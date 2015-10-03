@@ -14,4 +14,14 @@ public class Store {
         }
         return store;
     }
+    
+    public static void processSale(){
+        
+    }
+    
+    public static void main(String[] args){
+        Store mainStore = Store.getStore();
+        
+        mainStore.processSale();
+    }
 }

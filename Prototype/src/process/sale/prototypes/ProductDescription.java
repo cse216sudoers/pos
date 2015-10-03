@@ -4,16 +4,15 @@ package process.sale.prototypes;
 public class ProductDescription {
     private int productCode;
     private float price;
-    public ProductDescription(int productCode, float price){
-        this.productCode=productCode;
+    private String description; 
+    public ProductDescription(String description, float price){
         this.price=price;
+        this.description = description;
+        this.productCode = DB.ProductDescription.getNextCode();
     }
 
-    ProductDescription(ProductDescription desc, int code, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     int getCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.productCode;
     }
 }
