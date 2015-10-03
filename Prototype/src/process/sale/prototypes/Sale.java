@@ -7,7 +7,12 @@ public class Sale {
     private float total;
     private ArrayList<SaleLineItem> lines;
     
-    public float getCost(){
+    public Sale(){
+        total = 0;
+        lines = new ArrayList<SaleLineItem>();
+    }
+    
+    public float getTotal(){
         return total;
     }
     public ArrayList<SaleLineItem> getLines(){

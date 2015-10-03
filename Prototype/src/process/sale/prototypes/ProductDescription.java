@@ -11,6 +11,10 @@ public class ProductDescription {
         this.productCode = DB.ProductDescription.getNextCode();
     }
 
+    ProductDescription(ProductDescription desc, int code, String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     int getCode() {
         return this.productCode;

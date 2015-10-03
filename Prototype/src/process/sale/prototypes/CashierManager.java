@@ -12,6 +12,18 @@ import java.util.ArrayList;
  */
 public class CashierManager {
     private ArrayList<Cashier> cashiers;
+    private static CashierManager instance;
+    
+    private CashierManager(){
+        cashiers = new ArrayList<Cashier>();
+    }
+    
+    public static synchronized CashierManager getInstance(){
+        if(instance == null){
+            instance = new CashierManager();
+        }
+        return instance;
+    }
     
     public CashierManager(ArrayList<Cashier> cashiers){
         this.cashiers = cashiers;
