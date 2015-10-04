@@ -39,4 +39,12 @@ public class SaleLineItem {
     public Coupon getCoupon(){
         return coupon;
     }
+    
+    @Override
+    public String toString(){
+        if(coupon != null)
+            return product.toString() + "\n\t"+ coupon.toString() + "\n";
+        else
+            return product.toString() + "\n";
+    }
 }

@@ -34,4 +34,9 @@ public class Coupon {
     public void setCode(int code){
         this.code = code;
     }
+    
+    @Override
+    public String toString(){
+        return "" + code + "\t -" + amount + "\n";
+    }
 }

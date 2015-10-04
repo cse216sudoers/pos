@@ -15,8 +15,12 @@ public class ProductDescription {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
     int getCode() {
         return this.productCode;
+    }
+    
+    @Override
+    public String toString(){
+        return "" + productCode + "\t" + description + "\t" + price + "\n";
     }
 }

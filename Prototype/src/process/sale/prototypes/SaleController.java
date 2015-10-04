@@ -35,6 +35,9 @@ public class SaleController {
                 else if(input.equals("override")){
                     //manager override
                 }
+                else if(input.equals("void")){
+                    processVoid();
+                }
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
                 }
@@ -53,10 +56,18 @@ public class SaleController {
     private void processVoid(){
       int code = scanner.nextInt();
       ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
+      if(product == null){
+            System.out.println("Invalid product code: " + code);
+            return;
+        }
       sale.removeItem(product);
     }
     private void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
+        if(product == null){
+            System.out.println("Invalid product code: " + code);
+            return;
+        }
         sale.addItem(product);
     }
     
@@ -84,6 +95,6 @@ public class SaleController {
     }
     
     private void displaySale(){
-        
+        System.out.println(sale);
     }
 }

@@ -77,4 +77,13 @@ public class Sale {
     public int getId(){
         return id;
     }
+    
+    @Override
+    public String toString(){
+        String total = "";
+        for(int i = 0; i < lines.size(); i++){
+            total += lines.get(i).toString() + "\n";
+        }
+        return total;
+    }
 }
