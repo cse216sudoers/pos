@@ -34,6 +34,21 @@ public class Sale {
         }
     }
     
+    public void addCoupon(Coupon coupon){
+        //System.out.println("Add coupon");
+        boolean found = false;
+        for(int i = 0; i < lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == coupon.getCode()){
+                lines.get(i).setCoupon(coupon);
+                found = true;
+                break;
+            }
+        }
+        if(!found){
+            System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
+        }
+    }
+    
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){

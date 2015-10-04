@@ -5,6 +5,8 @@
  */
 package process.sale.prototypes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jeff
@@ -12,10 +14,12 @@ package process.sale.prototypes;
 public class SaleLineItem {
     private int quantity;
     private ProductDescription product;
+    private Coupon coupon;
     
     public SaleLineItem(ProductDescription product){
         quantity = 1;
         this.product = product;
+        coupon = null;
     }
     public ProductDescription getProduct(){
         return product;
@@ -28,5 +32,11 @@ public class SaleLineItem {
     }
     public void decreaseQuantity(){
         quantity--;
+    }
+    public void setCoupon(Coupon coupon){
+        this.coupon = coupon;
+    }
+    public Coupon getCoupon(){
+        return coupon;
     }
 }
