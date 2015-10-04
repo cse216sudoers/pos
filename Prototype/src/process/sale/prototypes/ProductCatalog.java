@@ -1,28 +1,40 @@
 
 package process.sale.prototypes;
 
+import java.util.ArrayList;
+
 public class ProductCatalog {
-    private ProductCatalog Cat;
-    private ProductDescription[] items;
-    private int itemCount=0;
+    private static ProductCatalog cat;
+    private ArrayList<ProductDescription> items;
+    
     private ProductCatalog(){
-        
+        items = new ArrayList<ProductDescription>();
     }
-    public ProductCatalog getCatalog(){
-        if (Cat==null){
-            Cat=new ProductCatalog();
+    
+    public static synchronized ProductCatalog getCatalog(){
+        if (cat==null){
+            cat=new ProductCatalog();
         }
-        return Cat;
+        return cat;
     }
     public void addItem(ProductDescription desc, int code, String name){
         boolean isIn=false;
-        for (int i=0;i<itemCount;i++){
-            if (code==items[i].getCode()){
+        for (int i=0;i<items.size();i++){
+            if (code==items.get(i).getCode()){
                 isIn=true;
             }
         }
         if (!isIn){
-            items[itemCount]=new ProductDescription(desc, code, name);//NEEDS TO BE UPDATED WHEN CONSTRUCTOR IS MADE
+            items.add(new ProductDescription(desc, code, name));//NEEDS TO BE UPDATED WHEN CONSTRUCTOR IS MADE
         }
+    }
+    
+    public ProductDescription findProductByCode(int code){
+        for (int i=0;i<items.size();i++){
+            if (code==items.get(i).getCode()){
+                return items.get(i);
+            }
+        }
+        return null;
     }
 }

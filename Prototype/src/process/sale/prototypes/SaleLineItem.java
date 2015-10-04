@@ -10,20 +10,23 @@ package process.sale.prototypes;
  * @author Jeff
  */
 public class SaleLineItem {
-    private Item item;
     private int quantity;
+    private ProductDescription product;
     
-    public SaleLineItem(Item item){
+    public SaleLineItem(ProductDescription product){
         quantity = 1;
-        this.item = item;
+        this.product = product;
     }
-    public Item getItem(){
-        return item;
+    public ProductDescription getProduct(){
+        return product;
     }
     public int getQuantity(){
         return quantity;
     }
     public void increaseQuantity(){
         quantity++;
+    }
+    public void decreaseQuantity(){
+        quantity--;
     }
 }

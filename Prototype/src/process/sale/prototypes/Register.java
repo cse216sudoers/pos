@@ -25,4 +25,8 @@ public class Register {
     public void startSale(){
         currentSale = new Sale();
     }
+    
+    public int getId(){
+        return id;
+    }
 }
