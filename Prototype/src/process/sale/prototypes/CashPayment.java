@@ -11,7 +11,8 @@ package process.sale.prototypes;
 public class CashPayment extends Payment{
     private float cashGiven;
     
-    public CashPayment(float cashGiven){
+    public CashPayment(float cashGiven, float amount){
+        super(PaymentType.CREDIT, amount);
         type = PaymentType.CASH;
         this.cashGiven = cashGiven;
     }

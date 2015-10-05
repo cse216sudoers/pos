@@ -12,8 +12,8 @@ public class CreditPayment extends Payment{
     private int securityCode;
     private int cardNum;
     
-    public CreditPayment(int cardNum, int securityCode){
-        type = PaymentType.CREDIT;
+    public CreditPayment(int cardNum, int securityCode, float amount){
+        super(PaymentType.CREDIT, amount);
         this.cardNum= cardNum;
         this.securityCode = securityCode;
     }

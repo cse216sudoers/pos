@@ -12,10 +12,11 @@ public class DebitPayment extends Payment{
     private int pin;
     private int cardNum;
     
-    public DebitPayment(int cardNum, int pin){
-        type = PaymentType.DEBIT;
+    public DebitPayment(int cardNum, int pin, float amount){
+        super(PaymentType.DEBIT, amount);
         this.cardNum= cardNum;
         this.pin = pin;
+        
     }
     public int getCardNum(){
         return cardNum;

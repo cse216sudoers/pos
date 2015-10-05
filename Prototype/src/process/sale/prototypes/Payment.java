@@ -9,11 +9,16 @@ package process.sale.prototypes;
  * @author Pikachu
  */
 public class Payment {
-    private float amount;
-    public enum PaymentType{
+    protected float amount;
+    protected enum PaymentType{
         CREDIT, DEBIT, CASH
     }
-    PaymentType type;
+    protected PaymentType type;
+    
+    public Payment(PaymentType type, float amount){
+        this.type = type;
+        this.amount = amount;
+    }
     public float getAmount(){
         return amount;
     }
