@@ -4,7 +4,6 @@
 */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -21,23 +20,30 @@ public class SaleController {
     }
     
     public void startSale(){
+        
+        //continuous sale loop
         while(true){
             try{
                 System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
+                //void item
                 if(input.equals("void")){
                     processVoid();
                 }
+                //coupon
                 else if(input.equals("coupon")){
                     processCoupon();
                 }
+                //override
                 else if(input.equals("override")){
                     //manager override
                 }
+                //add item to sale
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
                 }
+                //end sale
                 else if (input.equals("close")){
                     break;
                 }
@@ -57,7 +63,8 @@ public class SaleController {
         System.out.print("Please enter a product code: ");
         int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-        if(product == null){
+        
+        if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
@@ -65,7 +72,8 @@ public class SaleController {
     }
     private void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-        if(product == null){
+        
+        if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
@@ -86,7 +94,7 @@ public class SaleController {
             return;
         }
         try{
-            System.out.print("Please enter coupon code: ");
+            System.out.print("Please enter item code: ");
             next = scanner.next();
             code = Integer.parseInt(next);
         }catch(Exception e){
