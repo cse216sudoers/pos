@@ -9,6 +9,11 @@ public class ProductCatalog {
     
     private ProductCatalog(){
         items = new ArrayList<ProductDescription>();
+        items.add(new ProductDescription("Pikachu Plushie", 24.95f));
+        items.add(new ProductDescription("Potato Bread", 5.99f));
+        items.add(new ProductDescription("iPhone 6S Plus", 299.99f));
+        items.add(new ProductDescription("Pickles", 0.99f));
+        items.add(new ProductDescription("Migraine Medication", 29.97f));
     }
     
     public static synchronized ProductCatalog getCatalog(){

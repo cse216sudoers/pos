@@ -37,6 +37,6 @@ public class Coupon {
     
     @Override
     public String toString(){
-        return "" + code + "\t -" + amount + "\n";
+        return "" + code + "\t -" + amount;
     }
 }
