@@ -12,12 +12,12 @@ public class ProductDescription {
         this.description = description;
         // this.productCode = DB.ProductDescription.getNextCode();
         this.productCode = getNextCode();
+        update();
     }
-
-    public ProductDescription(ProductDescription desc, int code, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void update(){
+        ProductCatalog cat=ProductCatalog.getCatalog();
+        cat.addItem(this);
     }
-
     public int getCode() {
         return this.productCode;
     }

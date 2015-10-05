@@ -22,22 +22,14 @@ public class ProductCatalog {
         }
         return cat;
     }
-    public void addItem(ProductDescription desc, int code, String name){
-        boolean isIn=false;
-        for (int i=0;i<items.size();i++){
-            if (code==items.get(i).getCode()){
-                isIn=true;
-            }
-        }
-        if (!isIn){
-            items.add(new ProductDescription(desc, code, name));//NEEDS TO BE UPDATED WHEN CONSTRUCTOR IS MADE
-        }
+    public void addItem(ProductDescription desc){
+        items.add(desc);
     }
     
     public ProductDescription findProductByCode(int code){
-        for (int i=0;i<items.size();i++){
-            if (code==items.get(i).getCode()){
-                return items.get(i);
+        for (ProductDescription item : items) {
+            if (code == item.getCode()) {
+                return item;
             }
         }
         return null;
