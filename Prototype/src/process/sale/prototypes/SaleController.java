@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 package process.sale.prototypes;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class SaleController {
     public void startSale(){
         while(true){
             try{
-                System.out.print("Please enter 'void', coupon', <code>, 'override', or 'close': ");
+                System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
                 if(input.equals("void")){
@@ -54,13 +54,14 @@ public class SaleController {
     }
     
     private void processVoid(){
-      int code = scanner.nextInt();
-      ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-      if(product == null){
+        System.out.print("Please enter a product code: ");
+        int code = scanner.nextInt();
+        ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
+        if(product == null){
             System.out.println("Invalid product code: " + code);
             return;
         }
-      sale.removeItem(product);
+        sale.removeItem(product);
     }
     private void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
@@ -72,6 +73,7 @@ public class SaleController {
     }
     
     private void processCoupon(){
+        System.out.print("Please enter coupon amount: ");
         String next = scanner.next();
         int code;
         float amount;
@@ -84,7 +86,7 @@ public class SaleController {
             return;
         }
         try{
-            //System.out.println("get code");
+            System.out.print("Please enter coupon code: ");
             next = scanner.next();
             code = Integer.parseInt(next);
         }catch(Exception e){
