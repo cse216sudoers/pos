@@ -45,7 +45,8 @@ public class SaleController {
                 }
                 //end sale
                 else if (input.equals("close")){
-                    break;
+                    // Close sale and get payment
+                    closeSale();
                 }
                 else{
                     System.out.println("Invalid input: " + input);
@@ -55,8 +56,22 @@ public class SaleController {
                 System.out.println(e.toString());
                 System.out.println("Invalid input: " + input);
             }
-            //TODO ending sale and payment stuffs
         }
+    }
+    
+    private void closeSale() {
+        // Give total price (subtotal, tax, and total)
+        sale.printTotals();
+        
+        // TODO: Ask for payment
+        
+        
+        // TODO: Receive payment and verify, if necessary
+        
+        
+        // Thank customer, and close
+        System.out.println("\nThank for you shopping with us. Have a nice day!");
+        System.exit(0);
     }
     
     private void processVoid(){

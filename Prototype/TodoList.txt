@@ -20,4 +20,5 @@ Data Storage - Josh and Ryan
 		Store.txt
 
 General Other Things We Should Do:
-	Have fun
+	Have fun - not Peter
+	SaleController.closeSale method - Peter

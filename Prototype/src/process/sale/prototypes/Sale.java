@@ -83,6 +83,21 @@ public class Sale {
         return id;
     }
     
+    public void printTotals() {
+        // Calculate tax and total
+        float tax = TaxCalculator.getTax(getTotal());
+        float saleTotal = getTotal() + tax;
+        
+        // Set up ability to format print statements right so everything aligns
+        int digits = ((Float) saleTotal).toString().length();
+        String format = "%" + digits + ".2f";
+        
+        System.out.println("\n" + toString());
+        System.out.printf("Subtotal: $" + format + "\n", getTotal());
+        System.out.printf("Tax:      $" + format + "\n", tax);
+        System.out.printf("Total:    $" + format + "\n", saleTotal);
+    }
+    
     @Override
     public String toString(){
         String output = "";
