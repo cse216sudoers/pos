@@ -48,6 +48,11 @@ public class SaleController {
                     // Close sale and get payment
                     closeSale();
                 }
+                //end sale with payment
+                else if (input.equals("payment")){
+                    if(processPayment())//returns true if successful
+                        break;
+                }
                 else{
                     System.out.println("Invalid input: " + input);
                 }
@@ -85,6 +90,7 @@ public class SaleController {
         }
         sale.removeItem(product);
     }
+    
     private void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
@@ -117,6 +123,11 @@ public class SaleController {
             return;
         }
         sale.addCoupon(new Coupon(code, amount));
+    }
+    
+    public boolean processPayment(){
+        
+        return true;
     }
     
     private void displaySale(){
