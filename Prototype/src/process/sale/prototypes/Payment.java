@@ -13,21 +13,7 @@ public class Payment {
     public enum PaymentType{
         CREDIT, DEBIT, CASH
     }
-    private int cardNum;
-    private int securityCode;
-    
-    public int getSecurityCode(){
-        return securityCode;
-    }
-    public void setSecurityCode(int securityCode){
-        this.securityCode = securityCode;
-    }
-    public int getCardNum(){
-        return cardNum;
-    }
-    public void setCardNum(int cardNum){
-        this.cardNum = cardNum;
-    }
+    PaymentType type;
     public float getAmount(){
         return amount;
     }
