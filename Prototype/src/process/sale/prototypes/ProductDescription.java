@@ -14,7 +14,7 @@ public class ProductDescription {
         this.productCode = getNextCode();
     }
 
-    ProductDescription(ProductDescription desc, int code, String name) {
+    public ProductDescription(ProductDescription desc, int code, String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -24,6 +24,14 @@ public class ProductDescription {
     
     private int getNextCode() {
         return nextCode++;
+    }
+
+    public float getPrice(){
+        return price;
+    }
+    
+    public String getDescription(){
+        return description;
     }
     
     @Override

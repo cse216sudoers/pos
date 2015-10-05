@@ -1,6 +1,4 @@
-
 package process.sale.prototypes;
-
 import java.util.ArrayList;
 
 public class Sale {
@@ -17,9 +15,11 @@ public class Sale {
     public float getTotal(){
         return total;
     }
+    
     public ArrayList<SaleLineItem> getLines(){
         return lines;
     }
+    
     public void addItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -32,6 +32,7 @@ public class Sale {
         if(!found){
             lines.add(new SaleLineItem(product));
         }
+        total += product.getPrice();
     }
     
     public void addCoupon(Coupon coupon){
@@ -40,6 +41,7 @@ public class Sale {
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == coupon.getCode()){
                 lines.get(i).setCoupon(coupon);
+                total-=coupon.getAmount();
                 found = true;
                 break;
             }
@@ -59,11 +61,12 @@ public class Sale {
                 else{
                     lines.get(i).decreaseQuantity();
                 }
+                total-=product.getPrice();
                 found = true;
                 break;
             }
         }
-        if(!found){
+        if(!found){//item not in sale
             System.out.println("item not found");
         }
     }
@@ -71,19 +74,21 @@ public class Sale {
     public Payment getPayment(){
         return payment;
     }
+    
     public void setPayment(Payment payment){
         this.payment = payment;
     }
+    
     public int getId(){
         return id;
     }
     
     @Override
     public String toString(){
-        String total = "";
+        String output = "";
         for(int i = 0; i < lines.size(); i++){
-            total += lines.get(i).toString() + "\n";
+            output += lines.get(i).toString() + "\n";
         }
-        return total;
+        return output;
     }
 }
