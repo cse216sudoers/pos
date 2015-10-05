@@ -23,7 +23,7 @@ public class SaleController {
     public void startSale(){
         while(true){
             try{
-                System.out.println("Please enter 'coupon', <code>, 'override':");
+                System.out.print("Please enter 'void', coupon', <code>, 'override', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
                 if(input.equals("void")){
@@ -35,11 +35,11 @@ public class SaleController {
                 else if(input.equals("override")){
                     //manager override
                 }
-                else if(input.equals("void")){
-                    processVoid();
-                }
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
+                }
+                else if (input.equals("close")){
+                    break;
                 }
                 else{
                     System.out.println("Invalid input: " + input);

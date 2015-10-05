@@ -4,7 +4,7 @@ Classes
 	ProductCatalog - Noah
 	ProductDescription - Josh
 	Register - 
-	Sale - Peter
+	Sale - 
 	SaleLineItem - 
 	Store - 
 
