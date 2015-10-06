@@ -30,6 +30,7 @@ public class Store {
         Store mainStore = Store.getStore();
         CashierManager cashierManager = CashierManager.getInstance();
         RegisterManager registerManager = RegisterManager.getInstance();
+        cashierManager.addCashier(new Cashier("Bobbert", "bob", "bob"));
         
         mainStore.processSale();
     }
