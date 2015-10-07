@@ -11,8 +11,8 @@ package process.sale.prototypes;
 public class CashPayment extends Payment{
     private float cashGiven;
     
-    public CashPayment(float cashGiven){
-        type = PaymentType.CASH;
+    public CashPayment(float cashGiven, float amount){
+        super(PaymentType.CASH, amount);
         this.cashGiven = cashGiven;
     }
     public float getCashGiven(){
@@ -20,5 +20,13 @@ public class CashPayment extends Payment{
     }
     public void setCashGiven(float cashGiven){
         this.cashGiven = cashGiven;
+    }
+    @Override
+    public String toString(){
+        String output = "";
+        output += String.format("%2s %16s\t$%-7.2f", "Cash", " ",amount);
+        output += "\n";
+        output += String.format("%2s %16s\t$%-7.2f", "", "Change ",cashGiven - this.amount);
+        return output;
     }
 }

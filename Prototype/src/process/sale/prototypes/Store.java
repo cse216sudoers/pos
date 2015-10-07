@@ -13,6 +13,8 @@ public class Store {
     private Store(){
         cashierManager = CashierManager.getInstance();
         registerManager = RegisterManager.getInstance();
+        productCatalog = ProductCatalog.getCatalog();
+        saleManager = SaleManager.getInstance();
     }
     public static synchronized Store getStore(){
         if(store==null){
@@ -30,6 +32,7 @@ public class Store {
         Store mainStore = Store.getStore();
         CashierManager cashierManager = CashierManager.getInstance();
         RegisterManager registerManager = RegisterManager.getInstance();
+        cashierManager.addCashier(new Cashier("Bobbert", "bob", "bob"));
         
         mainStore.processSale();
     }

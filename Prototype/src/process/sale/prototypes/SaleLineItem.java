@@ -42,9 +42,11 @@ public class SaleLineItem {
     
     @Override
     public String toString(){
+        String output = product.toString() + "\n";
+        if(quantity >1)
+            output += String.format("%2s %-15.15s\t%7.2f\n", "", "X" + quantity, quantity *product.getPrice());
         if(coupon != null)
-            return product.toString() + "\n\t"+ coupon.toString();
-        else
-            return product.toString();
+            output += coupon.toString() + "\n";
+        return output;
     }
 }

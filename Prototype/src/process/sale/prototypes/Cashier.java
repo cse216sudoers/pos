@@ -12,11 +12,18 @@ public class Cashier {
     private String username;
     private String name;
     private String password;
+    private int id;
     
-    public Cashier(String username, String name, String password){
+    public Cashier(String name, String username, String password){
         this.username = username;
         this.name = name;
         this.password = password;
+    }
+    public Cashier(String name, String username, String password, int uid){
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.id= uid;
     }
     
     public String getUsername(){

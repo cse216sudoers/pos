@@ -12,12 +12,19 @@ public class ProductDescription {
         this.description = description;
         // this.productCode = DB.ProductDescription.getNextCode();
         this.productCode = getNextCode();
+        // update(); - Caused Stack Overflow due to infinite looping
     }
-
-    public ProductDescription(ProductDescription desc, int code, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ProductDescription(String description, float price,int ID){
+        this.price=price;
+        this.description = description;
+        // this.productCode = DB.ProductDescription.getNextCode();
+        this.productCode = ID;
+        // update(); - Caused Stack Overflow due to infinite looping
     }
-
+    private void update(){
+        ProductCatalog cat=ProductCatalog.getCatalog();
+        cat.addItem(this);
+    }
     public int getCode() {
         return this.productCode;
     }
@@ -36,7 +43,6 @@ public class ProductDescription {
     
     @Override
     public String toString(){
-        // return "" + productCode + "\t" + description + "\t" + price;
         return String.format("%2d %-15.15s\t%7.2f", productCode, description, price);
     }
 }

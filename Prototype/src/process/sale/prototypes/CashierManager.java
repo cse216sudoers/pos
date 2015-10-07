@@ -4,7 +4,9 @@
  */
 package process.sale.prototypes;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -16,6 +18,22 @@ public class CashierManager {
     
     private CashierManager(){
         cashiers = new ArrayList<Cashier>();
+        try{
+            Scanner read = new Scanner(new File("Users.txt"));
+            read.useDelimiter("\\|");
+            while(read.hasNext()){
+                String name = read.next();
+                int uid = Integer.parseInt(read.next());
+                int access = Integer.parseInt(read.next());
+                String username = read.next();
+                String password = read.next();
+                cashiers.add(new Cashier( name, username, password,uid));
+                read.nextLine();
+            }
+        }
+        catch(Exception e){
+            //System.out.println(e.toString());
+        }
     }
     
     public static synchronized CashierManager getInstance(){
