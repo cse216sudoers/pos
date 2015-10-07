@@ -12,7 +12,7 @@ public class ProductDescription {
         this.description = description;
         // this.productCode = DB.ProductDescription.getNextCode();
         this.productCode = getNextCode();
-        update();
+        // update(); - Caused Stack Overflow due to infinite looping
     }
     private void update(){
         ProductCatalog cat=ProductCatalog.getCatalog();

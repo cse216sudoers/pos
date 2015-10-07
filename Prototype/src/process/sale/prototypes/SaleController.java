@@ -90,6 +90,7 @@ public class SaleController {
         }
         // Thank customer, and close
         System.out.println("\nThank for you shopping with us. Have a nice day!");
+        System.exit(0);
     }
     
     private void processCashPayment(){
