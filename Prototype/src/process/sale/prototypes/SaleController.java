@@ -124,8 +124,8 @@ public class SaleController {
         float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
-        int cardNum = 0;
-        int secNum = 0;
+        String cardNum = "";
+        String secNum = "";
         
         while(invalid){
             System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
@@ -149,13 +149,17 @@ public class SaleController {
                 input = scanner.next();
                 if(input.equals("cancel"))
                     return;
-                cardNum = Integer.parseInt(input);
+                cardNum = input; // Integer.parseInt(input);
                 
                 System.out.println("Please enter security code or type cancel: ");
                 input = scanner.next();
                 if(input.equals("cancel"))
                     return;
-                secNum = Integer.parseInt(input);                
+                secNum = input;// Integer.parseInt(input);   
+                
+                // TODO: Put in conditions for a valid credit card number
+                // Assuming everything is good to go...
+                invalid = false;
             }catch(Exception e){
                 System.out.println("Invalid input.");
             }
@@ -173,8 +177,8 @@ public class SaleController {
     }
     
     private boolean processCreditPayment(CreditPayment payment){
-        String cardNum = "" + payment.getCardNum();
-        String secNum = "" + payment.getSecurityCode();
+        String cardNum = payment.getCardNum();
+        String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
             return true;
         return false;

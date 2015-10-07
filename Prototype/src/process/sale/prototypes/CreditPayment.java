@@ -9,24 +9,24 @@ package process.sale.prototypes;
  * @author Pikachu
  */
 public class CreditPayment extends Payment{
-    private int securityCode;
-    private int cardNum;
+    private String securityCode;
+    private String cardNum;
     
-    public CreditPayment(int cardNum, int securityCode, float amount){
+    public CreditPayment(String cardNum, String securityCode, float amount){
         super(PaymentType.CREDIT, amount);
         this.cardNum= cardNum;
         this.securityCode = securityCode;
     }
-    public int getCardNum(){
+    public String getCardNum(){
         return cardNum;
     }
-    public void setCardNum(int cardNum){
+    public void setCardNum(String cardNum){
         this.cardNum = cardNum;
     }
-    public int getSecurityCode(){
+    public String getSecurityCode(){
         return securityCode;
     }
-    public void setSecurityCode(int securityCode){
+    public void setSecurityCode(String securityCode){
         this.securityCode = securityCode;
     }
 }
