@@ -10,18 +10,18 @@ package process.sale.prototypes;
  */
 public class DebitPayment extends Payment{
     private int pin;
-    private int cardNum;
+    private String cardNum;
     
-    public DebitPayment(int cardNum, int pin, float amount){
+    public DebitPayment(String cardNum, int pin, float amount){
         super(PaymentType.DEBIT, amount);
         this.cardNum= cardNum;
         this.pin = pin;
         
     }
-    public int getCardNum(){
+    public String getCardNum(){
         return cardNum;
     }
-    public void setCardNum(int cardNum){
+    public void setCardNum(String cardNum){
         this.cardNum = cardNum;
     }
     public int getPin(){
@@ -29,5 +29,9 @@ public class DebitPayment extends Payment{
     }
     public void setPin(int pin){
         this.pin = pin;
+    }
+    @Override
+    public String toString(){
+        return String.format("%2s %16s\t%-7.2f", "Debit", cardNum, amount);
     }
 }

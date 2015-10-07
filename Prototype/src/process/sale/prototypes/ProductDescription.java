@@ -12,11 +12,6 @@ public class ProductDescription {
         this.description = description;
         // this.productCode = DB.ProductDescription.getNextCode();
         this.productCode = getNextCode();
-        update();
-    }
-    private void update(){
-        ProductCatalog cat=ProductCatalog.getCatalog();
-        cat.addItem(this);
     }
     public int getCode() {
         return this.productCode;
@@ -36,7 +31,6 @@ public class ProductDescription {
     
     @Override
     public String toString(){
-        // return "" + productCode + "\t" + description + "\t" + price;
         return String.format("%2d %-15.15s\t%7.2f", productCode, description, price);
     }
 }

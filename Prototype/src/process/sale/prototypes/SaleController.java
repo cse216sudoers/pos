@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -24,7 +25,7 @@ public class SaleController {
         
         //continuous sale loop
         while(true){
-            try{
+            //try{
                 System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -48,15 +49,16 @@ public class SaleController {
                 else if (input.equalsIgnoreCase("close")){
                     // Close sale and get payment
                     closeSale();
+                    break;
                 }
                 else{
                     System.out.println("Invalid input: " + input);
                 }
                 displaySale();
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
+//            }catch(Exception e){
+//                System.out.println(e.toString());
+//                System.out.println("Invalid input");
+//            }
         }
     }
     
@@ -86,85 +88,83 @@ public class SaleController {
             else if(paymentType.equalsIgnoreCase("credit"))
                 processCreditPayment();
             else if(paymentType.equalsIgnoreCase("debit"))
-                processDebitPayment();        
+                processDebitPayment();
+            if(leftToPay > 0)
+                System.out.printf("Total: $%7.2f \n", leftToPay);
         }
+        SaleManager.getInstance().addSale(sale);
         // Thank customer, and close
+        printReceipt();
         System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
     private void processCashPayment(){
         float payment = 0;
-        boolean invalid = true;
-        while(invalid){
-            System.out.println("Please enter total cash payment: ");
-            try{
-                payment = scanner.nextFloat();
-                invalid = false;
-            }catch(Exception e){
-                System.out.println("Invalid payment.");
-            }
+        System.out.println("Please enter total cash payment: ");
+        try{
+            payment = scanner.nextFloat();
+        }catch(Exception e){
+            System.out.println("Invalid payment.");
         }
-        if(payment > sale.getSaleTotal()){
-            System.out.printf("Your change is $%.2d", sale.getSaleTotal());
-            sale.addPayment(new CashPayment(payment, sale.getSaleTotal()));
-            leftToPay-=sale.getSaleTotal();
+        if(payment > leftToPay){
+            System.out.printf("Your change is $%.2f\n", payment - leftToPay);
+            sale.addPayment(new CashPayment(payment, leftToPay));
+            leftToPay = 0;
         }
-        else if(payment == sale.getSaleTotal()){
-            sale.addPayment(new CashPayment(payment, sale.getSaleTotal()));
-            leftToPay-=sale.getSaleTotal();
-        }
-        else{
-            sale.addPayment(new CashPayment(payment, sale.getSaleTotal()-payment));
+        else if(payment == leftToPay){
+            sale.addPayment(new CashPayment(payment, leftToPay));
             leftToPay-=payment;
         }
+        else{
+            sale.addPayment(new CashPayment(payment, leftToPay-payment));
+            leftToPay-=payment;
+        }
+        System.out.println("done");
     }
     
     private void processCreditPayment(){
         float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
-        int cardNum = 0;
+        String cardNum = "";
         int secNum = 0;
         
-        while(invalid){
-            System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
+        System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: of type cancel");
+        do{
             try{
                 input = scanner.next();
                 if(input.equalsIgnoreCase("total"))
                     payment = sale.getSaleTotal();
+                else                                                                                                             if(input.equals("cancel"))
+                    return;
                 else{
                     payment = Float.parseFloat(input);
                 }
-                invalid = false;
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }
+        }while(payment > leftToPay);
         
-        invalid = true;
-        while(invalid){
-            try{
-                System.out.println("Please enter card number or type cancel: ");
-                input = scanner.next();
-                if(input.equals("cancel"))
-                    return;
-                cardNum = Integer.parseInt(input);
-                
-                System.out.println("Please enter security code or type cancel: ");
-                input = scanner.next();
-                if(input.equals("cancel"))
-                    return;
-                secNum = Integer.parseInt(input);                
-            }catch(Exception e){
-                System.out.println("Invalid input.");
-            }
+        try{
+            System.out.println("Please enter card number or type cancel: ");
+            cardNum = scanner.next();
+            if(input.equals("cancel"))
+                return;
+
+            System.out.println("Please enter security code or type cancel: ");
+            input = scanner.next();
+            if(input.equals("cancel"))
+                return;
+            secNum = Integer.parseInt(input);                
+        }catch(Exception e){
+            System.out.println("Invalid input.");
         }
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         accepted = processCreditPayment(credit);
         if(accepted){
             sale.addPayment(credit);
-            leftToPay-=payment;
+            leftToPay -= payment;
         }
         else{
             System.out.println("Card rejected.");
@@ -182,41 +182,36 @@ public class SaleController {
                 float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
-        int cardNum = 0;
+        String cardNum = "";
         int pin = 0;
         
-        while(invalid){
-            System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
-            try{
-                input = scanner.next();
-                if(input.equalsIgnoreCase("total"))
-                    payment = sale.getSaleTotal();
-                else{
-                    payment = Float.parseFloat(input);
-                }
-                invalid = false;
-            }catch(Exception e){
-                System.out.println("Invalid payment.");
+        System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
+        
+        try{
+            input = scanner.next();
+            if(input.equalsIgnoreCase("total"))
+                payment = sale.getSaleTotal();
+            else{
+                payment = Float.parseFloat(input);
             }
+            invalid = false;
+        }catch(Exception e){
+            System.out.println("Invalid payment.");
         }
         
-        invalid = true;
-        while(invalid){
-            try{
-                System.out.println("Please enter card number or type cancel: ");
-                input = scanner.next();
-                if(input.equals("cancel"))
-                    return;
-                cardNum = Integer.parseInt(input);
-                
-                System.out.println("Please enter pin or type cancel: ");
-                input = scanner.next();
-                if(input.equals("cancel"))
-                    return;
-                pin = Integer.parseInt(input);                
-            }catch(Exception e){
-                System.out.println(e.getStackTrace() + "/nInvalid input.");
-            }
+        try{
+            System.out.println("Please enter card number or type cancel: ");
+            cardNum = scanner.next();
+            if(input.equals("cancel"))
+                return;
+
+            System.out.println("Please enter pin or type cancel: ");
+            input = scanner.next();
+            if(input.equals("cancel"))
+                return;
+            pin = Integer.parseInt(input);                
+        }catch(Exception e){
+            System.out.println(e.getStackTrace() + "/nInvalid input.");
         }
         
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
@@ -298,5 +293,13 @@ public class SaleController {
     
     private void displaySale(){
         System.out.println(sale);
+    }
+    private void printReceipt(){
+        displaySale();
+        sale.printTotals();
+        ArrayList<Payment> payments = sale.getPayments();
+        for(int i = 0; i < payments.size(); i++){
+            System.out.print(payments.get(i));
+        }
     }
 }

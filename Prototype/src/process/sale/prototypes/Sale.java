@@ -104,7 +104,7 @@ public class Sale {
     public String toString(){
         String output = "";
         for(int i = 0; i < lines.size(); i++){
-            output += lines.get(i).toString() + "\n";
+            output += lines.get(i).toString();
         }
         return output;
     }

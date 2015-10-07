@@ -15,6 +15,7 @@ public class SaleManager {
     private static SaleManager instance;
     
     private SaleManager(){
+        sales = new ArrayList<Sale>();
     }
     
     public static synchronized SaleManager getInstance(){

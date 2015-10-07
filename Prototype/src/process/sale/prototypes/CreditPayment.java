@@ -10,17 +10,17 @@ package process.sale.prototypes;
  */
 public class CreditPayment extends Payment{
     private int securityCode;
-    private int cardNum;
+    private String cardNum;
     
-    public CreditPayment(int cardNum, int securityCode, float amount){
+    public CreditPayment(String cardNum, int securityCode, float amount){
         super(PaymentType.CREDIT, amount);
         this.cardNum= cardNum;
         this.securityCode = securityCode;
     }
-    public int getCardNum(){
+    public String getCardNum(){
         return cardNum;
     }
-    public void setCardNum(int cardNum){
+    public void setCardNum(String cardNum){
         this.cardNum = cardNum;
     }
     public int getSecurityCode(){
@@ -28,5 +28,9 @@ public class CreditPayment extends Payment{
     }
     public void setSecurityCode(int securityCode){
         this.securityCode = securityCode;
+    }
+    @Override
+    public String toString(){
+        return String.format("%2s %16s\t$%-7.2f", "Credit", cardNum, amount);
     }
 }

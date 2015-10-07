@@ -9,11 +9,11 @@ public class ProductCatalog {
     
     private ProductCatalog(){
         items = new ArrayList<ProductDescription>();
-        new ProductDescription("Pikachu Plushie", 24.95f);//ADDED THROUGH METHODS TO ARRAYLIST
-        new ProductDescription("Potato Bread", 5.99f);//Allows for future additions
-        new ProductDescription("iPhone 6S Plus", 299.99f);
-        new ProductDescription("Pickles", 0.99f);
-        new ProductDescription("Migraine Medication", 29.97f);
+        addItem(new ProductDescription("Pikachu Plushie", 24.95f));//ADDED THROUGH METHODS TO ARRAYLIST
+        addItem(new ProductDescription("Potato Bread", 5.99f));//Allows for future additions
+        addItem(new ProductDescription("iPhone 6S Plus", 299.99f));
+        addItem(new ProductDescription("Pickles", 0.99f));
+        addItem(new ProductDescription("Migraine Medication", 29.97f));
     }
     
     public static synchronized ProductCatalog getCatalog(){

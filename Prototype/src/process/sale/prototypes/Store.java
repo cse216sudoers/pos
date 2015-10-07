@@ -13,6 +13,8 @@ public class Store {
     private Store(){
         cashierManager = CashierManager.getInstance();
         registerManager = RegisterManager.getInstance();
+        productCatalog = ProductCatalog.getCatalog();
+        saleManager = SaleManager.getInstance();
     }
     public static synchronized Store getStore(){
         if(store==null){
