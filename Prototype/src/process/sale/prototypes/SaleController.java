@@ -25,7 +25,7 @@ public class SaleController {
         
         //continuous sale loop
         while(true){
-            //try{
+            try{
                 System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -55,10 +55,10 @@ public class SaleController {
                     System.out.println("Invalid input: " + input);
                 }
                 displaySale();
-//            }catch(Exception e){
-//                System.out.println(e.toString());
-//                System.out.println("Invalid input");
-//            }
+            }catch(Exception e){
+                System.out.println(e.toString());
+                System.out.println("Invalid input");
+            }
         }
     }
     
