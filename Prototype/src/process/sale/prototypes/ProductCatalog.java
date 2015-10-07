@@ -1,19 +1,29 @@
 
 package process.sale.prototypes;
 
+import java.io.*;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class ProductCatalog {
     private static ProductCatalog cat;
     private ArrayList<ProductDescription> items;
     
     private ProductCatalog(){
         items = new ArrayList<ProductDescription>();
-        items.add(new ProductDescription("Pikachu Plushie", 24.95f));
-        items.add(new ProductDescription("Potato Bread", 5.99f));
-        items.add(new ProductDescription("iPhone 6S Plus", 299.99f));
-        items.add(new ProductDescription("Pickles", 0.99f));
-        items.add(new ProductDescription("Migraine Medication", 29.97f));
+        try{
+            Scanner read = new Scanner(new File("Product_description.txt"));
+            read.useDelimiter("\\|");
+            while(read.hasNext()){
+                int id = Integer.parseInt(read.next());
+                String desc = read.next();
+                float price = Float.parseFloat(read.next());
+                items.add(new ProductDescription(desc,price,id));
+                read.nextLine();
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
     
     public static synchronized ProductCatalog getCatalog(){

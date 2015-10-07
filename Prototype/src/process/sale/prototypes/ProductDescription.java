@@ -14,6 +14,13 @@ public class ProductDescription {
         this.productCode = getNextCode();
         // update(); - Caused Stack Overflow due to infinite looping
     }
+    public ProductDescription(String description, float price,int ID){
+        this.price=price;
+        this.description = description;
+        // this.productCode = DB.ProductDescription.getNextCode();
+        this.productCode = ID;
+        // update(); - Caused Stack Overflow due to infinite looping
+    }
     private void update(){
         ProductCatalog cat=ProductCatalog.getCatalog();
         cat.addItem(this);
