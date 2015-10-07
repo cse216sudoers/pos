@@ -9,10 +9,10 @@ package process.sale.prototypes;
  * @author Pikachu
  */
 public class CreditPayment extends Payment{
-    private int securityCode;
+    private String securityCode;
     private String cardNum;
     
-    public CreditPayment(String cardNum, int securityCode, float amount){
+    public CreditPayment(String cardNum, String securityCode, float amount){
         super(PaymentType.CREDIT, amount);
         this.cardNum= cardNum;
         this.securityCode = securityCode;
@@ -23,10 +23,10 @@ public class CreditPayment extends Payment{
     public void setCardNum(String cardNum){
         this.cardNum = cardNum;
     }
-    public int getSecurityCode(){
+    public String getSecurityCode(){
         return securityCode;
     }
-    public void setSecurityCode(int securityCode){
+    public void setSecurityCode(String securityCode){
         this.securityCode = securityCode;
     }
     @Override

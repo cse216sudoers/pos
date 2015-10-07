@@ -96,6 +96,7 @@ public class SaleController {
         // Thank customer, and close
         printReceipt();
         System.out.println("\nThank for you shopping with us. Have a nice day!");
+        System.exit(0);
     }
     
     private void processCashPayment(){
@@ -127,7 +128,7 @@ public class SaleController {
         boolean invalid = true;
         boolean accepted; //for payment
         String cardNum = "";
-        int secNum = 0;
+        String secNum = "";
         
         System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: of type cancel");
         do{
@@ -155,7 +156,7 @@ public class SaleController {
             input = scanner.next();
             if(input.equals("cancel"))
                 return;
-            secNum = Integer.parseInt(input);                
+            secNum = input;
         }catch(Exception e){
             System.out.println("Invalid input.");
         }
@@ -172,8 +173,8 @@ public class SaleController {
     }
     
     private boolean processCreditPayment(CreditPayment payment){
-        String cardNum = "" + payment.getCardNum();
-        String secNum = "" + payment.getSecurityCode();
+        String cardNum = payment.getCardNum();
+        String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
             return true;
         return false;
