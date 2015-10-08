@@ -24,9 +24,12 @@ public class CashPayment extends Payment{
     @Override
     public String toString(){
         String output = "";
-        output += String.format("%2s %16s\t$%-7.2f", "Cash", " ",amount);
+        output += String.format("%2s %16s\t$%-7.2f", "Cash", " ",cashGiven);
         output += "\n";
-        output += String.format("%2s %16s\t$%-7.2f", "", "Change ",cashGiven - this.amount);
+        if(cashGiven - amount > 0){
+            output += String.format("%2s %16s\t$%-7.2f", "", "Change ",cashGiven - amount);
+            output += "\n";
+        }
         return output;
     }
 }

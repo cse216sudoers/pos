@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class RegisterManager {
     private ArrayList<Register> registers;
     private static RegisterManager instance;
+    private int nextId = 0;
     
     private RegisterManager(){
         registers = new ArrayList<Register>();
@@ -42,5 +43,8 @@ public class RegisterManager {
                 return registers.get(i);
         }
         return null;
+    }
+    public int getNextId(){
+        return ++nextId;
     }
 }

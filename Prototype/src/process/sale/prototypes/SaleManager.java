@@ -12,10 +12,13 @@ import java.util.ArrayList;
  */
 public class SaleManager {
     private ArrayList<Sale> sales;
+    private ArrayList<Sale> suspendedSales;
+    private int nextId = 0;
     private static SaleManager instance;
     
     private SaleManager(){
         sales = new ArrayList<Sale>();
+        suspendedSales = new ArrayList<Sale>();
     }
     
     public static synchronized SaleManager getInstance(){
@@ -37,7 +40,19 @@ public class SaleManager {
         return sales;
     }
     
+    public ArrayList<Sale> getSuspendedSales(){
+        return suspendedSales;
+    }
+   
+    
     public void addSale(Sale sale){
         sales.add(sale);
+    } 
+    
+    public void addSuspendedSale(Sale sale){
+        suspendedSales.add(sale);
+    }
+    public int getNextId(){
+        return ++nextId;
     }
 }

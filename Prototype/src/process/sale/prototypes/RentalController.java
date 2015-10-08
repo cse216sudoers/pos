@@ -1,7 +1,7 @@
 /*
-* To change this template, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package process.sale.prototypes;
 
 import java.text.DecimalFormat;
@@ -12,20 +12,19 @@ import java.util.Scanner;
  *
  * @author Pikachu
  */
-public class SaleController {
-    private Sale sale;
+public class RentalController {
+    private Rental rental;
     private float leftToPay; //so we can do multiple tupes of payments
     private Scanner scanner;
     private String input;
     
-    public SaleController(){
-        sale = new Sale();
+    public RentalController(){
+        rental = new Rental();
     }
-    public void startSale(){
+    public void startRental(){
         
-        //continuous Sale loop
-        boolean done = false;
-        while(!done){
+        //continuous retnal loop
+        while(true){
             try{
                 System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
                 scanner = new Scanner(System.in);
@@ -33,27 +32,27 @@ public class SaleController {
                 //void item
                 if(input.equalsIgnoreCase("void")){
                     processVoid();
-                    displaySale();
+                    displayRental();
                 }
                 //coupon
                 else if(input.equalsIgnoreCase("coupon")){
                     processCoupon();
-                    displaySale();
+                    displayRental();
                 }
                 //override
                 else if(input.equalsIgnoreCase("override")){
                     //manager override
                 }
-                //add item to Sale
+                //add item to rental
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
-                    displaySale();
+                    displayRental();
                 }
-                //end Sale
+                //end rental
                 else if (input.equalsIgnoreCase("close")){
-                    // Close Sale and get payment
-                    closeSale();
-                    done = true;
+                    // Close rental and get payment
+                    closeRental();
+                    break;
                 }
                 else{
                     System.out.println("Invalid input: " + input);
@@ -65,13 +64,13 @@ public class SaleController {
         }
     }
     
-    private void closeSale() {
+    private void closeRental() {
         String paymentType;
         boolean validType;
         
         // Give total price (subtotal, tax, and total)
-        sale.printTotals();
-        leftToPay = sale.getSaleTotal();
+        rental.printTotals();
+        leftToPay = rental.getRentalTotal();
         while(leftToPay > 0){
             validType= false;
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
@@ -95,7 +94,7 @@ public class SaleController {
             if(leftToPay > 0)
                 System.out.printf("Total: $%7.2f \n", leftToPay);
         }
-        SaleManager.getInstance().addSale(sale);
+        RentalManager.getInstance().addRental(rental);
         // Thank customer, and close
         printReceipt();
         System.out.println("\nThank for you shopping with us. Have a nice day!");
@@ -111,15 +110,15 @@ public class SaleController {
         }
         if(payment > leftToPay){
             System.out.printf("Your change is $%.2f\n", payment - leftToPay);
-            sale.addPayment(new CashPayment(payment, leftToPay));
+            rental.addPayment(new CashPayment(payment, leftToPay));
             leftToPay = 0;
         }
         else if(payment == leftToPay){
-            sale.addPayment(new CashPayment(payment, payment));
+            rental.addPayment(new CashPayment(payment, payment));
             leftToPay-=payment;
         }
         else{
-            sale.addPayment(new CashPayment(payment, payment));
+            rental.addPayment(new CashPayment(payment, payment));
             leftToPay-=payment;
         }
     }
@@ -165,7 +164,7 @@ public class SaleController {
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         accepted = processCreditPayment(credit);
         if(accepted){
-            sale.addPayment(credit);
+            rental.addPayment(credit);
             leftToPay -= payment;
         }
         else{
@@ -219,7 +218,7 @@ public class SaleController {
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
         accepted = processDebitPayment(debit);
         if(accepted){
-            sale.addPayment(debit);
+            rental.addPayment(debit);
             leftToPay-=payment;
         }
         else{
@@ -236,20 +235,14 @@ public class SaleController {
     
     private void processVoid(){
         System.out.print("Please enter a product code: ");
-        int code;
-        try{
-            code = scanner.nextInt();
-        }catch(Exception e){
-            System.out.println("Invalid input");
-            return;
-        }
+        int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        sale.removeItem(product);
+        rental.removeItem(product);
     }
     
     private void processProduct(int code){
@@ -259,7 +252,7 @@ public class SaleController {
             System.out.println("Invalid product code: " + code);
             return;
         }
-        sale.addItem(product);
+        rental.addItem(product);
     }
     
     private void processCoupon(){
@@ -296,19 +289,19 @@ public class SaleController {
             return;
         }
         
-        sale.addCoupon(new Coupon(code, productCode, amount));
+        rental.addCoupon(new Coupon(code, productCode, amount));
     }
     
-    private void displaySale(){
-        System.out.println(sale);
+    private void displayRental(){
+        System.out.println(rental);
     }
     private void printReceipt(){
         System.out.print("******************************************");
-        sale.printTotals();
-        ArrayList<Payment> payments = sale.getPayments();
+        rental.printTotals();
+        ArrayList<Payment> payments = rental.getPayments();
         for(int i = 0; i < payments.size(); i++){
             System.out.print(payments.get(i));
         }
-        System.out.println("\n******************************************");
+        System.out.print("\n******************************************");
     }
 }

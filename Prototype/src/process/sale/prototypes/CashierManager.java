@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class CashierManager {
     private ArrayList<Cashier> cashiers;
     private static CashierManager instance;
+    private int nextId = 0;
     
     private CashierManager(){
         cashiers = new ArrayList<Cashier>();
@@ -48,6 +49,9 @@ public class CashierManager {
     }
     
     public void addCashier(Cashier cashier){
+        if(getCashierById(cashier.getId()) != null){  //id already exists, get new id by using other constructor
+            cashier = new Cashier(cashier.getName(), cashier.getUsername(), cashier.getPassword());
+        }
         cashiers.add(cashier);
     }
     
@@ -64,5 +68,15 @@ public class CashierManager {
                 return cashiers.get(i);
         }
         return null;
+    }
+    public Cashier getCashierById(int id){
+        for(int i = 0; i < cashiers.size(); i++){
+            if(cashiers.get(i).getId() == id)
+                return cashiers.get(i);
+        }
+        return null;
+    }
+    public int getNextId(){
+        return ++nextId;
     }
 }

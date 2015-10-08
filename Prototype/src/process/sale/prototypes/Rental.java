@@ -1,16 +1,25 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package process.sale.prototypes;
+
 import java.util.ArrayList;
 
-public class Sale {
-    private float total; //no tax
-    private float saleTotal;
+/**
+ *
+ * @author Pikachu
+ */
+public class Rental {
+    private float total;
+    private float rentalTotal;
     private ArrayList<LineItem> lines;
     private ArrayList<Payment> payments; //for when we need to do returns
     private int id;
     
-    public Sale(){
+    public Rental(){
         total = 0;
-        id = SaleManager.getInstance().getNextId();
+        id = RentalManager.getInstance().getNextId();
         payments = new ArrayList<Payment>();
         lines = new ArrayList<LineItem>();
     }
@@ -18,8 +27,8 @@ public class Sale {
     public float getTotal(){
         return total;
     }
-    public float getSaleTotal(){
-        return saleTotal;
+    public float getRentalTotal(){
+        return rentalTotal;
     }
     public void addPayment(Payment payment){
         payments.add(payment);
@@ -29,13 +38,17 @@ public class Sale {
     }
     
     public void addItem(ProductDescription product){
-        LineItem item = getLineItemByCode(product.getCode());
-        if(item == null){
-            lines.add(new LineItem(product));
-            total += product.getPrice();
-            return;
+        boolean found = false;
+        for(int i = 0; i < lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == product.getCode()){
+                lines.get(i).increaseQuantity();
+                found = true;
+                break;
+            }
         }
-        item.increaseQuantity();
+        if(!found){
+            lines.add(new LineItem(product));
+        }
         total += product.getPrice();
     }
     
@@ -81,32 +94,25 @@ public class Sale {
     public int getId(){
         return id;
     }
-    public LineItem getLineItemByCode(int code){
-        for(int i = 0; i< lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == code)
-                return lines.get(i);
-        }
-        return null;
-    }
     
     public void printTotals() {
         // Calculate tax and total
         float tax = TaxCalculator.getTax(getTotal());
-        saleTotal = getTotal() + tax;
+        rentalTotal = getTotal() + tax;
         
         // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) saleTotal).toString().length();
+        int digits = ((Float) rentalTotal).toString().length();
         String format = "%" + digits + ".2f";
         
         System.out.println("\n" + toString());
         System.out.printf("Subtotal: $" + format + "\n", getTotal());
         System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", saleTotal);
+        System.out.printf("Total:    $" + format + "\n", rentalTotal);
     }
     
     @Override
     public String toString(){
-        String output = "******Sale******* \nSale ID: " + id + "\n";
+        String output = "******Rental******* \nRental ID: " + id + "\n";
         for(int i = 0; i < lines.size(); i++){
             output += lines.get(i).toString();
         }
