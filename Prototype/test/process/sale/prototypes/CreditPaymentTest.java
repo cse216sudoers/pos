@@ -95,7 +95,7 @@ public class CreditPaymentTest {
     public void testToString() {
         System.out.println("toString");
         CreditPayment instance = test;
-        String expResult = String.format ("%2s %16s\t$%-7.2f", "Credit", instance.getCardNum(), instance.getAmount());
+        String expResult = "Credit     123456789012	$12.35  ";
         String result = instance.toString();
         assertEquals(expResult, result);
     }
