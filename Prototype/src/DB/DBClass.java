@@ -71,6 +71,11 @@ public class DBClass {
         
     }
     
+    /**
+     *
+     * @param path The file you want the nextID in
+     * @return The next available ID in this table
+     */
     public static int nextId(String path){
         int id = 0;
         String line;
@@ -85,7 +90,7 @@ public class DBClass {
             Logger.getLogger(DBClass.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return id;
+        return id + 1;
     }
     
     /**
@@ -94,7 +99,8 @@ public class DBClass {
      * @param column : Name of column you want to test against
      * @param value : Value of the column you want to compare to 
      * @return : An ArrayList full of the rows that match where values in column
-     * are equal to value. Returns null if no rows matched.
+     * are equal to value. Returns null if no rows matched. The zeroth row in
+     * the return will be the headers
      */
     public static ArrayList<String> select (String path, String column, String value){
         int columnNumber = getColumnNumber(path, column);
@@ -107,6 +113,8 @@ public class DBClass {
         BufferedReader table = open(path);
     
         try {
+            line = table.readLine();
+            rows.add(line);
             while ((line = table.readLine()) != null) {
                 String[] columns = line.split("|");
                 String test = columns[columnNumber];
