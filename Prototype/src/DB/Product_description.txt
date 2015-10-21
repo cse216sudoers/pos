@@ -1,5 +1,4 @@
 ID | Name | Price | Quantity
-
 0287|Canon Printer|99.99| 4
 0853|Target Gift Card|25.00| 5
 0975|Shots|4.99| 6

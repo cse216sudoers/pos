@@ -28,18 +28,6 @@ public class DBClass {
         return br;
     }
     
-    public static void insert(String path, String row){
-
-    }
-
-    public static void delete(String path, int id){
-
-    }
-
-    public static void update(String path, int id){
-
-    }
-    
     /**
      *
      * @param path Path to the file you want to open
@@ -130,5 +118,15 @@ public class DBClass {
         return rows;
     }
     
+    public static void insert(String path, String row){
 
+    }
+
+    public static void delete(String path, int id){
+
+    }
+
+    public static void update(String path, int id){
+
+    }
 }
