@@ -4,21 +4,21 @@
  */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Pikachu
  */
 public class ReturnManager {
-        private ArrayList<Return> returns;
-    private ArrayList<Return> suspendedReturns;
+        private HashMap<Integer, Return> returns;
+    private HashMap<Integer, Return> suspendedReturns;
     private int nextId = 0;
     private static ReturnManager instance;
     
     private ReturnManager(){
-        returns = new ArrayList<Return>();
-        suspendedReturns = new ArrayList<Return>();
+        returns = new HashMap(89);
+        suspendedReturns = new HashMap(89);
     }
     
     public static synchronized ReturnManager getInstance(){
@@ -29,28 +29,27 @@ public class ReturnManager {
     }
     
     public Return getReturnById(int id){
-        for(int i = 0; i < returns.size(); i++){
-            if(returns.get(i).getId() == id)
-                return returns.get(i);
-        }
-        return null;
+        return returns.get(id);
     }
     
-    public ArrayList<Return> getReturns(){
+    public Return getSuspendedReturnById(int id){
+        return suspendedReturns.get(id);
+    }
+    
+    public HashMap<Integer, Return> getReturns(){
         return returns;
     }
     
-    public ArrayList<Return> getSuspendedreturns(){
+    public HashMap<Integer, Return> getSuspendedreturns(){
         return suspendedReturns;
     }
    
-    
     public void addReturn(Return ret){
-        returns.add(ret);
+        returns.put(ret.getId(), ret);
     } 
     
     public void addSuspendedReturn(Return ret){
-        suspendedReturns.add(ret);
+        suspendedReturns.put(ret.getId(),ret);
     }
     public int getNextId(){
         return ++nextId;

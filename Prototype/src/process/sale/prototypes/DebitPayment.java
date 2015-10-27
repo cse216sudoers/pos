@@ -13,7 +13,8 @@ public class DebitPayment extends Payment{
     private String cardNum;
     
     public DebitPayment(String cardNum, int pin, float amount){
-        super(PaymentType.DEBIT, amount);
+        type = PaymentType.DEBIT;
+        this.amount = amount;
         this.cardNum= cardNum;
         this.pin = pin;
         

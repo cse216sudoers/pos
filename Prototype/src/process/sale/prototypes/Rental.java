@@ -10,31 +10,18 @@ import java.util.ArrayList;
  *
  * @author Pikachu
  */
-public class Rental {
-    private float total;
+public class Rental extends Transaction{
     private float rentalTotal;
-    private ArrayList<LineItem> lines;
-    private ArrayList<Payment> payments; //for when we need to do returns
-    private int id;
     
     public Rental(){
         total = 0;
         id = RentalManager.getInstance().getNextId();
-        payments = new ArrayList<Payment>();
-        lines = new ArrayList<LineItem>();
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
     }
     
-    public float getTotal(){
-        return total;
-    }
     public float getRentalTotal(){
         return rentalTotal;
-    }
-    public void addPayment(Payment payment){
-        payments.add(payment);
-    }
-    public ArrayList<LineItem> getLines(){
-        return lines;
     }
     
     public void addItem(ProductDescription product){
@@ -67,34 +54,7 @@ public class Rental {
         }
     }
     
-    public void removeItem(ProductDescription product){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
-                if(lines.get(i).getQuantity() == 1){
-                    lines.remove(i);
-                }
-                else{
-                    lines.get(i).decreaseQuantity();
-                }
-                total-=product.getPrice();
-                found = true;
-                break;
-            }
-        }
-        if(!found){//item not in Sale
-            System.out.println("item not found");
-        }
-    }
-    
-    public ArrayList<Payment> getPayments(){
-        return payments;
-    }
-    
-    public int getId(){
-        return id;
-    }
-    
+    @Override
     public void printTotals() {
         // Calculate tax and total
         float tax = TaxCalculator.getTax(getTotal());

@@ -4,7 +4,6 @@
  */
 package process.sale.prototypes;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,27 +11,32 @@ import java.util.Scanner;
  *
  * @author Pikachu
  */
-public class ReturnController {
+public class ReturnController extends TransactionController{
     private Return ret;
-    private float leftToReturn; //so we can do multiple tupes of payments
     private Scanner scanner;
-    private String input;
     
     public ReturnController(int saleId){
         ret = new Return(saleId);
     }
-    public void startReturn(){
+    
+    public ReturnController(Return ret){
+        this.ret = ret;
+        display();
+    }
+    
+    @Override
+    public void start(){
         
         //continuous return loop
         while(true){
             try{
-                System.out.print("Please enter 'void', <code>, 'override', or 'close': ");
+                System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
                 //void item
                 if(input.equalsIgnoreCase("void")){
                     processVoid();
-                    displayReturn();
+                    display();
                 }
                 //override
                 else if(input.equalsIgnoreCase("override")){
@@ -41,12 +45,18 @@ public class ReturnController {
                 //add item to return
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
-                    displayReturn();
+                    display();
                 }
                 //end return
                 else if (input.equalsIgnoreCase("close")){
                     // Close return and get payment
-                    closeReturn();
+                    close();
+                    break;
+                }
+                //suspend Return
+                else if (input.equalsIgnoreCase("suspend")){
+                    // Close Sale and get payment
+                    processSuspend();
                     break;
                 }
                 else{
@@ -59,20 +69,26 @@ public class ReturnController {
         }
     }
     
-    private void closeReturn() {
+    @Override
+    protected void processSuspend(){
+        ReturnManager.getInstance().addSuspendedReturn(ret);
+    }
+    
+    @Override
+    protected void close() {
         ArrayList<Payment> payments = SaleManager.getInstance().getSaleById(ret.getSaleId()).getPayments();
         ret.printTotals();
-        leftToReturn = ret.getReturnTotal();
+        leftToPay = ret.getReturnTotal();
         int i = 0;
-        while(leftToReturn > 0){
-            System.out.println("in loop " + leftToReturn);
+        while(leftToPay > 0){
+            System.out.println("in loop " + leftToPay);
             Payment.PaymentType paymentType = payments.get(i).type;
             if(paymentType == Payment.PaymentType.CASH)
-                processCashReturn(payments.get(i));
+                processCashPayment(payments.get(i));
             else if(paymentType == Payment.PaymentType.CREDIT)
-                processCreditReturn(payments.get(i));
+                processCreditPayment(payments.get(i));
             else if(paymentType == Payment.PaymentType.DEBIT)
-                processDebitReturn(payments.get(i));
+                processDebitPayment(payments.get(i));
             i++;
         }
         ReturnManager.getInstance().addReturn(ret);
@@ -81,42 +97,43 @@ public class ReturnController {
         System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
-    private void processCashReturn(Payment payment){
-        if(payment.amount >= leftToReturn){
-            ret.addReturnPayment(new CashPayment(leftToReturn, leftToReturn));
-            leftToReturn = 0;
+    private void processCashPayment(Payment payment){
+        if(payment.amount >= leftToPay){
+            ret.addPayment(new CashPayment(leftToPay, leftToPay));
+            leftToPay = 0;
         }
-        else if(payment.amount < leftToReturn){
-            ret.addReturnPayment(new CashPayment(leftToReturn, payment.amount));
-            leftToReturn-=payment.amount;
+        else if(payment.amount < leftToPay){
+            ret.addPayment(new CashPayment(leftToPay, payment.amount));
+            leftToPay-=payment.amount;
         }
     }
     
-    private void processCreditReturn(Payment payment){
+    private void processCreditPayment(Payment payment){
        CreditPayment p = (CreditPayment)payment;
-       if(payment.amount >= leftToReturn){
-            ret.addReturnPayment(new CreditPayment(p.getCardNum(), p.getSecurityCode(),leftToReturn));
-            leftToReturn = 0;
+       if(payment.amount >= leftToPay){
+            ret.addPayment(new CreditPayment(p.getCardNum(), p.getSecurityCode(),leftToPay));
+            leftToPay = 0;
         }
-        else if(payment.amount < leftToReturn){
-            ret.addReturnPayment(new CreditPayment(p.getCardNum(), p.getSecurityCode(),p.amount));
-            leftToReturn-=p.amount;
+        else if(payment.amount < leftToPay){
+            ret.addPayment(new CreditPayment(p.getCardNum(), p.getSecurityCode(),p.amount));
+            leftToPay-=p.amount;
         }
     }
     
-    private void processDebitReturn(Payment payment){
+    private void processDebitPayment(Payment payment){
        DebitPayment p = (DebitPayment)payment;
-       if(payment.amount >= leftToReturn){
-            ret.addReturnPayment(new DebitPayment(p.getCardNum(), p.getPin(),leftToReturn));
-            leftToReturn = 0;
+       if(payment.amount >= leftToPay){
+            ret.addPayment(new DebitPayment(p.getCardNum(), p.getPin(),leftToPay));
+            leftToPay = 0;
         }
-        else if(payment.amount < leftToReturn){
-            ret.addReturnPayment(new DebitPayment(p.getCardNum(), p.getPin(),p.amount));
-            leftToReturn-=p.amount;
+        else if(payment.amount < leftToPay){
+            ret.addPayment(new DebitPayment(p.getCardNum(), p.getPin(),p.amount));
+            leftToPay-=p.amount;
         }
     }
     
-    private void processVoid(){
+    @Override
+    protected void processVoid(){
         System.out.print("Please enter a product code: ");
         int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
@@ -128,7 +145,8 @@ public class ReturnController {
         ret.removeItem(product);
     }
     
-    private void processProduct(int code){
+    @Override
+    protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
@@ -138,10 +156,12 @@ public class ReturnController {
         ret.addItem(product);
     }
     
-    private void displayReturn(){
+    @Override
+    protected void display(){
         System.out.println(ret);
     }
-    private void printReceipt(){
+    @Override
+    protected void printReceipt(){
         System.out.print("******************************************");
         ret.printTotals();
         ArrayList<Payment> payments = ret.getPayments();

@@ -30,49 +30,66 @@ public class Store {
         return store;
     }
     
-    public void processSale(){
-        SaleController controller = new SaleController();
-        controller.startSale();
-    }
-    
-    public void processReturn(){
-        Scanner scan = new Scanner(System.in);
-        Sale sale = null;
-        do{
-            try{
-                System.out.println("Please enter receipt ID: ");
-                sale = saleManager.getSaleById(scan.nextInt());
-            }catch(Exception e){
-                System.out.println("Invalid input");
-            }
-            
-        }while(sale == null);
-        ReturnController controller = new ReturnController(sale.getId());
-        controller.startReturn();
-    }
-    
-    public void processRental(){
-        RentalController controller = new RentalController();
-        controller.startRental();
-    }
-    
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
+        
         Store mainStore = Store.getStore();
         CashierManager cashierManager = CashierManager.getInstance();
         RegisterManager registerManager = RegisterManager.getInstance();
+        registerManager.addRegister(new Register());
+        Register currentRegister = registerManager.getRegisterById(1);
         String input;
         do{
-            System.out.println("Enter sale, return, rental, or q to quit: ");
+            currentRegister.checkCashier();
+            System.out.println("Enter 'sale', 'return', 'rental', or 'q' to quit: ");
             input = scan.next();
-            if(input.equalsIgnoreCase("sale"))
-                mainStore.processSale();
-            else if(input.equalsIgnoreCase("return"))
-                mainStore.processReturn();
-            else if(input.equalsIgnoreCase("rental"))
-                mainStore.processRental();
-            else
+            if(input.equalsIgnoreCase("q")){
+                break;
+            }
+            System.out.println("Enter 'new' or 'suspended': ");
+            String type = scan.next();
+            
+            if(input.equalsIgnoreCase("sale") && type.equalsIgnoreCase("new")){
+                currentRegister.processSale();
+            }else if(input.equalsIgnoreCase("return") && type.equalsIgnoreCase("new")){
+                currentRegister.processReturn();
+            }else if(input.equalsIgnoreCase("rental") && type.equalsIgnoreCase("new")){
+                currentRegister.processRental();
+            }else if(type.equalsIgnoreCase("suspended")){
+                System.out.printf("Enter suspended %s id: \n", input);
+                int id;
+                
+                do{
+                    try{
+                        id = scan.nextInt();
+                        break;
+                    }catch(Exception e){
+                        System.out.println("Invalid id. Please enter an integer.");
+                    }
+                }while(true);
+                
+                if(input.equalsIgnoreCase("sale")){
+                    Sale sale = SaleManager.getInstance().getSuspendedSaleById(id);
+                    if(sale != null)
+                        currentRegister.processSuspendedSale(sale);
+                    else
+                        System.out.printf("Suspended sale with id %d does not exist.\n", id);
+                }else if(input.equalsIgnoreCase("return")){
+                    Return ret = ReturnManager.getInstance().getSuspendedReturnById(id);
+                    if(ret != null)
+                        currentRegister.processSuspendedReturn(ret);
+                    else
+                        System.out.printf("Suspended return with id %d does not exist.\n", id);
+                }else if(input.equalsIgnoreCase("rental")){
+                    Rental rental = RentalManager.getInstance().getSuspendedRentalById(id);
+                    if(rental != null)
+                        currentRegister.processSuspendedRental(rental);
+                    else
+                        System.out.printf("Suspended rental with id %d does not exist.\n", id);
+                }
+            }else if(!input.equalsIgnoreCase("q")){
                 System.out.println("Invalid Input");
+            }
         }while(!input.equalsIgnoreCase("q"));
     }
 }

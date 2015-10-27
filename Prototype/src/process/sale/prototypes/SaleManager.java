@@ -4,21 +4,21 @@
  */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Pikachu
  */
 public class SaleManager {
-    private ArrayList<Sale> sales;
-    private ArrayList<Sale> suspendedSales;
+    private HashMap<Integer, Sale> sales;
+    private HashMap<Integer, Sale> suspendedSales;
     private int nextId = 0;
     private static SaleManager instance;
     
     private SaleManager(){
-        sales = new ArrayList<Sale>();
-        suspendedSales = new ArrayList<Sale>();
+        sales = new HashMap(89);
+        suspendedSales = new HashMap(89);
     }
     
     public static synchronized SaleManager getInstance(){
@@ -29,28 +29,27 @@ public class SaleManager {
     }
     
     public Sale getSaleById(int id){
-        for(int i = 0; i < sales.size(); i++){
-            if(sales.get(i).getId() == id)
-                return sales.get(i);
-        }
-        return null;
+        return sales.get(id);
     }
     
-    public ArrayList<Sale> getSales(){
+    public Sale getSuspendedSaleById(int id){
+        return suspendedSales.get(id);
+    }
+    
+    public HashMap<Integer, Sale> getSales(){
         return sales;
     }
     
-    public ArrayList<Sale> getSuspendedSales(){
+    public HashMap<Integer, Sale> getSuspendedSales(){
         return suspendedSales;
     }
-   
     
     public void addSale(Sale sale){
-        sales.add(sale);
+        sales.put(sale.getId(), sale);
     } 
     
     public void addSuspendedSale(Sale sale){
-        suspendedSales.add(sale);
+        suspendedSales.put(sale.getId(), sale);
     }
     public int getNextId(){
         return ++nextId;

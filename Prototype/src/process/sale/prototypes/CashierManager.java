@@ -14,11 +14,12 @@ import java.util.Scanner;
  */
 public class CashierManager {
     private ArrayList<Cashier> cashiers;
+    private ArrayList<Cashier> currentCashiers;
     private static CashierManager instance;
     private int nextId = 0;
     
     private CashierManager(){
-        cashiers = new ArrayList<Cashier>();
+        cashiers = new ArrayList<>();
         try{
             Scanner read = new Scanner(new File("Users.txt"));
             read.useDelimiter("\\|");
@@ -49,9 +50,6 @@ public class CashierManager {
     }
     
     public void addCashier(Cashier cashier){
-        if(getCashierById(cashier.getId()) != null){  //id already exists, get new id by using other constructor
-            cashier = new Cashier(cashier.getName(), cashier.getUsername(), cashier.getPassword());
-        }
         cashiers.add(cashier);
     }
     
@@ -59,9 +57,22 @@ public class CashierManager {
         cashiers.remove(cashier);
     }
     
+    public void addCurrentCashier(Cashier cashier){
+        currentCashiers.add(cashier);
+    }
+    
+    public void removeCurrentCashier(Cashier cashier){
+        currentCashiers.remove(cashier);
+    }
+    
     public ArrayList<Cashier> getCashiers(){
         return cashiers;
     }
+    
+    public ArrayList<Cashier> getCurrentCashiers(){
+        return currentCashiers;
+    }
+    
     public Cashier getCashierByUsername(String username){
         for(int i = 0; i < cashiers.size(); i++){
             if(cashiers.get(i).getUsername().equals(username))
@@ -69,6 +80,7 @@ public class CashierManager {
         }
         return null;
     }
+    
     public Cashier getCashierById(int id){
         for(int i = 0; i < cashiers.size(); i++){
             if(cashiers.get(i).getId() == id)
@@ -76,6 +88,15 @@ public class CashierManager {
         }
         return null;
     }
+    
+    public Cashier getCurrentCashierById(int id){
+        for(int i = 0; i < currentCashiers.size(); i++){
+            if(currentCashiers.get(i).getId() == id)
+                return currentCashiers.get(i);
+        }
+        return null;
+    }
+    
     public int getNextId(){
         return ++nextId;
     }

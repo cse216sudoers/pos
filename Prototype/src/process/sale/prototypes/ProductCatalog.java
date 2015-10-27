@@ -9,7 +9,7 @@ public class ProductCatalog {
     private ArrayList<ProductDescription> items;
     
     private ProductCatalog(){
-        items = new ArrayList<ProductDescription>();
+        items = new ArrayList<>();
         try{
             Scanner read = new Scanner(new File("Product_description.txt"));
             read.useDelimiter("\\|");
@@ -21,7 +21,7 @@ public class ProductCatalog {
                 read.nextLine();
             }
         }
-        catch(Exception e){
+        catch(FileNotFoundException | NumberFormatException e){
             System.out.println(e.toString());
         }
     }

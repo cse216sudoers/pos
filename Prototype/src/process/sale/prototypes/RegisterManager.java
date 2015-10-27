@@ -16,7 +16,7 @@ public class RegisterManager {
     private int nextId = 0;
     
     private RegisterManager(){
-        registers = new ArrayList<Register>();
+        registers = new ArrayList<>();
     }
     
     public static synchronized RegisterManager getInstance(){

@@ -12,7 +12,8 @@ public class CashPayment extends Payment{
     private float cashGiven;
     
     public CashPayment(float cashGiven, float amount){
-        super(PaymentType.CASH, amount);
+        this.amount = amount;
+        this.type = Payment.PaymentType.CASH;
         this.cashGiven = cashGiven;
     }
     public float getCashGiven(){

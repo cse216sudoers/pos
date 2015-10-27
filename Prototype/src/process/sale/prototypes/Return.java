@@ -10,38 +10,26 @@ import java.util.ArrayList;
  *
  * @author Pikachu
  */
-public class Return {
-    private float total;
+public class Return extends Transaction{
     private float returnTotal;
     private int saleId;
-    private ArrayList<LineItem> lines;
-    private ArrayList<Payment> returnPayments; //for when we need to do returns
-    private int id;
     
     public Return(int saleId){
         total = 0;
         this.saleId = saleId;
         id = RentalManager.getInstance().getNextId();
-        returnPayments = new ArrayList<Payment>();
-        lines = new ArrayList<LineItem>();
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
     }
     
     public int getSaleId(){
         return saleId;
     }
-    public float getTotal(){
-        return total;
-    }
+
     public float getReturnTotal(){
         return returnTotal;
     }
-    public void addReturnPayment(Payment payment){
-        returnPayments.add(payment);
-    }
-    public ArrayList<LineItem> getLines(){
-        return lines;
-    }
-    
+
     public boolean addItem(ProductDescription product){
         LineItem item = SaleManager.getInstance().getSaleById(saleId).getLineItemByCode(product.getCode());
         
@@ -78,33 +66,6 @@ public class Return {
         return false; //already returned all of that item
     }
     
-    public void removeItem(ProductDescription product){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
-                if(lines.get(i).getQuantity() == 1){
-                    lines.remove(i);
-                }
-                else{
-                    lines.get(i).decreaseQuantity();
-                }
-                total-=product.getPrice();
-                found = true;
-                break;
-            }
-        }
-        if(!found){//item not in return
-            System.out.println("item not found");
-        }
-    }
-    
-    public ArrayList<Payment> getPayments(){
-        return returnPayments;
-    }
-    
-    public int getId(){
-        return id;
-    }
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -112,6 +73,8 @@ public class Return {
         }
         return null;
     }
+    
+    @Override
     public void printTotals() {
         // Calculate tax and total
         float tax = TaxCalculator.getTax(getTotal());

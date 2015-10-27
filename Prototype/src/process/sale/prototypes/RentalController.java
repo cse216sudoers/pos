@@ -12,32 +12,37 @@ import java.util.Scanner;
  *
  * @author Pikachu
  */
-public class RentalController {
+public class RentalController extends TransactionController{
     private Rental rental;
-    private float leftToPay; //so we can do multiple tupes of payments
     private Scanner scanner;
-    private String input;
     
     public RentalController(){
         rental = new Rental();
     }
-    public void startRental(){
-        
+    
+    public RentalController(Rental rental){
+        this.rental = rental;
+        display();
+    }
+    
+    @Override
+    public void start(){
+        boolean done = false;
         //continuous retnal loop
-        while(true){
+        while(!done){
             try{
-                System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
+                System.out.print("Please enter 'void', 'coupon', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
                 //void item
                 if(input.equalsIgnoreCase("void")){
                     processVoid();
-                    displayRental();
+                    display();
                 }
                 //coupon
                 else if(input.equalsIgnoreCase("coupon")){
                     processCoupon();
-                    displayRental();
+                    display();
                 }
                 //override
                 else if(input.equalsIgnoreCase("override")){
@@ -46,13 +51,19 @@ public class RentalController {
                 //add item to rental
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
-                    displayRental();
+                    display();
                 }
                 //end rental
                 else if (input.equalsIgnoreCase("close")){
                     // Close rental and get payment
-                    closeRental();
-                    break;
+                    close();
+                    done = true;
+                }
+                //suspend Sale
+                else if (input.equalsIgnoreCase("suspend")){
+                    // Close Sale and get payment
+                    processSuspend();
+                    done = true;
                 }
                 else{
                     System.out.println("Invalid input: " + input);
@@ -64,7 +75,13 @@ public class RentalController {
         }
     }
     
-    private void closeRental() {
+    @Override
+    protected void processSuspend(){
+        RentalManager.getInstance().addSuspendedRental(rental);
+    }
+    
+    @Override
+    protected void close() {
         String paymentType;
         boolean validType;
         
@@ -100,7 +117,7 @@ public class RentalController {
         System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
-    private void processCashPayment(){
+    protected void processCashPayment(){
         float payment = 0;
         System.out.println("Please enter total cash payment: ");
         try{
@@ -123,7 +140,7 @@ public class RentalController {
         }
     }
     
-    private void processCreditPayment(){
+    protected void processCreditPayment(){
         float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
@@ -172,15 +189,16 @@ public class RentalController {
         }
     }
     
-    private boolean processCreditPayment(CreditPayment payment){
+    protected boolean processCreditPayment(CreditPayment payment){
         String cardNum = payment.getCardNum();
         String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
             return true;
         return false;
     }
-    private void processDebitPayment(){
-                float payment = 0;
+    
+    protected void processDebitPayment(){
+        float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
         String cardNum = "";
@@ -233,7 +251,8 @@ public class RentalController {
         return false;
     }
     
-    private void processVoid(){
+    @Override
+    protected void processVoid(){
         System.out.print("Please enter a product code: ");
         int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
@@ -245,7 +264,8 @@ public class RentalController {
         rental.removeItem(product);
     }
     
-    private void processProduct(int code){
+    @Override
+    protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
@@ -292,10 +312,13 @@ public class RentalController {
         rental.addCoupon(new Coupon(code, productCode, amount));
     }
     
-    private void displayRental(){
+    @Override
+    protected void display(){
         System.out.println(rental);
     }
-    private void printReceipt(){
+    
+    @Override
+    protected void printReceipt(){
         System.out.print("******************************************");
         rental.printTotals();
         ArrayList<Payment> payments = rental.getPayments();

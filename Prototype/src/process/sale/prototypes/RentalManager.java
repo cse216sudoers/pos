@@ -4,21 +4,21 @@
  */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Pikachu
  */
 public class RentalManager {
-    private ArrayList<Rental> rental;
-    private ArrayList<Rental> suspendedRentals;
+    private HashMap<Integer, Rental> rentals;
+    private HashMap<Integer, Rental> suspendedRentals;
     private int nextId = 0;
     private static RentalManager instance;
     
     private RentalManager(){
-        rental = new ArrayList<Rental>();
-        suspendedRentals = new ArrayList<Rental>();
+        rentals = new HashMap(89);
+        suspendedRentals = new HashMap(89);
     }
     
     public static synchronized RentalManager getInstance(){
@@ -29,28 +29,27 @@ public class RentalManager {
     }
     
     public Rental getRentalById(int id){
-        for(int i = 0; i < rental.size(); i++){
-            if(rental.get(i).getId() == id)
-                return rental.get(i);
-        }
-        return null;
+        return rentals.get(id);
     }
     
-    public ArrayList<Rental> getRentals(){
-        return rental;
+    public Rental getSuspendedRentalById(int id){
+        return rentals.get(id);
     }
     
-    public ArrayList<Rental> getSuspendedRentals(){
+    public HashMap<Integer, Rental> getRentals(){
+        return rentals;
+    }
+    
+    public HashMap<Integer, Rental> getSuspendedRentals(){
         return suspendedRentals;
     }
-   
     
-    public void addRental(Rental ret){
-        rental.add(ret);
+    public void addRental(Rental rental){
+        rentals.put(rental.getId(), rental);
     } 
     
-    public void addSuspendedSale(Rental ret){
-        suspendedRentals.add(ret);
+    public void addSuspendedRental(Rental rental){
+        suspendedRentals.put(rental.getId(), rental);
     }
     public int getNextId(){
         return ++nextId;

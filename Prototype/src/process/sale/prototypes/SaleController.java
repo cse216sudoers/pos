@@ -12,33 +12,38 @@ import java.util.Scanner;
  *
  * @author Pikachu
  */
-public class SaleController {
+public class SaleController extends TransactionController{
     private Sale sale;
-    private float leftToPay; //so we can do multiple tupes of payments
     private Scanner scanner;
-    private String input;
     
     public SaleController(){
         sale = new Sale();
     }
-    public void startSale(){
+    
+    public SaleController(Sale sale){
+        this.sale = sale;
+        display();
+    }
+    
+    @Override
+    public void start(){
         
         //continuous Sale loop
         boolean done = false;
         while(!done){
             try{
-                System.out.print("Please enter 'void', 'coupon', <code>, 'override', or 'close': ");
+                System.out.print("Please enter 'void', 'coupon', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
                 //void item
                 if(input.equalsIgnoreCase("void")){
                     processVoid();
-                    displaySale();
+                    display();
                 }
                 //coupon
                 else if(input.equalsIgnoreCase("coupon")){
                     processCoupon();
-                    displaySale();
+                    display();
                 }
                 //override
                 else if(input.equalsIgnoreCase("override")){
@@ -47,12 +52,18 @@ public class SaleController {
                 //add item to Sale
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
-                    displaySale();
+                    display();
                 }
                 //end Sale
                 else if (input.equalsIgnoreCase("close")){
                     // Close Sale and get payment
-                    closeSale();
+                    close();
+                    done = true;
+                }
+                //suspend Sale
+                else if (input.equalsIgnoreCase("suspend")){
+                    // Close Sale and get payment
+                    processSuspend();
                     done = true;
                 }
                 else{
@@ -65,7 +76,13 @@ public class SaleController {
         }
     }
     
-    private void closeSale() {
+    @Override
+    protected void processSuspend(){
+        SaleManager.getInstance().addSuspendedSale(sale);
+    }
+    
+    @Override
+    protected void close() {
         String paymentType;
         boolean validType;
         
@@ -101,7 +118,7 @@ public class SaleController {
         System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
-    private void processCashPayment(){
+    protected void processCashPayment(){
         float payment = 0;
         System.out.println("Please enter total cash payment: ");
         try{
@@ -124,7 +141,7 @@ public class SaleController {
         }
     }
     
-    private void processCreditPayment(){
+    protected void processCreditPayment(){
         float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
@@ -180,7 +197,8 @@ public class SaleController {
             return true;
         return false;
     }
-    private void processDebitPayment(){
+    
+    protected void processDebitPayment(){
                 float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
@@ -234,7 +252,8 @@ public class SaleController {
         return false;
     }
     
-    private void processVoid(){
+    @Override
+    protected void processVoid(){
         System.out.print("Please enter a product code: ");
         int code;
         try{
@@ -252,7 +271,8 @@ public class SaleController {
         sale.removeItem(product);
     }
     
-    private void processProduct(int code){
+    @Override
+    protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
@@ -299,10 +319,12 @@ public class SaleController {
         sale.addCoupon(new Coupon(code, productCode, amount));
     }
     
-    private void displaySale(){
+    @Override
+    protected void display(){
         System.out.println(sale);
     }
-    private void printReceipt(){
+    @Override
+    protected void printReceipt(){
         System.out.print("******************************************");
         sale.printTotals();
         ArrayList<Payment> payments = sale.getPayments();

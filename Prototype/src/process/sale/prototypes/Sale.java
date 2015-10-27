@@ -11,8 +11,8 @@ public class Sale {
     public Sale(){
         total = 0;
         id = SaleManager.getInstance().getNextId();
-        payments = new ArrayList<Payment>();
-        lines = new ArrayList<LineItem>();
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
     }
     
     public float getTotal(){

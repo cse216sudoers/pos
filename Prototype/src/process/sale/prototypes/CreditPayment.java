@@ -13,7 +13,8 @@ public class CreditPayment extends Payment{
     private String cardNum;
     
     public CreditPayment(String cardNum, String securityCode, float amount){
-        super(PaymentType.CREDIT, amount);
+        type = PaymentType.CREDIT;
+        this.amount = amount;
         this.cardNum= cardNum;
         this.securityCode = securityCode;
     }

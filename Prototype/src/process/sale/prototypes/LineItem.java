@@ -5,8 +5,6 @@
  */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Jeff
