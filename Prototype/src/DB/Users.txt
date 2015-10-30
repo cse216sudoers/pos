@@ -1,3 +1,4 @@
+name|ID|NULL?|username|password
 Ryan|1|0|Ryn|potato|
 Jim|2|1|Jib|bill|
 Peter|3|1|Pes|a2h4g@s|

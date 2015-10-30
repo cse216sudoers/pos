@@ -18,6 +18,7 @@ public class Cashier {
         this.username = username;
         this.name = name;
         this.password = password;
+        id = CashierManager.getInstance().getNextId();
     }
     public Cashier(String name, String username, String password, int uid){
         this.username = username;
@@ -48,5 +49,9 @@ public class Cashier {
     
     public void setPassword(String password){
         this.password = password;
+    }
+    
+    public int getId(){
+        return id;
     }
 }

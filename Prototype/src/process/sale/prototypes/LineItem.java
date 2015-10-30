@@ -5,24 +5,25 @@
  */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Jeff
  */
-public class SaleLineItem {
+public class LineItem {
     private int quantity;
     private ProductDescription product;
     private Coupon coupon;
     
-    public SaleLineItem(ProductDescription product){
+    public LineItem(ProductDescription product){
         quantity = 1;
         this.product = product;
         coupon = null;
     }
     public ProductDescription getProduct(){
         return product;
+    }
+    public float getPriceWithCoupons(){
+        return product.getPrice() - coupon.getAmount();
     }
     public int getQuantity(){
         return quantity;

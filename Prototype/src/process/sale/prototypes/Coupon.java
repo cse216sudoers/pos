@@ -4,8 +4,6 @@
  */
 package process.sale.prototypes;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Pikachu

@@ -2,16 +2,17 @@ package process.sale.prototypes;
 import java.util.ArrayList;
 
 public class Sale {
-    private float total;
+    private float total; //no tax
     private float saleTotal;
-    private ArrayList<SaleLineItem> lines;
+    private ArrayList<LineItem> lines;
     private ArrayList<Payment> payments; //for when we need to do returns
     private int id;
     
     public Sale(){
         total = 0;
-        payments = new ArrayList<Payment>();
-        lines = new ArrayList<SaleLineItem>();
+        id = SaleManager.getInstance().getNextId();
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
     }
     
     public float getTotal(){
@@ -23,22 +24,18 @@ public class Sale {
     public void addPayment(Payment payment){
         payments.add(payment);
     }
-    public ArrayList<SaleLineItem> getLines(){
+    public ArrayList<LineItem> getLines(){
         return lines;
     }
     
     public void addItem(ProductDescription product){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
-                lines.get(i).increaseQuantity();
-                found = true;
-                break;
-            }
+        LineItem item = getLineItemByCode(product.getCode());
+        if(item == null){
+            lines.add(new LineItem(product));
+            total += product.getPrice();
+            return;
         }
-        if(!found){
-            lines.add(new SaleLineItem(product));
-        }
+        item.increaseQuantity();
         total += product.getPrice();
     }
     
@@ -72,7 +69,7 @@ public class Sale {
                 break;
             }
         }
-        if(!found){//item not in sale
+        if(!found){//item not in Sale
             System.out.println("item not found");
         }
     }
@@ -83,6 +80,13 @@ public class Sale {
     
     public int getId(){
         return id;
+    }
+    public LineItem getLineItemByCode(int code){
+        for(int i = 0; i< lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == code)
+                return lines.get(i);
+        }
+        return null;
     }
     
     public void printTotals() {
@@ -102,7 +106,7 @@ public class Sale {
     
     @Override
     public String toString(){
-        String output = "";
+        String output = "******Sale******* \nSale ID: " + id + "\n";
         for(int i = 0; i < lines.size(); i++){
             output += lines.get(i).toString();
         }

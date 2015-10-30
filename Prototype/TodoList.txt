@@ -4,8 +4,8 @@ Classes
 	ProductCatalog - Noah
 	ProductDescription - Josh
 	Register - 
-	Sale - 
-	SaleLineItem - 
+	sale - 
+	saleLineItem - 
 	Store - 
 
 SAD Diagrams
@@ -15,10 +15,10 @@ Data Storage - Josh and Ryan
 		User.txt
 		Product.txt
 		Product_description.txt
-		Sale.txt
-		SaleLineItem.txt
+		sale.txt
+		saleLineItem.txt
 		Store.txt
 
 General Other Things We Should Do:
 	Have fun - not Peter
-	SaleController.closeSale method - Peter
+	saleController.closesale method - Peter
