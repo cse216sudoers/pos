@@ -26,20 +26,29 @@ public class Register {
         }
     }
     
+    public boolean verifyUsernameText(String username) {
+        return cashierManager.getCashierByUsername(username) != null;
+    }
+    
+    public boolean verifyPasswordText(String username, String password) {
+        String correctPass = cashierManager.getCashierByUsername(username).getPassword();
+        return password.equals(correctPass);
+    }
+    
     private void promptLogIn(){
         Scanner scan = new Scanner(System.in);
         String username;
         System.out.println("****Log In****");
-        System.out.println("Username: ");
+        System.out.print("Username: ");
         while(true){
             username = scan.next();
-            if(cashierManager.getCashierByUsername(username) != null){
+            if(verifyUsernameText(username)){
                 if(checkPassword(username))
                     break;
             }else{
                 continue;
             }
-            System.out.println("Incorrect. \nUsername: ");
+            System.out.print("Incorrect. \nUsername: ");
         }
         System.out.println("****Log in successful****");
         currentCashier = cashierManager.getCashierByUsername(username);
@@ -48,13 +57,13 @@ public class Register {
     private boolean checkPassword(String username){
         Scanner scan = new Scanner(System.in);
         String password;
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         while(true){
             password= scan.next();
-            if(password.equals(cashierManager.getCashierByUsername(username).getPassword())){
+            if(verifyPasswordText(username, password)){
                 return true;
             }
-            System.out.println("Incorrect. \nPassword: ");
+            System.out.print("Incorrect. \nPassword: ");
         }
     }
     
