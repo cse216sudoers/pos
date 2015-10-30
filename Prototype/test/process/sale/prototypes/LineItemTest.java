@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author peterschaedler
  */
-public class SaleLineItemTest {
+public class LineItemTest {
     
-    public SaleLineItemTest() {
+    public LineItemTest() {
     }
     
     @BeforeClass
@@ -44,7 +44,7 @@ public class SaleLineItemTest {
     public void testGetProduct() {
         System.out.println("getProduct");
         ProductDescription expResult = new ProductDescription("Item", 12.95F, 1000);
-        SaleLineItem instance = new SaleLineItem(expResult);
+        LineItem instance = new LineItem(expResult);
         ProductDescription result = instance.getProduct();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -57,7 +57,7 @@ public class SaleLineItemTest {
     @Test
     public void testGetQuantity() {
         System.out.println("getQuantity");
-        SaleLineItem instance = new SaleLineItem(new ProductDescription("Item", 12.95F, 1000));
+        LineItem instance = new LineItem(new ProductDescription("Item", 12.95F, 1000));
         int expResult = 1;
         int result = instance.getQuantity();
         assertEquals(expResult, result);
@@ -71,7 +71,7 @@ public class SaleLineItemTest {
     @Test
     public void testIncreaseQuantity() {
         System.out.println("increaseQuantity");
-        SaleLineItem instance = new SaleLineItem(new ProductDescription("Item", 12.95F, 1000));
+        LineItem instance = new LineItem(new ProductDescription("Item", 12.95F, 1000));
         instance.increaseQuantity();
         int expResult = 2;
         int result = instance.getQuantity();
@@ -86,7 +86,7 @@ public class SaleLineItemTest {
     @Test
     public void testDecreaseQuantity() {
         System.out.println("decreaseQuantity");
-        SaleLineItem instance = new SaleLineItem(new ProductDescription("Item", 12.95F, 1000));
+        LineItem instance = new LineItem(new ProductDescription("Item", 12.95F, 1000));
         instance.decreaseQuantity();
         int expResult = 0;
         int result = instance.getQuantity();

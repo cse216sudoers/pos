@@ -33,7 +33,7 @@ public class PaymentTest {
     
     @Before
     public void setUp() {
-        instance = new Payment(Payment.PaymentType.CASH, 25.02f);
+        instance = new CashPayment(25.02f, 25.02f);
     }
     
     @After
