@@ -6,7 +6,16 @@
             <file>file:/C:/Users/Jeff/Desktop/pos/Prototype/nbproject/private/private.xml</file>
         </group>
         <group>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/test/process/sale/prototypes/SaleLineItemTest.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/ProductCatalog.java</file>
             <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/Sale.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/SaleLineItem.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/TaxCalculator.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/Store.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/ProductDescription.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/Payment.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/Register.java</file>
+            <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/CreditPayment.java</file>
             <file>file:/Users/peterschaedler/Documents/Lehigh%20Documents/Junior%20Year/CSE%20216/pos/Prototype/src/process/sale/prototypes/SaleController.java</file>
         </group>
     </open-files>
