@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  */
 public class LoginWindow extends Application {
     private Register register;
+    private Stage stage;
     
     public LoginWindow() {
         super();
@@ -36,6 +37,8 @@ public class LoginWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         // This code is basically taken from this Java example: http://docs.oracle.com/javafx/2/get_started/form.htm
+        
+        stage = primaryStage;
         
         // Create new grid layout
         GridPane grid = new GridPane();
@@ -81,6 +84,7 @@ public class LoginWindow extends Application {
                 if (verifyLogin(username, password)) {
                     // TODO: move on to the next part - show the sale chooser
                     System.out.println("Login confirmed!");
+                    continueToMainWindow();
                 }
             }
         });
@@ -95,6 +99,7 @@ public class LoginWindow extends Application {
                     if (verifyLogin(username, password)) {
                         // TODO: move on to the next part - show the sale chooser
                         System.out.println("Login confirmed!");
+                        continueToMainWindow();
                     }
                 }
             }
@@ -114,6 +119,14 @@ public class LoginWindow extends Application {
         }
         // TODO: Add error handling for login
         return false;
+    }
+    
+    private void continueToMainWindow() {
+        // Close this window
+        stage.close();
+        
+        // Open up main window
+        MainWindow main = new MainWindow();
     }
 
     /**
