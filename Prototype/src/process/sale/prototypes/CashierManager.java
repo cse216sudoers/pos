@@ -29,7 +29,14 @@ public class CashierManager {
                 int access = Integer.parseInt(read.next());
                 String username = read.next();
                 String password = read.next();
-                cashiers.add(new Cashier( name, username, password,uid));
+                Cashier.Access type;
+                if(access == 0)
+                    type = Cashier.Access.Admin;
+                else if(access == 1)
+                    type = Cashier.Access.Manager;
+                else
+                    type = Cashier.Access.Cashier;
+                cashiers.add(new Cashier( name, username, password, uid, type));
                 read.nextLine();
             }
         }
@@ -37,7 +44,7 @@ public class CashierManager {
             //System.out.println(e.toString());
         }
     }
-    
+
     public static synchronized CashierManager getInstance(){
         if(instance == null){
             instance = new CashierManager();
@@ -53,8 +60,20 @@ public class CashierManager {
         cashiers.add(cashier);
     }
     
-    public void removeCashier(Cashier cashier){
-        cashiers.remove(cashier);
+    public boolean removeCashier(String username){
+        for(int i = 0; i < currentCashiers.size(); i++){
+            if(cashiers.get(i).getUsername().equals(username)){
+                return false; // return false if the cashier is currently logged on somewhere
+            }
+        }
+        
+        for(int i = 0; i < cashiers.size(); i++){
+            if(cashiers.get(i).getUsername().equals(username)){
+                cashiers.remove(i);
+                return true; //return true if found 
+            }
+        }
+        return true; //return true if doesn't exist
     }
     
     public void addCurrentCashier(Cashier cashier){

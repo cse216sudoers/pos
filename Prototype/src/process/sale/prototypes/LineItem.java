@@ -40,6 +40,9 @@ public class LineItem {
     public Coupon getCoupon(){
         return coupon;
     }
+    public float getRentalPrice(){
+        return product.getPrice();
+    }
     
     @Override
     public String toString(){

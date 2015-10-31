@@ -313,7 +313,7 @@ public class RentalController extends TransactionController{
     }
     
     @Override
-    protected void display(){
+    protected final void display(){
         System.out.println(rental);
     }
     

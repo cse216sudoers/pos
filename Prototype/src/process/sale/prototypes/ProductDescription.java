@@ -4,6 +4,7 @@ package process.sale.prototypes;
 public class ProductDescription {
     private int productCode;
     private float price;
+    private float rentalPrice;
     private String description;
     private static int nextCode = 1;
     
@@ -35,6 +36,10 @@ public class ProductDescription {
 
     public float getPrice(){
         return price;
+    }
+    
+    public float getRentalPrice() {
+        return rentalPrice;
     }
     
     public String getDescription(){
