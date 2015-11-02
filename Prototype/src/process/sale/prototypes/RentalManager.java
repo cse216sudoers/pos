@@ -33,7 +33,7 @@ public class RentalManager {
     }
     
     public Rental getSuspendedRentalById(int id){
-        return rentals.get(id);
+        return suspendedRentals.get(id);
     }
     
     public HashMap<Integer, Rental> getRentals(){

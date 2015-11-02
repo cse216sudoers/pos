@@ -10,9 +10,9 @@ package process.sale.prototypes;
  * @author Jeff
  */
 public class LineItem {
-    private int quantity;
-    private ProductDescription product;
-    private Coupon coupon;
+    protected int quantity;
+    protected ProductDescription product;
+    protected Coupon coupon;
     
     public LineItem(ProductDescription product){
         quantity = 1;
@@ -39,9 +39,6 @@ public class LineItem {
     }
     public Coupon getCoupon(){
         return coupon;
-    }
-    public float getRentalPrice(){
-        return product.getPrice();
     }
     
     @Override

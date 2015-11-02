@@ -16,7 +16,9 @@ public class RegisterController{
     private TransactionController currentTransaction;
     private SaleManager saleManager;
     private Register register;
-    
+    public Register getRegister(){
+        return register;
+    }
     public RegisterController(Register register){
         registerManager = RegisterManager.getInstance();
         saleManager = SaleManager.getInstance();
@@ -37,7 +39,6 @@ public class RegisterController{
         Scanner scan = new Scanner(System.in);
         String input;
         do{
-            checkCashier();
             String otherOptions = "";
             if(register.getCashier().getAccess() == Cashier.Access.Admin)
                     otherOptions += "user management, ";
@@ -98,39 +99,20 @@ public class RegisterController{
         }while(!input.equalsIgnoreCase("q"));
     }
      
-    private void promptLogIn(){
-        Scanner scan = new Scanner(System.in);
-        String username;
-        System.out.println("****Log In****");
-      
-        System.out.println("Username: ");
-        while(true){
-            username = scan.next();
-            if(cashierManager.getCashierByUsername(username) != null){
-                if(checkPassword(username))
-                    break;
-            }
-            System.out.println("Incorrect. \nUsername: ");
-        }
-        register.setCashier(cashierManager.getCashierByUsername(username));
-        System.out.println("****Log in successful****");
-        System.out.printf("****Logged in as a %s ****\n", register.getCashier().getAccess().toString());
-        register.setCashier(cashierManager.getCashierByUsername(username));
+    public boolean verifyUsername(String username){
+        if(cashierManager.getCashierByUsername(username) != null)
+                return true;
+        return false;
     }
     
-    private boolean checkPassword(String username){
-        Scanner scan = new Scanner(System.in);
-        String password;
-        System.out.println("Password: ");
-        while(true){
-            password= scan.next();
-            if(password.equals(cashierManager.getCashierByUsername(username).getPassword())){
-                return true;
-            }
-            System.out.println("Incorrect. \nPassword: ");
-        }
+    public Cashier verifyPassword(String username, String password){
+        Cashier cashier = cashierManager.getCashierByUsername(username);
+        if(password.equals(cashier.getPassword()))
+            return cashier;
+        return null;
     }
-        public void processSuspendedSale(Sale sale){
+    
+    public void processSuspendedSale(Sale sale){
         currentTransaction = new SaleController(sale);
         currentTransaction.start();
     }
@@ -180,11 +162,5 @@ public class RegisterController{
     
     private void processUserManagement(){
         UserManagementController userManagementController = new UserManagementController();
-    }
-    
-    private void checkCashier(){
-        if(register.getCashier() == null){
-            promptLogIn();
-        }
     }
 }

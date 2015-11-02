@@ -14,10 +14,22 @@ public class ProductCatalog {
             Scanner read = new Scanner(new File("Product_description.txt"));
             read.useDelimiter("\\|");
             while(read.hasNext()){
+//                while(read.hasNext()){
+//                System.out.println(read.nextLine());
+//                }
                 int id = Integer.parseInt(read.next());
                 String desc = read.next();
                 float price = Float.parseFloat(read.next());
-                items.add(new ProductDescription(desc,price,id));
+                int quantity = Integer.parseInt(read.next());
+                int rentable = Integer.parseInt(read.next());
+                boolean isRentable;
+                if(rentable == 0)
+                    isRentable = false;
+                else
+                    isRentable = true;
+                float rentalPrice = read.nextFloat();
+                ProductDescription product = new ProductDescription(desc,price,id, quantity, isRentable, rentalPrice);
+                items.add(product);
                 read.nextLine();
             }
         }

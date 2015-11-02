@@ -30,7 +30,7 @@ public class RentalController extends TransactionController{
         boolean done = false;
         //continuous retnal loop
         while(!done){
-            try{
+            //try{
                 System.out.print("Please enter 'void', 'coupon', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -68,10 +68,10 @@ public class RentalController extends TransactionController{
                 else{
                     System.out.println("Invalid input: " + input);
                 }
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
+//            }catch(Exception e){
+//                System.out.println(e.toString());
+//                System.out.println("Invalid input");
+//            }
         }
     }
     
@@ -267,12 +267,16 @@ public class RentalController extends TransactionController{
     @Override
     protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-        
+  
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
-            return;
+        }else if(!product.getIsRentable()){
+            System.out.println("Item cannot be rented: " + code);
+        }else{
+            System.out.print("Please enter days to rent: ");
+            int days = scanner.nextInt();
+            rental.addItem(product, days);
         }
-        rental.addItem(product);
     }
     
     private void processCoupon(){

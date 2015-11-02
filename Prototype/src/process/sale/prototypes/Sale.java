@@ -1,12 +1,8 @@
 package process.sale.prototypes;
 import java.util.ArrayList;
 
-public class Sale {
-    private float total; //no tax
+public class Sale extends Transaction{
     private float saleTotal;
-    private ArrayList<LineItem> lines;
-    private ArrayList<Payment> payments; //for when we need to do returns
-    private int id;
     
     public Sale(){
         total = 0;
@@ -15,17 +11,8 @@ public class Sale {
         lines = new ArrayList<>();
     }
     
-    public float getTotal(){
-        return total;
-    }
     public float getSaleTotal(){
         return saleTotal;
-    }
-    public void addPayment(Payment payment){
-        payments.add(payment);
-    }
-    public ArrayList<LineItem> getLines(){
-        return lines;
     }
     
     public void addItem(ProductDescription product){
@@ -54,6 +41,7 @@ public class Sale {
         }
     }
     
+    @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -74,13 +62,6 @@ public class Sale {
         }
     }
     
-    public ArrayList<Payment> getPayments(){
-        return payments;
-    }
-    
-    public int getId(){
-        return id;
-    }
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -89,6 +70,7 @@ public class Sale {
         return null;
     }
     
+    @Override
     public void printTotals() {
         // Calculate tax and total
         float tax = TaxCalculator.getTax(getTotal());

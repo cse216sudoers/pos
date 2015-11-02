@@ -24,19 +24,19 @@ public class Rental extends Transaction{
         return rentalTotal;
     }
     
-    public void addItem(ProductDescription product){
+    public void addItem(ProductDescription product, int daysRented){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
+            if(lines.get(i).getProduct().getCode() == product.getCode() && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented){
                 lines.get(i).increaseQuantity();
                 found = true;
                 break;
             }
         }
         if(!found){
-            lines.add(new LineItem(product));
+            lines.add(new RentalLineItem(product, daysRented));
         }
-        total += product.getPrice();
+        total += product.getRentalPrice();
     }
     
     public void addCoupon(Coupon coupon){
@@ -77,5 +77,26 @@ public class Rental extends Transaction{
             output += lines.get(i).toString();
         }
         return output;
+    }
+
+    @Override
+    public void removeItem(ProductDescription product){
+        boolean found = false;
+        for(int i = 0; i < lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == product.getCode()){
+                if(lines.get(i).getQuantity() == 1){
+                    lines.remove(i);
+                }
+                else{
+                    lines.get(i).decreaseQuantity();
+                }
+                total-=product.getRentalPrice();
+                found = true;
+                break;
+            }
+        }
+        if(!found){//item not in Sale
+            System.out.println("item not found");
+        }
     }
 }

@@ -18,12 +18,4 @@ public class Store {
         }
         return store;
     }
-    
-    public static void main(String[] args){        
-        RegisterManager registerManager = RegisterManager.getInstance();
-        Register register = new Register(registerManager.getNextId());
-        registerManager.addRegister(register);
-        RegisterController currentRegisterController = new RegisterController(register);
-        currentRegisterController.start();
-    }
 }

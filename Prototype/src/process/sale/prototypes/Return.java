@@ -66,6 +66,27 @@ public class Return extends Transaction{
         return false; //already returned all of that item
     }
     
+    @Override
+    public void removeItem(ProductDescription product){
+        boolean found = false;
+        for(int i = 0; i < lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == product.getCode()){
+                if(lines.get(i).getQuantity() == 1){
+                    lines.remove(i);
+                }
+                else{
+                    lines.get(i).decreaseQuantity();
+                }
+                total-=product.getPrice();
+                found = true;
+                break;
+            }
+        }
+        if(!found){//item not in Sale
+            System.out.println("item not found");
+        }
+    }
+    
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)

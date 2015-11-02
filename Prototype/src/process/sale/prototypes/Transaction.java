@@ -28,25 +28,7 @@ public abstract class Transaction {
         return lines;
     }
         
-    public void removeItem(ProductDescription product){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
-                if(lines.get(i).getQuantity() == 1){
-                    lines.remove(i);
-                }
-                else{
-                    lines.get(i).decreaseQuantity();
-                }
-                total-=product.getPrice();
-                found = true;
-                break;
-            }
-        }
-        if(!found){//item not in Sale
-            System.out.println("item not found");
-        }
-    }
+    public abstract void removeItem(ProductDescription product);
     
     public ArrayList<Payment> getPayments(){
         return payments;
