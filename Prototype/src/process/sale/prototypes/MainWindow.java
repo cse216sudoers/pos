@@ -59,21 +59,39 @@ public class MainWindow {
         buttonBox.setPadding(new Insets(0, 15, 0, 0));
         
         // Create buttons
-        Button saleLabel = new Button("SALE");
+        Button saleLabel = new Button("Sale");
         saleLabel.setMaxWidth(Double.MAX_VALUE);
+        saleLabel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                displayProcessSale();
+            }
+        });
         
-        Button rentalLabel = new Button("RENTAL");
+        Button rentalLabel = new Button("Rental");
         rentalLabel.setMaxWidth(Double.MAX_VALUE);
+        rentalLabel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                displayProcessRental();
+            }
+        });
         
-        Button returnLabel = new Button("RETURN");
+        Button returnLabel = new Button("Return");
         returnLabel.setMaxWidth(Double.MAX_VALUE);
+        returnLabel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                displayProcessReturn();
+            }
+        });
         
         // Add buttons to grid
         buttonBox.getChildren().addAll(saleLabel, rentalLabel, returnLabel);
         grid.add(buttonBox, 0, 0);
         
         // Create text area for writing receipts and things
-        console = new TextArea("Sudoers Point of Sale System\n");
+        console = new TextArea("Sudoers Point of Sale System");
         console.setPrefColumnCount(40);
         console.setPrefRowCount(40);
         console.setEditable(false);
@@ -81,9 +99,27 @@ public class MainWindow {
         
         // Show the window
         stage.show();
+        
+        // Default to showing process sale
+        displayProcessSale();
+    }
+    
+    public void writeToConsole(String text) {
+        console.appendText("\n\n" + text);
     }
     
     public void displayProcessSale() {
-        
+        // TODO: Add controls for process sale
+        writeToConsole("A sale is totally in progress.");
+    }
+    
+    public void displayProcessRental() {
+        // TODO
+        writeToConsole("A rental is totally in progress.");
+    }
+    
+    public void displayProcessReturn() {
+        // TODO
+        writeToConsole("A return is totally in progress.");
     }
 }
