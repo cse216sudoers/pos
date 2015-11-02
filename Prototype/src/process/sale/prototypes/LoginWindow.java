@@ -37,6 +37,7 @@ public class LoginWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         // This code is basically taken from this Java example: http://docs.oracle.com/javafx/2/get_started/form.htm
+        // This code is also very not-modular. Could be improved a lot.
         
         stage = primaryStage;
         
@@ -81,8 +82,8 @@ public class LoginWindow extends Application {
                 // Verify information
                 String username = userTextField.getText();
                 String password = pwBox.getText();
+                // TODO: Add error handling
                 if (verifyLogin(username, password)) {
-                    // TODO: move on to the next part - show the sale chooser
                     System.out.println("Login confirmed!");
                     continueToMainWindow();
                 }
@@ -96,8 +97,8 @@ public class LoginWindow extends Application {
                 if (e.getCode() == KeyCode.ENTER) {
                     String username = userTextField.getText();
                     String password = pwBox.getText();
+                    // TODO: Add error handling
                     if (verifyLogin(username, password)) {
-                        // TODO: move on to the next part - show the sale chooser
                         System.out.println("Login confirmed!");
                         continueToMainWindow();
                     }
