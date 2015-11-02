@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  */
 public class LoginWindow extends Application {
     private RegisterController registerController;
+    private Stage stage;
     
     public LoginWindow() {
         super();
@@ -34,6 +35,9 @@ public class LoginWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         // This code is basically taken from this Java example: http://docs.oracle.com/javafx/2/get_started/form.htm
+        // This code is also very not-modular. Could be improved a lot.
+        
+        stage = primaryStage;
         
         // Create new grid layout
         GridPane grid = new GridPane();
@@ -77,12 +81,13 @@ public class LoginWindow extends Application {
                 String username = userTextField.getText();
                 String password = pwBox.getText();
                 Cashier cashier = verifyLogin(username, password);
-                    if(cashier != null) {
-                        // TODO: move on to the next part - show the sale chooser
-                        System.out.println("Login confirmed!");
-                        registerController.getRegister().setCashier(cashier);
-                        registerController.start();
-                    }
+                if(cashier != null) {
+                    // TODO: move on to the next part - show the sale chooser
+                    System.out.println("Login confirmed!");
+                    registerController.getRegister().setCashier(cashier);
+                    continueToMainWindow();
+
+                }
             }
         });
         
@@ -98,7 +103,7 @@ public class LoginWindow extends Application {
                         // TODO: move on to the next part - show the sale chooser
                         System.out.println("Login confirmed!");
                         registerController.getRegister().setCashier(cashier);
-                        registerController.start();
+                        continueToMainWindow();
                     }
                 }
             }
@@ -116,6 +121,14 @@ public class LoginWindow extends Application {
         }
         // TODO: Add error handling for login
         return null;
+    }
+    
+    private void continueToMainWindow() {
+        // Close this window
+        stage.close();
+        
+        // Open up main window
+        MainWindow main = new MainWindow();
     }
 
     /**
