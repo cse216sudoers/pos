@@ -95,7 +95,7 @@ public class RegisterController{
             }else{
                 System.out.println("Invalid Input");
             }
-            
+            ProductCatalog.getCatalog().updateFile();
         }while(!input.equalsIgnoreCase("q"));
     }
      
