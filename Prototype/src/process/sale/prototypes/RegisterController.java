@@ -162,5 +162,6 @@ public class RegisterController{
     
     private void processUserManagement(){
         UserManagementController userManagementController = new UserManagementController();
+        userManagementController.start();
     }
 }

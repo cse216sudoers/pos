@@ -15,10 +15,9 @@ public class UserManagementController {
     
     public UserManagementController(){
          cashierManager = CashierManager.getInstance();
-         start();
     }
     
-    private void start(){
+    public void start(){
         Scanner scan = new Scanner(System.in);
         String input;
         do{
