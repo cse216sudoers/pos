@@ -16,9 +16,11 @@ public class RegisterController{
     private TransactionController currentTransaction;
     private SaleManager saleManager;
     private Register register;
+    
     public Register getRegister(){
         return register;
     }
+    
     public RegisterController(Register register){
         registerManager = RegisterManager.getInstance();
         saleManager = SaleManager.getInstance();
@@ -134,23 +136,38 @@ public class RegisterController{
     
     private void processReturn(){
         Scanner scan = new Scanner(System.in);
-        Sale sale = null;
+        Transaction t = null;
+        String returnType = "";
         do{
             try{
-                System.out.println("Please enter receipt ID or q to quit: ");
-                String next = scan.next();
-                if(next.equalsIgnoreCase("q")){
-                    break;
+                System.out.println("Rental or sale return: ");
+                returnType = scan.next();
+                if(returnType.equals("Return")){
+                    System.out.println("Please enter receipt ID or q to quit: ");
+                    String next = scan.next();
+                    if(next.equalsIgnoreCase("q")){
+                        break;
+                    }
+                    t = saleManager.getSaleById(scan.nextInt());
+                }else{
+                    System.out.println("Please enter receipt ID or q to quit: ");
+                    String next = scan.next();
+                    if(next.equalsIgnoreCase("q")){
+                        break;
+                    }
+                    t = RentalManager.getInstance().getRentalById(scan.nextInt());
                 }
-                sale = saleManager.getSaleById(scan.nextInt());
             }catch(Exception e){
                 System.out.println("Invalid input");
             }
             
-        }while(sale == null);
+        }while(t == null);
         
-        if(sale != null){
-            currentTransaction = new ReturnController(sale.getId());
+        if(returnType.equals("return")){
+            currentTransaction = new ReturnController(t.getId());
+            currentTransaction.start();
+        }else{
+            currentTransaction = new RentalReturnController((Rental)t);
             currentTransaction.start();
         }
     }
@@ -162,5 +179,6 @@ public class RegisterController{
     
     private void processUserManagement(){
         UserManagementController userManagementController = new UserManagementController();
+        userManagementController.start();
     }
 }
