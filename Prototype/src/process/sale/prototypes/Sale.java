@@ -16,14 +16,21 @@ public class Sale extends Transaction{
     }
     
     public void addItem(ProductDescription product){
+        if(ProductCatalog.getCatalog().findProductByCode(product.getCode()).getQuantity()!=0){
         LineItem item = getLineItemByCode(product.getCode());
-        if(item == null){
-            lines.add(new LineItem(product));
+        
+            ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
+            System.out.println("Quantity"+product.getQuantity());
+            if(item == null){
+                lines.add(new LineItem(product));
+                total += product.getPrice();
+                return;
+            }
+            item.increaseQuantity();
             total += product.getPrice();
-            return;
         }
-        item.increaseQuantity();
-        total += product.getPrice();
+        else
+            System.out.println("Out of Stock");
     }
     
     public void addCoupon(Coupon coupon){
@@ -31,7 +38,7 @@ public class Sale extends Transaction{
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == coupon.getProductCode()){
                 lines.get(i).setCoupon(coupon);
-                total-=coupon.getAmount();
+                total-=coupon.apply(total);
                 found = true;
                 break;
             }
@@ -46,6 +53,7 @@ public class Sale extends Transaction{
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
+                ProductCatalog.getCatalog().findProductByCode(product.getCode()).increaseQuantity();
                 if(lines.get(i).getQuantity() == 1){
                     lines.remove(i);
                 }

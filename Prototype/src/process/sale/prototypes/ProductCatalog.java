@@ -47,7 +47,7 @@ public class ProductCatalog {
     public void addItem(ProductDescription desc){
         items.add(desc);
     }
-    
+
     public ProductDescription findProductByCode(int code){
         for (ProductDescription item : items) {
             if (code == item.getCode()) {
@@ -65,7 +65,7 @@ public class ProductCatalog {
                 int rent=0;
                 if(item.getIsRentable())
                     rent=1;
-                //System.out.println(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+item.getIsRentable()+"|"+item.getRentalPrice()+"|\n");
+                // System.out.println(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+item.getIsRentable()+"|"+item.getRentalPrice()+"|\n");
                 bw.write(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+rent+"|"+item.getRentalPrice()+"|");
                 bw.newLine();
             }

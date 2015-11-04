@@ -296,7 +296,7 @@ public class SaleController extends TransactionController{
             return;
         }
         
-        try{
+        /*try{
             System.out.print("Please enter product code: ");
             next = scanner.next();
             productCode = Integer.parseInt(next);
@@ -314,9 +314,9 @@ public class SaleController extends TransactionController{
         }catch(Exception e){
             System.out.println("Invalid amount: " + next);
             return;
-        }
+        }*/
         
-        sale.addCoupon(new Coupon(code, productCode, amount));
+        sale.addCoupon(CouponCatalog.getCatalog().findCouponByCode(code));
     }
     
     @Override

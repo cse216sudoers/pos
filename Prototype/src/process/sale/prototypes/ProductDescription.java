@@ -35,7 +35,12 @@ public class ProductDescription {
         return this.productCode;
     }
     
-    
+    public void increaseQuantity(){
+        quantity++;
+    }
+    public void decreaseQuantity(){
+        quantity--;
+    }
     public int getQuantity(){
         return quantity;
     }

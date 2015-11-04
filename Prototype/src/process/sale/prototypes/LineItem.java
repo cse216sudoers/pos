@@ -23,6 +23,7 @@ public class LineItem {
         return product;
     }
     public float getPriceWithCoupons(){
+        
         return product.getPrice() - coupon.getAmount();
     }
     public int getQuantity(){
