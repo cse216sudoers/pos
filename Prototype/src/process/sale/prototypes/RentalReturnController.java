@@ -1,7 +1,7 @@
 /*
-* To change this template, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package process.sale.prototypes;
 
 import java.text.DecimalFormat;
@@ -12,27 +12,26 @@ import java.util.Scanner;
  *
  * @author Pikachu
  */
-public class SaleController extends TransactionController{
-    private Sale sale;
+public class RentalReturnController extends TransactionController{
+    private RentalReturn rentalReturn;
     private Scanner scanner;
     
-    public SaleController(){
-        sale = new Sale();
+    public RentalReturnController(Rental rental){
+        rentalReturn = new RentalReturn(rental);
     }
     
-    public SaleController(Sale sale){
-        this.sale = sale;
+    public RentalReturnController(RentalReturn rentalReturn){
+        this.rentalReturn = rentalReturn;
         display();
     }
     
     @Override
     public void start(){
-        
-        //continuous Sale loop
         boolean done = false;
+        //continuous retnal loop
         while(!done){
-            try{
-                System.out.print("Please enter 'void', 'coupon', <code>, 'override', 'suspend', or 'close': ");
+            //try{
+                System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
                 //void item
@@ -40,34 +39,19 @@ public class SaleController extends TransactionController{
                     processVoid();
                     display();
                 }
-                //coupon
-                else if(input.equalsIgnoreCase("coupon")){
-                    processCoupon();
-                    display();
-                }
+
                 //override
                 else if(input.equalsIgnoreCase("override")){
-                    // prompt for admin credentials
-                    // this is terrible program design
-                    System.out.print("Admin username: ");
-                    input = scanner.next();
-                    Cashier temp = CashierManager.getInstance().getCashierByUsername(input);
-                    if (temp.getAccess() == Cashier.Access.Admin || temp.getAccess() == Cashier.Access.Manager) {
-                        System.out.print("Password: ");
-                        input = scanner.next();
-                        if (temp.getPassword().equals(input)) {
-                            processOverride();
-                        }
-                    }
+                    //manager override
                 }
-                //add item to Sale
+                //add item to rentalReturn
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
                     processProduct(Integer.parseInt(input));
                     display();
                 }
-                //end Sale
+                //end rentalReturn
                 else if (input.equalsIgnoreCase("close")){
-                    // Close Sale and get payment
+                    // Close rentalReturn and get payment
                     close();
                     done = true;
                 }
@@ -80,16 +64,16 @@ public class SaleController extends TransactionController{
                 else{
                     System.out.println("Invalid input: " + input);
                 }
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
+//            }catch(Exception e){
+//                System.out.println(e.toString());
+//                System.out.println("Invalid input");
+//            }
         }
     }
     
     @Override
     protected void processSuspend(){
-        SaleManager.getInstance().addSuspendedSale(sale);
+       // RentalManager.getInstance().addSuspendedRental(rentalReturn);
     }
     
     @Override
@@ -98,8 +82,8 @@ public class SaleController extends TransactionController{
         boolean validType;
         
         // Give total price (subtotal, tax, and total)
-        sale.printTotals();
-        leftToPay = sale.getSaleTotal();
+        rentalReturn.printTotals();
+        leftToPay = rentalReturn.getRentalTotal();
         while(leftToPay > 0){
             validType= false;
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
@@ -123,7 +107,7 @@ public class SaleController extends TransactionController{
             if(leftToPay > 0)
                 System.out.printf("Total: $%7.2f \n", leftToPay);
         }
-        SaleManager.getInstance().addSale(sale);
+        rentalReturn.getRental().addRentalreturn(rentalReturn);
         // Thank customer, and close
         printReceipt();
         System.out.println("\nThank for you shopping with us. Have a nice day!");
@@ -139,15 +123,15 @@ public class SaleController extends TransactionController{
         }
         if(payment > leftToPay){
             System.out.printf("Your change is $%.2f\n", payment - leftToPay);
-            sale.addPayment(new CashPayment(payment, leftToPay));
+            rentalReturn.addPayment(new CashPayment(payment, leftToPay));
             leftToPay = 0;
         }
         else if(payment == leftToPay){
-            sale.addPayment(new CashPayment(payment, payment));
+            rentalReturn.addPayment(new CashPayment(payment, payment));
             leftToPay-=payment;
         }
         else{
-            sale.addPayment(new CashPayment(payment, payment));
+            rentalReturn.addPayment(new CashPayment(payment, payment));
             leftToPay-=payment;
         }
     }
@@ -165,7 +149,7 @@ public class SaleController extends TransactionController{
                 input = scanner.next();
                 if(input.equalsIgnoreCase("total"))
                     payment = leftToPay;
-                else if(input.equals("cancel"))
+                else                                                                                                             if(input.equals("cancel"))
                     return;
                 else{
                     payment = Float.parseFloat(input);
@@ -193,7 +177,7 @@ public class SaleController extends TransactionController{
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         accepted = processCreditPayment(credit);
         if(accepted){
-            sale.addPayment(credit);
+            rentalReturn.addPayment(credit);
             leftToPay -= payment;
         }
         else{
@@ -201,7 +185,7 @@ public class SaleController extends TransactionController{
         }
     }
     
-    private boolean processCreditPayment(CreditPayment payment){
+    protected boolean processCreditPayment(CreditPayment payment){
         String cardNum = payment.getCardNum();
         String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
@@ -210,7 +194,7 @@ public class SaleController extends TransactionController{
     }
     
     protected void processDebitPayment(){
-                float payment = 0;
+        float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
         String cardNum = "";
@@ -248,7 +232,7 @@ public class SaleController extends TransactionController{
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
         accepted = processDebitPayment(debit);
         if(accepted){
-            sale.addPayment(debit);
+            rentalReturn.addPayment(debit);
             leftToPay-=payment;
         }
         else{
@@ -266,31 +250,27 @@ public class SaleController extends TransactionController{
     @Override
     protected void processVoid(){
         System.out.print("Please enter a product code: ");
-        int code;
-        try{
-            code = scanner.nextInt();
-        }catch(Exception e){
-            System.out.println("Invalid input");
-            return;
-        }
+        int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        sale.removeItem(product);
+        rentalReturn.removeItem(product);
     }
     
     @Override
     protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-        
+  
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
-            return;
+        }else if(!product.getIsRentable()){
+            System.out.println("Item cannot be rented: " + code);
+        }else{
+            rentalReturn.addItem(product);
         }
-        sale.addItem(product);
     }
     
     private void processCoupon(){
@@ -307,7 +287,7 @@ public class SaleController extends TransactionController{
             return;
         }
         
-        /*try{
+        try{
             System.out.print("Please enter product code: ");
             next = scanner.next();
             productCode = Integer.parseInt(next);
@@ -325,56 +305,24 @@ public class SaleController extends TransactionController{
         }catch(Exception e){
             System.out.println("Invalid amount: " + next);
             return;
-        }*/
-        
-        sale.addCoupon(CouponCatalog.getCatalog().findCouponByCode(code));
-    }
-    
-    private void processOverride(){
-        String next = "";
-        int productCode;
-        float amount;
-        
-        try{
-            System.out.print("Please enter product code: ");
-            next = scanner.next();
-            productCode = Integer.parseInt(next);
-        }catch(Exception e){
-            System.out.println("Invalid code: " + next);
-            return;
         }
         
-        if (sale.getLineItemByCode(productCode) == null) {
-            System.out.println("Product not in current sale.");
-            return;
-        }
-
-        try{
-            System.out.print("Please enter override amount: ");
-            next = scanner.next();
-            DecimalFormat myFormatter = new DecimalFormat("0.00");
-            amount = Float.parseFloat(next);
-            amount = Float.parseFloat(myFormatter.format(amount));
-        }catch(Exception e){
-            System.out.println("Invalid amount: " + next);
-            return;
-        }
-        
-        sale.getLineItemByCode(productCode).setPrice(amount);
+        rentalReturn.addCoupon(new Coupon(code, productCode, amount));
     }
     
     @Override
-    protected void display(){
-        System.out.println(sale);
+    protected final void display(){
+        System.out.println(rentalReturn);
     }
+    
     @Override
     protected void printReceipt(){
         System.out.print("******************************************");
-        sale.printTotals();
-        ArrayList<Payment> payments = sale.getPayments();
+        rentalReturn.printTotals();
+        ArrayList<Payment> payments = rentalReturn.getPayments();
         for(int i = 0; i < payments.size(); i++){
             System.out.print(payments.get(i));
         }
-        System.out.println("\n******************************************");
+        System.out.print("\n******************************************");
     }
 }

@@ -5,46 +5,72 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- *
+ *Return for a SINGLE rental
  * @author Pikachu
  */
-public class Rental extends Transaction{
+public class RentalReturn extends Transaction{
+    Rental rental;
     private float rentalTotal;
-    ArrayList<RentalReturn> returns;
     
-    public Rental(){
+    public RentalReturn(Rental rental){
+        this.rental = rental;
         total = 0;
         id = RentalManager.getInstance().getNextId();
         payments = new ArrayList<>();
         lines = new ArrayList<>();
-        returns = new ArrayList<>();
-    }
-    
-    public void addRentalreturn(RentalReturn ret){
-        returns.add(ret);
     }
     
     public float getRentalTotal(){
         return rentalTotal;
     }
     
-    public void addItem(ProductDescription product, int daysRented){
+    public Rental getRental(){
+            return rental;
+    }
+    
+    public LineItem getLineItemByCode(int code, int daysRented){
+        for(int i = 0; i< lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == code)
+                return lines.get(i);
+        }
+        return null;
+    }
+    
+    public boolean addItem(ProductDescription product){        
+        Scanner scan = new Scanner(System.in);
+        int daysLate = scan.nextInt();
+        LineItem item = new RentalReturnLineItem(product, daysLate);
+        lines.add(item);
+        total += ((RentalReturnLineItem)item).getLateFee();
+        return true;
+    }
+    
+    @Override
+    public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode() && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented){
-                lines.get(i).increaseQuantity();
+            if(lines.get(i).getProduct().getCode() == product.getCode()){
+                LineItem item = null;
+                
+                if(lines.get(i).getQuantity() == 1){
+                    item = lines.remove(i);
+                }
+                else{
+                    lines.get(i).decreaseQuantity();
+                    item = lines.get(i);
+                }
+                
+                total -= ((RentalReturnLineItem)item).getLateFee();
                 found = true;
-                total += ((RentalLineItem)lines.get(i)).getRentalPrice();
                 break;
             }
         }
-        if(!found){
-            lines.add(new RentalLineItem(product, daysRented));
-            total += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
+        if(!found){//item not in Sale
+            System.out.println("item not found");
         }
-        
     }
     
     public void addCoupon(Coupon coupon){
@@ -85,26 +111,5 @@ public class Rental extends Transaction{
             output += lines.get(i).toString();
         }
         return output;
-    }
-
-    @Override
-    public void removeItem(ProductDescription product){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
-                if(lines.get(i).getQuantity() == 1){
-                    lines.remove(i);
-                }
-                else{
-                    lines.get(i).decreaseQuantity();
-                }
-                total-=product.getRentalPrice();
-                found = true;
-                break;
-            }
-        }
-        if(!found){//item not in Sale
-            System.out.println("item not found");
-        }
     }
 }
