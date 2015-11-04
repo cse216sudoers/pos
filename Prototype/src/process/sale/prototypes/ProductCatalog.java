@@ -44,6 +44,7 @@ public class ProductCatalog {
         }
         return cat;
     }
+    
     public void addItem(ProductDescription desc){
         items.add(desc);
     }
