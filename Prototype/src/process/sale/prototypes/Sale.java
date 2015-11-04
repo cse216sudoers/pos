@@ -12,6 +12,10 @@ public class Sale extends Transaction{
     }
     
     public float getSaleTotal(){
+        // return saleTotal;
+        saleTotal = 0;
+        for (LineItem line : lines)
+            saleTotal += line.getPrice();
         return saleTotal;
     }
     

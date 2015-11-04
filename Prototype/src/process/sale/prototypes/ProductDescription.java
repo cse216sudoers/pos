@@ -60,6 +60,10 @@ public class ProductDescription {
         return isRentable;
     }
     
+    public void setPrice(float newPrice) {
+        price = newPrice;
+    }
+    
     @Override
     public String toString(){
         return String.format("%2d %-15.15s\t%7.2f", productCode, description, price);

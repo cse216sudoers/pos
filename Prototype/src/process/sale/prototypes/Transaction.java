@@ -17,6 +17,10 @@ public abstract class Transaction {
     protected int id;
     
     public float getTotal(){
+        // return total;
+        total = 0;
+        for (LineItem line : lines)
+            total += line.getPrice();
         return total;
     }
 

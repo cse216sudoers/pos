@@ -47,7 +47,18 @@ public class SaleController extends TransactionController{
                 }
                 //override
                 else if(input.equalsIgnoreCase("override")){
-                    //manager override
+                    // prompt for admin credentials
+                    // this is terrible program design
+                    System.out.print("Admin username: ");
+                    input = scanner.next();
+                    Cashier temp = CashierManager.getInstance().getCashierByUsername(input);
+                    if (temp.getAccess() == Cashier.Access.Admin || temp.getAccess() == Cashier.Access.Manager) {
+                        System.out.print("Password: ");
+                        input = scanner.next();
+                        if (temp.getPassword().equals(input)) {
+                            processOverride();
+                        }
+                    }
                 }
                 //add item to Sale
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
@@ -154,7 +165,7 @@ public class SaleController extends TransactionController{
                 input = scanner.next();
                 if(input.equalsIgnoreCase("total"))
                     payment = leftToPay;
-                else                                                                                                             if(input.equals("cancel"))
+                else if(input.equals("cancel"))
                     return;
                 else{
                     payment = Float.parseFloat(input);
@@ -317,6 +328,39 @@ public class SaleController extends TransactionController{
         }
         
         sale.addCoupon(new Coupon(code, productCode, amount));
+    }
+    
+    private void processOverride(){
+        String next = "";
+        int productCode;
+        float amount;
+        
+        try{
+            System.out.print("Please enter product code: ");
+            next = scanner.next();
+            productCode = Integer.parseInt(next);
+        }catch(Exception e){
+            System.out.println("Invalid code: " + next);
+            return;
+        }
+        
+        if (sale.getLineItemByCode(productCode) == null) {
+            System.out.println("Product not in current sale.");
+            return;
+        }
+
+        try{
+            System.out.print("Please enter override amount: ");
+            next = scanner.next();
+            DecimalFormat myFormatter = new DecimalFormat("0.00");
+            amount = Float.parseFloat(next);
+            amount = Float.parseFloat(myFormatter.format(amount));
+        }catch(Exception e){
+            System.out.println("Invalid amount: " + next);
+            return;
+        }
+        
+        sale.getLineItemByCode(productCode).setPrice(amount);
     }
     
     @Override

@@ -127,13 +127,16 @@ public class MainWindow {
     }
     
     public void togglePower() {
+        // If system is currently on, turn off
         if (powerState) {
             disableAll(true);
             powerState = false;
         }
+        // If currently off, turn on and reset to sale
         else {
             disableAll(false);
             powerState = true;
+            displayProcessSale();
         }
     }
     
@@ -146,6 +149,11 @@ public class MainWindow {
     public void displayProcessSale() {
         // TODO: Add controls for process sale
         writeToConsole("A sale is totally in progress.");
+        
+        // Needs stuff for add item, quantity, suspend sale, user mgmt if admin
+        // Close sale - go for payment (separate window for accepting payment)
+        GridPane inputArea = new GridPane();
+        // add stuff
     }
     
     public void displayProcessRental() {

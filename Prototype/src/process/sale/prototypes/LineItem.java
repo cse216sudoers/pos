@@ -12,18 +12,23 @@ package process.sale.prototypes;
 public class LineItem {
     protected int quantity;
     protected ProductDescription product;
+    protected float price;
     protected Coupon coupon;
     
     public LineItem(ProductDescription product){
         quantity = 1;
         this.product = product;
+        price = product.getPrice();
         coupon = null;
     }
     public ProductDescription getProduct(){
         return product;
     }
+    public float getPrice() {
+        return price;
+    }
     public float getPriceWithCoupons(){
-        return product.getPrice() - coupon.getAmount();
+        return price - coupon.getAmount();
     }
     public int getQuantity(){
         return quantity;
@@ -40,12 +45,17 @@ public class LineItem {
     public Coupon getCoupon(){
         return coupon;
     }
+    public void setPrice(float newPrice) {
+        price = newPrice;
+    }
     
     @Override
     public String toString(){
         String output = product.toString() + "\n";
+        if (price != product.getPrice())
+            output += "*** Price overridden to " + price + "\n";
         if(quantity >1)
-            output += String.format("%2s %-15.15s\t%7.2f\n", "", "X" + quantity, quantity *product.getPrice());
+            output += String.format("%2s %-15.15s\t%7.2f\n", "", "X" + quantity, quantity * price);
         if(coupon != null)
             output += coupon.toString() + "\n";
         return output;
