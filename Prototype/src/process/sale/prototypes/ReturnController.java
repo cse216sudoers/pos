@@ -95,7 +95,7 @@ public class ReturnController extends TransactionController{
     protected void close() {
         ArrayList<Payment> payments = SaleManager.getInstance().getSaleById(ret.getSaleId()).getPayments();
         ret.printTotals();
-        leftToPay = ret.getReturnTotal();
+        leftToPay = ret.getTotal();
         int i = 0;
         while(leftToPay > 0){
             System.out.println("in loop " + leftToPay);

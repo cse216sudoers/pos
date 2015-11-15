@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * @author Pikachu
  */
 public class Rental extends Transaction{
-    private float rentalTotal;
     ArrayList<RentalReturn> returns;
     
     /**
@@ -34,14 +33,6 @@ public class Rental extends Transaction{
     }
     
     /**
-     * Get rental total
-     * @return total
-     */
-    public float getRentalTotal(){
-        return rentalTotal;
-    }
-    
-    /**
      * Add item to rental
      * @param product product rented
      * @param daysRented days rented for
@@ -52,13 +43,13 @@ public class Rental extends Transaction{
             if(lines.get(i).getProduct().getCode() == product.getCode() && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented){
                 lines.get(i).increaseQuantity();
                 found = true;
-                total += ((RentalLineItem)lines.get(i)).getRentalPrice();
+                subTotal += ((RentalLineItem)lines.get(i)).getRentalPrice();
                 break;
             }
         }
         if(!found){
             lines.add(new RentalLineItem(product, daysRented));
-            total += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
+            subTotal += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
         }
         
     }
@@ -72,7 +63,7 @@ public class Rental extends Transaction{
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == coupon.getProductCode()){
                 lines.get(i).setCoupon(coupon);
-                total-=coupon.getAmount();
+                subTotal-=coupon.getAmount();
                 found = true;
                 break;
             }
@@ -88,17 +79,17 @@ public class Rental extends Transaction{
     @Override
     public void printTotals() {
         // Calculate tax and total
-        float tax = TaxCalculator.getTax(getTotal());
-        rentalTotal = getTotal() + tax;
+        float tax = TaxCalculator.getTax(subTotal);
+        total = subTotal + tax;
         
         // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) rentalTotal).toString().length();
+        int digits = ((Float) total).toString().length();
         String format = "%" + digits + ".2f";
         
         System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", getTotal());
+        System.out.printf("Subtotal: $" + format + "\n", subTotal);
         System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", rentalTotal);
+        System.out.printf("Total:    $" + format + "\n", total);
     }
     
     @Override
