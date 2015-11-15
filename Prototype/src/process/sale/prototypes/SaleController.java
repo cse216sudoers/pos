@@ -115,7 +115,7 @@ public class SaleController extends TransactionController{
         
         // Give total price (subtotal, tax, and total)
         sale.printTotals();
-        leftToPay = sale.getSaleTotal();
+        leftToPay = sale.getTotal();
         while(leftToPay > 0){
             validType= false;
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");

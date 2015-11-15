@@ -12,11 +12,15 @@ import java.util.ArrayList;
  */
 public abstract class Transaction {
     /**
-     *
+     * total with tax
      */
     protected float total;
     /**
      *
+     */
+    protected float subTotal;
+    /**
+     * 
      */
     protected ArrayList<LineItem> lines;
     /**
@@ -33,11 +37,11 @@ public abstract class Transaction {
      * @return
      */
     public float getTotal(){
-        // return total;
-        total = 0;
-        for (LineItem line : lines)
-            total += line.getPrice();
         return total;
+    }
+    
+    public float getSubTotal(){
+        return subTotal;
     }
 
     /**
