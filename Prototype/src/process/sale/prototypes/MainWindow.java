@@ -35,6 +35,9 @@ public class MainWindow {
     private boolean powerState = true;
     private ArrayList<Node> itemsOnScreen;
     
+    /**
+     *
+     */
     public MainWindow() {
         super();
         grid = new GridPane();
@@ -44,6 +47,9 @@ public class MainWindow {
         initWindow();
     }
     
+    /**
+     *
+     */
     public void initWindow() {
         // Settings for stage
         stage.setTitle("Sudoers Point of Sale System");
@@ -122,10 +128,17 @@ public class MainWindow {
         displayProcessSale();
     }
     
+    /**
+     *
+     * @param text
+     */
     public void writeToConsole(String text) {
         console.appendText("\n\n" + text);
     }
     
+    /**
+     *
+     */
     public void togglePower() {
         // If system is currently on, turn off
         if (powerState) {
@@ -140,12 +153,19 @@ public class MainWindow {
         }
     }
     
+    /**
+     *
+     * @param disable
+     */
     public void disableAll(boolean disable) {
         for (Node node : itemsOnScreen) {
             node.setDisable(disable);
         }
     }
     
+    /**
+     *
+     */
     public void displayProcessSale() {
         // TODO: Add controls for process sale
         writeToConsole("A sale is totally in progress.");
@@ -156,11 +176,17 @@ public class MainWindow {
         // add stuff
     }
     
+    /**
+     *
+     */
     public void displayProcessRental() {
         // TODO
         writeToConsole("A rental is totally in progress.");
     }
     
+    /**
+     *
+     */
     public void displayProcessReturn() {
         // TODO
         writeToConsole("A return is totally in progress.");

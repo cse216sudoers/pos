@@ -9,15 +9,43 @@ package process.sale.prototypes;
  * @author Pikachu
  */
 public abstract class Payment {
+    /**
+     *
+     */
     protected float amount;
+    /**
+     * Payment type
+     */
     protected enum PaymentType{
-        CREDIT, DEBIT, CASH
+        /**
+         * Credit payment
+         */
+        CREDIT,
+        /**
+         * Debit payment
+         */
+        DEBIT,
+        /**
+         * Cash payment
+         */
+        CASH
     }
+    /**
+     *
+     */
     protected PaymentType type;
     
+    /**
+     * get amount payment was for
+     * @return
+     */
     public float getAmount(){
         return amount;
     }
+    /**
+     * set amount payment was for
+     * @param amount
+     */
     public void setAmount(float amount){
         this.amount = amount;
     }

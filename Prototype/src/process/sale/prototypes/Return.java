@@ -7,13 +7,17 @@ package process.sale.prototypes;
 import java.util.ArrayList;
 
 /**
- *
+ * Return
  * @author Pikachu
  */
 public class Return extends Transaction{
     private float returnTotal;
     private int saleId;
     
+    /**
+     *
+     * @param saleId
+     */
     public Return(int saleId){
         total = 0;
         this.saleId = saleId;
@@ -22,14 +26,27 @@ public class Return extends Transaction{
         lines = new ArrayList<>();
     }
     
+    /**
+     *
+     * @return
+     */
     public int getSaleId(){
         return saleId;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getReturnTotal(){
         return returnTotal;
     }
 
+    /**
+     *
+     * @param product
+     * @return
+     */
     public boolean addItem(ProductDescription product){
         LineItem item = SaleManager.getInstance().getSaleById(saleId).getLineItemByCode(product.getCode());
         
@@ -66,6 +83,10 @@ public class Return extends Transaction{
         return false; //already returned all of that item
     }
     
+    /**
+     *
+     * @param product
+     */
     @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
@@ -87,6 +108,11 @@ public class Return extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param code
+     * @return
+     */
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -95,6 +121,9 @@ public class Return extends Transaction{
         return null;
     }
     
+    /**
+     *
+     */
     @Override
     public void printTotals() {
         // Calculate tax and total

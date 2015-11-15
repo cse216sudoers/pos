@@ -13,10 +13,16 @@ import java.util.Scanner;
 public class UserManagementController {
     CashierManager cashierManager;
     
+    /**
+     *
+     */
     public UserManagementController(){
          cashierManager = CashierManager.getInstance();
     }
     
+    /**
+     *
+     */
     public void start(){
         Scanner scan = new Scanner(System.in);
         String input;

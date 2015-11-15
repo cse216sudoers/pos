@@ -13,34 +13,63 @@ public class RentalReturnLineItem extends LineItem{
     private int daysLate;
     private float lateFee;
 
+    /**
+     *
+     * @param product
+     */
     public RentalReturnLineItem(ProductDescription product){
         super(product);
         onTime = true;
         lateFee = 0;
     }
     
+    /**
+     *
+     * @param product
+     * @param lateFee
+     */
     public RentalReturnLineItem(ProductDescription product, float lateFee){
         super(product);
         onTime = false;
         this.lateFee = lateFee;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isOnTime() {
         return onTime;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDaysLate() {
         return daysLate;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getLateFee() {
         return product.getRentalPrice() * 2 * daysLate;
     }
 
+    /**
+     *
+     * @param onTime
+     */
     public void setOnTime(boolean onTime) {
         this.onTime = onTime;
     }
 
+    /**
+     *
+     * @param daysLate
+     */
     public void setDaysLate(int daysLate) {
         this.daysLate = daysLate;
     }

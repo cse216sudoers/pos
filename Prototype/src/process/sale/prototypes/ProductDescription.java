@@ -1,5 +1,9 @@
 package process.sale.prototypes;
 
+/**
+ *
+ * @author Pikachu
+ */
 public class ProductDescription {
     private int productCode;
     private float price;
@@ -9,6 +13,14 @@ public class ProductDescription {
     private String description;
     private static int nextCode = 1;
     
+    /**
+     *
+     * @param description
+     * @param price
+     * @param quantity
+     * @param isRentable
+     * @param rentalPrice
+     */
     public ProductDescription(String description, float price, int quantity, boolean isRentable, float rentalPrice){
         this.price=price;
         this.description = description;
@@ -18,6 +30,15 @@ public class ProductDescription {
         this.rentalPrice = rentalPrice;
         // update(); - Caused Stack Overflow due to infinite looping
     }
+    /**
+     *
+     * @param description
+     * @param price
+     * @param ID
+     * @param quantity
+     * @param isRentable
+     * @param rentalPrice
+     */
     public ProductDescription(String description, float price,int ID, int quantity, boolean isRentable, float rentalPrice){
         this.price=price;
         this.description = description;
@@ -31,16 +52,30 @@ public class ProductDescription {
         ProductCatalog cat=ProductCatalog.getCatalog();
         cat.addItem(this);
     }
+    /**
+     *
+     * @return
+     */
     public int getCode() {
         return this.productCode;
     }
     
+    /**
+     *
+     */
     public void increaseQuantity(){
         quantity++;
     }
+    /**
+     *
+     */
     public void decreaseQuantity(){
         quantity--;
     }
+    /**
+     *
+     * @return
+     */
     public int getQuantity(){
         return quantity;
     }
@@ -49,22 +84,42 @@ public class ProductDescription {
         return nextCode++;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPrice(){
         return price;
     }
     
+    /**
+     *
+     * @return
+     */
     public float getRentalPrice() {
         return rentalPrice;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getDescription(){
         return description;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean getIsRentable(){
         return isRentable;
     }
     
+    /**
+     *
+     * @param newPrice
+     */
     public void setPrice(float newPrice) {
         price = newPrice;
     }

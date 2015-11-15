@@ -15,6 +15,10 @@ public class RentalReturn extends Transaction{
     Rental rental;
     private float rentalTotal;
     
+    /**
+     *
+     * @param rental
+     */
     public RentalReturn(Rental rental){
         this.rental = rental;
         total = 0;
@@ -23,14 +27,28 @@ public class RentalReturn extends Transaction{
         lines = new ArrayList<>();
     }
     
+    /**
+     *
+     * @return
+     */
     public float getRentalTotal(){
         return rentalTotal;
     }
     
+    /**
+     *
+     * @return
+     */
     public Rental getRental(){
             return rental;
     }
     
+    /**
+     *
+     * @param code
+     * @param daysRented
+     * @return
+     */
     public LineItem getLineItemByCode(int code, int daysRented){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -39,6 +57,11 @@ public class RentalReturn extends Transaction{
         return null;
     }
     
+    /**
+     *
+     * @param product
+     * @return
+     */
     public boolean addItem(ProductDescription product){        
         Scanner scan = new Scanner(System.in);
         int daysLate = scan.nextInt();
@@ -48,6 +71,10 @@ public class RentalReturn extends Transaction{
         return true;
     }
     
+    /**
+     *
+     * @param product
+     */
     @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
@@ -73,6 +100,10 @@ public class RentalReturn extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param coupon
+     */
     public void addCoupon(Coupon coupon){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -88,6 +119,9 @@ public class RentalReturn extends Transaction{
         }
     }
     
+    /**
+     *
+     */
     @Override
     public void printTotals() {
         // Calculate tax and total

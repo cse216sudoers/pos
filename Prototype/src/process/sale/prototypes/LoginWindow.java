@@ -23,6 +23,9 @@ public class LoginWindow extends Application {
     private RegisterController registerController;
     private Stage stage;
     
+    /**
+     *
+     */
     public LoginWindow() {
         super();
         RegisterManager registerManager = RegisterManager.getInstance();
@@ -32,6 +35,10 @@ public class LoginWindow extends Application {
         ProductCatalog.getCatalog();
     }
     
+    /**
+     *
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         // This code is basically taken from this Java example: http://docs.oracle.com/javafx/2/get_started/form.htm

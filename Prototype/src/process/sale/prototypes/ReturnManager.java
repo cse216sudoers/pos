@@ -21,6 +21,10 @@ public class ReturnManager {
         suspendedReturns = new HashMap(89);
     }
     
+    /**
+     *
+     * @return
+     */
     public static synchronized ReturnManager getInstance(){
         if (instance == null){
             instance = new ReturnManager();
@@ -28,29 +32,59 @@ public class ReturnManager {
         return instance;
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Return getReturnById(int id){
         return returns.get(id);
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Return getSuspendedReturnById(int id){
         return suspendedReturns.get(id);
     }
     
+    /**
+     *
+     * @return
+     */
     public HashMap<Integer, Return> getReturns(){
         return returns;
     }
     
+    /**
+     *
+     * @return
+     */
     public HashMap<Integer, Return> getSuspendedreturns(){
         return suspendedReturns;
     }
    
+    /**
+     *
+     * @param ret
+     */
     public void addReturn(Return ret){
         returns.put(ret.getId(), ret);
     } 
     
+    /**
+     *
+     * @param ret
+     */
     public void addSuspendedReturn(Return ret){
         suspendedReturns.put(ret.getId(),ret);
     }
+    /**
+     *
+     * @return
+     */
     public int getNextId(){
         return ++nextId;
     }

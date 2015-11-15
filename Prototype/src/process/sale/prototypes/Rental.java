@@ -7,13 +7,16 @@ package process.sale.prototypes;
 import java.util.ArrayList;
 
 /**
- *
+ * Rental Domain object 
  * @author Pikachu
  */
 public class Rental extends Transaction{
     private float rentalTotal;
     ArrayList<RentalReturn> returns;
     
+    /**
+     *Initialize rental
+     */
     public Rental(){
         total = 0;
         id = RentalManager.getInstance().getNextId();
@@ -22,14 +25,27 @@ public class Rental extends Transaction{
         returns = new ArrayList<>();
     }
     
+    /**
+     * Add a RentalReturn
+     * @param ret 
+     */
     public void addRentalreturn(RentalReturn ret){
         returns.add(ret);
     }
     
+    /**
+     * Get rental total
+     * @return total
+     */
     public float getRentalTotal(){
         return rentalTotal;
     }
     
+    /**
+     * Add item to rental
+     * @param product product rented
+     * @param daysRented days rented for
+     */
     public void addItem(ProductDescription product, int daysRented){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -47,6 +63,10 @@ public class Rental extends Transaction{
         
     }
     
+    /**
+     * add a coupon to the rental
+     * @param coupon
+     */
     public void addCoupon(Coupon coupon){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -62,6 +82,9 @@ public class Rental extends Transaction{
         }
     }
     
+    /**
+     * Print totals
+     */
     @Override
     public void printTotals() {
         // Calculate tax and total
@@ -87,6 +110,10 @@ public class Rental extends Transaction{
         return output;
     }
 
+    /**
+     * Remove item from rental
+     * @param product item to remove
+     */
     @Override
     public void removeItem(ProductDescription product){
         boolean found = false;

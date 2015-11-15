@@ -16,15 +16,26 @@ public class RentalReturnController extends TransactionController{
     private RentalReturn rentalReturn;
     private Scanner scanner;
     
+    /**
+     *
+     * @param rental
+     */
     public RentalReturnController(Rental rental){
         rentalReturn = new RentalReturn(rental);
     }
     
+    /**
+     *
+     * @param rentalReturn
+     */
     public RentalReturnController(RentalReturn rentalReturn){
         this.rentalReturn = rentalReturn;
         display();
     }
     
+    /**
+     *
+     */
     @Override
     public void start(){
         boolean done = false;
@@ -71,11 +82,17 @@ public class RentalReturnController extends TransactionController{
         }
     }
     
+    /**
+     *
+     */
     @Override
     protected void processSuspend(){
        // RentalManager.getInstance().addSuspendedRental(rentalReturn);
     }
     
+    /**
+     *
+     */
     @Override
     protected void close() {
         String paymentType;
@@ -113,6 +130,9 @@ public class RentalReturnController extends TransactionController{
         System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
+    /**
+     *
+     */
     protected void processCashPayment(){
         float payment = 0;
         System.out.println("Please enter total cash payment: ");
@@ -136,6 +156,9 @@ public class RentalReturnController extends TransactionController{
         }
     }
     
+    /**
+     *
+     */
     protected void processCreditPayment(){
         float payment = 0;
         boolean invalid = true;
@@ -185,6 +208,11 @@ public class RentalReturnController extends TransactionController{
         }
     }
     
+    /**
+     *
+     * @param payment
+     * @return
+     */
     protected boolean processCreditPayment(CreditPayment payment){
         String cardNum = payment.getCardNum();
         String secNum = payment.getSecurityCode();
@@ -193,6 +221,9 @@ public class RentalReturnController extends TransactionController{
         return false;
     }
     
+    /**
+     *
+     */
     protected void processDebitPayment(){
         float payment = 0;
         boolean invalid = true;
@@ -247,6 +278,9 @@ public class RentalReturnController extends TransactionController{
         return false;
     }
     
+    /**
+     *
+     */
     @Override
     protected void processVoid(){
         System.out.print("Please enter a product code: ");
@@ -260,6 +294,10 @@ public class RentalReturnController extends TransactionController{
         rentalReturn.removeItem(product);
     }
     
+    /**
+     *
+     * @param code
+     */
     @Override
     protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
@@ -310,11 +348,17 @@ public class RentalReturnController extends TransactionController{
         rentalReturn.addCoupon(new Coupon(code, productCode, amount));
     }
     
+    /**
+     *
+     */
     @Override
     protected final void display(){
         System.out.println(rentalReturn);
     }
     
+    /**
+     *
+     */
     @Override
     protected void printReceipt(){
         System.out.print("******************************************");

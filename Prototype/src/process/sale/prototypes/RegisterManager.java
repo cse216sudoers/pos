@@ -19,6 +19,10 @@ public class RegisterManager {
         registers = new ArrayList<>();
     }
     
+    /**
+     * Get singleton
+     * @return singleton
+     */
     public static synchronized RegisterManager getInstance(){
         if(instance == null){
             instance = new RegisterManager();
@@ -26,17 +30,34 @@ public class RegisterManager {
         return instance;
     }
     
+    /**
+     * add a new register
+     * @param register
+     */
     public void addRegister(Register register){
         registers.add(register);
     }
     
+    /**
+     * remove a register
+     * @param register
+     */
     public void removeRegister(Register register){
         registers.remove(register);
     }
     
+    /**
+     * get all registers in store
+     * @return all registers
+     */
     public ArrayList<Register> getRegisters(){
         return registers;
     }
+    /**
+     * Get register by ID
+     * @param id unique id
+     * @return register
+     */
     public Register getRegisterById(int id){
         for(int i = 0; i < registers.size(); i++){
             if(registers.get(i).getId() == id)
@@ -44,6 +65,10 @@ public class RegisterManager {
         }
         return null;
     }
+    /**
+     *
+     * @return unique id
+     */
     public int getNextId(){
         return ++nextId;
     }

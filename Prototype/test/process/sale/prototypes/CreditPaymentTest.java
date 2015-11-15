@@ -52,17 +52,6 @@ public class CreditPaymentTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setCardNum method, of class CreditPayment.
-     */
-    @Test
-    public void testSetCardNum() {
-        System.out.println("setCardNum");
-        String cardNum = "123456789123";
-        CreditPayment instance = test;
-        instance.setCardNum(cardNum);
-        assertEquals(cardNum, instance.getCardNum());
-    }
 
     /**
      * Test of getSecurityCode method, of class CreditPayment.
@@ -74,18 +63,6 @@ public class CreditPaymentTest {
         String expResult = "123";
         String result = instance.getSecurityCode();
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setSecurityCode method, of class CreditPayment.
-     */
-    @Test
-    public void testSetSecurityCode() {
-        System.out.println("setSecurityCode");
-        String securityCode = "456";
-        CreditPayment instance = test;
-        instance.setSecurityCode(securityCode);
-        assertEquals(securityCode, instance.getSecurityCode());
     }
 
     /**

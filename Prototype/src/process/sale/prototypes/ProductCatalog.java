@@ -4,6 +4,10 @@ package process.sale.prototypes;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+/**
+ *
+ * @author Pikachu
+ */
 public class ProductCatalog {
     private static ProductCatalog cat;
     private ArrayList<ProductDescription> items;
@@ -38,6 +42,10 @@ public class ProductCatalog {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public static synchronized ProductCatalog getCatalog(){
         if (cat==null){
             cat=new ProductCatalog();
@@ -45,10 +53,19 @@ public class ProductCatalog {
         return cat;
     }
     
+    /**
+     *
+     * @param desc
+     */
     public void addItem(ProductDescription desc){
         items.add(desc);
     }
 
+    /**
+     *
+     * @param code
+     * @return
+     */
     public ProductDescription findProductByCode(int code){
         for (ProductDescription item : items) {
             if (code == item.getCode()) {
@@ -57,6 +74,9 @@ public class ProductCatalog {
         }
         return null;
     }
+    /**
+     *
+     */
     public synchronized void updateFile(){
         File catalog = new File("Product_description.txt");
         try{

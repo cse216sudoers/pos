@@ -1,9 +1,16 @@
 package process.sale.prototypes;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Pikachu
+ */
 public class Sale extends Transaction{
     private float saleTotal;
     
+    /**
+     *
+     */
     public Sale(){
         total = 0;
         id = SaleManager.getInstance().getNextId();
@@ -11,6 +18,10 @@ public class Sale extends Transaction{
         lines = new ArrayList<>();
     }
     
+    /**
+     *
+     * @return
+     */
     public float getSaleTotal(){
         // return saleTotal;
         saleTotal = 0;
@@ -19,6 +30,10 @@ public class Sale extends Transaction{
         return saleTotal;
     }
     
+    /**
+     *
+     * @param product
+     */
     public void addItem(ProductDescription product){
         if(ProductCatalog.getCatalog().findProductByCode(product.getCode()).getQuantity()!=0){
         LineItem item = getLineItemByCode(product.getCode());
@@ -37,12 +52,16 @@ public class Sale extends Transaction{
             System.out.println("Out of Stock");
     }
     
+    /**
+     *
+     * @param coupon
+     */
     public void addCoupon(Coupon coupon){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == coupon.getProductCode()){
                 lines.get(i).setCoupon(coupon);
-                total-=coupon.apply(total);
+                total-=coupon.apply();
                 found = true;
                 break;
             }
@@ -52,6 +71,10 @@ public class Sale extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param product
+     */
     @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
@@ -74,6 +97,11 @@ public class Sale extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param code
+     * @return
+     */
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -82,6 +110,9 @@ public class Sale extends Transaction{
         return null;
     }
     
+    /**
+     *
+     */
     @Override
     public void printTotals() {
         // Calculate tax and total

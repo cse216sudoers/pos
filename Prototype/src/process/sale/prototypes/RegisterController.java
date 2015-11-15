@@ -7,7 +7,7 @@ package process.sale.prototypes;
 import java.util.Scanner;
 
 /**
- *
+ * Does operations for a register domain object
  * @author Pikachu
  */
 public class RegisterController{
@@ -17,10 +17,18 @@ public class RegisterController{
     private SaleManager saleManager;
     private Register register;
     
+    /**
+     * 
+     * @return register
+     */
     public Register getRegister(){
         return register;
     }
     
+    /**
+     * Register to make a controller for
+     * @param register
+     */
     public RegisterController(Register register){
         registerManager = RegisterManager.getInstance();
         saleManager = SaleManager.getInstance();
@@ -29,6 +37,10 @@ public class RegisterController{
         currentTransaction = null;
     }
     
+    /**
+     * Register ID to make controller for
+     * @param registerId
+     */
     public RegisterController(int registerId){
         registerManager = RegisterManager.getInstance();
         saleManager = SaleManager.getInstance();
@@ -37,6 +49,9 @@ public class RegisterController{
         register = registerManager.getRegisterById(registerId);
     }
     
+    /**
+     * Start/Turn on the register
+     */
     public void start(){
         Scanner scan = new Scanner(System.in);
         String input;
@@ -101,12 +116,23 @@ public class RegisterController{
         }while(!input.equalsIgnoreCase("q"));
     }
      
+    /**
+     * Check if username is valid
+     * @param username
+     * @return
+     */
     public boolean verifyUsername(String username){
         if(cashierManager.getCashierByUsername(username) != null)
                 return true;
         return false;
     }
     
+    /**
+     * Check if cashier password is correct
+     * @param username
+     * @param password
+     * @return
+     */
     public Cashier verifyPassword(String username, String password){
         Cashier cashier = cashierManager.getCashierByUsername(username);
         if(password.equals(cashier.getPassword()))
@@ -114,26 +140,31 @@ public class RegisterController{
         return null;
     }
     
-    public void processSuspendedSale(Sale sale){
+    //start a suspended sale
+    private void processSuspendedSale(Sale sale){
         currentTransaction = new SaleController(sale);
         currentTransaction.start();
     }
     
+    //start a suspended return
     private void processSuspendedReturn(Return ret){
         currentTransaction = new ReturnController(ret);
         currentTransaction.start();
     }
     
+    //start a suspended rental
     private void processSuspendedRental(Rental rental){
         currentTransaction = new RentalController(rental);
         currentTransaction.start();
     }
-
+    
+    //start a sale
     private void processSale(){
         currentTransaction = new SaleController();
         currentTransaction.start();
     }
     
+    //start a return
     private void processReturn(){
         Scanner scan = new Scanner(System.in);
         Transaction t = null;
@@ -171,12 +202,14 @@ public class RegisterController{
             currentTransaction.start();
         }
     }
-    
+   
+    //start a rental
     private void processRental(){
         currentTransaction = new RentalController();
         currentTransaction.start();
     }
     
+    //start user management (for Admin access level only)
     private void processUserManagement(){
         UserManagementController userManagementController = new UserManagementController();
         userManagementController.start();
