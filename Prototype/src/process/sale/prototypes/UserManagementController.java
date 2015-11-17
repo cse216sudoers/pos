@@ -7,21 +7,21 @@ package process.sale.prototypes;
 import java.util.Scanner;
 
 /**
- *
+ * Controls all users on the system. Only admin level can access user management
  * @author Pikachu
  */
 public class UserManagementController {
     CashierManager cashierManager;
     
     /**
-     *
+      Get singleton
      */
     public UserManagementController(){
          cashierManager = CashierManager.getInstance();
     }
     
     /**
-     *
+     * Start asking for input
      */
     public void start(){
         Scanner scan = new Scanner(System.in);

@@ -382,7 +382,7 @@ public class SaleController extends TransactionController{
      * Display the sale as it would be displayed on a monitor
      */
     @Override
-    protected void display(){
+    protected final void display(){
         System.out.println(sale);
     }
     /**
