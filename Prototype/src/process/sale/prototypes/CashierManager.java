@@ -19,6 +19,7 @@ public class CashierManager {
     private int nextId = 0; //next unique id for use in creating new cashier
     
     private CashierManager(){
+        currentCashiers = new ArrayList<>();
         cashiers = new ArrayList<>();
         try{
             //read in all users
@@ -171,5 +172,13 @@ public class CashierManager {
      */
     public int getNextId(){
         return ++nextId;
+    }
+    
+    @Override
+    public String toString(){
+        String output = String.format("%3s \t %20s \t %10s \t %10s", "ID", "Name", "Username", "Access");
+        for(int i = 0; i < cashiers.size(); i++)
+            output += cashiers.get(i).toString();
+        return output;
     }
 }

@@ -50,13 +50,13 @@ public class UserManagementController {
         input = scan.next();
         if(input.equalsIgnoreCase("q"))
             return;
-        String name = scan.next();
+        String name = input;
 
         System.out.println("Enter userId or 'q' to quit: ");
         input = scan.next();
         if(input.equalsIgnoreCase("q"))
             return;
-        String username = scan.next();
+        String username = input;
 
         do{
             System.out.println("Enter access status: 'cashier', 'manager', 'admin' or 'q' to quit: ");
@@ -79,13 +79,10 @@ public class UserManagementController {
     private void processRemove(){
         Scanner scan = new Scanner(System.in);
         String input;
-        System.out.println("Enter userName or 'q' to quit: ");
+        System.out.println("Enter username or 'q' to quit: ");
         input = scan.next();
-        if(input.equalsIgnoreCase("q"))
-            return;
-        String name = scan.next();
-        
-        if(cashierManager.removeCashier(name)){
+        if(input.equalsIgnoreCase("q"));        
+        else if(cashierManager.removeCashier(input)){
             System.out.println("Cashier successfully removed.");
         }
         else{
@@ -93,6 +90,6 @@ public class UserManagementController {
         }
     }
     private void processDisplay(){
-        //display cashiers
+        System.out.println(cashierManager);
     }
 }
