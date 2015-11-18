@@ -6,7 +6,10 @@
 package DB;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -71,8 +74,8 @@ public class DBClass {
     
         try {
             while ((line = table.readLine()) != null) {
-                String[] columns = line.split("|");
-                id = Integer.parseInt(columns[0]);
+                String[] columns = line.split("\\|");
+                id = Integer.parseInt(columns[1]);
             }
         } catch (IOException ex) {
             Logger.getLogger(DBClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,7 +122,7 @@ public class DBClass {
     }
     
     public static void insert(String path, String row){
-
+        
     }
 
     public static void delete(String path, int id){
