@@ -7,6 +7,7 @@ package process.sale.prototypes;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+import DB.User;
 
 /**
  * Keep track of all cashiers in POS system
@@ -72,6 +73,7 @@ public class CashierManager {
      */
     public void addCashier(Cashier cashier){
         cashiers.add(cashier);
+        DB.User.insert(cashier.getName(), 2, cashier.getUsername(), cashier.getPassword());
     }
     
     /**
@@ -80,6 +82,7 @@ public class CashierManager {
      * @return true if successful
      */
     public boolean removeCashier(String username){
+        int id = 0;
         for(int i = 0; i < currentCashiers.size(); i++){
             if(cashiers.get(i).getUsername().equals(username)){
                 return false; // return false if the cashier is currently logged on somewhere
@@ -88,10 +91,12 @@ public class CashierManager {
         
         for(int i = 0; i < cashiers.size(); i++){
             if(cashiers.get(i).getUsername().equals(username)){
+                id = cashiers.get(i).getId();
                 cashiers.remove(i);
                 return true; //return true if found 
             }
         }
+        DB.User.delete(id);
         return true; //return true if doesn't exist
     }
     
