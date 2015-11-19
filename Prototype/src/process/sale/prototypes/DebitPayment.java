@@ -43,6 +43,6 @@ public class DebitPayment extends Payment{
 
     @Override
     public String toString(){
-        return String.format("%2s %16s\t%-7.2f", "Debit", cardNum, amount);
+        return String.format("%2s %16s\t%-7.2f\n", "Debit", cardNum, amount);
     }
 }

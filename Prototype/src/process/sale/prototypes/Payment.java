@@ -42,6 +42,9 @@ public abstract class Payment {
     public float getAmount(){
         return amount;
     }
+    public PaymentType getType(){
+        return type;
+    }
     /**
      * set amount payment was for
      * @param amount

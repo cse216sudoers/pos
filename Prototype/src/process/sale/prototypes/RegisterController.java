@@ -177,7 +177,7 @@ public class RegisterController{
         do{
             System.out.println("Rental or sale return: ");
             returnType = scan.next();
-        }while(!returnType.equalsIgnoreCase("Rental") && !returnType.equalsIgnoreCase("Return"));
+        }while(!returnType.equalsIgnoreCase("Rental") && !returnType.equalsIgnoreCase("sale"));
         
         do{
             try{
@@ -185,9 +185,9 @@ public class RegisterController{
                 String next = scan.next();
                 if(next.equalsIgnoreCase("q")){
                     return;
-                }else if(returnType.equals("Return")){
+                }else if(returnType.equalsIgnoreCase("sale")){
                     t = saleManager.getSaleById(Integer.parseInt(next));
-                }else if(returnType.equals("Rental")){
+                }else if(returnType.equalsIgnoreCase("rental")){
                     t = RentalManager.getInstance().getRentalById(Integer.parseInt(next));
                 }else{
                     System.out.println("Invalid input");
@@ -197,8 +197,9 @@ public class RegisterController{
             }
         }while(t == null);
         
-        if(returnType.equals("return")){
-            
+        if(returnType.equals("sale")){
+            currentTransaction = new ReturnController((t.getId()));
+            currentTransaction.start();
         }else{
             currentTransaction = new RentalReturnController((Rental)t);
             currentTransaction.start();

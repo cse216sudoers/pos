@@ -177,7 +177,10 @@ public class ReturnController extends TransactionController{
             System.out.println("Invalid product code: " + code);
             return;
         }
-        ret.addItem(product);
+        if(!ret.addItem(product)){
+            System.out.println("Item does not exist on this receipt.");
+        }
+        
     }
     
     /**

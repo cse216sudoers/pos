@@ -228,7 +228,7 @@ public class RentalController extends TransactionController{
         String cardNum = "";
         int pin = 0;
         
-        System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
+        System.out.println("Please enter total debit payment or enter 'total' to pay the whole balance: ");
         
         try{
             input = scanner.next();
@@ -286,11 +286,14 @@ public class RentalController extends TransactionController{
         int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
+        System.out.print("Please enter number of days rented: "); //For if there are multiple of the item 
+        int days = scanner.nextInt();
+        
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        rental.removeItem(product);
+        rental.removeItem(product, days);
     }
     
     /**

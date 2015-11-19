@@ -91,7 +91,6 @@ public class CashierManager {
         
         for(int i = 0; i < cashiers.size(); i++){
             if(cashiers.get(i).getUsername().equals(username)){
-                id = cashiers.get(i).getId();
                 cashiers.remove(i);
                 return true; //return true if found 
             }

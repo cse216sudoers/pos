@@ -59,13 +59,7 @@ public abstract class Transaction {
     public ArrayList<LineItem> getLines(){
         return lines;
     }
-        
-    /**
-     *
-     * @param product
-     */
-    public abstract void removeItem(ProductDescription product);
-    
+
     /**
      *
      * @return

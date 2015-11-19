@@ -56,6 +56,7 @@ public class Return extends Transaction{
             else{
                 subTotal += product.getPrice();
             }
+            product.increaseQuantity();
             
             lines.add(retItem);
             return true;
@@ -79,7 +80,6 @@ public class Return extends Transaction{
      *
      * @param product
      */
-    @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -91,6 +91,7 @@ public class Return extends Transaction{
                     lines.get(i).decreaseQuantity();
                 }
                 subTotal-=product.getPrice();
+                product.decreaseQuantity();
                 found = true;
                 break;
             }

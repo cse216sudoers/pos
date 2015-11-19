@@ -16,24 +16,32 @@ public class Sale extends Transaction{
         payments = new ArrayList<>();
         lines = new ArrayList<>();
     }
+    public Sale(int id){
+        total = 0;
+        subTotal= 0;
+        this.id = id;
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
+    }
     
     /**
      *
      * @param product
      */
     public void addItem(ProductDescription product){
-        if(ProductCatalog.getCatalog().findProductByCode(product.getCode()).getQuantity()!=0){
-        LineItem item = getLineItemByCode(product.getCode());
-        
+        if(product.productLeft()){
+            LineItem item = getLineItemByCode(product.getCode()); 
             ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
             System.out.println("Quantity"+product.getQuantity());
             if(item == null){
                 lines.add(new LineItem(product));
                 subTotal += product.getPrice();
+                product.decreaseQuantity();
                 return;
             }
             item.increaseQuantity();
             subTotal += product.getPrice();
+            product.decreaseQuantity();
         }
         else
             System.out.println("Out of Stock");
@@ -62,12 +70,11 @@ public class Sale extends Transaction{
      *
      * @param product
      */
-    @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
-                ProductCatalog.getCatalog().findProductByCode(product.getCode()).increaseQuantity();
+                product.increaseQuantity();
                 if(lines.get(i).getQuantity() == 1){
                     lines.remove(i);
                 }

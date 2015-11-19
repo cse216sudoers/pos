@@ -61,6 +61,7 @@ public class RentalReturn extends Transaction{
         LineItem item = new RentalReturnLineItem(product, daysLate);
         lines.add(item);
         subTotal += ((RentalReturnLineItem)item).getLateFee();
+        product.increaseQuantity();
         return true;
     }
     
@@ -68,7 +69,6 @@ public class RentalReturn extends Transaction{
      *
      * @param product
      */
-    @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
@@ -85,6 +85,7 @@ public class RentalReturn extends Transaction{
                 
                 subTotal -= ((RentalReturnLineItem)item).getLateFee();
                 found = true;
+                product.decreaseQuantity();
                 break;
             }
         }
