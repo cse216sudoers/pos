@@ -187,7 +187,6 @@ public class SaleManager {
         return ++nextId;
     }
     public synchronized void updateFile(){
-        System.out.println("UPDATING");
         File store = new File("Sales.txt");
         try{
             FileOutputStream fos = new FileOutputStream(store);

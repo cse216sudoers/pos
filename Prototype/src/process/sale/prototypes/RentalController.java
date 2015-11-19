@@ -305,6 +305,8 @@ public class RentalController extends TransactionController{
             System.out.println("Invalid product code: " + code);
         }else if(!product.getIsRentable()){
             System.out.println("Item cannot be rented: " + code);
+        }else if(!product.productLeft()){
+            System.out.println("Item out of stock: " + code);
         }else{
             System.out.print("Please enter days to rent: ");
             int days = scanner.nextInt();

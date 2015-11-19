@@ -23,6 +23,13 @@ public class Rental extends Transaction{
         lines = new ArrayList<>();
         returns = new ArrayList<>();
     }
+    public Rental(int id){
+        total = 0;
+        this.id = id;
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
+        returns = new ArrayList<>();
+    }
     
     /**
      * Add a RentalReturn
@@ -49,8 +56,13 @@ public class Rental extends Transaction{
             }
         }
         if(!found){
-            lines.add(new RentalLineItem(product, daysRented));
-            subTotal += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
+            if(product.productLeft()){
+                lines.add(new RentalLineItem(product, daysRented));
+                subTotal += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
+                product.decreaseQuantity();
+            }
+            else
+                ;
         }
         
     }
