@@ -42,6 +42,6 @@ public class CreditPayment extends Payment{
 
     @Override
     public String toString(){
-        return String.format("%2s %16s\t$%-7.2f", "Credit", cardNum, amount);
+        return String.format("%2s %16s\t$%-7.2f\n", "Credit", cardNum, amount);
     }
 }

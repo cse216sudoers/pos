@@ -23,8 +23,7 @@ public class Sale extends Transaction{
      */
     public void addItem(ProductDescription product){
         if(ProductCatalog.getCatalog().findProductByCode(product.getCode()).getQuantity()!=0){
-        LineItem item = getLineItemByCode(product.getCode());
-        
+            LineItem item = getLineItemByCode(product.getCode());
             ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
             System.out.println("Quantity"+product.getQuantity());
             if(item == null){

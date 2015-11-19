@@ -242,7 +242,7 @@ public class SaleController extends TransactionController{
         String cardNum = "";
         int pin = 0;
         
-        System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
+        System.out.println("Please enter total debit payment or enter 'total' to pay the whole balance: ");
         
         try{
             input = scanner.next();

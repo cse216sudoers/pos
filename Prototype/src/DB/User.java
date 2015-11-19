@@ -57,7 +57,6 @@ public class User extends DBClass{
     
     public static void insert (String name, int permission, String username, String password){
         int id = nextId(path);
-        System.out.println(id);
         
         String newTuple = name + "|" + id + "|" + permission + "|" + username + "|" + password + "|";
         
