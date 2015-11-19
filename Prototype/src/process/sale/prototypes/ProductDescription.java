@@ -63,13 +63,13 @@ public class ProductDescription {
     /**
      *
      */
-    public void increaseQuantity(){
+    public synchronized void increaseQuantity(){
         quantity++;
     }
     /**
      *
      */
-    public void decreaseQuantity(){
+    public synchronized void decreaseQuantity(){
         quantity--;
     }
     /**
@@ -107,7 +107,11 @@ public class ProductDescription {
     public String getDescription(){
         return description;
     }
-    
+    public synchronized boolean productLeft(){
+        if(quantity>0)
+            return true;
+        return false;
+    }
     /**
      *
      * @return
