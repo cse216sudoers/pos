@@ -284,16 +284,13 @@ public class RentalController extends TransactionController{
     protected void processVoid(){
         System.out.print("Please enter a product code: ");
         int code = scanner.nextInt();
-        
-        System.out.print("Please enter number of days rented: "); //For if there are multiple of the item 
-        int days = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        rental.removeItem(product, days);
+        rental.removeItem(product);
     }
     
     /**

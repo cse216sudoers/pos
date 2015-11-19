@@ -47,7 +47,7 @@ public class UserManagementController {
         Scanner scan = new Scanner(System.in);
         String input;
         System.out.println("Enter full name or 'q' to quit: ");
-        input = scan.nextLine();
+        input = scan.next();
         if(input.equalsIgnoreCase("q"))
             return;
         String name = input;

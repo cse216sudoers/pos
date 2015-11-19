@@ -69,6 +69,7 @@ public class RentalReturn extends Transaction{
      *
      * @param product
      */
+    @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){

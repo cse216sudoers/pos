@@ -26,7 +26,7 @@ public class RentalLineItem extends LineItem{
      * @return total price of rental
      */
     public float getRentalPrice(){
-        return product.getRentalPrice() * daysRented;
+        return product.getRentalPrice() * daysRented * quantity;
     }
     
     /**
@@ -34,7 +34,7 @@ public class RentalLineItem extends LineItem{
      * @return daily late fee
      */
     public float getLatePayment(){
-        return product.getRentalPrice();
+        return product.getRentalPrice() * 2;
     }
     
     /**
@@ -55,9 +55,9 @@ public class RentalLineItem extends LineItem{
     
     @Override
     public String toString(){
-        String output =  String.format("%2d %-15.15s \tdays rented: %5d\t$%7.2f\n", product.getCode(), product.getDescription(), daysRented, getRentalPrice());
+        String output =  String.format("%2s %-15.15sdays rented: %5d\t$%7.2f\n", product.getCode(), product.getDescription(), daysRented, getRentalPrice());
         if(quantity >1)
-            output += String.format("\tX%4d \t%7.2f\n", quantity, getRentalPrice()*quantity);
+            output += String.format("%2s\t%7.2f\n", "", "X" + quantity, quantity * getRentalPrice());
         return output;
     }
 }

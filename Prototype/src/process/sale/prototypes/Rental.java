@@ -30,16 +30,6 @@ public class Rental extends Transaction{
      */
     public void addRentalreturn(RentalReturn ret){
         returns.add(ret);
-        
-        //update all item quantities in rental
-        for(int i = 0; i < ret.getLines().size(); i++){
-            RentalLineItem retItem = (RentalLineItem)ret.getLines().get(i);
-            int quantity = retItem.getQuantity();
-            while(quantity > 0){
-                removeItem(retItem.getProduct(), retItem.getDaysRented());
-                quantity--;
-            }
-        }   
     }
     
     /**
@@ -49,27 +39,20 @@ public class Rental extends Transaction{
      */
     public void addItem(ProductDescription product, int daysRented){
         boolean found = false;
-        LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
-        if(lineItem!=null){
-            lineItem.increaseQuantity();
-            found = true;
-            subTotal += ((RentalLineItem)lineItem).getRentalPrice();
-            product.decreaseQuantity();
-        } 
-        else{
+        for(int i = 0; i < lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == product.getCode() && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented){
+                lines.get(i).increaseQuantity();
+                found = true;
+                subTotal += ((RentalLineItem)lines.get(i)).getRentalPrice();
+                product.decreaseQuantity();
+                break;
+            }
+        }
+        if(!found){
             lines.add(new RentalLineItem(product, daysRented));
             subTotal += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
         }
         
-    }
-    
-    public LineItem getLineItemByCodeAndDaysRented(int code, int daysRented){
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == code && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented){
-                return lines.get(i);
-            }
-        }
-        return null;
     }
     
     /**
@@ -123,21 +106,24 @@ public class Rental extends Transaction{
      * Remove item from rental
      * @param product item to remove
      */
-    
-    public void removeItem(ProductDescription product, int daysRented){
+    @Override
+    public void removeItem(ProductDescription product){
         boolean found = false;
-        LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
-        if(lineItem != null){
-            if(lineItem.getQuantity() == 1){
-                lines.remove(lineItem);
+        for(int i = 0; i < lines.size(); i++){
+            if(lines.get(i).getProduct().getCode() == product.getCode()){
+                if(lines.get(i).getQuantity() == 1){
+                    lines.remove(i);
+                }
+                else{
+                    lines.get(i).decreaseQuantity();
+                }
+                total-=product.getRentalPrice();
+                product.increaseQuantity();
+                found = true;
+                break;
             }
-            else{
-                lineItem.decreaseQuantity();
-            }
-            total-=product.getRentalPrice();
-            product.increaseQuantity();
         }
-        else{//item not in Sale
+        if(!found){//item not in Sale
             System.out.println("item not found");
         }
     }
