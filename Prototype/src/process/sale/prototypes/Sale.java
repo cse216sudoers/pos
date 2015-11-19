@@ -1,24 +1,26 @@
 package process.sale.prototypes;
 import java.util.ArrayList;
 
-public class Sale extends Transaction{
-    private float saleTotal;
-    
+/**
+ *
+ * @author Pikachu
+ */
+public class Sale extends Transaction{    
+    /**
+     *
+     */
     public Sale(){
         total = 0;
+        subTotal= 0;
         id = SaleManager.getInstance().getNextId();
         payments = new ArrayList<>();
         lines = new ArrayList<>();
     }
     
-    public float getSaleTotal(){
-        // return saleTotal;
-        saleTotal = 0;
-        for (LineItem line : lines)
-            saleTotal += line.getPrice();
-        return saleTotal;
-    }
-    
+    /**
+     *
+     * @param product
+     */
     public void addItem(ProductDescription product){
         if(ProductCatalog.getCatalog().findProductByCode(product.getCode()).getQuantity()!=0){
         LineItem item = getLineItemByCode(product.getCode());
@@ -27,22 +29,26 @@ public class Sale extends Transaction{
             System.out.println("Quantity"+product.getQuantity());
             if(item == null){
                 lines.add(new LineItem(product));
-                total += product.getPrice();
+                subTotal += product.getPrice();
                 return;
             }
             item.increaseQuantity();
-            total += product.getPrice();
+            subTotal += product.getPrice();
         }
         else
             System.out.println("Out of Stock");
     }
     
+    /**
+     *
+     * @param coupon
+     */
     public void addCoupon(Coupon coupon){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == coupon.getProductCode()){
                 lines.get(i).setCoupon(coupon);
-                total-=coupon.apply(total);
+                subTotal-=coupon.apply();
                 found = true;
                 break;
             }
@@ -52,6 +58,10 @@ public class Sale extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param product
+     */
     @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
@@ -64,7 +74,7 @@ public class Sale extends Transaction{
                 else{
                     lines.get(i).decreaseQuantity();
                 }
-                total-=product.getPrice();
+                subTotal-=product.getPrice();
                 found = true;
                 break;
             }
@@ -74,6 +84,11 @@ public class Sale extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param code
+     * @return
+     */
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -82,20 +97,23 @@ public class Sale extends Transaction{
         return null;
     }
     
+    /**
+     *
+     */
     @Override
     public void printTotals() {
         // Calculate tax and total
-        float tax = TaxCalculator.getTax(getTotal());
-        saleTotal = getTotal() + tax;
+        float tax = TaxCalculator.getTax(subTotal);
+        total = subTotal + tax;
         
         // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) saleTotal).toString().length();
+        int digits = ((Float)total).toString().length();
         String format = "%" + digits + ".2f";
         
         System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", getTotal());
+        System.out.printf("Subtotal: $" + format + "\n", subTotal);
         System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", saleTotal);
+        System.out.printf("Total:    $" + format + "\n", total);
     }
     
     @Override

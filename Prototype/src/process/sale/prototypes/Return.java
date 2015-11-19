@@ -7,29 +7,38 @@ package process.sale.prototypes;
 import java.util.ArrayList;
 
 /**
- *
+ * Return
  * @author Pikachu
  */
 public class Return extends Transaction{
-    private float returnTotal;
     private int saleId;
     
+    /**
+     *
+     * @param saleId
+     */
     public Return(int saleId){
         total = 0;
+        subTotal = 0;
         this.saleId = saleId;
         id = RentalManager.getInstance().getNextId();
         payments = new ArrayList<>();
         lines = new ArrayList<>();
     }
     
+    /**
+     *
+     * @return
+     */
     public int getSaleId(){
         return saleId;
     }
 
-    public float getReturnTotal(){
-        return returnTotal;
-    }
-
+    /**
+     *
+     * @param product
+     * @return
+     */
     public boolean addItem(ProductDescription product){
         LineItem item = SaleManager.getInstance().getSaleById(saleId).getLineItemByCode(product.getCode());
         
@@ -42,10 +51,10 @@ public class Return extends Transaction{
             
             if(item.getQuantity() == 1 && item.getCoupon() != null){
                 retItem.setCoupon(item.getCoupon());
-                total += item.getPriceWithCoupons();                
+                subTotal += item.getPriceWithCoupons();                
             }
             else{
-                total += product.getPrice();
+                subTotal += product.getPrice();
             }
             
             lines.add(retItem);
@@ -56,16 +65,20 @@ public class Return extends Transaction{
             retItem.increaseQuantity();
              if(item.getQuantity() == retItem.getQuantity() && item.getCoupon() != null){
                  retItem.setCoupon(item.getCoupon());
-                total += item.getPriceWithCoupons();
+                subTotal += item.getPriceWithCoupons();
             }
              else{
-                total += product.getPrice();
+                subTotal += product.getPrice();
              }
             return true;
         }
         return false; //already returned all of that item
     }
     
+    /**
+     *
+     * @param product
+     */
     @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
@@ -77,7 +90,7 @@ public class Return extends Transaction{
                 else{
                     lines.get(i).decreaseQuantity();
                 }
-                total-=product.getPrice();
+                subTotal-=product.getPrice();
                 found = true;
                 break;
             }
@@ -87,6 +100,11 @@ public class Return extends Transaction{
         }
     }
     
+    /**
+     *
+     * @param code
+     * @return
+     */
     public LineItem getLineItemByCode(int code){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
@@ -95,20 +113,23 @@ public class Return extends Transaction{
         return null;
     }
     
+    /**
+     *
+     */
     @Override
     public void printTotals() {
         // Calculate tax and total
-        float tax = TaxCalculator.getTax(getTotal());
-        returnTotal = getTotal() + tax;
+        float tax = TaxCalculator.getTax(subTotal);
+        total = subTotal + tax;
         
         // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) returnTotal).toString().length();
+        int digits = ((Float) total).toString().length();
         String format = "%" + digits + ".2f";
         
         System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", getTotal());
+        System.out.printf("Subtotal: $" + format + "\n", subTotal);
         System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", returnTotal);
+        System.out.printf("Total:    $" + format + "\n", total);
     }
     
     @Override

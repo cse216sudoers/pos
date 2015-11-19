@@ -5,30 +5,50 @@
 package process.sale.prototypes;
 
 /**
- *
+ * Line Item child for Rentals because we needed additional fields
  * @author Pikachu
  */
 public class RentalLineItem extends LineItem{
     private int daysRented;
     
+    /**
+     * 
+     * @param product
+     * @param daysRented
+     */
     public RentalLineItem(ProductDescription product, int daysRented){
         super(product);
         this.daysRented = daysRented;
     }
     
+    /**
+     *
+     * @return total price of rental
+     */
     public float getRentalPrice(){
         return product.getRentalPrice() * daysRented * quantity;
     }
     
-    //daily late fee
+    /**
+     *
+     * @return daily late fee
+     */
     public float getLatePayment(){
         return product.getRentalPrice() * 2;
     }
     
+    /**
+     * 
+     * @return days rented
+     */
     public int getDaysRented(){
         return daysRented;
     }
     
+    /**
+     * set days rented
+     * @param days days rented
+     */
     public void setDaysRented(int days){
             daysRented = days;
     }

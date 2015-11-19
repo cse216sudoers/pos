@@ -2,7 +2,12 @@
 package process.sale.prototypes;
 
 import java.util.Scanner;
+import DB.User;
 
+/**
+ *
+ * @author Pikachu
+ */
 public class Store {
     private String name;
     private int storeCode;
@@ -22,6 +27,10 @@ public class Store {
         rentalManager = RentalManager.getInstance();
         returnManager = ReturnManager.getInstance();
     }
+    /**
+     *
+     * @return
+     */
     public static synchronized Store getStore(){
         if(store==null){
             store=new Store();
@@ -29,7 +38,12 @@ public class Store {
         return store;
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
+        DB.User.insert("Test", 0, "Test", "Test");
         Scanner scan = new Scanner(System.in);
         Store mainStore = Store.getStore();
         CashierManager cashierManager = CashierManager.getInstance();

@@ -12,6 +12,7 @@ package process.sale.prototypes;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class CouponCatalog {
     private static CouponCatalog cat;
     private ArrayList<Coupon> coupons;
@@ -22,9 +23,6 @@ public class CouponCatalog {
             Scanner read = new Scanner(new File("Coupons.txt"));
             read.useDelimiter("\\|");
             while(read.hasNext()){
-//                while(read.hasNext()){
-//                System.out.println(read.nextLine());
-//                }
                 int cid = Integer.parseInt(read.next());
                 String fullamount = read.next();
                 boolean percent = false;
@@ -44,16 +42,29 @@ public class CouponCatalog {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public static synchronized CouponCatalog getCatalog(){
         if (cat==null){
             cat=new CouponCatalog();
         }
         return cat;
     }
+    /**
+     *
+     * @param desc
+     */
     public void addItem(Coupon desc){
         coupons.add(desc);
     }
 
+    /**
+     *
+     * @param code
+     * @return
+     */
     public Coupon findCouponByCode(int code){
         for (Coupon coupon : coupons) {
             if (code == coupon.getCode()) {

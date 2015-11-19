@@ -15,15 +15,26 @@ public class ReturnController extends TransactionController{
     private Return ret;
     private Scanner scanner;
     
+    /**
+     *
+     * @param saleId
+     */
     public ReturnController(int saleId){
         ret = new Return(saleId);
     }
     
+    /**
+     *
+     * @param ret
+     */
     public ReturnController(Return ret){
         this.ret = ret;
         display();
     }
     
+    /**
+     *
+     */
     @Override
     public void start(){
         
@@ -69,16 +80,22 @@ public class ReturnController extends TransactionController{
         }
     }
     
+    /**
+     *
+     */
     @Override
     protected void processSuspend(){
         ReturnManager.getInstance().addSuspendedReturn(ret);
     }
     
+    /**
+     *
+     */
     @Override
     protected void close() {
         ArrayList<Payment> payments = SaleManager.getInstance().getSaleById(ret.getSaleId()).getPayments();
         ret.printTotals();
-        leftToPay = ret.getReturnTotal();
+        leftToPay = ret.getTotal();
         int i = 0;
         while(leftToPay > 0){
             System.out.println("in loop " + leftToPay);
@@ -132,6 +149,9 @@ public class ReturnController extends TransactionController{
         }
     }
     
+    /**
+     *
+     */
     @Override
     protected void processVoid(){
         System.out.print("Please enter a product code: ");
@@ -145,6 +165,10 @@ public class ReturnController extends TransactionController{
         ret.removeItem(product);
     }
     
+    /**
+     *
+     * @param code
+     */
     @Override
     protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
@@ -156,10 +180,16 @@ public class ReturnController extends TransactionController{
         ret.addItem(product);
     }
     
+    /**
+     *
+     */
     @Override
     protected void display(){
         System.out.println(ret);
     }
+    /**
+     *
+     */
     @Override
     protected void printReceipt(){
         System.out.print("******************************************");

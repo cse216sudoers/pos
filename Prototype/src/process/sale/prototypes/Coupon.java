@@ -5,59 +5,88 @@
 package process.sale.prototypes;
 
 /**
- *
+ * Keeps track of Coupon for a specific item
  * @author Pikachu
  */
 public class Coupon {
-    private int code;
-    private int productCode;
-    private float amount;
-    private boolean percent;
+    private int code; //coupon code
+    private int productCode; //product to be applied to
+    private float amount; //amount to take off product total
+    private boolean percent; //true if amount off a percentage
     
+    /**
+     * Creates a new coupon
+     * @param code
+     * @param productCode
+     * @param amount
+     * @param percent
+     */
     public Coupon(int code, int productCode, float amount,boolean percent){
         this.code =code;
         this.productCode = productCode;
         this.amount = amount;
         this.percent=percent;
     }
+    /**
+     * Creates a new coupon
+     * @param code
+     * @param productCode
+     * @param amount
+     */
     public Coupon(int code, int productCode, float amount){
         this.code =code;
         this.productCode = productCode;
         this.amount = amount;
         this.percent=false;
     }
+    /**
+     *
+     * @return discount amount (either a percentage or dollar amount)
+     */
     public float getAmount(){
         return amount;
     }
+    /**
+     * Set amount (either a percentage or dollar amount
+     * @param amount
+     */
     public void setAmount(float amount){
         this.amount = amount;
     }
+    /**
+     *
+     * @return coupon code
+     */
     public int getCode(){
         return code;
     }
-    public void setCode(int code){
-        this.code = code;
-    }
-    public float apply(float total){
+
+    /**
+     * Get discount for item
+     * @return discount
+     */
+    public float apply(){
         float drop;
-        //if(total>prereq){
-          if(percent){
-              drop=total*amount/100;
-          }  
-          drop =  amount;
-          
-        //}
-        
+        if(percent){
+            drop=ProductCatalog.getCatalog().findProductByCode(productCode).getPrice()*(amount/100);
+        }
+        else
+            drop =  amount;
         return drop;
     }
+    /**
+     * Get product code
+     * @return
+     */
     public int getProductCode(){
         return productCode;
     }
-    public void setProductCode(int productCode){
-        this.productCode = productCode;
-    }
+
     @Override
     public String toString(){
-        return String.format("%2s %-16d\t-%7.2f", " ", code, amount);
+        if(!percent){
+            return String.format("%2s %16d\t-%7.2f", " ", code, apply());
+        }
+        return String.format("%2s %16d\t-%7.2f\t%3.2f%%", " ", code, apply(), amount);
     }
 }

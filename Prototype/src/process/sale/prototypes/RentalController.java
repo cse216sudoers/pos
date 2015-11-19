@@ -9,22 +9,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Keeps track of all of the operations for a Rental domain object
  * @author Pikachu
  */
 public class RentalController extends TransactionController{
     private Rental rental;
     private Scanner scanner;
     
+    /**
+     * Initialize a rentalController and corresponding rental
+     */
     public RentalController(){
         rental = new Rental();
     }
     
+    /**
+     * Initialize a rentalController for a suspended rental
+     * @param rental
+     */
     public RentalController(Rental rental){
         this.rental = rental;
         display();
     }
     
+    /**
+     * Start rental process
+     */
     @Override
     public void start(){
         boolean done = false;
@@ -75,11 +85,17 @@ public class RentalController extends TransactionController{
         }
     }
     
+    /**
+     *Suspend the rental
+     */
     @Override
     protected void processSuspend(){
         RentalManager.getInstance().addSuspendedRental(rental);
     }
     
+    /**
+     * Close the sale
+     */
     @Override
     protected void close() {
         String paymentType;
@@ -87,7 +103,7 @@ public class RentalController extends TransactionController{
         
         // Give total price (subtotal, tax, and total)
         rental.printTotals();
-        leftToPay = rental.getRentalTotal();
+        leftToPay = rental.getTotal();
         while(leftToPay > 0){
             validType= false;
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
@@ -117,6 +133,9 @@ public class RentalController extends TransactionController{
         System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
+    /**
+     * Create Cash payment
+     */
     protected void processCashPayment(){
         float payment = 0;
         System.out.println("Please enter total cash payment: ");
@@ -140,6 +159,9 @@ public class RentalController extends TransactionController{
         }
     }
     
+    /**
+     * Create Credit Payment
+     */
     protected void processCreditPayment(){
         float payment = 0;
         boolean invalid = true;
@@ -189,7 +211,8 @@ public class RentalController extends TransactionController{
         }
     }
     
-    protected boolean processCreditPayment(CreditPayment payment){
+    //check if credit card payment is valid
+    private boolean processCreditPayment(CreditPayment payment){
         String cardNum = payment.getCardNum();
         String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
@@ -197,7 +220,8 @@ public class RentalController extends TransactionController{
         return false;
     }
     
-    protected void processDebitPayment(){
+    //check if debit payment is valid
+    private void processDebitPayment(){
         float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
@@ -243,6 +267,8 @@ public class RentalController extends TransactionController{
             System.out.println("Card rejected.");
         }
     }
+    
+    //make a debit paymnent
     private boolean processDebitPayment(DebitPayment payment){
         String cardNum = "" + payment.getCardNum();
         String pin = "" + payment.getPin();
@@ -251,6 +277,9 @@ public class RentalController extends TransactionController{
         return false;
     }
     
+    /**
+     *Remove item from rental
+     */
     @Override
     protected void processVoid(){
         System.out.print("Please enter a product code: ");
@@ -264,6 +293,10 @@ public class RentalController extends TransactionController{
         rental.removeItem(product);
     }
     
+    /**
+     * Add item to rental
+     * @param code product code
+     */
     @Override
     protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
@@ -279,6 +312,7 @@ public class RentalController extends TransactionController{
         }
     }
     
+    //add coupon
     private void processCoupon(){
         String next = "";
         int code;
@@ -316,11 +350,17 @@ public class RentalController extends TransactionController{
         rental.addCoupon(new Coupon(code, productCode, amount));
     }
     
+    /**
+     * display rental
+     */
     @Override
     protected final void display(){
         System.out.println(rental);
     }
     
+    /**
+     * Print receipt
+     */
     @Override
     protected void printReceipt(){
         System.out.print("******************************************");
