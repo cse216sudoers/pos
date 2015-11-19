@@ -29,10 +29,10 @@ public class Sale extends Transaction{
      * @param product
      */
     public void addItem(ProductDescription product){
-        
         if(product.productLeft()){
-        LineItem item = getLineItemByCode(product.getCode());
-//        System.out.println("Product: "+product.getDescription()+" Quantity: "+product.getQuantity());
+            LineItem item = getLineItemByCode(product.getCode()); 
+            ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
+            System.out.println("Quantity"+product.getQuantity());
             if(item == null){
                 lines.add(new LineItem(product));
                 subTotal += product.getPrice();
