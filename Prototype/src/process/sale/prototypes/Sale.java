@@ -16,6 +16,13 @@ public class Sale extends Transaction{
         payments = new ArrayList<>();
         lines = new ArrayList<>();
     }
+    public Sale(int id){
+        total = 0;
+        subTotal= 0;
+        this.id = id;
+        payments = new ArrayList<>();
+        lines = new ArrayList<>();
+    }
     
     /**
      *
@@ -29,6 +36,7 @@ public class Sale extends Transaction{
             if(item == null){
                 lines.add(new LineItem(product));
                 subTotal += product.getPrice();
+                product.decreaseQuantity();
                 return;
             }
             item.increaseQuantity();
@@ -67,7 +75,7 @@ public class Sale extends Transaction{
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
-                ProductCatalog.getCatalog().findProductByCode(product.getCode()).increaseQuantity();
+                product.increaseQuantity();
                 if(lines.get(i).getQuantity() == 1){
                     lines.remove(i);
                 }
@@ -75,7 +83,6 @@ public class Sale extends Transaction{
                     lines.get(i).decreaseQuantity();
                 }
                 subTotal-=product.getPrice();
-                product.increaseQuantity();
                 found = true;
                 break;
             }
