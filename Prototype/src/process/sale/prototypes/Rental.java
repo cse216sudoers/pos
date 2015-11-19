@@ -44,6 +44,7 @@ public class Rental extends Transaction{
                 lines.get(i).increaseQuantity();
                 found = true;
                 subTotal += ((RentalLineItem)lines.get(i)).getRentalPrice();
+                product.decreaseQuantity();
                 break;
             }
         }
@@ -117,6 +118,7 @@ public class Rental extends Transaction{
                     lines.get(i).decreaseQuantity();
                 }
                 total-=product.getRentalPrice();
+                product.increaseQuantity();
                 found = true;
                 break;
             }
