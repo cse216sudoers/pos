@@ -39,9 +39,9 @@ public class RentalReturnController extends TransactionController{
     @Override
     public void start(){
         boolean done = false;
-        //continuous retnal loop
+        //continuous rental loop
         while(!done){
-            //try{
+            try{
                 System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -75,10 +75,10 @@ public class RentalReturnController extends TransactionController{
                 else{
                     System.out.println("Invalid input: " + input);
                 }
-//            }catch(Exception e){
-//                System.out.println(e.toString());
-//                System.out.println("Invalid input");
-//            }
+            }catch(Exception e){
+                System.out.println(e.toString());
+                System.out.println("Invalid input");
+            }
         }
     }
     
@@ -101,7 +101,8 @@ public class RentalReturnController extends TransactionController{
         // Give total price (subtotal, tax, and total)
         rentalReturn.printTotals();
         leftToPay = rentalReturn.getTotal();
-        while(leftToPay > 0){            validType= false;
+        while(leftToPay > 0){            
+            validType= false;
 
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
             paymentType = scanner.next();
