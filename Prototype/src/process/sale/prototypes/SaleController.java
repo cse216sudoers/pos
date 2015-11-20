@@ -325,15 +325,11 @@ public class SaleController extends TransactionController{
             System.out.println("Invalid product code: " + code);
             return;
         }
-<<<<<<< HEAD
-        sale.addItem(product, true);
-=======
         else if(!product.productLeft()){
             System.out.println("Item out of stock: " + code);
         }
         else
-            sale.addItem(product);
->>>>>>> 2931279979cbbb3784d2df7c231a55d93e3884cc
+            sale.addItem(product, true);
     }
     
     //coupon to add to sale
