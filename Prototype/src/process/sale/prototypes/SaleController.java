@@ -32,8 +32,8 @@ public class SaleController extends TransactionController{
         display(); //display what is already in the sale
     }
     
-    /**
-     * Present basic options to the user for a sale and start processing input
+    /**     * Present basic options to the user for a sale and start processing input
+
      */
     @Override
     public void start(){
@@ -310,7 +310,7 @@ public class SaleController extends TransactionController{
             System.out.println("Invalid product code: " + code);
             return;
         }
-        sale.removeItem(product);
+        sale.removeItem(product, true);
     }
     
     /**
@@ -325,7 +325,7 @@ public class SaleController extends TransactionController{
             System.out.println("Invalid product code: " + code);
             return;
         }
-        sale.addItem(product);
+        sale.addItem(product, true);
     }
     
     //coupon to add to sale

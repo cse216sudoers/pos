@@ -101,7 +101,8 @@ public class RentalReturnController extends TransactionController{
         // Give total price (subtotal, tax, and total)
         rentalReturn.printTotals();
         leftToPay = rentalReturn.getTotal();
-        while(leftToPay > 0){            validType= false;
+        while(leftToPay > 0){            
+            validType= false;
 
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
             paymentType = scanner.next();

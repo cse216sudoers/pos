@@ -47,11 +47,11 @@ public class SaleManager {
                     int itemid = Integer.parseInt(pair[0]);
                     int quantity = Integer.parseInt(pair[1]);
                     int coupon = Integer.parseInt(pair[2]);
-                    saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid));
+                    saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid), false);
                     int q = 1;
                     while(q<quantity){
                         ProductCatalog.getCatalog().findProductByCode(itemid).increaseQuantity();
-                        saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid));
+                        saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid), false);
                         q++;
                     }
                     if(coupon!=0)
@@ -98,11 +98,11 @@ public class SaleManager {
                     int itemid = Integer.parseInt(pair[0]);
                     int quantity = Integer.parseInt(pair[1]);
                     int coupon = Integer.parseInt(pair[2]);
-                    saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid));
+                    saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid), false);
                     int q = 1;
                     while(q<quantity){
                         ProductCatalog.getCatalog().findProductByCode(itemid).increaseQuantity();
-                        saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid));
+                        saleI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid), false);
                         q++;
                     }
                     if(coupon!=0)

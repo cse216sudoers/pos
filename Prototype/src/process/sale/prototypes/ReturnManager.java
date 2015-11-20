@@ -78,7 +78,7 @@ public class ReturnManager {
             LineItem retItem = ret.getLines().get(i);
             int quantity = retItem.getQuantity();
             while(quantity > 0){
-                sale.removeItem(retItem.product);
+                sale.removeItem(retItem.product, false);
                 quantity--;
             }
         }
