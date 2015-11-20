@@ -1,4 +1,4 @@
-287|Canon Printer|99.99|998|1|2.0|
+287|Canon Printer|99.99|997|1|2.0|
 853|Target Gift Card|25.0|0|0|0.0|
 975|Shots|4.99|3|0|0.0|
 983|24pc pencil ticonderoga|6.99|2|0|0.0|
