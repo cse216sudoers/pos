@@ -57,7 +57,7 @@ public class RentalLineItem extends LineItem{
     public String toString(){
         String output =  String.format("%2s %-15.15sdays rented: %5d\t$%7.2f\n", product.getCode(), product.getDescription(), daysRented, getRentalPrice());
         if(quantity >1)
-            output += String.format("\tX%4d \t%7.2f\n", quantity, getRentalPrice()*quantity);
+            output += String.format("%1s%d\t%7.2f\n", /*"",*/ "X",quantity, quantity * getRentalPrice());
         return output;
     }
 }

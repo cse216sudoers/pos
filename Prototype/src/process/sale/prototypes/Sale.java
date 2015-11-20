@@ -32,19 +32,16 @@ public class Sale extends Transaction{
         if(product.productLeft()){
             LineItem item = getLineItemByCode(product.getCode()); 
             ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
-            System.out.println("Quantity"+product.getQuantity());
             if(item == null){
                 lines.add(new LineItem(product));
                 subTotal += product.getPrice();
-                product.decreaseQuantity();
                 return;
             }
             item.increaseQuantity();
             subTotal += product.getPrice();
-            product.decreaseQuantity();
         }
         else
-            System.out.println("Out of Stock");
+            ;//System.out.println("Out of Stock");
     }
     
     /**
@@ -70,6 +67,7 @@ public class Sale extends Transaction{
      *
      * @param product
      */
+    @Override
     public void removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){

@@ -4,7 +4,13 @@
  */
 package process.sale.prototypes;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Keeps track of all rentals
@@ -19,6 +25,98 @@ public class RentalManager {
     private RentalManager(){
         rentals = new HashMap(89);
         suspendedRentals = new HashMap(89);
+        try{
+            Scanner read = new Scanner(new File("Rentals.txt"));
+            read.useDelimiter("\\|");
+            String check="";
+            while(read.hasNext()&&!check.contains("suspended")){
+                check = read.next();
+                if(check.contains("suspended")){
+                    read.nextLine();
+                    break;
+                }
+                int id = Integer.parseInt(check);
+                Rental rentalI = new Rental(id);
+                String itemlist = read.next();
+                Scanner split = new Scanner(itemlist);
+                split.useDelimiter(">");
+                
+                while(split.hasNext()){
+                    String line = split.next();
+                    String[] pair = line.split("\\+");
+                    int itemid = Integer.parseInt(pair[0]);
+                    int quantity = Integer.parseInt(pair[1]);
+                    int days = Integer.parseInt(pair[2]);
+                    int coupon = Integer.parseInt(pair[3]);
+                    rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                    int q = 1;
+                    while(q<quantity){
+                        ProductCatalog.getCatalog().findProductByCode(itemid).increaseQuantity();
+                        rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                        q++;
+                    }
+                    if(coupon!=0)
+                        rentalI.addCoupon(CouponCatalog.getCatalog().findCouponByCode(coupon));
+                }
+                String payment = read.next();
+                Scanner splitpay = new Scanner(payment);
+                splitpay.useDelimiter(">");
+                while(splitpay.hasNext()){
+                    String[] pair = splitpay.next().split("\\+");
+                    float amount = Float.parseFloat(pair[0]);
+                    String type = pair[1];
+                    Payment pay;
+                    if(type.contains("CASH")){
+                        float cash = Float.parseFloat(pair[2]);
+                        pay = new CashPayment(cash,amount);
+                    }
+                    else if(type.contains("DEBIT")){
+                        String cardnum = pair[2];
+                        int pin = Integer.parseInt(pair[3]);
+                        pay = new DebitPayment(cardnum,pin,amount);
+                    }
+                    else if(type.contains("CREDIT")){
+                        String cardnum = pair[2];
+                        String sec = pair[3];
+                        pay = new CreditPayment(cardnum,sec,amount);
+                    }
+                    else
+                        break;
+                    rentalI.addPayment(pay);
+                }
+                read.nextLine();
+                //Rental rental = new Rental();
+                rentals.put(rentalI.getId(),rentalI);
+            }
+            while(read.hasNext()){
+                int id = Integer.parseInt(read.next());
+                Rental rentalI = new Rental(id);
+                String itemlist = read.next();
+                Scanner split = new Scanner(itemlist);
+                split.useDelimiter(">");
+                while(split.hasNext()){
+                    String[] pair = split.next().split("\\+");
+                    int itemid = Integer.parseInt(pair[0]);
+                    int quantity = Integer.parseInt(pair[1]);
+                    int days = Integer.parseInt(pair[2]);
+                    int coupon = Integer.parseInt(pair[3]);
+                    rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                    int q = 1;
+                    while(q<quantity){
+                        ProductCatalog.getCatalog().findProductByCode(itemid).increaseQuantity();
+                        rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                        q++;
+                    }
+                    if(coupon!=0)
+                        rentalI.addCoupon(CouponCatalog.getCatalog().findCouponByCode(coupon));
+                }
+                suspendedRentals.put(rentalI.getId(),rentalI);
+                read.nextLine();
+            }
+        }
+        catch(FileNotFoundException | NumberFormatException e){
+            System.out.println(e.toString());
+        }
     }
     
     /**
@@ -72,6 +170,7 @@ public class RentalManager {
      */
     public void addRental(Rental rental){
         rentals.put(rental.getId(), rental);
+        updateFile();
     } 
     
     /**
@@ -80,6 +179,7 @@ public class RentalManager {
      */
     public void addSuspendedRental(Rental rental){
         suspendedRentals.put(rental.getId(), rental);
+        updateFile();
     }
     /**
      * get next unique id
@@ -87,5 +187,56 @@ public class RentalManager {
      */
     public int getNextId(){
         return ++nextId;
+    }
+    public synchronized void updateFile(){
+        File store = new File("Rentals.txt");
+        try{
+            FileOutputStream fos = new FileOutputStream(store);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+            for (Rental rental : rentals.values()) {
+                // System.out.println(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+item.getIsRentable()+"|"+item.getRentalPrice()+"|\n");
+                bw.write(rental.id+"|");
+                for(LineItem item: rental.getLines()){
+                    RentalLineItem ritem = (RentalLineItem)item;
+                    if(ritem.getCoupon()==null)
+                        bw.write(ritem.getProduct().getCode()+"+"+ritem.getQuantity()+"+"+ritem.getDaysRented()+"+"+0+">");
+                    else
+                        bw.write(item.getProduct().getCode()+"+"+item.getQuantity()+"+"+ritem.getDaysRented()+"+"+item.getCoupon()+">");
+                }
+                bw.write("|");
+                for(Payment pay: rental.getPayments()){
+                    bw.write(pay.getAmount()+"+"+pay.getType());
+                    if(pay.getType()==Payment.PaymentType.CASH){
+                        bw.write("+"+((CashPayment)pay).getCashGiven());
+                    }
+                    else if(pay.getType()==Payment.PaymentType.DEBIT){
+                        bw.write("+"+((DebitPayment)pay).getCardNum()+"+"+((DebitPayment)pay).getPin());
+                    }
+                    else if(pay.getType()==Payment.PaymentType.CREDIT){
+                        bw.write("+"+((CreditPayment)pay).getCardNum()+"+"+((CreditPayment)pay).getSecurityCode());
+                    }
+                }
+                bw.write("|");
+                bw.newLine();
+            }
+            bw.write("suspended|");
+            bw.newLine();
+            for (Rental rental : suspendedRentals.values()) {
+                // System.out.println(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+item.getIsRentable()+"|"+item.getRentalPrice()+"|\n");
+                bw.write(rental.id+"|");
+                for(LineItem item: rental.getLines()){
+                    RentalLineItem ritem = (RentalLineItem)item;
+                    if(ritem.getCoupon()==null)
+                        bw.write(ritem.getProduct().getCode()+"+"+ritem.getQuantity()+"+"+ritem.getDaysRented()+"+"+0+">");
+                    else
+                        bw.write(item.getProduct().getCode()+"+"+item.getQuantity()+"+"+ritem.getDaysRented()+"+"+item.getCoupon()+">");
+                }
+                bw.write("|");
+                bw.newLine();
+            }
+            bw.close();
+        } catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
 }

@@ -286,14 +286,11 @@ public class RentalController extends TransactionController{
         int code = scanner.nextInt();
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
-        System.out.print("Please enter number of days rented: "); //For if there are multiple of the item 
-        int days = scanner.nextInt();
-        
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        rental.removeItem(product, days);
+        rental.removeItem(product);
     }
     
     /**
@@ -308,6 +305,8 @@ public class RentalController extends TransactionController{
             System.out.println("Invalid product code: " + code);
         }else if(!product.getIsRentable()){
             System.out.println("Item cannot be rented: " + code);
+        }else if(!product.productLeft()){
+            System.out.println("Item out of stock: " + code);
         }else{
             System.out.print("Please enter days to rent: ");
             int days = scanner.nextInt();
