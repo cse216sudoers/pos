@@ -36,6 +36,7 @@ public class SaleManager {
                     break;
                 }
                 int id = Integer.parseInt(check);
+                nextId++;
                 Sale saleI = new Sale(id);
                 String itemlist = read.next();
                 Scanner split = new Scanner(itemlist);
@@ -89,6 +90,7 @@ public class SaleManager {
             }
             while(read.hasNext()){
                 int id = Integer.parseInt(read.next());
+                nextId++;
                 Sale saleI = new Sale(id);
                 String itemlist = read.next();
                 Scanner split = new Scanner(itemlist);

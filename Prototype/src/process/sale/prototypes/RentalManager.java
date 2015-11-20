@@ -37,6 +37,7 @@ public class RentalManager {
                 }
                 int id = Integer.parseInt(check);
                 Rental rentalI = new Rental(id);
+                nextId++;
                 String itemlist = read.next();
                 Scanner split = new Scanner(itemlist);
                 split.useDelimiter(">");
@@ -89,6 +90,7 @@ public class RentalManager {
                 rentals.put(rentalI.getId(),rentalI);
             }
             while(read.hasNext()){
+                nextId++;
                 int id = Integer.parseInt(read.next());
                 Rental rentalI = new Rental(id);
                 String itemlist = read.next();
