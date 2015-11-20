@@ -185,7 +185,7 @@ public class RentalController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment > leftToPay);
+        }while(payment >= leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
@@ -241,7 +241,7 @@ public class RentalController extends TransactionController{
                     return;
                 else{
                     payment = Float.parseFloat(input);
-                    if(payment > leftToPay)
+                    if(payment >= leftToPay)
                         System.out.println("Payment is more than total.");
                 }
             }catch(Exception e){

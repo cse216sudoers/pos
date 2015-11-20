@@ -197,7 +197,7 @@ public class SaleController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment > leftToPay);
+        }while(payment >= leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
@@ -261,7 +261,7 @@ public class SaleController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment > leftToPay);
+        }while(payment >= leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
