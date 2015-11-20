@@ -1,4 +1,4 @@
-287|Canon Printer|99.99|0|1|2.0|
+287|Canon Printer|99.99|998|1|2.0|
 853|Target Gift Card|25.0|0|0|0.0|
 975|Shots|4.99|3|0|0.0|
 983|24pc pencil ticonderoga|6.99|1|0|0.0|
@@ -9,7 +9,7 @@
 2745|Pepperoni|7.99|1|0|0.0|
 2845|Pokemon Bowtie|45.95|16|1|2.0|
 3674|Potato Bread|5.99|3|0|0.0|
-4253|Pikachu Plushie|24.95|5|100|0.0|
+4253|Pikachu Plushie|24.95|5|1|0.0|
 4499|Potato|0.8|0|0|0.0|
 5644|Mahogany Door|127.95|61|0|0.0|
 6278|4 function calculator|2.49|0|0|0.0|
