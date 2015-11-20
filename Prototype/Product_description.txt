@@ -7,7 +7,7 @@
 1533|Pickles|0.99|3|0|0.0|
 2348|Harvard Law School Diploma|500000.0|0|0|0.0|
 2745|Pepperoni|7.99|1|0|0.0|
-2845|Pokemon Bowtie|45.95|23|1|2.0|
+2845|Pokemon Bowtie|45.95|18|1|2.0|
 3674|Potato Bread|5.99|3|0|0.0|
 4253|Pikachu Plushie|24.95|5|0|0.0|
 4499|Potato|0.8|0|0|0.0|

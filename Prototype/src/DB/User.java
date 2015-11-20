@@ -37,6 +37,9 @@ public class User extends DBClass{
             
             while((currentLine = reader.readLine()) != null) {
                 String[] columns = currentLine.split("\\|");
+                if (columns.length < 2)
+                    continue; 
+                
                 if (Integer.parseInt(columns[1]) == id)
                     continue;
                 

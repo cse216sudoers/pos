@@ -74,7 +74,12 @@ public class DBClass {
     
         try {
             while ((line = table.readLine()) != null) {
+                
                 String[] columns = line.split("\\|");
+                
+                if (columns.length < 2)
+                    continue;
+                
                 id = Integer.parseInt(columns[1]);
             }
         } catch (IOException ex) {
