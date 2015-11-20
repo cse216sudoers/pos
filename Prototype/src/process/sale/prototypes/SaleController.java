@@ -191,6 +191,8 @@ public class SaleController extends TransactionController{
                     return;
                 else{
                     payment = Float.parseFloat(input);
+                    if(payment > leftToPay)
+                        System.out.println("Payment is more than total.");
                 }
             }catch(Exception e){
                 System.out.println("Invalid payment.");
@@ -244,17 +246,22 @@ public class SaleController extends TransactionController{
         
         System.out.println("Please enter total debit payment or enter 'total' to pay the whole balance: ");
         
-        try{
-            input = scanner.next();
-            if(input.equalsIgnoreCase("total"))
-                payment = leftToPay;
-            else{
-                payment = Float.parseFloat(input);
+        do{
+            try{
+                input = scanner.next();
+                if(input.equalsIgnoreCase("total"))
+                    payment = leftToPay;
+                else if(input.equals("cancel"))
+                    return;
+                else{
+                    payment = Float.parseFloat(input);
+                    if(payment > leftToPay)
+                        System.out.println("Payment is more than total.");
+                }
+            }catch(Exception e){
+                System.out.println("Invalid payment.");
             }
-            invalid = false;
-        }catch(Exception e){
-            System.out.println("Invalid payment.");
-        }
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
