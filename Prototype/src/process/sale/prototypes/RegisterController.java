@@ -68,7 +68,7 @@ public class RegisterController{
                 processUserManagement();
             }else if (input.equalsIgnoreCase("sale") || input.equalsIgnoreCase("return") || input.equalsIgnoreCase("rental")){
                 System.out.println("Enter 'new' or 'suspended': ");
-                String type = scan.next();
+                String type = scan.nextLine();
 
                 if(input.equalsIgnoreCase("sale") && type.equalsIgnoreCase("new")){
                     processSale();
@@ -79,7 +79,9 @@ public class RegisterController{
                 }else if(type.equalsIgnoreCase("suspended")){
                     processSuspended(input);
                 }
-                continue;
+                else{
+                    System.out.println("Invalid Input");
+                }
             }else{
                 System.out.println("Invalid Input");
             }

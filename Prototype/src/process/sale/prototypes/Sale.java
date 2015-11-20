@@ -28,10 +28,11 @@ public class Sale extends Transaction{
      *
      * @param product
      */
-    public void addItem(ProductDescription product){
+    public void addItem(ProductDescription product, boolean affectQuantity){
         if(product.productLeft()){
             LineItem item = getLineItemByCode(product.getCode()); 
-            ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
+            if(true)
+                ProductCatalog.getCatalog().findProductByCode(product.getCode()).decreaseQuantity();
             if(item == null){
                 lines.add(new LineItem(product));
                 subTotal += product.getPrice();
@@ -67,12 +68,12 @@ public class Sale extends Transaction{
      *
      * @param product
      */
-    @Override
-    public void removeItem(ProductDescription product){
+    public void removeItem(ProductDescription product, boolean affectQuantity){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
-                product.increaseQuantity();
+                if(affectQuantity)
+                    product.increaseQuantity();
                 if(lines.get(i).getQuantity() == 1){
                     lines.remove(i);
                 }

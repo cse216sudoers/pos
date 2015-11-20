@@ -32,8 +32,8 @@ public class SaleController extends TransactionController{
         display(); //display what is already in the sale
     }
     
-    /**
-     * Present basic options to the user for a sale and start processing input
+    /**     * Present basic options to the user for a sale and start processing input
+
      */
     @Override
     public void start(){
@@ -191,6 +191,8 @@ public class SaleController extends TransactionController{
                     return;
                 else{
                     payment = Float.parseFloat(input);
+                    if(payment > leftToPay)
+                        System.out.println("Payment is more than total.");
                 }
             }catch(Exception e){
                 System.out.println("Invalid payment.");
@@ -244,17 +246,22 @@ public class SaleController extends TransactionController{
         
         System.out.println("Please enter total debit payment or enter 'total' to pay the whole balance: ");
         
-        try{
-            input = scanner.next();
-            if(input.equalsIgnoreCase("total"))
-                payment = leftToPay;
-            else{
-                payment = Float.parseFloat(input);
+        do{
+            try{
+                input = scanner.next();
+                if(input.equalsIgnoreCase("total"))
+                    payment = leftToPay;
+                else if(input.equals("cancel"))
+                    return;
+                else{
+                    payment = Float.parseFloat(input);
+                    if(payment > leftToPay)
+                        System.out.println("Payment is more than total.");
+                }
+            }catch(Exception e){
+                System.out.println("Invalid payment.");
             }
-            invalid = false;
-        }catch(Exception e){
-            System.out.println("Invalid payment.");
-        }
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
@@ -310,7 +317,7 @@ public class SaleController extends TransactionController{
             System.out.println("Invalid product code: " + code);
             return;
         }
-        sale.removeItem(product);
+        sale.removeItem(product, true);
     }
     
     /**
@@ -333,7 +340,7 @@ public class SaleController extends TransactionController{
                     System.out.println("Not enough of item "+code+" in stock");
                 else if(product.productLeft()) {
                     for(int i=0; i<amount; i++)
-                        sale.addItem(product);
+                        sale.addItem(product, true);
                 } else
                     System.out.println("Item out of stock: " + code);
             }catch(Exception e){

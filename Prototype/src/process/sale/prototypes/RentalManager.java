@@ -49,11 +49,11 @@ public class RentalManager {
                     int quantity = Integer.parseInt(pair[1]);
                     int days = Integer.parseInt(pair[2]);
                     int coupon = Integer.parseInt(pair[3]);
-                    rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                    rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days, false);
                     int q = 1;
                     while(q<quantity){
                         ProductCatalog.getCatalog().findProductByCode(itemid).increaseQuantity();
-                        rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                        rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days, false);
                         q++;
                     }
                     if(coupon!=0)
@@ -102,11 +102,11 @@ public class RentalManager {
                     int quantity = Integer.parseInt(pair[1]);
                     int days = Integer.parseInt(pair[2]);
                     int coupon = Integer.parseInt(pair[3]);
-                    rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                    rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days, false);
                     int q = 1;
                     while(q<quantity){
                         ProductCatalog.getCatalog().findProductByCode(itemid).increaseQuantity();
-                        rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days);
+                        rentalI.addItem(ProductCatalog.getCatalog().findProductByCode(itemid),days, false);
                         q++;
                     }
                     if(coupon!=0)
