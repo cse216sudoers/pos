@@ -395,8 +395,9 @@ public class SaleController extends TransactionController{
             System.out.println("Invalid amount: " + next);
             return;
         }
-        
+        //float pre = sale.getLineItemByCode(productCode).getPrice();
         sale.getLineItemByCode(productCode).setPrice(amount);
+        //sale.subtotal-= sale.getLineItemByCode(productCode).getQuantity()*(pre-sale.getLineItemByCode(productCode).getPrice());
     }
     
     /**
