@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ProductCatalog {
     private static ProductCatalog cat;
     private ArrayList<ProductDescription> items;
-    
+   
     private ProductCatalog(){
         items = new ArrayList<>();
         try{

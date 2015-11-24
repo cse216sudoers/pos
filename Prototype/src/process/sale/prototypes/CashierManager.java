@@ -18,6 +18,7 @@ public class CashierManager {
     private ArrayList<Cashier> currentCashiers; //All users currently loggin in
     private static CashierManager instance; //singleton
     private int nextId = 0; //next unique id for use in creating new cashier
+    //private static String path=Path.getPath()+""
     
     private CashierManager(){
         currentCashiers = new ArrayList<>();
