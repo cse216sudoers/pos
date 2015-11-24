@@ -40,7 +40,7 @@ public class RentalController extends TransactionController{
         boolean done = false;
         //continuous retnal loop
         while(!done){
-            //try{
+            try{
                 System.out.print("Please enter 'void', 'coupon', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -78,10 +78,10 @@ public class RentalController extends TransactionController{
                 else{
                     System.out.println("Invalid input: " + input);
                 }
-//            }catch(Exception e){
-//                System.out.println(e.toString());
-//                System.out.println("Invalid input");
-//            }
+            }catch(Exception e){
+                System.out.println(e.toString());
+                System.out.println("Invalid input");
+            }
         }
     }
     
@@ -104,7 +104,7 @@ public class RentalController extends TransactionController{
         // Give total price (subtotal, tax, and total)
         rental.printTotals();
         leftToPay = rental.getTotal();
-        while(leftToPay > 0.01){
+        while(leftToPay >= 0.01){
             validType= false;
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
             paymentType = scanner.next();
@@ -185,7 +185,7 @@ public class RentalController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment >= leftToPay);
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
@@ -241,7 +241,7 @@ public class RentalController extends TransactionController{
                     return;
                 else{
                     payment = Float.parseFloat(input);
-                    if(payment >= leftToPay)
+                    if(payment > leftToPay)
                         System.out.println("Payment is more than total.");
                 }
             }catch(Exception e){

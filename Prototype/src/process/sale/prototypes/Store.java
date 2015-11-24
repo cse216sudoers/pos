@@ -43,7 +43,6 @@ public class Store {
      * @param args
      */
     public static void main(String[] args){
-        DB.User.insert("Test", 0, "Test", "Test");
         Scanner scan = new Scanner(System.in);
         Store mainStore = Store.getStore();
         CashierManager cashierManager = CashierManager.getInstance();

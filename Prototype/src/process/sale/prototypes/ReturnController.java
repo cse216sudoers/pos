@@ -40,7 +40,7 @@ public class ReturnController extends TransactionController{
         
         //continuous return loop
         while(true){
-            try{
+            //try{
                 System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -73,10 +73,10 @@ public class ReturnController extends TransactionController{
                 else{
                     System.out.println("Invalid input: " + input);
                 }
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
+//            }catch(Exception e){
+//                System.out.println(e.toString());
+//                System.out.println("Invalid input");
+//            }
         }
     }
     

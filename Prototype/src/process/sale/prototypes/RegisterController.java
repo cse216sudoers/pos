@@ -78,8 +78,7 @@ public class RegisterController{
                     processRental();
                 }else if(type.equalsIgnoreCase("suspended")){
                     processSuspended(input);
-                }
-                else{
+                }else{
                     System.out.println("Invalid Input");
                 }
             }else{

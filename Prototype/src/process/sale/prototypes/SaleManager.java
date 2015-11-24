@@ -85,8 +85,10 @@ public class SaleManager {
                     saleI.addPayment(pay);
                 }
                 read.nextLine();
-                //Sale sale = new Sale();
                 sales.put(saleI.getId(),saleI);
+                if(saleI.getId() >= nextId){
+                    nextId = saleI.getId() + 1;
+                }
             }
             while(read.hasNext()){
                 int id = Integer.parseInt(read.next());

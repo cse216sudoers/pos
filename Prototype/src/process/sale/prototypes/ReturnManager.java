@@ -86,14 +86,15 @@ public class ReturnManager {
         for(int i = 0; i < ret.getPayments().size()-1; i++){
             sale.getPayments().remove(0);//remove payment because it was returned
         }
-        
-        //The last payment may only have been partially returned
-        float amountReturned = ret.getPayments().get(ret.getPayments().size()-1).getAmount();
-        float amountPaid = sale.getPayments().get(0).getAmount();
-        if(amountReturned < amountPaid)
-            sale.getPayments().get(0).setAmount(amountPaid-amountReturned);
-        else
-            sale.getPayments().remove(0);
+        if(ret.getPayments().size() > 0){
+            //The last payment may only have been partially returned
+            float amountReturned = ret.getPayments().get(ret.getPayments().size()-1).getAmount();
+            float amountPaid = sale.getPayments().get(0).getAmount();
+            if(amountReturned < amountPaid)
+                sale.getPayments().get(0).setAmount(amountPaid-amountReturned);
+            else
+                sale.getPayments().remove(0);
+        }
     }
     
     /**

@@ -41,7 +41,7 @@ public class RentalReturnController extends TransactionController{
         boolean done = false;
         //continuous retnal loop
         while(!done){
-            //try{
+            try{
                 System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
                 scanner = new Scanner(System.in);
                 input = scanner.next();
@@ -75,10 +75,10 @@ public class RentalReturnController extends TransactionController{
                 else{
                     System.out.println("Invalid input: " + input);
                 }
-//            }catch(Exception e){
-//                System.out.println(e.toString());
-//                System.out.println("Invalid input");
-//            }
+            }catch(Exception e){
+                System.out.println(e.toString());
+                System.out.println("Invalid input");
+            }
         }
     }
     
@@ -101,7 +101,7 @@ public class RentalReturnController extends TransactionController{
         // Give total price (subtotal, tax, and total)
         rentalReturn.printTotals();
         leftToPay = rentalReturn.getTotal();
-        while(leftToPay > 0.01){            
+        while(leftToPay >= 0.01){            
             validType= false;
 
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
@@ -183,7 +183,7 @@ public class RentalReturnController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment >= leftToPay);
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
@@ -251,7 +251,7 @@ public class RentalReturnController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment >= leftToPay);
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");

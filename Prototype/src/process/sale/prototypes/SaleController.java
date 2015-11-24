@@ -116,7 +116,7 @@ public class SaleController extends TransactionController{
         // Give total price (subtotal, tax, and total)
         sale.printTotals();
         leftToPay = sale.getTotal();
-        while(leftToPay > 0.01){
+        while(leftToPay >= 0.01){
             validType= false;
             System.out.println("Please enter a form of payment (cash, credit, or debit): ");
             paymentType = scanner.next();
@@ -197,7 +197,7 @@ public class SaleController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment >= leftToPay);
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
@@ -261,7 +261,7 @@ public class SaleController extends TransactionController{
             }catch(Exception e){
                 System.out.println("Invalid payment.");
             }
-        }while(payment >= leftToPay);
+        }while(payment > leftToPay);
         
         try{
             System.out.println("Please enter card number or type cancel: ");
