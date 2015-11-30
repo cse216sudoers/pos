@@ -50,20 +50,7 @@ public class Store {
         Register register = new Register(registerManager.getNextId());
         registerManager.addRegister(register);
         RegisterController currentRegisterController = new RegisterController(register);
-        while(true){
-            System.out.println("Username:");
-            String username = scan.next();
-            System.out.println("Password:");
-            String password = scan.next();
-            if(currentRegisterController.verifyUsername(username)){
-                Cashier cashier = currentRegisterController.verifyPassword(username, password);
-                if(cashier != null){
-                    currentRegisterController.getRegister().setCashier(cashier);
-                    break;
-                }
-            }
-            System.out.println("Username and Password conbination incorrect.");
-        }
+        currentRegisterController.logOn();
         
         currentRegisterController.start();
     }

@@ -218,4 +218,24 @@ public class RegisterController{
         UserManagementController userManagementController = new UserManagementController();
         userManagementController.start();
     }
+    
+    //log on register
+    public void logOn(){
+        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println("Username:");
+            String username = scan.next();
+            System.out.println("Password:");
+            String password = scan.next();
+            if(verifyUsername(username)){
+                Cashier cashier = verifyPassword(username, password);
+                if(cashier != null){
+                    getRegister().setCashier(cashier);
+                    cashierManager.addCurrentCashier(cashier);
+                    break;
+                }
+            }
+            System.out.println("Username and Password conbination incorrect.");
+        }
+    }
 }
