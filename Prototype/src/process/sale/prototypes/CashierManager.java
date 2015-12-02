@@ -25,7 +25,7 @@ public class CashierManager {
         cashiers = new ArrayList<>();
         try{
             //read in all users
-            Scanner read = new Scanner(new File("Users.txt"));
+            Scanner read = new Scanner(new File(Resources.getPath("Users.txt")));
             read.useDelimiter("\\|");
             while(read.hasNext()){
                 String name = read.next();

@@ -15,7 +15,7 @@ public class ProductCatalog {
     private ProductCatalog(){
         items = new ArrayList<>();
         try{
-            Scanner read = new Scanner(new File("Product_description.txt"));
+            Scanner read = new Scanner(new File(Resources.getPath("Product_description.txt")));
             read.useDelimiter("\\|");
             while(read.hasNext()){
 //                while(read.hasNext()){

@@ -26,7 +26,7 @@ public class RentalManager {
         rentals = new HashMap(89);
         suspendedRentals = new HashMap(89);
         try{
-            Scanner read = new Scanner(new File("Rentals.txt"));
+            Scanner read = new Scanner(new File(Resources.getPath("Rentals.txt")));
             read.useDelimiter("\\|");
             String check="";
             while(read.hasNext()&&!check.contains("suspended")){

@@ -26,7 +26,7 @@ public class SaleManager {
         sales = new HashMap(89);
         suspendedSales = new HashMap(89);
         try{
-            Scanner read = new Scanner(new File("Sales.txt"));
+            Scanner read = new Scanner(new File(Resources.getPath("Sales.txt")));
             read.useDelimiter("\\|");
             String check="";
             while(read.hasNext()&&!check.contains("suspended")){
