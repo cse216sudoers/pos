@@ -1,11 +1,13 @@
 package DB;
 
+import process.sale.prototypes.Resources;
+
 /**
  *
  * @author Joshua Ryan
 */
 public class ProductDescription extends DBClass{
-    private static String path = "ProductDescription.txt";
+    private static String path = Resources.getPath("ProductDescription.txt");
     public static int getNextCode(){
         return nextId(path);
     }

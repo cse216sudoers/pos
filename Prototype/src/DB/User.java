@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import process.sale.prototypes.Resources;
 
 /**
  *
  * @author shua
  */
 public class User extends DBClass{
-    static String path = "Users.txt";
+    static String path = Resources.getPath("Users.txt");
     
     /**
      *
