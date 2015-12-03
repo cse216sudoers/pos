@@ -191,7 +191,7 @@ public class RentalManager {
         return ++nextId;
     }
     public synchronized void updateFile(){
-        File store = new File("Rentals.txt");
+        File store = new File(Resources.getPath("Rentals.txt"));
         try{
             FileOutputStream fos = new FileOutputStream(store);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));

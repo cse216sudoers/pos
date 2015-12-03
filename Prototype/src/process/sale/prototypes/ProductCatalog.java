@@ -78,7 +78,7 @@ public class ProductCatalog {
      *
      */
     public synchronized void updateFile(){
-        File catalog = new File("Product_description.txt");
+        File catalog = new File(Resources.getPath("Product_description.txt"));
         try{
             FileOutputStream fos = new FileOutputStream(catalog);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));

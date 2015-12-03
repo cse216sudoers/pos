@@ -327,25 +327,23 @@ public class SaleController extends TransactionController{
     @Override
     protected void processProduct(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-        System.out.print("How many would you like to buy: ");
-        int amount;
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        else{
-            try{
-                amount = scanner.nextInt();
-                if(product.getQuantity()>=1&&amount>product.getQuantity())
-                    System.out.println("Not enough of item "+code+" in stock");
-                else if(product.productLeft()) {
-                    for(int i=0; i<amount; i++)
-                        sale.addItem(product, true);
-                } else
-                    System.out.println("Item out of stock: " + code);
-            }catch(Exception e){
-            
-            }
+        System.out.print("How many would you like to buy: ");
+        int amount;
+        try{
+            amount = scanner.nextInt();
+            if(product.getQuantity()>=1&&amount>product.getQuantity())
+                System.out.println("Not enough of item "+code+" in stock");
+            else if(product.productLeft()) {
+                for(int i=0; i<amount; i++)
+                    sale.addItem(product, true);
+            } else
+                System.out.println("Item out of stock: " + code);
+        }catch(Exception e){
+
         }
     }
     

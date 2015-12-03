@@ -191,7 +191,7 @@ public class SaleManager {
         return ++nextId;
     }
     public synchronized void updateFile(){
-        File store = new File("Sales.txt");
+        File store = new File(Resources.getPath("Sales.txt"));
         try{
             FileOutputStream fos = new FileOutputStream(store);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
