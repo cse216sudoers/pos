@@ -51,11 +51,17 @@ public class UserManagementController {
         if(input.equalsIgnoreCase("q"))
             return;
         String name = input;
-
-        System.out.println("Enter userId or 'q' to quit: ");
+        do{
+        System.out.println("Enter username or 'q' to quit: ");
         input = scan.next();
         if(input.equalsIgnoreCase("q"))
             return;
+        if(cashierManager.getCashierByUsername(input)!=null)
+            System.out.println("Username already exists.");
+        else
+            break;
+        }while(true);
+        
         String username = input;
 
         do{
@@ -63,7 +69,11 @@ public class UserManagementController {
             input = scan.next();
             if(input.equalsIgnoreCase("q"))
                 return;
-        }while(!input.equalsIgnoreCase("cashier") && !input.equalsIgnoreCase("manager") && !input.equalsIgnoreCase("admin"));
+            if(!input.equalsIgnoreCase("cashier") && !input.equalsIgnoreCase("manager") && !input.equalsIgnoreCase("admin"))
+                System.out.println("Invalid access status.");
+            else
+                break;
+        }while(true);
 
         Cashier.Access access;
         if(input.equalsIgnoreCase("admin")){

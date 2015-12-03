@@ -41,6 +41,8 @@ public class CashierManager {
                 else
                     type = Cashier.Access.Cashier;
                 cashiers.add(new Cashier( name, username, password, uid, type));
+                if(uid >= nextId)
+                    nextId = uid+1;
                 read.nextLine();
             }
         }
@@ -72,9 +74,17 @@ public class CashierManager {
      * Add a new cashier
      * @param cashier
      */
-    public void addCashier(Cashier cashier){
+    public boolean addCashier(Cashier cashier){
         cashiers.add(cashier);
-        DB.User.insert(cashier.getName(), 2, cashier.getUsername(), cashier.getPassword());
+        int access;
+        if(cashier.getAccess() == Cashier.Access.Admin)
+            access = 0;
+        else if(cashier.getAccess() == Cashier.Access.Manager)
+            access = 1;
+        else
+            access = 2;
+        DB.User.insert(cashier.getName(), access, cashier.getUsername(), cashier.getPassword());
+        return true;
     }
     
     /**
