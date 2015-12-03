@@ -20,7 +20,7 @@ public class CouponCatalog {
     private CouponCatalog(){
         coupons = new ArrayList<>();
         try{
-            Scanner read = new Scanner(new File("Coupons.txt"));
+            Scanner read = new Scanner(new File(Resources.getPath("Coupons.txt")));
             read.useDelimiter("\\|");
             while(read.hasNext()){
                 int cid = Integer.parseInt(read.next());
