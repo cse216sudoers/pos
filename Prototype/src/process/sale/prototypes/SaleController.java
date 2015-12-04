@@ -72,7 +72,7 @@ public class SaleController extends TransactionController{
                 }
                 //add item to Sale
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
-                    processProduct(Integer.parseInt(input));
+                    //processProduct(Integer.parseInt(input));
                     display();
                 }
                 //end Sale
@@ -101,7 +101,7 @@ public class SaleController extends TransactionController{
      * Suspend the sale
      */
     @Override
-    protected void processSuspend(){
+    public void processSuspend(){
         SaleManager.getInstance().addSuspendedSale(sale);
     }
     
@@ -109,7 +109,7 @@ public class SaleController extends TransactionController{
      * Close out the sale and take payments
      */
     @Override
-    protected void close() {
+    public void close() {
         String paymentType;
         boolean validType;
         
@@ -148,7 +148,7 @@ public class SaleController extends TransactionController{
     /**
      * Create a cash payment
      */
-    protected void processCashPayment(){
+    public void processCashPayment(){
         float payment = 0;
         System.out.println("Please enter total cash payment: ");
         try{
@@ -174,7 +174,7 @@ public class SaleController extends TransactionController{
     /**
      * Create a Credit payment
      */
-    protected void processCreditPayment(){
+    public void processCreditPayment(){
         float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
@@ -237,7 +237,7 @@ public class SaleController extends TransactionController{
     /**
      * Make a debit payment
      */
-    protected void processDebitPayment(){
+    public void processDebitPayment(){
                 float payment = 0;
         boolean invalid = true;
         boolean accepted; //for payment
@@ -302,7 +302,7 @@ public class SaleController extends TransactionController{
      * Remove an item from the sale
      */
     @Override
-    protected void processVoid(){
+    public void processVoid(){
         System.out.print("Please enter a product code: ");
         int code;
         try{
@@ -325,30 +325,24 @@ public class SaleController extends TransactionController{
      * @param code product to add
      */
     @Override
-    protected void processProduct(int code){
+    public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        System.out.print("How many would you like to buy: ");
-        int amount;
-        try{
-            amount = scanner.nextInt();
-            if(product.getQuantity()>=1&&amount>product.getQuantity())
-                System.out.println("Not enough of item "+code+" in stock");
-            else if(product.productLeft()) {
-                for(int i=0; i<amount; i++)
-                    sale.addItem(product, true);
-            } else
-                System.out.println("Item out of stock: " + code);
-        }catch(Exception e){
-
-        }
+        
+        if(product.getQuantity()>=1&&amount>product.getQuantity())
+            System.out.println("Not enough of item "+code+" in stock");
+        else if(product.productLeft()) {
+            for(int i=0; i<amount; i++)
+                sale.addItem(product, true);
+        } else
+            System.out.println("Item out of stock: " + code);
     }
     
     //coupon to add to sale
-    private void processCoupon(){
+    public void processCoupon(){
         String next = "";
         int code;
         try{
@@ -402,14 +396,14 @@ public class SaleController extends TransactionController{
      * Display the sale as it would be displayed on a monitor
      */
     @Override
-    protected final void display(){
+    public final void display(){
         System.out.println(sale);
     }
     /**
      * Print the receipt
      */
     @Override
-    protected void printReceipt(){
+    public void printReceipt(){
         System.out.print("******************************************");
         sale.printTotals();
         ArrayList<Payment> payments = sale.getPayments();

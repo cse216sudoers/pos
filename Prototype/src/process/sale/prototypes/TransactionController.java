@@ -38,7 +38,7 @@ public abstract class TransactionController {
      *
      * @param code
      */
-    protected abstract void processProduct(int code);
+    protected abstract void processProduct(int code, int amount);
     /**
      *
      */

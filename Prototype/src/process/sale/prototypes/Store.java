@@ -45,11 +45,11 @@ public class Store {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         Store mainStore = Store.getStore();
-        CashierManager cashierManager = CashierManager.getInstance();
-        RegisterManager registerManager = RegisterManager.getInstance();
-        Register register = new Register(registerManager.getNextId());
-        registerManager.addRegister(register);
-        RegisterController currentRegisterController = new RegisterController(register);
+            CashierManager cashierManager = CashierManager.getInstance();
+            RegisterManager registerManager = RegisterManager.getInstance();
+            Register register = new Register(registerManager.getNextId());
+            registerManager.addRegister(register);
+            RegisterController currentRegisterController = new RegisterController(register);
         currentRegisterController.logOn();
         
         currentRegisterController.start();

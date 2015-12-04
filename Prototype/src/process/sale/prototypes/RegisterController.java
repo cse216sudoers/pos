@@ -37,6 +37,9 @@ public class RegisterController{
         currentTransaction = null;
     }
     
+    public TransactionController getCurrentTransaction(){
+        return currentTransaction;
+    }
     /**
      * Register ID to make controller for
      * @param registerId
@@ -73,7 +76,7 @@ public class RegisterController{
                 if(input.equalsIgnoreCase("sale") && type.equalsIgnoreCase("new")){
                     processSale();
                 }else if(input.equalsIgnoreCase("return") && type.equalsIgnoreCase("new")){
-                    processReturn();
+                    //processReturn();
                 }else if(input.equalsIgnoreCase("rental") && type.equalsIgnoreCase("new")){
                     processRental();
                 }else if(type.equalsIgnoreCase("suspended")){
@@ -146,75 +149,47 @@ public class RegisterController{
     }
     
     //start a suspended sale
-    private void processSuspendedSale(Sale sale){
+    public void processSuspendedSale(Sale sale){
         currentTransaction = new SaleController(sale);
         currentTransaction.start();
     }
     
     //start a suspended return
-    private void processSuspendedReturn(Return ret){
+    public void processSuspendedReturn(Return ret){
         currentTransaction = new ReturnController(ret);
         currentTransaction.start();
     }
     
     //start a suspended rental
-    private void processSuspendedRental(Rental rental){
+    public void processSuspendedRental(Rental rental){
         currentTransaction = new RentalController(rental);
         currentTransaction.start();
     }
     
     //start a sale
-    private void processSale(){
+    public void processSale(){
         currentTransaction = new SaleController();
-        currentTransaction.start();
+        //currentTransaction.start();
     }
     
     //start a return
-    private void processReturn(){
-        Scanner scan = new Scanner(System.in);
-        Transaction t = null;
-        String returnType = "";
-        
-        do{
-            System.out.println("Rental or sale return: ");
-            returnType = scan.next();
-        }while(!returnType.equalsIgnoreCase("Rental") && !returnType.equalsIgnoreCase("sale"));
-        
-        do{
-            try{
-                System.out.println("Please enter receipt ID or q to quit: ");
-                String next = scan.next();
-                if(next.equalsIgnoreCase("q")){
-                    return;
-                }else if(returnType.equalsIgnoreCase("sale")){
-                    t = saleManager.getSaleById(Integer.parseInt(next));
-                }else if(returnType.equalsIgnoreCase("rental")){
-                    t = RentalManager.getInstance().getRentalById(Integer.parseInt(next));
-                }else{
-                    System.out.println("Invalid input");
-                }
-            }catch(Exception e){
-                System.out.println("Invalid input");
-            }
-        }while(t == null);
-        
-        if(returnType.equals("sale")){
-            currentTransaction = new ReturnController((t.getId()));
-            currentTransaction.start();
-        }else{
-            currentTransaction = new RentalReturnController((Rental)t);
-            currentTransaction.start();
-        }
+    public void processSaleReturn(Sale sale){
+        currentTransaction = new ReturnController(sale.getId());
+        currentTransaction.start();
     }
-   
+    
+    public void processRentalReturn(Rental rental){
+        currentTransaction = new RentalReturnController(rental);
+        currentTransaction.start();
+    }
     //start a rental
-    private void processRental(){
+    public void processRental(){
         currentTransaction = new RentalController();
         currentTransaction.start();
     }
     
     //start user management (for Admin access level only)
-    private void processUserManagement(){
+    public void processUserManagement(){
         UserManagementController userManagementController = new UserManagementController();
         userManagementController.start();
     }

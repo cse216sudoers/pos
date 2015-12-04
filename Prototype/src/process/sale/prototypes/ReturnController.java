@@ -55,7 +55,7 @@ public class ReturnController extends TransactionController{
                 }
                 //add item to return
                 else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
-                    processProduct(Integer.parseInt(input));
+                    //processProduct(Integer.parseInt(input));
                     display();
                 }
                 //end return
@@ -170,7 +170,7 @@ public class ReturnController extends TransactionController{
      * @param code
      */
     @Override
-    protected void processProduct(int code){
+    protected void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
