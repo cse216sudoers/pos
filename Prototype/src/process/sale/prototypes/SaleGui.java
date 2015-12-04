@@ -10,14 +10,14 @@ import javax.swing.JOptionPane;
  *
  * @author Pikachu
  */
-public class SaleGui extends javax.swing.JFrame {
+public class SaleGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form SaleGui
+     * Creates new form SaleGUI
      */
     MainGui previous;
     private SaleController sale;
-    public SaleGui(MainGui prev) {
+    public SaleGUI(MainGui prev) {
         previous=prev;
         sale = (SaleController)previous.getRegisterController().getCurrentTransaction();
         initComponents();
@@ -77,7 +77,7 @@ public class SaleGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
         couponButton = new javax.swing.JButton();
-        overrideButton1 = new javax.swing.JButton();
+        overrideButton = new javax.swing.JButton();
         cashButton = new javax.swing.JRadioButton();
         creditButton = new javax.swing.JRadioButton();
         debitButton = new javax.swing.JRadioButton();
@@ -120,6 +120,7 @@ public class SaleGui extends javax.swing.JFrame {
             }
         });
 
+        console.setEditable(false);
         console.setColumns(20);
         console.setRows(5);
         jScrollPane1.setViewportView(console);
@@ -131,7 +132,12 @@ public class SaleGui extends javax.swing.JFrame {
             }
         });
 
-        overrideButton1.setText("Override");
+        overrideButton.setText("Override");
+        overrideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overrideButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(cashButton);
         cashButton.setSelected(true);
@@ -144,9 +150,19 @@ public class SaleGui extends javax.swing.JFrame {
 
         buttonGroup1.add(creditButton);
         creditButton.setText("Credit");
+        creditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(debitButton);
         debitButton.setText("Debit");
+        debitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                debitButtonActionPerformed(evt);
+            }
+        });
 
         paymentLabel1.setText("Total");
 
@@ -190,7 +206,7 @@ public class SaleGui extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(closeButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(overrideButton1))))
+                                .addComponent(overrideButton))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(debitButton)
@@ -261,7 +277,7 @@ public class SaleGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(closeButton)
-                    .addComponent(overrideButton1))
+                    .addComponent(overrideButton))
                 .addContainerGap())
         );
 
@@ -322,7 +338,8 @@ public class SaleGui extends javax.swing.JFrame {
         addButton.setEnabled(false);
         voidButton.setEnabled(false);
         couponButton.setEnabled(false);
-        
+        overrideButton.setEnabled(false);
+                
         cashButton.setEnabled(true);
         cashButton.setVisible(true);
         
@@ -337,14 +354,10 @@ public class SaleGui extends javax.swing.JFrame {
         paymentInput1.setEnabled(true);
         paymentInput1.setVisible(true);
         
-        paymentLabel2.setEnabled(true);
         paymentLabel2.setVisible(true);
-        paymentInput2.setEnabled(true);
         paymentInput2.setVisible(true);
         
-        paymentLabel3.setEnabled(true);
         paymentLabel3.setVisible(true);
-        paymentInput3.setEnabled(true);
         paymentInput3.setVisible(true);
         
         enterPaymentButton.setEnabled(true);
@@ -357,14 +370,10 @@ public class SaleGui extends javax.swing.JFrame {
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
         paymentLabel2.setEnabled(false);
-        paymentLabel2.setVisible(false);
         paymentInput2.setEnabled(false);
-        paymentInput2.setVisible(false);
         
         paymentLabel3.setEnabled(false);
-        paymentLabel3.setVisible(false);
         paymentInput3.setEnabled(false);
-        paymentInput3.setVisible(false);
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
@@ -388,9 +397,31 @@ public class SaleGui extends javax.swing.JFrame {
         if(sale.getLeftToPay() < .01){
             String receipt = sale.close();
             JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE);
+            previous.setVisible(true);
+            this.dispose();
         }
             
     }//GEN-LAST:event_enterPaymentButtonActionPerformed
+
+    private void overrideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideButtonActionPerformed
+        
+    }//GEN-LAST:event_overrideButtonActionPerformed
+
+    private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditButtonActionPerformed
+        paymentLabel2.setEnabled(true);
+        paymentInput2.setEnabled(true);
+        
+        paymentLabel3.setEnabled(true);
+        paymentInput3.setEnabled(true);
+    }//GEN-LAST:event_creditButtonActionPerformed
+
+    private void debitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debitButtonActionPerformed
+        paymentLabel2.setEnabled(true);
+        paymentInput2.setEnabled(true);
+        
+        paymentLabel3.setEnabled(true);
+        paymentInput3.setEnabled(true);
+    }//GEN-LAST:event_debitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,20 +440,20 @@ public class SaleGui extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new SaleGui().setVisible(true);
+//                new SaleGUI().setVisible(true);
 //            }
 //        });
 //    }
@@ -446,7 +477,7 @@ public class SaleGui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JButton overrideButton1;
+    private javax.swing.JButton overrideButton;
     private javax.swing.JTextField paymentInput1;
     private javax.swing.JTextField paymentInput2;
     private javax.swing.JTextField paymentInput3;

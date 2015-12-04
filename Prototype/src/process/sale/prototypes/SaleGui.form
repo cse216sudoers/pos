@@ -82,7 +82,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="overrideButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="overrideButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -177,7 +177,7 @@
                   <EmptySpace pref="11" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="overrideButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="overrideButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -239,6 +239,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="console">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
@@ -253,10 +254,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="couponButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="overrideButton1">
+        <Component class="javax.swing.JButton" name="overrideButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Override"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overrideButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="cashButton">
           <Properties>
@@ -277,6 +281,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Credit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creditButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="debitButton">
           <Properties>
@@ -285,6 +292,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Debit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="debitButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="paymentInput2">
         </Component>

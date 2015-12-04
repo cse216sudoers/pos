@@ -49,7 +49,6 @@ public class ReturnController extends TransactionController{
         leftToPay = ret.getTotal();
         int i = 0;
         while(leftToPay > 0){
-            System.out.println("in loop " + leftToPay);
             Payment.PaymentType paymentType = payments.get(i).type;
             if(paymentType == Payment.PaymentType.CASH)
                 processCashPayment(payments.get(i));
@@ -60,9 +59,6 @@ public class ReturnController extends TransactionController{
             i++;
         }
         ReturnManager.getInstance().addReturn(ret);
-        // Thank customer, and close
-        printReceipt();
-        System.out.println("\nThank for you shopping with us. Have a nice day!");
     }
     
     private void processCashPayment(Payment payment){
@@ -103,14 +99,16 @@ public class ReturnController extends TransactionController{
     /**
      *
      */
-    public void pProductDescriptionrocessVoid(int code){
+    public void processVoid(int code, int quantity){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
             return;
         }
-        ret.removeItem(product);
+        for(int i = 0; i < quantity; i++)
+            if(!ret.removeItem(product))
+                break;
     }
     
     /**
@@ -137,6 +135,12 @@ public class ReturnController extends TransactionController{
     @Override
     public String display(){
         return ret.toString();
+    }
+    
+    public String getTotals(){
+        String output = ret.printTotals();
+        leftToPay = ret.getTotal();
+        return output;
     }
     /**
      *

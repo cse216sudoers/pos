@@ -157,36 +157,9 @@ public class SaleController extends TransactionController{
     }
     
     //override an item's price
-    private void processOverride(){
-        String next = "";
-        int productCode;
-        float amount;
-        
-        try{
-            System.out.print("Please enter product code: ");
-            next = scanner.next();
-            productCode = Integer.parseInt(next);
-        }catch(Exception e){
-            System.out.println("Invalid code: " + next);
-            return;
-        }
-        
-        if (sale.getLineItemByCode(productCode) == null) {
-            System.out.println("Product not in current sale.");
-            return;
-        }
-
-        try{
-            System.out.print("Please enter override amount: ");
-            next = scanner.next();
-            DecimalFormat myFormatter = new DecimalFormat("0.00");
-            amount = Float.parseFloat(next);
-            amount = Float.parseFloat(myFormatter.format(amount));
-        }catch(Exception e){
-            System.out.println("Invalid amount: " + next);
-            return;
-        }
-        //float pre = sale.getLineItemByCode(productCode).getPrice();
+    private void processOverride(int productCode, float amount){
+        DecimalFormat myFormatter = new DecimalFormat("0.00");
+        amount = Float.parseFloat(myFormatter.format(amount));
         sale.getLineItemByCode(productCode).setPrice(amount);
         //sale.subtotal-= sale.getLineItemByCode(productCode).getQuantity()*(pre-sale.getLineItemByCode(productCode).getPrice());
     }

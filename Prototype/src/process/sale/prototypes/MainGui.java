@@ -21,6 +21,8 @@ public class MainGui extends javax.swing.JFrame {
     }
     public MainGui() {
         initComponents();
+        SaleManager.getInstance();
+        RentalManager.getInstance();
         CashierManager cashierManager = CashierManager.getInstance();
         RegisterManager registerManager = RegisterManager.getInstance();
         Register register = new Register(registerManager.getNextId());
@@ -148,7 +150,7 @@ public class MainGui extends javax.swing.JFrame {
         switch(choice){
             case 0: 
                 registerController.processSale();
-                new SaleGui(this).setVisible(true);
+                new SaleGUI(this).setVisible(true);
                 this.setVisible(false);
                 break;
             case 1:
@@ -182,24 +184,45 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Object[] options = {"New",
-                    "Suspended",
+        Object[] options = {"New Sale Return",
+                    "Suspended Sale Return", "New Rental Return", "Suspended Rental Renturn",
                     "Cancel"};
         int choice = JOptionPane.showOptionDialog(this,
             "New or Suspended?", "",
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.INFORMATION_MESSAGE,
-            null, options, options[2]);
-
+            null, options, options[4]);
+        String inputValue = "";
+        int id;
+        Sale sale = null;
+        Rental rental = null;
+        Return ret = null;
         switch(choice){
             case 0: 
-                new SaleGui(this).setVisible(true);
-                registerController.processSale();
+               do{
+                   try{
+                        inputValue = JOptionPane.showInputDialog("Sale ID: "); 
+                        id = Integer.parseInt(inputValue);
+                        sale = SaleManager.getInstance().getSaleById(id);
+                    }catch(Exception e){
+                    }
+                }while(sale == null);
+                new ReturnGUI(this).setVisible(true);
+                registerController.processSaleReturn(sale);
                 this.setVisible(false);
                 break;
             case 1:
-                String inputValue;
-                //= JOptionPane.showInputDialog("Please input a value"); 
+                do{
+                    try{
+                        inputValue = JOptionPane.showInputDialog("Return ID: "); 
+                        id = Integer.parseInt(inputValue);
+                        ret = ReturnManager.getInstance().getSuspendedReturnById(id);
+                    }catch(Exception e){
+                    }
+                }while(sale == null);
+                new ReturnGUI(this).setVisible(true);
+                registerController.processSuspendedReturn(ret);
+                this.setVisible(false);
                 break;
             default:
         }   

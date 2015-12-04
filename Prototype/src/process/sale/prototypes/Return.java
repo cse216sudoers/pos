@@ -80,7 +80,7 @@ public class Return extends Transaction{
      *
      * @param product
      */
-    public void removeItem(ProductDescription product){
+    public boolean removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
@@ -98,7 +98,9 @@ public class Return extends Transaction{
         }
         if(!found){//item not in Sale
             System.out.println("item not found");
+            return false;
         }
+        return true;
     }
     
     /**
