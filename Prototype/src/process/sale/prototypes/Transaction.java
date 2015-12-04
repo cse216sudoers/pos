@@ -76,10 +76,24 @@ public abstract class Transaction {
         return id;
     }
     
-    /**
-     *
-     */
-    public abstract void printTotals();
+    public String printTotals() {
+        String output = "";
+        // Calculate tax and total
+        float tax = TaxCalculator.getTax(subTotal);
+        total = subTotal + tax;
+        
+        // Set up ability to format print statements right so everything aligns
+        int digits = ((Float)total).toString().length();
+        String format = "%" + digits + ".2f";
+        
+        output += (toString() + "\n");
+        output += String.format("Subtotal: $" + format + "\n", subTotal);
+        output += String.format("Tax:      $" + format + "\n", tax);
+        output += String.format("Total:    $" + format + "\n", total);
+        
+        return output;
+    }
+    
     @Override
     public abstract String toString();
 }

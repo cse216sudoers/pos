@@ -147,8 +147,8 @@ public class MainGui extends javax.swing.JFrame {
 
         switch(choice){
             case 0: 
-                new SaleGui(this).setVisible(true);
                 registerController.processSale();
+                new SaleGui(this).setVisible(true);
                 this.setVisible(false);
                 break;
             case 1:

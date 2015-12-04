@@ -68,7 +68,7 @@ public class Sale extends Transaction{
      *
      * @param product
      */
-    public void removeItem(ProductDescription product, boolean affectQuantity){
+    public boolean removeItem(ProductDescription product, boolean affectQuantity){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
@@ -87,7 +87,9 @@ public class Sale extends Transaction{
         }
         if(!found){//item not in Sale
             System.out.println("item not found");
+            return false;
         }
+        return true;
     }
     
     /**
@@ -102,26 +104,7 @@ public class Sale extends Transaction{
         }
         return null;
     }
-    
-    /**
-     *
-     */
-    @Override
-    public void printTotals() {
-        // Calculate tax and total
-        float tax = TaxCalculator.getTax(subTotal);
-        total = subTotal + tax;
-        
-        // Set up ability to format print statements right so everything aligns
-        int digits = ((Float)total).toString().length();
-        String format = "%" + digits + ".2f";
-        
-        System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", subTotal);
-        System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", total);
-    }
-    
+
     @Override
     public String toString(){
         String output = "******Sale******* \nSale ID: " + id + "\n";

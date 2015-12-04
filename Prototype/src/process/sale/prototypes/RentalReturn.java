@@ -113,25 +113,6 @@ public class RentalReturn extends Transaction{
         }
     }
     
-    /**
-     *
-     */
-    @Override
-    public void printTotals() {
-        // Calculate tax and total
-        float tax = TaxCalculator.getTax(getTotal());
-        total = subTotal + tax;
-        
-        // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) total).toString().length();
-        String format = "%" + digits + ".2f";
-        
-        System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", subTotal);
-        System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", total);
-    }
-    
     @Override
     public String toString(){
         String output = "******Rental******* \nRental ID: " + id + "\n";

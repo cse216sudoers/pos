@@ -36,63 +36,14 @@ public class ReturnController extends TransactionController{
      *
      */
     @Override
-    public void start(){
-        
-        //continuous return loop
-        while(true){
-            //try{
-                System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
-                scanner = new Scanner(System.in);
-                input = scanner.next();
-                //void item
-                if(input.equalsIgnoreCase("void")){
-                    processVoid();
-                    display();
-                }
-                //override
-                else if(input.equalsIgnoreCase("override")){
-                    //manager override
-                }
-                //add item to return
-                else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
-                    //processProduct(Integer.parseInt(input));
-                    display();
-                }
-                //end return
-                else if (input.equalsIgnoreCase("close")){
-                    // Close return and get payment
-                    close();
-                    break;
-                }
-                //suspend Return
-                else if (input.equalsIgnoreCase("suspend")){
-                    // Close Sale and get payment
-                    processSuspend();
-                    break;
-                }
-                else{
-                    System.out.println("Invalid input: " + input);
-                }
-//            }catch(Exception e){
-//                System.out.println(e.toString());
-//                System.out.println("Invalid input");
-//            }
-        }
-    }
-    
-    /**
-     *
-     */
-    @Override
-    protected void processSuspend(){
+    public void processSuspend(){
         ReturnManager.getInstance().addSuspendedReturn(ret);
     }
     
     /**
      *
      */
-    @Override
-    protected void close() {
+    public void close() {
         ArrayList<Payment> payments = SaleManager.getInstance().getSaleById(ret.getSaleId()).getPayments();
         ret.printTotals();
         leftToPay = ret.getTotal();
@@ -152,10 +103,7 @@ public class ReturnController extends TransactionController{
     /**
      *
      */
-    @Override
-    protected void processVoid(){
-        System.out.print("Please enter a product code: ");
-        int code = scanner.nextInt();
+    public void pProductDescriptionrocessVoid(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
@@ -170,7 +118,7 @@ public class ReturnController extends TransactionController{
      * @param code
      */
     @Override
-    protected void processProduct(int code, int amount){
+    public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
@@ -187,20 +135,19 @@ public class ReturnController extends TransactionController{
      *
      */
     @Override
-    protected void display(){
-        System.out.println(ret);
+    public String display(){
+        return ret.toString();
     }
     /**
      *
      */
     @Override
-    protected void printReceipt(){
-        System.out.print("******************************************");
-        ret.printTotals();
+    public String printReceipt(){
+        String output = ret.printTotals();
         ArrayList<Payment> payments = ret.getPayments();
         for(int i = 0; i < payments.size(); i++){
-            System.out.print(payments.get(i));
+            output += payments.get(i).toString();
         }
-        System.out.print("\n******************************************");
+        return output;
     }
 }

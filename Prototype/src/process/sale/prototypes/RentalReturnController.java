@@ -37,64 +37,14 @@ public class RentalReturnController extends TransactionController{
      *
      */
     @Override
-    public void start(){
-        boolean done = false;
-        //continuous retnal loop
-        while(!done){
-            try{
-                System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
-                scanner = new Scanner(System.in);
-                input = scanner.next();
-                //void item
-                if(input.equalsIgnoreCase("void")){
-                    processVoid();
-                    display();
-                }
-
-                //override
-                else if(input.equalsIgnoreCase("override")){
-                    //manager override
-                }
-                //add item to rentalReturn
-                else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
-                    //processProduct(Integer.parseInt(input));
-                    display();
-                }
-                //end rentalReturn
-                else if (input.equalsIgnoreCase("close")){
-                    // Close rentalReturn and get payment
-                    close();
-                    done = true;
-                }
-                //suspend Sale
-                else if (input.equalsIgnoreCase("suspend")){
-                    // Close Sale and get payment
-                    processSuspend();
-                    done = true;
-                }
-                else{
-                    System.out.println("Invalid input: " + input);
-                }
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
-        }
+    public void processSuspend(){
+       //RentalManager.getInstance().addSuspendedRental(rentalReturn);
     }
     
     /**
      *
      */
-    @Override
-    protected void processSuspend(){
-       // RentalManager.getInstance().addSuspendedRental(rentalReturn);
-    }
-    
-    /**
-     *
-     */
-    @Override
-    protected void close() {
+    public void close() {
         String paymentType;
         boolean validType;
         
@@ -289,10 +239,7 @@ public class RentalReturnController extends TransactionController{
     /**
      *
      */
-    @Override
-    protected void processVoid(){
-        System.out.print("Please enter a product code: ");
-        int code = scanner.nextInt();
+    public void processVoid(int code){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
@@ -307,7 +254,7 @@ public class RentalReturnController extends TransactionController{
      * @param code
      */
     @Override
-    protected void processProduct(int code, int amount){
+    public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
   
         if(product == null){ //product does not exist
@@ -360,21 +307,20 @@ public class RentalReturnController extends TransactionController{
      *
      */
     @Override
-    protected final void display(){
-        System.out.println(rentalReturn);
+    public final String display(){
+        return rentalReturn.toString();
     }
     
     /**
      *
      */
     @Override
-    protected void printReceipt(){
-        System.out.print("******************************************");
-        rentalReturn.printTotals();
+    public String printReceipt(){
+        String output = rentalReturn.printTotals();
         ArrayList<Payment> payments = rentalReturn.getPayments();
         for(int i = 0; i < payments.size(); i++){
-            System.out.print(payments.get(i));
+            output += payments.get(i).toString();
         }
-        System.out.print("\n******************************************");
+        return output;
     }
 }

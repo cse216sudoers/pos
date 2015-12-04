@@ -33,71 +33,17 @@ public class RentalController extends TransactionController{
     }
     
     /**
-     * Start rental process
-     */
-    @Override
-    public void start(){
-        boolean done = false;
-        //continuous retnal loop
-        while(!done){
-            try{
-                System.out.print("Please enter 'void', 'coupon', <code>, 'override', 'suspend', or 'close': ");
-                scanner = new Scanner(System.in);
-                input = scanner.next();
-                //void item
-                if(input.equalsIgnoreCase("void")){
-                    processVoid();
-                    display();
-                }
-                //coupon
-                else if(input.equalsIgnoreCase("coupon")){
-                    processCoupon();
-                    display();
-                }
-                //override
-                else if(input.equalsIgnoreCase("override")){
-                    //manager override
-                }
-                //add item to rental
-                else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
-                    //processProduct(Integer.parseInt(input));
-                    display();
-                }
-                //end rental
-                else if (input.equalsIgnoreCase("close")){
-                    // Close rental and get payment
-                    close();
-                    done = true;
-                }
-                //suspend Sale
-                else if (input.equalsIgnoreCase("suspend")){
-                    // Close Sale and get payment
-                    processSuspend();
-                    done = true;
-                }
-                else{
-                    System.out.println("Invalid input: " + input);
-                }
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
-        }
-    }
-    
-    /**
      *Suspend the rental
      */
     @Override
-    protected void processSuspend(){
+    public void processSuspend(){
         RentalManager.getInstance().addSuspendedRental(rental);
     }
     
     /**
      * Close the sale
      */
-    @Override
-    protected void close() {
+    public void close() {
         String paymentType;
         boolean validType;
         
@@ -287,14 +233,8 @@ public class RentalController extends TransactionController{
     /**
      *Remove item from rental
      */
-    @Override
-    protected void processVoid(){
-        System.out.print("Please enter a product code: ");
-        int code = scanner.nextInt();
+    public void processVoid(int code, int days){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-        
-        System.out.print("Please enter number of days rented: "); //For if there are multiple of the item 
-        int days = scanner.nextInt();
         
         if(product == null){ //product does not exist
             System.out.println("Invalid product code: " + code);
@@ -308,7 +248,7 @@ public class RentalController extends TransactionController{
      * @param code product code
      */
     @Override
-    protected void processProduct(int code, int amount){
+    public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
   
         if(product == null){ //product does not exist
@@ -366,21 +306,20 @@ public class RentalController extends TransactionController{
      * display rental
      */
     @Override
-    protected final void display(){
-        System.out.println(rental);
+    public final String display(){
+        return rental.toString();
     }
     
     /**
      * Print receipt
      */
     @Override
-    protected void printReceipt(){
-        System.out.print("******************************************");
-        rental.printTotals();
+    public String printReceipt(){
+        String output = rental.printTotals();
         ArrayList<Payment> payments = rental.getPayments();
         for(int i = 0; i < payments.size(); i++){
-            System.out.print(payments.get(i));
+            output += payments.get(i).toString();
         }
-        System.out.print("\n******************************************");
+        return output;
     }
 }

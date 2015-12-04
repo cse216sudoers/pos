@@ -114,25 +114,6 @@ public class Return extends Transaction{
         return null;
     }
     
-    /**
-     *
-     */
-    @Override
-    public void printTotals() {
-        // Calculate tax and total
-        float tax = TaxCalculator.getTax(subTotal);
-        total = subTotal + tax;
-        
-        // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) total).toString().length();
-        String format = "%" + digits + ".2f";
-        
-        System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", subTotal);
-        System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", total);
-    }
-    
     @Override
     public String toString(){
         String output = "******Return******* \nSale ID: " + saleId + "\nReturn ID: " + id + "\n";

@@ -151,19 +151,16 @@ public class RegisterController{
     //start a suspended sale
     public void processSuspendedSale(Sale sale){
         currentTransaction = new SaleController(sale);
-        currentTransaction.start();
     }
     
     //start a suspended return
     public void processSuspendedReturn(Return ret){
         currentTransaction = new ReturnController(ret);
-        currentTransaction.start();
     }
     
     //start a suspended rental
     public void processSuspendedRental(Rental rental){
         currentTransaction = new RentalController(rental);
-        currentTransaction.start();
     }
     
     //start a sale
@@ -175,17 +172,14 @@ public class RegisterController{
     //start a return
     public void processSaleReturn(Sale sale){
         currentTransaction = new ReturnController(sale.getId());
-        currentTransaction.start();
     }
     
     public void processRentalReturn(Rental rental){
         currentTransaction = new RentalReturnController(rental);
-        currentTransaction.start();
     }
     //start a rental
     public void processRental(){
         currentTransaction = new RentalController();
-        currentTransaction.start();
     }
     
     //start user management (for Admin access level only)
