@@ -39,105 +39,79 @@ public class MainGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        saleButton = new javax.swing.JButton();
+        rentalButton = new javax.swing.JButton();
+        returnButton = new javax.swing.JButton();
+        userManagementButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("jTextField1");
-
-        jButton1.setText("Sale");
-        jButton1.setActionCommand("main1");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        saleButton.setText("Sale");
+        saleButton.setActionCommand("main1");
+        saleButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                saleButtonMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saleButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Rental");
-        jButton2.setActionCommand("main2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        rentalButton.setText("Rental");
+        rentalButton.setActionCommand("main2");
+        rentalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                rentalButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Return");
-        jButton3.setActionCommand("main3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        returnButton.setText("Return");
+        returnButton.setActionCommand("main3");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                returnButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("User Management");
-        jButton4.setActionCommand("main4");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addGap(8, 8, 8))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField1))
-                .addContainerGap())
-        );
-
-        jButton1.getAccessibleContext().setAccessibleName("main1");
-        jButton2.getAccessibleContext().setAccessibleName("main2");
-        jButton3.getAccessibleContext().setAccessibleName("main3");
-        jButton4.getAccessibleContext().setAccessibleName("main4");
+        userManagementButton.setText("User Management");
+        userManagementButton.setActionCommand("main4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(saleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rentalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(userManagementButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(saleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rentalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        saleButton.getAccessibleContext().setAccessibleName("main1");
+        rentalButton.getAccessibleContext().setAccessibleName("main2");
+        returnButton.getAccessibleContext().setAccessibleName("main3");
+        userManagementButton.getAccessibleContext().setAccessibleName("main4");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleButtonActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saleButtonActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void saleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saleButtonMouseClicked
         Object[] options = {"New",
                     "Suspended",
                     "Cancel"};
@@ -154,13 +128,26 @@ public class MainGui extends javax.swing.JFrame {
                 this.setVisible(false);
                 break;
             case 1:
-
+                Sale sale = null;
+                String inputValue;
+                int id;
+                do{
+                    try{
+                        inputValue = JOptionPane.showInputDialog("Return ID: "); 
+                        id = Integer.parseInt(inputValue);
+                        sale = SaleManager.getInstance().getSuspendedSaleById(id);
+                    }catch(Exception e){
+                    }
+                }while(sale == null);
+                registerController.processSuspendedSale(sale);
+                new ReturnGUI(this).setVisible(true);
+                this.setVisible(false);
                 break;
             default:
         }   
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_saleButtonMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void rentalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalButtonActionPerformed
         Object[] options = {"New",
                     "Suspended",
                     "Cancel"};
@@ -172,43 +159,56 @@ public class MainGui extends javax.swing.JFrame {
 
         switch(choice){
             case 0: 
-                //new RentalGui(this).setVisible(true);
                 registerController.processRental();
                 this.setVisible(false);
+                new RentalGUI(this).setVisible(true);
                 break;
             case 1:
-
+                Rental rental = null;
+                String inputValue;
+                int id;
+                do{
+                    try{
+                        inputValue = JOptionPane.showInputDialog("Return ID: "); 
+                        id = Integer.parseInt(inputValue);
+                        rental = RentalManager.getInstance().getSuspendedRentalById(id);
+                    }catch(Exception e){
+                    }
+                }while(rental == null);
+                registerController.processSuspendedRental(rental);
+                new ReturnGUI(this).setVisible(true);
+                this.setVisible(false);
                 break;
             default:
         }   
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_rentalButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         Object[] options = {"New Sale Return",
-                    "Suspended Sale Return", "New Rental Return", "Suspended Rental Renturn",
+                    "Suspended Sale Return", "New Rental Return",
                     "Cancel"};
         int choice = JOptionPane.showOptionDialog(this,
             "New or Suspended?", "",
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.INFORMATION_MESSAGE,
-            null, options, options[4]);
-        String inputValue = "";
+            null, options, options[3]);
+        String inputValue;
         int id;
         Sale sale = null;
         Rental rental = null;
         Return ret = null;
         switch(choice){
-            case 0: 
-               do{
-                   try{
+            case 0:
+                do{
+                    try{
                         inputValue = JOptionPane.showInputDialog("Sale ID: "); 
                         id = Integer.parseInt(inputValue);
                         sale = SaleManager.getInstance().getSaleById(id);
                     }catch(Exception e){
                     }
                 }while(sale == null);
-                new ReturnGUI(this).setVisible(true);
                 registerController.processSaleReturn(sale);
+                new ReturnGUI(this).setVisible(true);
                 this.setVisible(false);
                 break;
             case 1:
@@ -219,14 +219,26 @@ public class MainGui extends javax.swing.JFrame {
                         ret = ReturnManager.getInstance().getSuspendedReturnById(id);
                     }catch(Exception e){
                     }
-                }while(sale == null);
-                new ReturnGUI(this).setVisible(true);
+                }while(ret == null);
                 registerController.processSuspendedReturn(ret);
+                new ReturnGUI(this).setVisible(true);
                 this.setVisible(false);
                 break;
-            default:
+            case 2:
+                do{
+                   try{
+                        inputValue = JOptionPane.showInputDialog("Rental ID: "); 
+                        id = Integer.parseInt(inputValue);
+                        rental = RentalManager.getInstance().getRentalById(id);
+                    }catch(Exception e){
+                    }
+                }while(rental == null);
+                registerController.processRentalReturn(rental);
+                new RentalReturnGUI(this).setVisible(true);
+                this.setVisible(false);
+                break;
         }   
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_returnButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,11 +275,9 @@ public class MainGui extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton rentalButton;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JButton saleButton;
+    private javax.swing.JButton userManagementButton;
     // End of variables declaration//GEN-END:variables
 }

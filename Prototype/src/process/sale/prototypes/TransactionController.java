@@ -24,11 +24,6 @@ public abstract class TransactionController {
     public abstract void processSuspend();
     /**
      *
-     * @param code
-     */
-    public abstract void processProduct(int code, int amount);
-    /**
-     *
      */
     public abstract String display();
     /**

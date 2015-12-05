@@ -97,7 +97,7 @@ public class Rental extends Transaction{
      * Remove item from rental
      * @param product item to remove
      */
-    public void removeItem(ProductDescription product, int days, boolean affectQuantity){
+    public boolean removeItem(ProductDescription product, int days, boolean affectQuantity){
         LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), days);
         if(lineItem != null){
             if(lineItem.getQuantity() == 1){
@@ -109,7 +109,9 @@ public class Rental extends Transaction{
             total-=product.getRentalPrice();
         }else{//item not in Sale
             System.out.println("item not found");
+            return false;
         }
+        return true;
     }
     public LineItem getLineItemByCodeAndDaysRented(int code, int daysRented){
         for(int i = 0; i < lines.size(); i++){

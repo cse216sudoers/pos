@@ -134,7 +134,6 @@ public class SaleController extends TransactionController{
      * Add a product to the sale
      * @param code product to add
      */
-    @Override
     public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         if(product == null){ //product does not exist

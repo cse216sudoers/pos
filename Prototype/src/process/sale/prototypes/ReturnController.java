@@ -43,7 +43,7 @@ public class ReturnController extends TransactionController{
     /**
      *
      */
-    public void close() {
+    public String close() {
         ArrayList<Payment> payments = SaleManager.getInstance().getSaleById(ret.getSaleId()).getPayments();
         ret.printTotals();
         leftToPay = ret.getTotal();
@@ -59,6 +59,7 @@ public class ReturnController extends TransactionController{
             i++;
         }
         ReturnManager.getInstance().addReturn(ret);
+        return printReceipt();
     }
     
     private void processCashPayment(Payment payment){
@@ -115,7 +116,6 @@ public class ReturnController extends TransactionController{
      *
      * @param code
      */
-    @Override
     public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         

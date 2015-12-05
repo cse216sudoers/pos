@@ -4,6 +4,9 @@
  */
 package process.sale.prototypes;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,11 +153,11 @@ public class ReturnGUI extends javax.swing.JFrame {
         addButton.setEnabled(false);
         voidButton.setEnabled(false);
 
-        // Give total price (subtotal, tax, and total)
-        console.setText(ret.getTotals());
-        
-        ret.close();
-        console.setText(ret.printReceipt());
+        String receipt = ret.close();
+        Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(image));
+        previous.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void voidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voidButtonActionPerformed

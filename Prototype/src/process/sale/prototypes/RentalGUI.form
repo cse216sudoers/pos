@@ -58,27 +58,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="449" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" pref="30" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="voidButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dayslabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="productCodeInput" max="32767" attributes="0"/>
-                                      <Component id="addButton" pref="105" max="32767" attributes="0"/>
-                                      <Component id="quantityInput" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="productCodeInput" max="32767" attributes="0"/>
+                                          <Component id="addButton" pref="105" max="32767" attributes="0"/>
+                                          <Component id="quantityInput" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="daysInput" alignment="1" pref="105" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="couponLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="couponCodeInput" min="-2" pref="101" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="couponButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -96,23 +94,21 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="paymentLabel1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="paymentInput1" min="-2" pref="62" max="-2" attributes="0"/>
+                                      <Component id="paymentLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="paymentInput1" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="paymentLabel2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="paymentInput2" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="paymentLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="paymentInput2" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="paymentLabel3" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="paymentInput3" min="-2" pref="53" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                          <Component id="enterPaymentButton" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="paymentLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="paymentInput3" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="enterPaymentButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -127,7 +123,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -141,25 +137,23 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="voidButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dayslabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="daysInput" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="couponLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="couponCodeInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="voidButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="couponButton" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane1" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="cashButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="creditButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="paymentLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="paymentLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -170,9 +164,9 @@
                               <Component id="paymentInput1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="paymentInput3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="paymentInput2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="enterPaymentButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="enterPaymentButton" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Component id="debitButton" min="-2" max="-2" attributes="0"/>
@@ -217,13 +211,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voidButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="couponLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Coupon Code"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="couponCodeInput">
-        </Component>
         <Component class="javax.swing.JButton" name="closeButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Close"/>
@@ -248,14 +235,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="couponButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Add Coupon"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="couponButtonActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="overrideButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Override"/>
@@ -298,11 +277,31 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="debitButtonActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JLabel" name="dayslabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Days"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="daysInput">
+        </Component>
         <Component class="javax.swing.JTextField" name="paymentInput2">
         </Component>
-        <Component class="javax.swing.JTextField" name="paymentInput1">
+        <Component class="javax.swing.JLabel" name="paymentLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pin/SecurityCode"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="paymentInput3">
+        </Component>
+        <Component class="javax.swing.JButton" name="enterPaymentButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Enter"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enterPaymentButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="paymentInput1">
         </Component>
         <Component class="javax.swing.JLabel" name="paymentLabel1">
           <Properties>
@@ -313,19 +312,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="CardNum"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="paymentLabel3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pin/SecurityCode"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="enterPaymentButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Enter"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enterPaymentButtonActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
