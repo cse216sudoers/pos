@@ -140,7 +140,7 @@ public class MainGui extends javax.swing.JFrame {
                     }
                 }while(sale == null);
                 registerController.processSuspendedSale(sale);
-                new ReturnGUI(this).setVisible(true);
+                new SaleGUI(this).setVisible(true);
                 this.setVisible(false);
                 break;
             default:
@@ -176,7 +176,7 @@ public class MainGui extends javax.swing.JFrame {
                     }
                 }while(rental == null);
                 registerController.processSuspendedRental(rental);
-                new ReturnGUI(this).setVisible(true);
+                new RentalGUI(this).setVisible(true);
                 this.setVisible(false);
                 break;
             default:
