@@ -18,6 +18,7 @@ public class RentalGUI extends javax.swing.JFrame {
     MainGui previous;
     private RentalController rental;
     public RentalGUI(MainGui prev) {
+        MainGui.centreWindow(this);
         previous=prev;
         rental = (RentalController)previous.getRegisterController().getCurrentTransaction();
         initComponents();

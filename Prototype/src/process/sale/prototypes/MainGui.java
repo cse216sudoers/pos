@@ -1,5 +1,8 @@
 package process.sale.prototypes;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import javax.swing.JOptionPane;
 
 /*
@@ -19,8 +22,15 @@ public class MainGui extends javax.swing.JFrame {
     public RegisterController getRegisterController(){
         return registerController;
     }
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
     public MainGui() {
         initComponents();
+        centreWindow(this);
         SaleManager.getInstance();
         RentalManager.getInstance();
         CashierManager cashierManager = CashierManager.getInstance();

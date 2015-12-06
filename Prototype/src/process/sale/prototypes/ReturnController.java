@@ -6,6 +6,7 @@ package process.sale.prototypes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -104,6 +105,7 @@ public class ReturnController extends TransactionController{
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
             return;
         }
