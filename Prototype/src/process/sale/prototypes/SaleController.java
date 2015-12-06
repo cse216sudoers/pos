@@ -7,6 +7,7 @@ package process.sale.prototypes;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Keeps track of a single sale and does all basic operations for that sale domain object
@@ -137,16 +138,19 @@ public class SaleController extends TransactionController{
     public void processProduct(int code, int amount){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
             return;
         }
         
-        if(product.getQuantity()>=1&&amount>product.getQuantity())
+        if(product.getQuantity()>=1&&amount>product.getQuantity()){
+            JOptionPane.showMessageDialog (null, "Only "+ product.getQuantity() +" left in stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Not enough of item "+code+" in stock");
-        else if(product.productLeft()) {
+        }else if(product.productLeft()) {
             for(int i=0; i<amount; i++)
                 sale.addItem(product, true);
         } else
+            JOptionPane.showMessageDialog (null, "Item out of stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Item out of stock: " + code);
     }
     

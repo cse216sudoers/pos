@@ -13,14 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author Pikachu
  */
-public class SaleGUI extends javax.swing.JFrame {
+public class SaleGui extends javax.swing.JFrame {
 
     /**
      * Creates new form SaleGUI
      */
     MainGui previous;
     private SaleController sale;
-    public SaleGUI(MainGui prev) {
+    public SaleGui(MainGui prev) {
         previous=prev;
         sale = (SaleController)previous.getRegisterController().getCurrentTransaction();
         initComponents();

@@ -7,6 +7,7 @@ package process.sale.prototypes;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Keeps track of all of the operations for a Rental domain object
@@ -146,10 +147,13 @@ public class RentalController extends TransactionController{
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
   
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
         }else if(!product.getIsRentable()){
+            JOptionPane.showMessageDialog (null, "Item can not be rented: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Item cannot be rented: " + code);
         }else if(!product.productLeft()){
+            JOptionPane.showMessageDialog (null, "Item out of stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Item out of stock: " + code);
         }else{
             for(int i = 0; i < quantity; i++)

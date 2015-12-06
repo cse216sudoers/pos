@@ -124,7 +124,7 @@ public class MainGui extends javax.swing.JFrame {
         switch(choice){
             case 0: 
                 registerController.processSale();
-                new SaleGUI(this).setVisible(true);
+                new SaleGui(this).setVisible(true);
                 this.setVisible(false);
                 break;
             case 1:
@@ -140,7 +140,7 @@ public class MainGui extends javax.swing.JFrame {
                     }
                 }while(sale == null);
                 registerController.processSuspendedSale(sale);
-                new SaleGUI(this).setVisible(true);
+                new SaleGui(this).setVisible(true);
                 this.setVisible(false);
                 break;
             default:
