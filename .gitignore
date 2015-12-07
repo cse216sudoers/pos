@@ -1,8 +1,6 @@
-/Prototype/build/
 .*\#
 *~
 *\#
-/Prototype/dist/
 .DS_Store
 private.*
 Prototype/nbproject/private
