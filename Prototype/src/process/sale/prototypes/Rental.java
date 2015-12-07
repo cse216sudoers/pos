@@ -5,6 +5,8 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Rental extends Transaction{
     ArrayList<RentalReturn> returns;
+    GregorianCalendar startDate;
     
     /**
      *Initialize rental
@@ -47,7 +50,9 @@ public class Rental extends Transaction{
             }
         }   
     }
-    
+    public GregorianCalendar getRentalDate(){
+        return startDate;
+    }
     /**
      * Add item to rental
      * @param product product rented

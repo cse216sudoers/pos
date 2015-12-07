@@ -4,12 +4,15 @@
  */
 package process.sale.prototypes;
 
+import java.util.GregorianCalendar;
+
 /**
  * Line Item child for Rentals because we needed additional fields
  * @author Pikachu
  */
 public class RentalLineItem extends LineItem{
     private int daysRented;
+
     
     /**
      * 
