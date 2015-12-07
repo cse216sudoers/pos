@@ -237,7 +237,11 @@ public class MainGui extends javax.swing.JFrame {
                         inputValue = JOptionPane.showInputDialog("Sale ID: "); 
                         id = Integer.parseInt(inputValue);
                         sale = SaleManager.getInstance().getSaleById(id);
+                        if (sale==null){
+                            JOptionPane.showMessageDialog (null, "Sale ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        }
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Invalid Sale ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(sale == null);
                 registerController.processSaleReturn(sale);
@@ -250,7 +254,11 @@ public class MainGui extends javax.swing.JFrame {
                         inputValue = JOptionPane.showInputDialog("Return ID: "); 
                         id = Integer.parseInt(inputValue);
                         ret = ReturnManager.getInstance().getSuspendedReturnById(id);
+                        if (ret==null){
+                            JOptionPane.showMessageDialog (null, "Return ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        }
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Invalid Return ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(ret == null);
                 registerController.processSuspendedReturn(ret);
@@ -263,7 +271,9 @@ public class MainGui extends javax.swing.JFrame {
                         inputValue = JOptionPane.showInputDialog("Rental ID: "); 
                         id = Integer.parseInt(inputValue);
                         rental = RentalManager.getInstance().getRentalById(id);
+                        JOptionPane.showMessageDialog (null, "Rental ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Invalid Rental ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(rental == null);
                 registerController.processRentalReturn(rental);
