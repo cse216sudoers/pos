@@ -181,7 +181,15 @@ public class UsermanagementGUI extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         String name = nameInput.getText();
         String username = usernameInputAdd.getText();
-        int access = accessInput.getSelectedIndex();
+        int accessInt = accessInput.getSelectedIndex();
+        Cashier.Access access;
+        if(accessInt == 0)
+            access = Cashier.Access.Cashier;
+        else if(accessInt == 1)
+            access = Cashier.Access.Manager;
+        else
+            access = Cashier.Access.Admin;
+        cashierManager.addCashier(new Cashier(name, username, "1234", access));
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**
