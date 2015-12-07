@@ -36,6 +36,7 @@ public class MainGui extends javax.swing.JFrame {
         CashierManager cashierManager = CashierManager.getInstance();
         RegisterManager registerManager = RegisterManager.getInstance();
         Register register = new Register(registerManager.getNextId());
+        register.setCashier(cashier);
         registerManager.addRegister(register);
         registerController = new RegisterController(register);
     }

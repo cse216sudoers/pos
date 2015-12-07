@@ -179,7 +179,9 @@ public class UsermanagementGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_accessInputActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
+        String name = nameInput.getText();
+        String username = usernameInputAdd.getText();
+        int access = accessInput.getSelectedIndex();
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**
