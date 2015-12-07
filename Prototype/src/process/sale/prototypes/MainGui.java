@@ -28,7 +28,7 @@ public class MainGui extends javax.swing.JFrame {
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
         frame.setLocation(x, y);
     }
-    public MainGui() {
+    public MainGui(Cashier cashier) {
         initComponents();
         centreWindow(this);
         SaleManager.getInstance();
