@@ -46,7 +46,7 @@ public class RentalReturn extends Transaction{
      */
     public LineItem getLineItemByCodeAndDaysRented(int code, int daysRented){
         for(int i = 0; i< lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == code && ((RentalLineItem)lines.get(i)).getDaysRented() = daysRented)
+            if(lines.get(i).getProduct().getCode() == code && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented)
                 return lines.get(i);
         }
         return null;
