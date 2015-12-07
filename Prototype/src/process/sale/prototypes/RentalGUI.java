@@ -126,6 +126,11 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentLabel2.setText("CardNum");
 
         closeButton.setText("Pay");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
@@ -300,7 +305,7 @@ public class RentalGUI extends javax.swing.JFrame {
         try{
             payment = rental.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
         }catch(Exception e){
-
+            
         }
         if(payment != null){
             DecimalFormat myFormatter = new DecimalFormat("0.00");
@@ -325,6 +330,26 @@ public class RentalGUI extends javax.swing.JFrame {
         previous.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_suspendButtonActionPerformed
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        paymentLabel1.setVisible(true);
+        paymentLabel2.setVisible(true);
+        paymentLabel3.setVisible(true);
+        paymentInput1.setVisible(true);
+        paymentInput2.setVisible(true);
+        paymentInput3.setVisible(true);
+        creditLabel.setVisible(true);
+        enterPaymentButton.setVisible(true);
+        paymentLabel1.setEnabled(true);
+        paymentLabel2.setEnabled(true);
+        paymentLabel3.setEnabled(true);
+        paymentInput1.setEnabled(true);
+        paymentInput2.setEnabled(true);
+        paymentInput3.setEnabled(true);
+        creditLabel.setEnabled(true);
+        enterPaymentButton.setEnabled(true);
+        console.setText(rental.getTotals());
+    }//GEN-LAST:event_closeButtonActionPerformed
 
     /**
      * @param args the command line arguments

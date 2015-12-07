@@ -66,15 +66,7 @@ public class RentalController extends TransactionController{
             return null;
         }
     }
-    
-    //check if payment is valid
-    private boolean processCreditPayment(CreditPayment payment){
-        String cardNum = payment.getCardNum();
-        String secNum = payment.getSecurityCode();
-        if(cardNum.length() == 16 && secNum.length() == 3)
-            return true;
-        return false;
-    }
+
     
     /**
      *Remove item from rental

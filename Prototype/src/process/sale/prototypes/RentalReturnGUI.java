@@ -282,6 +282,9 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         int quantity=0;
         int days=0;
         try{
+            productCode=Integer.parseInt(productCodeInput.getText());
+            quantity=Integer.parseInt(quantityInput.getText());
+            days=Integer.parseInt(daysInput.getText());
             rentalReturn.processProduct(productCode, quantity, days);
         }catch(Exception e){
             if(productCode==0){
@@ -294,6 +297,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         }
         productCodeInput.setText("");
         quantityInput.setText("");
+        daysInput.setText("");
         console.setText(rentalReturn.display());
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -316,6 +320,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         }
         productCodeInput.setText("");
         quantityInput.setText("");
+        daysInput.setText("");
         console.setText(rentalReturn.display());
     }//GEN-LAST:event_voidButtonActionPerformed
 
@@ -413,40 +418,6 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new SaleGUI().setVisible(true);
-//            }
-//        });
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.ButtonGroup buttonGroup1;

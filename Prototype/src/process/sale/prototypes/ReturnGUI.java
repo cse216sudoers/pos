@@ -50,7 +50,6 @@ public class ReturnGUI extends javax.swing.JFrame {
         voidButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
-        overrideButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
 
@@ -81,13 +80,6 @@ public class ReturnGUI extends javax.swing.JFrame {
         console.setRows(5);
         jScrollPane1.setViewportView(console);
 
-        overrideButton.setText("Override");
-        overrideButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                overrideButtonActionPerformed(evt);
-            }
-        });
-
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +87,7 @@ public class ReturnGUI extends javax.swing.JFrame {
             }
         });
 
-        closeButton.setText("close");
+        closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -108,7 +100,7 @@ public class ReturnGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -124,8 +116,7 @@ public class ReturnGUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(closeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(suspendButton))
-                    .addComponent(overrideButton))
+                        .addComponent(suspendButton)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -145,9 +136,7 @@ public class ReturnGUI extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addButton)
                             .addComponent(voidButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                        .addComponent(overrideButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(suspendButton)
                             .addComponent(closeButton)))
@@ -215,12 +204,7 @@ public class ReturnGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_suspendButtonActionPerformed
 
-    private void overrideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideButtonActionPerformed
-        new LoginGui(true, this).setVisible(true);
-    }//GEN-LAST:event_overrideButtonActionPerformed
-
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        ret.close();
         String receipt = ret.close();
         Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(image));
@@ -241,7 +225,6 @@ public class ReturnGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JButton overrideButton;
     private javax.swing.JTextField productCodeInput;
     private javax.swing.JTextField quantityInput;
     private javax.swing.JButton suspendButton;
