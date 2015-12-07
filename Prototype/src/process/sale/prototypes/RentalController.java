@@ -105,6 +105,8 @@ public class RentalController extends TransactionController{
     public String getTotals(){
         String output = rental.printTotals();
         leftToPay = rental.getTotal();
+        int amount=(int)(leftToPay*100);
+        leftToPay=(float)(amount/100.0);
         return output;
     }
     
