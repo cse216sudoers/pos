@@ -4,6 +4,8 @@
  */
 package process.sale.prototypes;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Pikachu
@@ -37,7 +39,7 @@ public class LoginGui extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         userNameInput = new javax.swing.JTextField();
         Password = new javax.swing.JLabel();
-        passwordInputAdd = new javax.swing.JTextField();
+        passwordInput = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         Login = new javax.swing.JButton();
 
@@ -73,7 +75,7 @@ public class LoginGui extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Login)
-                            .addComponent(passwordInputAdd))))
+                            .addComponent(passwordInput))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -86,7 +88,7 @@ public class LoginGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Password)
-                    .addComponent(passwordInputAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Login)
                 .addGap(33, 33, 33)
@@ -112,7 +114,20 @@ public class LoginGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        // TODO add your handling code here:
+        String username=userNameInput.getText();
+        String password=passwordInput.getText();
+        Cashier cashier;
+        if(CashierManager.getInstance().verifyUsername(username)){
+            if((cashier=CashierManager.getInstance().verifyPassword(username,password))!=null){
+                new MainGui(cashier).setVisible(true);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog (null, "Invalid Username and Password combination", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog (null, "Invalid Username", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_LoginActionPerformed
 
     /**
@@ -160,7 +175,7 @@ public class LoginGui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField passwordInputAdd;
+    private javax.swing.JTextField passwordInput;
     private javax.swing.JTextField userNameInput;
     // End of variables declaration//GEN-END:variables
 }
