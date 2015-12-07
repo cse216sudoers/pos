@@ -107,6 +107,8 @@ public class RentalController extends TransactionController{
         String output = rental.printTotals();
         leftToPay = rental.getTotal();
         rental.startDate = new GregorianCalendar();
+        int amount=(int)(leftToPay*100);
+        leftToPay=(float)(amount/100.0);
         return output;
     }
     
