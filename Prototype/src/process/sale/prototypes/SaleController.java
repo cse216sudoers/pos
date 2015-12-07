@@ -170,7 +170,14 @@ public class SaleController extends TransactionController{
     public void processOverride(int productCode, float amount){
         DecimalFormat myFormatter = new DecimalFormat("0.00");
         amount = Float.parseFloat(myFormatter.format(amount));
-        sale.getLineItemByCode(productCode).setPrice(amount);
+        if(sale.getLineItemByCode(productCode) == null){
+            JOptionPane.showMessageDialog (null, "Invalid product code: " + productCode, "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }else if(amount > sale.getLineItemByCode(productCode).getPrice()){
+            JOptionPane.showMessageDialog (null, "Cannot override to high price.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            sale.getLineItemByCode(productCode).setPrice(amount);
     }
     
     public String close(){

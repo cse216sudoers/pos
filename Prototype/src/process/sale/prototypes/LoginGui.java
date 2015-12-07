@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class LoginGui extends javax.swing.JFrame {
 
     /**
-     * Creates new form SaleGUI
+     * Creates new form SaleGui
      */
     boolean override;
     JFrame prev;
@@ -149,7 +149,7 @@ public class LoginGui extends javax.swing.JFrame {
                 if(override && cashier.getAccess() == Cashier.Access.Cashier)
                     JOptionPane.showMessageDialog (null, "This user does not have Manager or Admin access.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 else if(override){
-                    new OverrideGUI((SaleGUI)(prev)).setVisible(true);
+                    new OverrideGUI((SaleGui)(prev)).setVisible(true);
                     this.dispose();
                 }else{
                     new MainGui(cashier).setVisible(true);
