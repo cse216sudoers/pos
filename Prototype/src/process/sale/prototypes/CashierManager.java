@@ -4,6 +4,7 @@
  */
 package process.sale.prototypes;
 
+import DB.User;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -76,14 +77,7 @@ public class CashierManager {
      */
     public boolean addCashier(Cashier cashier){
         cashiers.add(cashier);
-        int access;
-        if(cashier.getAccess() == Cashier.Access.Admin)
-            access = 0;
-        else if(cashier.getAccess() == Cashier.Access.Manager)
-            access = 1;
-        else
-            access = 2;
-        DB.User.insert(cashier.getName(), access, cashier.getUsername(), cashier.getPassword());
+        DB.User.insert(cashier);
         return true;
     }
     
@@ -180,6 +174,8 @@ public class CashierManager {
                 JOptionPane.showMessageDialog (null, "Invalid new Password.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if(newPassword1.equals(newPassword2)){
                 cashier.setPassword(newPassword1);
+                User.change(cashier);
+                JOptionPane.showMessageDialog (null, "Password has been changed", "Update", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }else{
                 JOptionPane.showMessageDialog (null, "New passwords do not match.", "Invalid Input", JOptionPane.ERROR_MESSAGE);

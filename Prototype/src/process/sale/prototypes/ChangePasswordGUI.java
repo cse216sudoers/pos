@@ -169,6 +169,7 @@ public class ChangePasswordGUI extends javax.swing.JFrame {
         String oldPassword=oldPasswordInput.getText();
         if(CashierManager.getInstance().changePassword(previous.getRegisterController().getRegister().getCashier().getUsername(), oldPassword, newPassword1, newPassword2)){
             previous.setVisible(true);
+            
             this.dispose();
         }     
     }//GEN-LAST:event_ChangePasswordActionPerformed

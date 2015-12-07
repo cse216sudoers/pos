@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import process.sale.prototypes.Cashier;
 import process.sale.prototypes.Resources;
 
 /**
@@ -59,15 +60,40 @@ public class User extends DBClass{
         }
     }
     
-    public static void insert (String name, int permission, String username, String password){
-        int id = nextId(path);
-        
-        String newTuple = name + "|" + id + "|" + permission + "|" + username + "|" + password + "|";
+    public static void insert (Cashier cashier){
+        int id=cashier.getId();
+        String name=cashier.getName();
+        int access;
+        if(cashier.getAccess() == Cashier.Access.Admin)
+            access = 0;
+        else if(cashier.getAccess() == Cashier.Access.Manager)
+            access = 1;
+        else
+            access = 2;
+        String username=cashier.getUsername();
+        String password=cashier.getPassword();
+        String newTuple = name + "|" + id + "|" + access + "|" + username + "|" + password + "|";
         
         try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
             out.println(newTuple);
             out.close();
         }catch (IOException e) {
         }
+    }
+    public static void change (Cashier cashier){
+        int id=cashier.getId();
+        String name=cashier.getName();
+        int access;
+        if(cashier.getAccess() == Cashier.Access.Admin)
+            access = 0;
+        else if(cashier.getAccess() == Cashier.Access.Manager)
+            access = 1;
+        else
+            access = 2;
+        String username=cashier.getUsername();
+        String password=cashier.getPassword();
+        String newTuple = name + "|" + id + "|" + access + "|" + username + "|" + password + "|";
+        delete(id);
+        insert(cashier);
     }
 }
