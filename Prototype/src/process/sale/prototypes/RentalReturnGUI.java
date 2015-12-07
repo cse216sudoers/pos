@@ -294,11 +294,11 @@ public class RentalReturnGUI extends javax.swing.JFrame {
             rentalReturn.processProduct(productCode, quantity, days);
         }catch(Exception e){
             if(productCode==0){
-                JOptionPane.showMessageDialog (null, "Please enter a product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if (quantity==0){
-                JOptionPane.showMessageDialog (null, "Please enter a quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if (days==0){
-                JOptionPane.showMessageDialog (null, "Please enter an amount of days", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog (null, "Please enter a valid amount of days", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
         }
         productCodeInput.setText("");

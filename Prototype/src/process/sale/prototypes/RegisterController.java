@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Does operations for a register domain object
@@ -82,9 +83,11 @@ public class RegisterController{
                 }else if(type.equalsIgnoreCase("suspended")){
                     processSuspended(input);
                 }else{
+                    JOptionPane.showMessageDialog (null, "Invalid Input", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     System.out.println("Invalid Input");
                 }
             }else{
+                JOptionPane.showMessageDialog (null, "Invalid Input", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 System.out.println("Invalid Input");
             }
             ProductCatalog.getCatalog().updateFile();
@@ -100,6 +103,7 @@ public class RegisterController{
                 id = scan.nextInt();
                 break;
             }catch(Exception e){
+                JOptionPane.showMessageDialog (null, "Invalid id. Please enter an integer", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 System.out.println("Invalid id. Please enter an integer.");
             }
         }while(true);
@@ -109,18 +113,21 @@ public class RegisterController{
             if(sale != null)
                 processSuspendedSale(sale);
             else
+                JOptionPane.showMessageDialog (null, "Suspended sale with id "+ id+ " does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 System.out.printf("Suspended sale with id %d does not exist.\n", id);
         }else if(type.equalsIgnoreCase("return")){
             Return ret = ReturnManager.getInstance().getSuspendedReturnById(id);
             if(ret != null)
                 processSuspendedReturn(ret);
             else
+                JOptionPane.showMessageDialog (null, "Suspended return with id "+ id+" does not exist.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 System.out.printf("Suspended return with id %d does not exist.\n", id);
         }else if(type.equalsIgnoreCase("rental")){
             Rental rental = RentalManager.getInstance().getSuspendedRentalById(id);
             if(rental != null)
                 processSuspendedRental(rental);
             else
+                JOptionPane.showMessageDialog (null, "Suspended rental with id "+ id+" does not exist.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 System.out.printf("Suspended rental with id %d does not exist.\n", id);
         }
     }
@@ -204,6 +211,7 @@ public class RegisterController{
                     break;
                 }
             }
+            JOptionPane.showMessageDialog (null, "Username and Password combination incorrect", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Username and Password conbination incorrect.");
         }
     }
