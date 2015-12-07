@@ -154,7 +154,24 @@ public class CashierManager {
         }
         return null;
     }
+    public boolean verifyUsername(String username){
+        if(getCashierByUsername(username) != null)
+                return true;
+        return false;
+    }
     
+    /**
+     * Check if cashier password is correct
+     * @param username
+     * @param password
+     * @return
+     */
+    public Cashier verifyPassword(String username, String password){
+        Cashier cashier = getCashierByUsername(username);
+        if(password.equals(cashier.getPassword()))
+            return cashier;
+        return null;
+    }
     /**
      *
      * @param id unique id for cashier

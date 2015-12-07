@@ -19,12 +19,12 @@ public class UsermanagementGUI extends javax.swing.JFrame {
      * Creates new form SaleGUI
      */
     MainGui previous;
-    private SaleController sale;
+    CashierManager cashierManager;
     public UsermanagementGUI(MainGui prev) {
         previous=prev;
-        sale = (SaleController)previous.getRegisterController().getCurrentTransaction();
+        cashierManager = CashierManager.getInstance();
         initComponents();
-        console.setText(sale.display());
+        console.setText(cashierManager.toString());
     }
 
     /**
