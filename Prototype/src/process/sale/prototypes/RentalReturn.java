@@ -56,6 +56,9 @@ public class RentalReturn extends Transaction{
      * @return
      */
     public void addItem(ProductDescription product, int daysRented, boolean affectQuantity){
+        if(rental.getLineItemByCodeAndDaysRented(id, daysRented) == null){
+            JOptionPane.showMessageDialog (null, "Item not found.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
         LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
         if(lineItem!=null){
             lineItem.increaseQuantity();
