@@ -23,7 +23,7 @@ public class RentalReturn extends Transaction{
         this.rental = rental;
         total = 0;
         subTotal = 0;
-        id = RentalManager.getInstance().getNextId();
+        id = rental.getId();
         payments = new ArrayList<>();
         lines = new ArrayList<>();
     }
@@ -94,7 +94,7 @@ public class RentalReturn extends Transaction{
     
     @Override
     public String toString(){
-        String output = "******Rental******* \nRental ID: " + id + "\n";
+        String output = "******RentalReturn******* \nReturn ID: " + id + "\n";
         for(int i = 0; i < lines.size(); i++){
             output += lines.get(i).toString();
         }

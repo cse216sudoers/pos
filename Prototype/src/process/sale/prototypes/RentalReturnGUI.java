@@ -280,6 +280,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         int productCode=0;
         int quantity=0;
+        int days=0;
         try{
             rentalReturn.processProduct(productCode, quantity, days);
         }catch(Exception e){
