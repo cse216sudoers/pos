@@ -164,9 +164,9 @@ public class ChangePasswordGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_oldPasswordInputActionPerformed
 
     private void ChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangePasswordActionPerformed
-        String newPassword1=newPasswordInput1.getText();
-        String newPassword2=newPasswordInput1.getText();
-        String oldPassword=oldPasswordInput.getText();
+        String newPassword1=newPasswordInput1.getPassword().toString();
+        String newPassword2=newPasswordInput1.getPassword().toString();
+        String oldPassword=oldPasswordInput.getPassword().toString();
         if(CashierManager.getInstance().changePassword(previous.getRegisterController().getRegister().getCashier().getUsername(), oldPassword, newPassword1, newPassword2)){
             previous.setVisible(true);
             this.dispose();
