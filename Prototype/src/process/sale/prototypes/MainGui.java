@@ -34,6 +34,10 @@ public class MainGui extends javax.swing.JFrame {
         SaleManager.getInstance();
         RentalManager.getInstance();
         CashierManager cashierManager = CashierManager.getInstance();
+        if (cashier.getAccess()!=Cashier.Access.Admin){
+            userManagementButton.setVisible(false);
+            userManagementButton.setEnabled(false);
+        }
         RegisterManager registerManager = RegisterManager.getInstance();
         Register register = new Register(registerManager.getNextId());
         register.setCashier(cashier);

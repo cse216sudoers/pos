@@ -128,6 +128,9 @@ public class SaleController extends TransactionController{
             JOptionPane.showMessageDialog (null, "Invalid product code: "+code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
             return;
+        }else if(quantity>sale.getLineItemByCode(product.getCode()).getQuantity()){
+            JOptionPane.showMessageDialog (null, "There are only "+ sale.getLineItemByCode(product.getCode()).getQuantity()+" of "+ code+" in this sale", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         for(int i = 0; i < quantity; i++)
             if(!sale.removeItem(product, true))
@@ -152,9 +155,10 @@ public class SaleController extends TransactionController{
         }else if(product.productLeft()) {
             for(int i=0; i<amount; i++)
                 sale.addItem(product, true);
-        } else
+        }else{
             JOptionPane.showMessageDialog (null, "Item out of stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Item out of stock: " + code);
+        }
     }
     
     //coupon to add to sale
