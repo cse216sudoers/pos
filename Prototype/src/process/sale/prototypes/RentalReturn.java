@@ -5,6 +5,8 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -53,13 +55,22 @@ public class RentalReturn extends Transaction{
     /**
      *
      * @param product
-     * @return
+     * @param daysRented
+     * @param affectQuantity
      */
     public void addItem(ProductDescription product, int daysRented, boolean affectQuantity){
         if(rental.getLineItemByCodeAndDaysRented(id, daysRented) == null){
             JOptionPane.showMessageDialog (null, "Item not found.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
         LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
+        GregorianCalendar now= new GregorianCalendar();
+        GregorianCalendar then = rental.getRentalDate();
+        then.add(Calendar.DAY_OF_MONTH, daysRented);
+        int dayslate=0;
+        while(then.before(now)){
+            then.add(Calendar.DAY_OF_MONTH, 1);
+            dayslate++;
+        }
         if(lineItem!=null){
             lineItem.increaseQuantity();
             subTotal += ((RentalLineItem)lineItem).getRentalPrice();
@@ -67,6 +78,7 @@ public class RentalReturn extends Transaction{
         } 
         else{
             lines.add(new RentalLineItem(product, daysRented));
+            ((RentalReturnLineItem)lineItem).setDaysLate(dayslate);
             subTotal += ((RentalReturnLineItem)lineItem).getLateFee();
         }
     }

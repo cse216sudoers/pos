@@ -50,7 +50,9 @@ public class RentalReturnLineItem extends LineItem{
     public int getDaysLate() {
         return daysLate;
     }
-    
+    public void setDaysLate(int days) {
+        daysLate=days;
+    }
     /**
      *
      * @return
