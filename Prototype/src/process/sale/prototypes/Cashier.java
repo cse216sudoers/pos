@@ -131,6 +131,6 @@ public class Cashier {
     
     @Override
     public String toString(){
-        return String.format("%3d \t %20s \t %10s \t %10s\n", id, name, username, access.toString());
+        return String.format("%3d \t %15s \t %10s \t %10s\n", id, name, username, access.toString());
     }
 }

@@ -25,8 +25,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="saleButton" alignment="0" max="32767" attributes="0"/>
           <Component id="rentalButton" alignment="0" max="32767" attributes="0"/>
-          <Component id="returnButton" max="32767" attributes="0"/>
-          <Component id="userManagementButton" alignment="0" pref="200" max="32767" attributes="0"/>
+          <Component id="returnButton" pref="200" max="32767" attributes="0"/>
+          <Component id="userManagementButton" alignment="1" max="32767" attributes="0"/>
+          <Component id="changePasswordButton" alignment="0" pref="200" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -37,8 +38,11 @@
               <Component id="rentalButton" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="returnButton" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="changePasswordButton" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="userManagementButton" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,6 +93,18 @@
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="main4"/>
       </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userManagementButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="changePasswordButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Change Password"/>
+        <Property name="actionCommand" type="java.lang.String" value="main4"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changePasswordButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

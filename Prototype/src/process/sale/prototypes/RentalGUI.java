@@ -23,14 +23,8 @@ public class RentalGUI extends javax.swing.JFrame {
         initComponents();
         console.setText(rental.display());
         
-        cashButton.setEnabled(false);
-        cashButton.setVisible(false);
-        
-        creditButton.setEnabled(false);
-        creditButton.setVisible(false);
-        
-        debitButton.setEnabled(false);
-        debitButton.setVisible(false);
+        creditLabel.setEnabled(false);
+        creditLabel.setVisible(false);
         
         paymentLabel1.setEnabled(false);
         paymentLabel1.setVisible(false);
@@ -75,9 +69,6 @@ public class RentalGUI extends javax.swing.JFrame {
         voidButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
-        cashButton = new javax.swing.JRadioButton();
-        creditButton = new javax.swing.JRadioButton();
-        debitButton = new javax.swing.JRadioButton();
         dayslabel = new javax.swing.JLabel();
         daysInput = new javax.swing.JTextField();
         paymentInput2 = new javax.swing.JTextField();
@@ -91,6 +82,7 @@ public class RentalGUI extends javax.swing.JFrame {
         closeButton = new javax.swing.JButton();
         overrideButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
+        creditLabel = new javax.swing.JLabel();
 
         jTextField3.setText("jTextField3");
 
@@ -119,34 +111,9 @@ public class RentalGUI extends javax.swing.JFrame {
         console.setRows(5);
         jScrollPane1.setViewportView(console);
 
-        buttonGroup1.add(cashButton);
-        cashButton.setSelected(true);
-        cashButton.setText("Cash");
-        cashButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cashButtonActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(creditButton);
-        creditButton.setText("Credit");
-        creditButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creditButtonActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(debitButton);
-        debitButton.setText("Debit");
-        debitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                debitButtonActionPerformed(evt);
-            }
-        });
-
         dayslabel.setText("Days");
 
-        paymentLabel3.setText("Pin/SecurityCode");
+        paymentLabel3.setText("SecurityCode");
 
         enterPaymentButton.setText("Enter");
         enterPaymentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +139,8 @@ public class RentalGUI extends javax.swing.JFrame {
             }
         });
 
+        creditLabel.setText("Credit");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -181,7 +150,7 @@ public class RentalGUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 30, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -195,26 +164,22 @@ public class RentalGUI extends javax.swing.JFrame {
                                 .addComponent(quantityInput, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addComponent(daysInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(creditLabel)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(debitButton)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(creditButton)
-                                    .addComponent(cashButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(paymentLabel1)
-                                    .addComponent(paymentInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(paymentLabel2)
-                                    .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(paymentLabel3)
-                                    .addComponent(paymentInput3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(enterPaymentButton)))
+                            .addComponent(paymentLabel1)
+                            .addComponent(paymentInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(paymentLabel2)
+                            .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(paymentLabel3)
+                            .addComponent(paymentInput3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enterPaymentButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -251,21 +216,14 @@ public class RentalGUI extends javax.swing.JFrame {
                                     .addComponent(voidButton)
                                     .addComponent(addButton)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(cashButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(creditButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(suspendButton)
-                                    .addComponent(quitButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(overrideButton)
-                                    .addComponent(closeButton)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(suspendButton)
+                            .addComponent(quitButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(overrideButton)
+                            .addComponent(closeButton)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(191, 191, 191)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -278,10 +236,10 @@ public class RentalGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(paymentInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(paymentInput3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(creditLabel)))
                             .addComponent(enterPaymentButton))
-                        .addGap(1, 1, 1)
-                        .addComponent(debitButton)))
+                        .addGap(24, 24, 24)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -298,30 +256,6 @@ public class RentalGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void debitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debitButtonActionPerformed
-        paymentLabel2.setEnabled(true);
-        paymentInput2.setEnabled(true);
-
-        paymentLabel3.setEnabled(true);
-        paymentInput3.setEnabled(true);
-    }//GEN-LAST:event_debitButtonActionPerformed
-
-    private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditButtonActionPerformed
-        paymentLabel2.setEnabled(true);
-        paymentInput2.setEnabled(true);
-
-        paymentLabel3.setEnabled(true);
-        paymentInput3.setEnabled(true);
-    }//GEN-LAST:event_creditButtonActionPerformed
-
-    private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
-        paymentLabel2.setEnabled(false);
-        paymentInput2.setEnabled(false);
-
-        paymentLabel3.setEnabled(false);
-        paymentInput3.setEnabled(false);
-    }//GEN-LAST:event_cashButtonActionPerformed
 
     private void voidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voidButtonActionPerformed
         int productCode= 0;
@@ -359,13 +293,7 @@ public class RentalGUI extends javax.swing.JFrame {
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
         try{
-            if(cashButton.isSelected()){
-                payment = rental.processCashPayment(Integer.parseInt(paymentInput1.getText()));
-            }else if(creditButton.isSelected()){
-                payment = rental.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
-            }else if(debitButton.isSelected()){
-                payment = rental.processDebitPayment(paymentInput2.getText(), Integer.parseInt(paymentInput3.getText()),Float.parseFloat(paymentInput1.getText()));
-            }else return;
+            payment = rental.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
         }catch(Exception e){
 
         }
@@ -429,13 +357,11 @@ public class RentalGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JRadioButton cashButton;
     private javax.swing.JButton closeButton;
     private javax.swing.JTextArea console;
-    private javax.swing.JRadioButton creditButton;
+    private javax.swing.JLabel creditLabel;
     private javax.swing.JTextField daysInput;
     private javax.swing.JLabel dayslabel;
-    private javax.swing.JRadioButton debitButton;
     private javax.swing.JButton enterPaymentButton;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

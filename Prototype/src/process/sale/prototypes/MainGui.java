@@ -58,6 +58,7 @@ public class MainGui extends javax.swing.JFrame {
         rentalButton = new javax.swing.JButton();
         returnButton = new javax.swing.JButton();
         userManagementButton = new javax.swing.JButton();
+        changePasswordButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +93,19 @@ public class MainGui extends javax.swing.JFrame {
 
         userManagementButton.setText("User Management");
         userManagementButton.setActionCommand("main4");
+        userManagementButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userManagementButtonActionPerformed(evt);
+            }
+        });
+
+        changePasswordButton.setText("Change Password");
+        changePasswordButton.setActionCommand("main4");
+        changePasswordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePasswordButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,8 +113,9 @@ public class MainGui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(saleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rentalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(userManagementButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(userManagementButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(changePasswordButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,8 +125,11 @@ public class MainGui extends javax.swing.JFrame {
                 .addComponent(rentalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(changePasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(userManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         saleButton.getAccessibleContext().setAccessibleName("main1");
@@ -255,6 +273,16 @@ public class MainGui extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_returnButtonActionPerformed
 
+    private void changePasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordButtonActionPerformed
+        new ChangePasswordGUI(this).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_changePasswordButtonActionPerformed
+
+    private void userManagementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManagementButtonActionPerformed
+        new UsermanagementGUI(this).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_userManagementButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +318,7 @@ public class MainGui extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton changePasswordButton;
     private javax.swing.JButton rentalButton;
     private javax.swing.JButton returnButton;
     private javax.swing.JButton saleButton;

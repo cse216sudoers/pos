@@ -40,7 +40,6 @@ public class LoginGui extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         userNameInput = new javax.swing.JTextField();
         Password = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         Login = new javax.swing.JButton();
         passwordInput = new javax.swing.JPasswordField();
 
@@ -72,7 +71,6 @@ public class LoginGui extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(Password)
                         .addGap(18, 18, 18)
@@ -100,9 +98,7 @@ public class LoginGui extends javax.swing.JFrame {
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Login)
-                .addGap(33, 33, 33)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,7 +182,6 @@ public class LoginGui extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JTextField userNameInput;

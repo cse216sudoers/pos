@@ -4,9 +4,6 @@
  */
 package process.sale.prototypes;
 
-import java.util.Scanner;
-import javax.swing.JOptionPane;
-
 /**
  * Does operations for a register domain object
  * @author Pikachu
@@ -53,26 +50,6 @@ public class RegisterController{
         register = registerManager.getRegisterById(registerId);
     }
     
-    
-    public boolean verifyUsername(String username){
-        if(cashierManager.getCashierByUsername(username) != null)
-                return true;
-        return false;
-    }
-    
-    /**
-     * Check if cashier password is correct
-     * @param username
-     * @param password
-     * @return
-     */
-    public Cashier verifyPassword(String username, String password){
-        Cashier cashier = cashierManager.getCashierByUsername(username);
-        if(password.equals(cashier.getPassword()))
-            return cashier;
-        return null;
-    }
-    
     //start a suspended sale
     public void processSuspendedSale(Sale sale){
         currentTransaction = new SaleController(sale);
@@ -105,26 +82,5 @@ public class RegisterController{
     //start a rental
     public void processRental(){
         currentTransaction = new RentalController();
-    }
-    
-    //log on register
-    public void logOn(){
-        Scanner scan = new Scanner(System.in);
-        while(true){
-            System.out.println("Username:");
-            String username = scan.next();
-            System.out.println("Password:");
-            String password = scan.next();
-            if(verifyUsername(username)){
-                Cashier cashier = verifyPassword(username, password);
-                if(cashier != null){
-                    getRegister().setCashier(cashier);
-                    cashierManager.addCurrentCashier(cashier);
-                    break;
-                }
-            }
-            JOptionPane.showMessageDialog (null, "Username and Password combination incorrect", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Username and Password conbination incorrect.");
-        }
     }
 }

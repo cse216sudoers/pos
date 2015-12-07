@@ -48,28 +48,7 @@ public class RentalController extends TransactionController{
         RentalManager.getInstance().addRental(rental);
         return printReceipt();
     }
-    
-        /**
-     * Create a cash payment
-     */
-    public CashPayment processCashPayment(int payment){
-        CashPayment cash;
-        if(payment > leftToPay){
-            //System.out.printf("Your change is $%.2f\n", payment - leftToPay);
-            rental.addPayment(cash = new CashPayment(payment, leftToPay));
-            leftToPay = 0;
-        }
-        else if(payment == leftToPay){
-            rental.addPayment(cash = new CashPayment(payment, payment));
-            leftToPay-=payment;
-        }
-        else{
-            rental.addPayment(cash = new CashPayment(payment, payment));
-            leftToPay-=payment;
-        }
-        return cash;
-    }
-    
+
     /**
      * Create a Credit payment
      */
@@ -94,34 +73,6 @@ public class RentalController extends TransactionController{
         String cardNum = payment.getCardNum();
         String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
-            return true;
-        return false;
-    }
-    
-    /**
-     * Make a debit payment
-     */
-    public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
-        if(payment > leftToPay)
-           JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-           System.out.println("Payment is more than total.");
-               
-        DebitPayment debit = new DebitPayment(cardNum, pin, payment);
-        if(processDebitPayment(debit)){
-            rental.addPayment(debit);
-            leftToPay-=payment;
-            return debit;
-        }
-        else{
-            return null;
-        }
-    }
-    
-    //Check if debit payment is valid
-    private boolean processDebitPayment(DebitPayment payment){
-        String cardNum = "" + payment.getCardNum();
-        String pin = "" + payment.getPin();
-        if(cardNum.length() == 16 && pin.length() == 4)
             return true;
         return false;
     }

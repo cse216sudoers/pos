@@ -1,4 +1,3 @@
-
 package process.sale.prototypes;
 
 import java.util.Scanner;
@@ -50,7 +49,6 @@ public class Store {
             Register register = new Register(registerManager.getNextId());
             registerManager.addRegister(register);
             RegisterController currentRegisterController = new RegisterController(register);
-        currentRegisterController.logOn();
         
     }
 }

@@ -4,9 +4,6 @@
  */
 package process.sale.prototypes;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -56,6 +53,7 @@ public class UsermanagementGUI extends javax.swing.JFrame {
         removeButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
+        cancelButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -89,8 +87,20 @@ public class UsermanagementGUI extends javax.swing.JFrame {
         jLabel4.setText("Username:");
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("User List:");
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,10 +111,13 @@ public class UsermanagementGUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(removeButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(cancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel4)
@@ -153,11 +166,15 @@ public class UsermanagementGUI extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(usernameInputRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeButton)
-                        .addGap(0, 22, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(removeButton)
+                                .addGap(0, 160, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cancelButton))))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,6 +199,20 @@ public class UsermanagementGUI extends javax.swing.JFrame {
         String name = nameInput.getText();
         String username = usernameInputAdd.getText();
         int accessInt = accessInput.getSelectedIndex();
+        
+        nameInput.setText("");
+        usernameInputAdd.setText("");
+        accessInput.setSelectedIndex(0);
+        if(name.equals("")){
+            JOptionPane.showMessageDialog (null, "Please enter a valid name", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }else if(username.equals("")){
+            JOptionPane.showMessageDialog (null, "Please enter a valid username", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }else if(cashierManager.getCashierByUsername(username) != null){
+            JOptionPane.showMessageDialog (null, "Username already exists", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Cashier.Access access;
         if(accessInt == 0)
             access = Cashier.Access.Cashier;
@@ -190,42 +221,32 @@ public class UsermanagementGUI extends javax.swing.JFrame {
         else
             access = Cashier.Access.Admin;
         cashierManager.addCashier(new Cashier(name, username, "1234", access));
+        console.setText(cashierManager.toString()); 
     }//GEN-LAST:event_addButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SaleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new SaleGUI().setVisible(true);
-//            }
-//        });
-//    }
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        String username = usernameInputRemove.getText();
+        if(username.equals("")){
+            JOptionPane.showMessageDialog (null, "Please enter a valid username", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        usernameInputRemove.setText("");
+        if(cashierManager.getCashierByUsername(username) == null){
+            JOptionPane.showMessageDialog (null, "Cashier does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }else if(cashierManager.getCurrentCashierById(cashierManager.getCashierByUsername(username).getId())!=null){
+            JOptionPane.showMessageDialog (null, "Cashier is currently logged on and cannot be removed.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        cashierManager.removeCashier(username);
+        console.setText(cashierManager.toString());
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        previous.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox accessInput;
     private javax.swing.JButton addButton;
@@ -233,6 +254,7 @@ public class UsermanagementGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JTextArea console;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
