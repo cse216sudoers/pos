@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Return
@@ -80,7 +81,7 @@ public class Return extends Transaction{
      *
      * @param product
      */
-    public void removeItem(ProductDescription product){
+    public boolean removeItem(ProductDescription product){
         boolean found = false;
         for(int i = 0; i < lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == product.getCode()){
@@ -97,8 +98,11 @@ public class Return extends Transaction{
             }
         }
         if(!found){//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
+            return false;
         }
+        return true;
     }
     
     /**
@@ -112,25 +116,6 @@ public class Return extends Transaction{
                 return lines.get(i);
         }
         return null;
-    }
-    
-    /**
-     *
-     */
-    @Override
-    public void printTotals() {
-        // Calculate tax and total
-        float tax = TaxCalculator.getTax(subTotal);
-        total = subTotal + tax;
-        
-        // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) total).toString().length();
-        String format = "%" + digits + ".2f";
-        
-        System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", subTotal);
-        System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", total);
     }
     
     @Override

@@ -7,6 +7,7 @@ package process.sale.prototypes;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,186 +38,60 @@ public class RentalReturnController extends TransactionController{
      *
      */
     @Override
-    public void start(){
-        boolean done = false;
-        //continuous retnal loop
-        while(!done){
-            try{
-                System.out.print("Please enter 'void', <code>, 'override', 'suspend', or 'close': ");
-                scanner = new Scanner(System.in);
-                input = scanner.next();
-                //void item
-                if(input.equalsIgnoreCase("void")){
-                    processVoid();
-                    display();
-                }
-
-                //override
-                else if(input.equalsIgnoreCase("override")){
-                    //manager override
-                }
-                //add item to rentalReturn
-                else if (input.charAt(0) >= '0' && input.charAt(0) <= '9'){
-                    processProduct(Integer.parseInt(input));
-                    display();
-                }
-                //end rentalReturn
-                else if (input.equalsIgnoreCase("close")){
-                    // Close rentalReturn and get payment
-                    close();
-                    done = true;
-                }
-                //suspend Sale
-                else if (input.equalsIgnoreCase("suspend")){
-                    // Close Sale and get payment
-                    processSuspend();
-                    done = true;
-                }
-                else{
-                    System.out.println("Invalid input: " + input);
-                }
-            }catch(Exception e){
-                System.out.println(e.toString());
-                System.out.println("Invalid input");
-            }
-        }
+    public void processSuspend(){
+       //RentalManager.getInstance().addSuspendedRental(rentalReturn);
     }
     
     /**
      *
      */
-    @Override
-    protected void processSuspend(){
-       // RentalManager.getInstance().addSuspendedRental(rentalReturn);
-    }
-    
-    /**
-     *
-     */
-    @Override
-    protected void close() {
-        String paymentType;
-        boolean validType;
-        
-        // Give total price (subtotal, tax, and total)
-        rentalReturn.printTotals();
-        leftToPay = rentalReturn.getTotal();
-        while(leftToPay >= 0.01){            
-            validType= false;
-
-            System.out.println("Please enter a form of payment (cash, credit, or debit): ");
-            paymentType = scanner.next();
-
-            if(paymentType.equalsIgnoreCase("credit")||paymentType.equalsIgnoreCase("debit")||paymentType.equalsIgnoreCase("cash"))
-                validType = true;
-            while(!validType){
-                System.out.println("Invalid payment type. \nPlease enter a form of payment (cash, credit, or debit): ");
-                paymentType = scanner.next();
-                if(paymentType.equalsIgnoreCase("credit")||paymentType.equalsIgnoreCase("debit")||paymentType.equalsIgnoreCase("cash"))
-                    validType = true;
-            }
-
-            if(paymentType.equalsIgnoreCase("cash"))
-                processCashPayment();
-            else if(paymentType.equalsIgnoreCase("credit"))
-                processCreditPayment();
-            else if(paymentType.equalsIgnoreCase("debit"))
-                processDebitPayment();
-            if(leftToPay > 0)
-                System.out.printf("Total: $%7.2f \n", leftToPay);
-        }
+    public String close() {
         rentalReturn.getRental().addRentalreturn(rentalReturn);
-        // Thank customer, and close
-        printReceipt();
-        System.out.println("\nThank for you shopping with us. Have a nice day!");
+        return printReceipt();
     }
     
-    /**
-     *
+        /**
+     * Create a cash payment
      */
-    protected void processCashPayment(){
-        float payment = 0;
-        System.out.println("Please enter total cash payment: ");
-        try{
-            payment = scanner.nextFloat();
-        }catch(Exception e){
-            System.out.println("Invalid payment.");
-        }
+    public CashPayment processCashPayment(int payment){
+        CashPayment cash;
         if(payment > leftToPay){
-            System.out.printf("Your change is $%.2f\n", payment - leftToPay);
-            rentalReturn.addPayment(new CashPayment(payment, leftToPay));
+            //System.out.printf("Your change is $%.2f\n", payment - leftToPay);
+            rentalReturn.addPayment(cash = new CashPayment(payment, leftToPay));
             leftToPay = 0;
         }
         else if(payment == leftToPay){
-            rentalReturn.addPayment(new CashPayment(payment, payment));
+            rentalReturn.addPayment(cash = new CashPayment(payment, payment));
             leftToPay-=payment;
         }
         else{
-            rentalReturn.addPayment(new CashPayment(payment, payment));
+            rentalReturn.addPayment(cash = new CashPayment(payment, payment));
             leftToPay-=payment;
         }
+        return cash;
     }
     
     /**
-     *
+     * Create a Credit payment
      */
-    protected void processCreditPayment(){
-        float payment = 0;
-        boolean invalid = true;
-        boolean accepted; //for payment
-        String cardNum = "";
-        String secNum = "";
-        
-        System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: of type cancel");
-        do{
-            try{
-                input = scanner.next();
-                if(input.equalsIgnoreCase("total"))
-                    payment = leftToPay;
-                else if(input.equals("cancel"))
-                    return;
-                else{
-                    payment = Float.parseFloat(input);
-                    if(payment > leftToPay)
-                        System.out.println("Payment is more than total.");
-                }
-            }catch(Exception e){
-                System.out.println("Invalid payment.");
-            }
-        }while(payment > leftToPay);
-        
-        try{
-            System.out.println("Please enter card number or type cancel: ");
-            cardNum = scanner.next();
-            if(input.equals("cancel"))
-                return;
-
-            System.out.println("Please enter security code or type cancel: ");
-            input = scanner.next();
-            if(input.equals("cancel"))
-                return;
-            secNum = input;
-        }catch(Exception e){
-            System.out.println("Invalid input.");
-        }
+    public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
+        if(payment > leftToPay)
+            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Payment is more than total.");
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
-        accepted = processCreditPayment(credit);
-        if(accepted){
+        if(processCreditPayment(credit)){
             rentalReturn.addPayment(credit);
             leftToPay -= payment;
+            return credit;
         }
         else{
-            System.out.println("Card rejected.");
+            return null;
         }
     }
     
-    /**
-     *
-     * @param payment
-     * @return
-     */
-    protected boolean processCreditPayment(CreditPayment payment){
+    //check if payment is valid
+    private boolean processCreditPayment(CreditPayment payment){
         String cardNum = payment.getCardNum();
         String secNum = payment.getSecurityCode();
         if(cardNum.length() == 16 && secNum.length() == 3)
@@ -225,59 +100,25 @@ public class RentalReturnController extends TransactionController{
     }
     
     /**
-     *
+     * Make a debit payment
      */
-    protected void processDebitPayment(){
-        float payment = 0;
-        boolean invalid = true;
-        boolean accepted; //for payment
-        String cardNum = "";
-        int pin = 0;
-        
-        System.out.println("Please enter total credit payment or enter 'total' to pay the whole balance: ");
-        
-        do{
-            try{
-                input = scanner.next();
-                if(input.equalsIgnoreCase("total"))
-                    payment = leftToPay;
-                else if(input.equals("cancel"))
-                    return;
-                else{
-                    payment = Float.parseFloat(input);
-                    if(payment > leftToPay)
-                        System.out.println("Payment is more than total.");
-                }
-            }catch(Exception e){
-                System.out.println("Invalid payment.");
-            }
-        }while(payment > leftToPay);
-        
-        try{
-            System.out.println("Please enter card number or type cancel: ");
-            cardNum = scanner.next();
-            if(input.equals("cancel"))
-                return;
-
-            System.out.println("Please enter pin or type cancel: ");
-            input = scanner.next();
-            if(input.equals("cancel"))
-                return;
-            pin = Integer.parseInt(input);                
-        }catch(Exception e){
-            System.out.println(e.getStackTrace() + "/nInvalid input.");
-        }
-        
+    public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
+       if(payment > leftToPay)
+           JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+           System.out.println("Payment is more than total.");
+               
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
-        accepted = processDebitPayment(debit);
-        if(accepted){
+        if(processDebitPayment(debit)){
             rentalReturn.addPayment(debit);
             leftToPay-=payment;
+            return debit;
         }
         else{
-            System.out.println("Card rejected.");
+            return null;
         }
     }
+    
+    //Check if debit payment is valid
     private boolean processDebitPayment(DebitPayment payment){
         String cardNum = "" + payment.getCardNum();
         String pin = "" + payment.getPin();
@@ -289,92 +130,62 @@ public class RentalReturnController extends TransactionController{
     /**
      *
      */
-    @Override
-    protected void processVoid(){
-        System.out.print("Please enter a product code: ");
-        int code = scanner.nextInt();
+    public void processVoid(int code, int quantity, int days){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: "+ code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
             return;
         }
-        rentalReturn.removeItem(product);
+        for(int i = 0; i < quantity; i++)
+            if(!rentalReturn.removeItem(product, days, true))
+                break;
     }
     
     /**
      *
      * @param code
      */
-    @Override
-    protected void processProduct(int code){
+    public void processProduct(int code, int amount, int days){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
   
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
         }else if(!product.getIsRentable()){
             System.out.println("Item cannot be rented: " + code);
         }else{
-            rentalReturn.addItem(product);
+            for(int i = 0; i < amount; i++)
+                rentalReturn.addItem(product, days, true);
         }
     }
     
-    private void processCoupon(){
-        String next = "";
-        int code;
-        int productCode;
-        float amount;
-        try{
-            System.out.print("Please enter coupon code: ");
-            next = scanner.next();
-            code = Integer.parseInt(next);
-        }catch(Exception e){
-            System.out.println("Invalid code: " + next);
-            return;
-        }
-        
-        try{
-            System.out.print("Please enter product code: ");
-            next = scanner.next();
-            productCode = Integer.parseInt(next);
-        }catch(Exception e){
-            System.out.println("Invalid code: " + next);
-            return;
-        }
-
-        try{
-            System.out.print("Please enter coupon amount: ");
-            next = scanner.next();
-            DecimalFormat myFormatter = new DecimalFormat("0.00");
-            amount = Float.parseFloat(next);
-            amount = Float.parseFloat(myFormatter.format(amount));
-        }catch(Exception e){
-            System.out.println("Invalid amount: " + next);
-            return;
-        }
-        
-        rentalReturn.addCoupon(new Coupon(code, productCode, amount));
+    
+    /**
+     *
+     */
+    @Override
+    public final String display(){
+        return rentalReturn.toString();
+    }
+    
+    public String getTotals(){
+        String output = rentalReturn.printTotals();
+        leftToPay = rentalReturn.getTotal();
+        return output;
     }
     
     /**
      *
      */
     @Override
-    protected final void display(){
-        System.out.println(rentalReturn);
-    }
-    
-    /**
-     *
-     */
-    @Override
-    protected void printReceipt(){
-        System.out.print("******************************************");
-        rentalReturn.printTotals();
+    public String printReceipt(){
+        String output = rentalReturn.printTotals();
         ArrayList<Payment> payments = rentalReturn.getPayments();
         for(int i = 0; i < payments.size(); i++){
-            System.out.print(payments.get(i));
+            output += payments.get(i).toString();
         }
-        System.out.print("\n******************************************");
+        return output;
     }
 }

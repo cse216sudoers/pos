@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Rental Domain object 
@@ -80,27 +81,9 @@ public class Rental extends Transaction{
             }
         }
         if(!found){
+            JOptionPane.showMessageDialog (null, "Invalid coupon "+ coupon.getCode(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
         }
-    }
-    
-    /**
-     * Print totals
-     */
-    @Override
-    public void printTotals() {
-        // Calculate tax and total
-        float tax = TaxCalculator.getTax(subTotal);
-        total = subTotal + tax;
-        
-        // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) total).toString().length();
-        String format = "%" + digits + ".2f";
-        
-        System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", subTotal);
-        System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", total);
     }
     
     @Override
@@ -116,7 +99,7 @@ public class Rental extends Transaction{
      * Remove item from rental
      * @param product item to remove
      */
-    public void removeItem(ProductDescription product, int days, boolean affectQuantity){
+    public boolean removeItem(ProductDescription product, int days, boolean affectQuantity){
         LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), days);
         if(lineItem != null){
             if(lineItem.getQuantity() == 1){
@@ -127,8 +110,11 @@ public class Rental extends Transaction{
             }
             total-=product.getRentalPrice();
         }else{//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
+            return false;
         }
+        return true;
     }
     public LineItem getLineItemByCodeAndDaysRented(int code, int daysRented){
         for(int i = 0; i < lines.size(); i++){

@@ -1,19 +1,20 @@
-Ryan|1|0|Ryn|potato|
-Jim|2|1|Jib|bill|
-Peter|3|1|Pes|a2h4g@s|
-Arielle|4|2|Arg|basic|
-Josh|5|2|Jor|admin9374|
-Collin|7|1|Com|Th3M4n|
-Jess|8|2|Jek|M1n23|
-Kevin|9|2|Kes|838384|
-John|10|2|Jom|9f83ye|
-Lars|11|2|Law|s4wd3r|
-Patricia|12|2|Pat|dinglehopper35|
-Meghan|13|2|Mel|@llll4m4s|
-Rachel|14|1|Ras|Jello909|
-Sal|15|2|Sap|89muffins!|
-Noah|16|2|Nar|0know|
-Tim|17|1|Tip|Turpintine|
-Meepo|18|2|Mee|beatit717171|
-Jeeves|19|2|Jep|y3sm4st3e|
-Mary|20|2|Mal|Poppins43v3r|
+287|Canon Printer|99.99|997|1|2.0|
+853|Target Gift Card|25.0|0|0|0.0|
+975|Shots|4.99|3|0|0.0|
+983|24pc pencil ticonderoga|6.99|1|0|0.0|
+1409|iPad|245.99|4|0|2.0|
+1463|Mtg card pack|3.99|0|0|0.0|
+1533|Pickles|0.99|3|0|0.0|
+2348|Harvard Law School Diploma|500000.0|0|0|0.0|
+2745|Pepperoni|7.99|1|0|0.0|
+2845|Pokemon Bowtie|45.95|16|1|2.0|
+3674|Potato Bread|5.99|3|0|0.0|
+4253|Pikachu Plushie|24.95|5|1|0.0|
+4499|Potato|0.8|0|0|0.0|
+5644|Mahogany Door|127.95|61|0|0.0|
+6278|4 function calculator|2.49|0|0|0.0|
+6843|A NEW CAR|14499.99|3|1|3.99|
+7774|Monkey|429.99|87|1|3.99|
+9605|Migraine Medication|29.97|1|0|0.0|
+9642|Nike Dancing Shoes|69.99|3|0|0.0|
+9685|iPhone 6S Plus|299.99|0|0|0.0|

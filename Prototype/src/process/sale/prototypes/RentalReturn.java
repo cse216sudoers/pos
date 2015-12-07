@@ -6,6 +6,7 @@ package process.sale.prototypes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *Return for a SINGLE rental
@@ -41,7 +42,7 @@ public class RentalReturn extends Transaction{
      * @param daysRented
      * @return
      */
-    public LineItem getLineItemByCode(int code, int daysRented){
+    public LineItem getLineItemByCodeAndDaysRented(int code, int daysRented){
         for(int i = 0; i< lines.size(); i++){
             if(lines.get(i).getProduct().getCode() == code)
                 return lines.get(i);
@@ -54,44 +55,39 @@ public class RentalReturn extends Transaction{
      * @param product
      * @return
      */
-    public boolean addItem(ProductDescription product){ 
-        System.out.println("Please enter days late: ");
-        Scanner scan = new Scanner(System.in);
-        int daysLate = scan.nextInt();
-        LineItem item = new RentalReturnLineItem(product, daysLate);
-        lines.add(item);
-        subTotal += ((RentalReturnLineItem)item).getLateFee();
-        product.increaseQuantity();
-        return true;
+    public void addItem(ProductDescription product, int daysRented, boolean affectQuantity){
+        LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
+        if(lineItem!=null){
+            lineItem.increaseQuantity();
+            subTotal += ((RentalLineItem)lineItem).getRentalPrice();
+            product.decreaseQuantity();
+        } 
+        else{
+            lines.add(new RentalLineItem(product, daysRented));
+            subTotal += ((RentalReturnLineItem)lineItem).getLateFee();
+        }
     }
     
     /**
      *
      * @param product
      */
-    public void removeItem(ProductDescription product){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == product.getCode()){
-                LineItem item = null;
-                
-                if(lines.get(i).getQuantity() == 1){
-                    item = lines.remove(i);
-                }
-                else{
-                    lines.get(i).decreaseQuantity();
-                    item = lines.get(i);
-                }
-                
-                subTotal -= ((RentalReturnLineItem)item).getLateFee();
-                found = true;
-                product.decreaseQuantity();
-                break;
+    public boolean removeItem(ProductDescription product, int days, boolean affectQuantity){
+        LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), days);
+        if(lineItem != null){
+            if(lineItem.getQuantity() == 1){
+                lines.remove(lineItem);
             }
-        }
-        if(!found){//item not in Sale
+            else{
+                lineItem.decreaseQuantity();
+            }
+            subTotal -= ((RentalReturnLineItem)lineItem).getLateFee();
+        }else{//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
+            return false;
         }
+        return true;
     }
     
     /**
@@ -111,25 +107,6 @@ public class RentalReturn extends Transaction{
         if(!found){
             System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
         }
-    }
-    
-    /**
-     *
-     */
-    @Override
-    public void printTotals() {
-        // Calculate tax and total
-        float tax = TaxCalculator.getTax(getTotal());
-        total = subTotal + tax;
-        
-        // Set up ability to format print statements right so everything aligns
-        int digits = ((Float) total).toString().length();
-        String format = "%" + digits + ".2f";
-        
-        System.out.println("\n" + toString());
-        System.out.printf("Subtotal: $" + format + "\n", subTotal);
-        System.out.printf("Tax:      $" + format + "\n", tax);
-        System.out.printf("Total:    $" + format + "\n", total);
     }
     
     @Override

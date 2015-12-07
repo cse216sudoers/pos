@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import DB.User;
+import javax.swing.JOptionPane;
 
 /**
  * Keep track of all cashiers in POS system
@@ -102,11 +103,11 @@ public class CashierManager {
         
         for(int i = 0; i < cashiers.size(); i++){
             if(cashiers.get(i).getUsername().equals(username)){
+                DB.User.delete(cashiers.get(i).getId());
                 cashiers.remove(i);
-                return true; //return true if found 
             }
         }
-        DB.User.delete(id);
+        
         return true; //return true if doesn't exist
     }
     
@@ -154,7 +155,41 @@ public class CashierManager {
         }
         return null;
     }
+    public boolean verifyUsername(String username){
+        if(getCashierByUsername(username) != null)
+                return true;
+        return false;
+    }
     
+    /**
+     * Check if cashier password is correct
+     * @param username
+     * @param password
+     * @return
+     */
+    public Cashier verifyPassword(String username, String password){
+        Cashier cashier = getCashierByUsername(username);
+        if(password.equals(cashier.getPassword()))
+            return cashier;
+        return null;
+    }
+    
+    public boolean changePassword(String username, String oldPassword, String newPassword1, String newPassword2){
+        Cashier cashier;
+        if((cashier = verifyPassword(username, oldPassword)) != null){
+            if(newPassword1.equals("")){
+                JOptionPane.showMessageDialog (null, "Invalid new Password.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if(newPassword1.equals(newPassword2)){
+                cashier.setPassword(newPassword1);
+                return true;
+            }else{
+                JOptionPane.showMessageDialog (null, "New passwords do not match.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog (null, "Old password is incorrect.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
     /**
      *
      * @param id unique id for cashier
@@ -191,7 +226,7 @@ public class CashierManager {
     
     @Override
     public String toString(){
-        String output = String.format("%3s \t %20s \t %10s \t %10s", "ID", "Name", "Username", "Access");
+        String output = String.format("%3s \t %15s \t %10s \t %10s\n", "ID", "Name", "Username", "Access");
         for(int i = 0; i < cashiers.size(); i++)
             output += cashiers.get(i).toString();
         return output;

@@ -17,34 +17,25 @@ public abstract class TransactionController {
      *
      */
     protected String input;
+
+    /**
+     *
+     */
+    public abstract void processSuspend();
+    /**
+     *
+     */
+    public abstract String display();
+    /**
+     *
+     */
+    public abstract String printReceipt();
     
-    /**
-     *
-     */
-    public abstract void start();
-    /**
-     *
-     */
-    protected abstract void close();
-    /**
-     *
-     */
-    protected abstract void processSuspend();
-    /**
-     *
-     */
-    protected abstract void processVoid();
-    /**
-     *
-     * @param code
-     */
-    protected abstract void processProduct(int code);
-    /**
-     *
-     */
-    protected abstract void display();
-    /**
-     *
-     */
-    protected abstract void printReceipt();
+    public float getLeftToPay(){
+        return leftToPay;
+    }
+    
+    public void setLeftToPay(float l){
+        leftToPay = l;
+    }
 }
