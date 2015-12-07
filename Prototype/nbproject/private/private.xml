@@ -3,21 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/ProductDescription.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/DB/ProductDescription.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/ProductCatalog.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/ChangePasswordGUI.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/SaleController.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Sale.java</file>
             <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/DB/User.java</file>
             <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/CashierManager.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Store.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/TestTest.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/RentalManager.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/SaleManager.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/UserManagementController.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/SaleController.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Transaction.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Sale.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/LoginGui.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Cashier.java</file>
             <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Resources.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/ReturnManager.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/UsermanagementGUI.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/MainGui.java</file>
+            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/SaleGui.java</file>
         </group>
     </open-files>
 </project-private>

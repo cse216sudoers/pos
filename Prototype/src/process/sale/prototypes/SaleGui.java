@@ -438,7 +438,8 @@ public class SaleGui extends javax.swing.JFrame {
         if(payment != null){
             DecimalFormat myFormatter = new DecimalFormat("0.00");
             float amount = Float.parseFloat(myFormatter.format(sale.getLeftToPay()));
-            console.setText(console.getText() + payment.toString() + "Total: $" + amount);
+            String output=String.format("Total: $%.2f", amount);
+            console.setText(console.getText() + payment.toString() + output);
         }
         paymentInput1.setText("");
         paymentInput2.setText("");
