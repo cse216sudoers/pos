@@ -4,6 +4,7 @@
  */
 package process.sale.prototypes;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,11 +16,22 @@ public class LoginGui extends javax.swing.JFrame {
     /**
      * Creates new form SaleGUI
      */
-    MainGui previous;
-    private SaleController sale;
+    boolean override;
+    JFrame prev;
     public LoginGui() {
         initComponents();
         MainGui.centreWindow(this);
+        override = false;
+        cancelButton.setVisible(override);
+        cancelButton.setEnabled(override);
+    }
+    
+    public LoginGui(boolean override, JFrame prev){
+        this();
+        this.override = override;
+        this.prev = prev;
+        cancelButton.setVisible(override);
+        cancelButton.setEnabled(override);
     }
 
     /**
@@ -42,6 +54,7 @@ public class LoginGui extends javax.swing.JFrame {
         Password = new javax.swing.JLabel();
         Login = new javax.swing.JButton();
         passwordInput = new javax.swing.JPasswordField();
+        cancelButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -64,25 +77,33 @@ public class LoginGui extends javax.swing.JFrame {
             }
         });
 
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(cancelButton)
+                        .addGap(88, 88, 88)
+                        .addComponent(Login))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(Password)
-                        .addGap(18, 18, 18)
-                        .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(userNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(Login)
+                        .addComponent(userNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -96,9 +117,11 @@ public class LoginGui extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Password)
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Login)
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Login)
+                    .addComponent(cancelButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,8 +134,7 @@ public class LoginGui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,8 +146,15 @@ public class LoginGui extends javax.swing.JFrame {
         Cashier cashier;
         if(CashierManager.getInstance().verifyUsername(username)){
             if((cashier=CashierManager.getInstance().verifyPassword(username,password))!=null){
-                new MainGui(cashier).setVisible(true);
-                this.setVisible(false);
+                if(override && cashier.getAccess() == Cashier.Access.Cashier)
+                    JOptionPane.showMessageDialog (null, "This user does not have Manager or Admin access.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                else if(override){
+                    new OverrideGUI((SaleGUI)(prev)).setVisible(true);
+                    this.dispose();
+                }else{
+                    new MainGui(cashier).setVisible(true);
+                    this.dispose();
+                }
             }else{
                 JOptionPane.showMessageDialog (null, "Invalid Username and Password combination", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
@@ -138,6 +167,10 @@ public class LoginGui extends javax.swing.JFrame {
     private void passwordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordInputActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +213,7 @@ public class LoginGui extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField3;

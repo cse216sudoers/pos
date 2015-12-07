@@ -107,8 +107,6 @@
                                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                   <Component id="enterPaymentButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="quitButton" min="-2" pref="57" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="suspendButton" min="-2" pref="89" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -166,10 +164,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="suspendButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="quitButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="suspendButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -345,14 +340,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enterPaymentButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="quitButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Quit"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="suspendButton">

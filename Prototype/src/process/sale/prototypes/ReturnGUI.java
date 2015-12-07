@@ -50,7 +50,6 @@ public class ReturnGUI extends javax.swing.JFrame {
         voidButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
-        quitButton = new javax.swing.JButton();
         overrideButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
 
@@ -81,9 +80,12 @@ public class ReturnGUI extends javax.swing.JFrame {
         console.setRows(5);
         jScrollPane1.setViewportView(console);
 
-        quitButton.setText("Quit");
-
         overrideButton.setText("Override");
+        overrideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overrideButtonActionPerformed(evt);
+            }
+        });
 
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,10 +113,7 @@ public class ReturnGUI extends javax.swing.JFrame {
                             .addComponent(productCodeInput)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                             .addComponent(quantityInput, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(quitButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(suspendButton))
+                    .addComponent(suspendButton)
                     .addComponent(overrideButton))
                 .addContainerGap())
         );
@@ -138,9 +137,7 @@ public class ReturnGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(overrideButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(quitButton)
-                            .addComponent(suspendButton)))
+                        .addComponent(suspendButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1)))
@@ -169,8 +166,8 @@ public class ReturnGUI extends javax.swing.JFrame {
             quantity = Integer.parseInt(quantityInput.getText());
             ret.processProduct(productCode, quantity);
         }catch(Exception e){
-            if(productCode==0){
-                JOptionPane.showMessageDialog (null, "Please enter a product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            if(productCode<=0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if (quantity==0){
                 JOptionPane.showMessageDialog (null, "Please enter a quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
@@ -188,7 +185,7 @@ public class ReturnGUI extends javax.swing.JFrame {
             quantity = Integer.parseInt(quantityInput.getText());
             ret.processProduct(productCode, quantity);
         }catch(Exception e){
-            if(productCode==0){
+            if(productCode<=0){
                 JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if (quantity==0){
                 JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
@@ -205,6 +202,10 @@ public class ReturnGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_suspendButtonActionPerformed
 
+    private void overrideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideButtonActionPerformed
+        new LoginGui(true, this).setVisible(true);
+    }//GEN-LAST:event_overrideButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -220,7 +221,6 @@ public class ReturnGUI extends javax.swing.JFrame {
     private javax.swing.JButton overrideButton;
     private javax.swing.JTextField productCodeInput;
     private javax.swing.JTextField quantityInput;
-    private javax.swing.JButton quitButton;
     private javax.swing.JButton suspendButton;
     private javax.swing.JButton voidButton;
     // End of variables declaration//GEN-END:variables

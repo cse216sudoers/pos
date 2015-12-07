@@ -78,9 +78,7 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentInput1 = new javax.swing.JTextField();
         paymentLabel1 = new javax.swing.JLabel();
         paymentLabel2 = new javax.swing.JLabel();
-        quitButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
-        overrideButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
         creditLabel = new javax.swing.JLabel();
 
@@ -126,11 +124,7 @@ public class RentalGUI extends javax.swing.JFrame {
 
         paymentLabel2.setText("CardNum");
 
-        quitButton.setText("Quit");
-
         closeButton.setText("Pay");
-
-        overrideButton.setText("Override");
 
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
@@ -181,15 +175,10 @@ public class RentalGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(enterPaymentButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(quitButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(suspendButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(closeButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(overrideButton)))))
+                        .addComponent(suspendButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(closeButton)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -217,13 +206,8 @@ public class RentalGUI extends javax.swing.JFrame {
                                     .addComponent(addButton)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(suspendButton)
-                            .addComponent(quitButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(overrideButton)
-                            .addComponent(closeButton)))
+                        .addComponent(suspendButton)
+                        .addGap(5, 5, 5))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(191, 191, 191)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -238,9 +222,10 @@ public class RentalGUI extends javax.swing.JFrame {
                                     .addComponent(paymentInput3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(creditLabel)))
-                            .addComponent(enterPaymentButton))
-                        .addGap(24, 24, 24)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(enterPaymentButton))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(closeButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,18 +263,37 @@ public class RentalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_voidButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        int productCode = 0;
+        int quantity = 0;
+        int days = 0;
         try{
-            int productCode = Integer.parseInt(productCodeInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
-            int days = Integer.parseInt(daysInput.getText());
+            productCode = Integer.parseInt(productCodeInput.getText());
+            quantity = Integer.parseInt(quantityInput.getText());
+            days = Integer.parseInt(daysInput.getText());
+            if(productCode==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0){
+                JOptionPane.showMessageDialog (null, "Please enter a quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (days==0){
+                JOptionPane.showMessageDialog (null, "Please enter an amount of days", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
             rental.processProduct(productCode, quantity, days);
         }catch(Exception e){
+            if(productCode<=0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0){
+                JOptionPane.showMessageDialog (null, "Please enter a quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (days==0){
+                JOptionPane.showMessageDialog (null, "Please enter an amount of days", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
         }
         productCodeInput.setText("");
         quantityInput.setText("");
         console.setText(rental.display());
     }//GEN-LAST:event_addButtonActionPerformed
-
+    public void updata(){
+        console.setText(rental.display());
+    }
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
         try{
@@ -368,7 +372,6 @@ public class RentalGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JButton overrideButton;
     private javax.swing.JTextField paymentInput1;
     private javax.swing.JTextField paymentInput2;
     private javax.swing.JTextField paymentInput3;
@@ -377,7 +380,6 @@ public class RentalGUI extends javax.swing.JFrame {
     private javax.swing.JLabel paymentLabel3;
     private javax.swing.JTextField productCodeInput;
     private javax.swing.JTextField quantityInput;
-    private javax.swing.JButton quitButton;
     private javax.swing.JButton suspendButton;
     private javax.swing.JButton voidButton;
     // End of variables declaration//GEN-END:variables

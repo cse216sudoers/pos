@@ -96,18 +96,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="enterPaymentButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="quitButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="suspendButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="closeButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="overrideButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="suspendButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -145,15 +138,8 @@
                               <Component id="jScrollPane1" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="suspendButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="quitButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="overrideButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="suspendButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
@@ -174,10 +160,11 @@
                               </Group>
                               <Component id="enterPaymentButton" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -265,19 +252,9 @@
             <Property name="text" type="java.lang.String" value="CardNum"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="quitButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Quit"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="closeButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pay"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="overrideButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Override"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="suspendButton">

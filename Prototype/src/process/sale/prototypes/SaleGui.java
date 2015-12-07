@@ -13,14 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author Pikachu
  */
-public class SaleGui extends javax.swing.JFrame {
+public class SaleGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form SaleGUI
      */
     MainGui previous;
-    private SaleController sale;
-    public SaleGui(MainGui prev) {
+    SaleController sale;
+    public SaleGUI(MainGui prev) {
         previous=prev;
         sale = (SaleController)previous.getRegisterController().getCurrentTransaction();
         initComponents();
@@ -92,7 +92,6 @@ public class SaleGui extends javax.swing.JFrame {
         paymentLabel2 = new javax.swing.JLabel();
         paymentLabel3 = new javax.swing.JLabel();
         enterPaymentButton = new javax.swing.JButton();
-        quitButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
@@ -183,13 +182,6 @@ public class SaleGui extends javax.swing.JFrame {
             }
         });
 
-        quitButton.setText("Quit");
-        quitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitButtonActionPerformed(evt);
-            }
-        });
-
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,8 +237,6 @@ public class SaleGui extends javax.swing.JFrame {
                                 .addGap(48, 48, 48)
                                 .addComponent(enterPaymentButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(suspendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(debitButton)
@@ -290,9 +280,7 @@ public class SaleGui extends javax.swing.JFrame {
                                 .addComponent(creditButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 29, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(suspendButton)
-                                    .addComponent(quitButton)))))
+                                .addComponent(suspendButton))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(paymentLabel1)
@@ -338,11 +326,10 @@ public class SaleGui extends javax.swing.JFrame {
             quantity = Integer.parseInt(quantityInput.getText());
             sale.processProduct(productCode, quantity);
         }catch(Exception e){
-            if(productCode==0){
+            if(productCode<=0){
                 JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            }else if (quantity==0){
+            }else if (quantity==0)
                 JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            }
         }
         productCodeInput.setText("");
         quantityInput.setText("");
@@ -360,15 +347,17 @@ public class SaleGui extends javax.swing.JFrame {
         quantityInput.setText("");
         console.setText(sale.display());
     }//GEN-LAST:event_voidButtonActionPerformed
-
+    public void update(){
+        console.setText(sale.display());
+    }
     private void couponButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_couponButtonActionPerformed
         try{
             int code = Integer.parseInt(couponCodeInput.getText());
             sale.processCoupon(code);
         }catch(Exception e){
         }
-        couponCodeInput.setText("");
-        console.setText(sale.display());
+        couponCodeInput.setText(""); console.setText(sale.display());
+       
     }//GEN-LAST:event_couponButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
@@ -448,7 +437,7 @@ public class SaleGui extends javax.swing.JFrame {
     }//GEN-LAST:event_enterPaymentButtonActionPerformed
 
     private void overrideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideButtonActionPerformed
-        
+        new LoginGui(true, this).setVisible(true);
     }//GEN-LAST:event_overrideButtonActionPerformed
 
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditButtonActionPerformed
@@ -466,10 +455,6 @@ public class SaleGui extends javax.swing.JFrame {
         paymentLabel3.setEnabled(true);
         paymentInput3.setEnabled(true);
     }//GEN-LAST:event_debitButtonActionPerformed
-
-    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quitButtonActionPerformed
 
     private void suspendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suspendButtonActionPerformed
         sale.processSuspend();
@@ -540,7 +525,6 @@ public class SaleGui extends javax.swing.JFrame {
     private javax.swing.JLabel paymentLabel3;
     private javax.swing.JTextField productCodeInput;
     private javax.swing.JTextField quantityInput;
-    private javax.swing.JButton quitButton;
     private javax.swing.JButton suspendButton;
     private javax.swing.JButton voidButton;
     // End of variables declaration//GEN-END:variables

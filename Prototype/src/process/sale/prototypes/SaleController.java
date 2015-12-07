@@ -167,11 +167,10 @@ public class SaleController extends TransactionController{
     }
     
     //override an item's price
-    private void processOverride(int productCode, float amount){
+    public void processOverride(int productCode, float amount){
         DecimalFormat myFormatter = new DecimalFormat("0.00");
         amount = Float.parseFloat(myFormatter.format(amount));
         sale.getLineItemByCode(productCode).setPrice(amount);
-        //sale.subtotal-= sale.getLineItemByCode(productCode).getQuantity()*(pre-sale.getLineItemByCode(productCode).getPrice());
     }
     
     public String close(){

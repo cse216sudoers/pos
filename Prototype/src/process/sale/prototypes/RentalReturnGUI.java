@@ -88,7 +88,6 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         paymentInput2 = new javax.swing.JTextField();
         paymentInput3 = new javax.swing.JTextField();
         paymentLabel3 = new javax.swing.JLabel();
-        payButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -112,7 +111,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
             }
         });
 
-        closeButton.setText("Close");
+        closeButton.setText("Pay");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -164,13 +163,6 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
         paymentLabel3.setText("Pin/SecurityCode");
 
-        payButton.setText("Pay");
-        payButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                payButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -219,8 +211,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
                         .addComponent(debitButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeButton)
-                        .addGap(39, 39, 39)
-                        .addComponent(payButton)))
+                        .addGap(90, 90, 90)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,8 +258,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(debitButton)
-                    .addComponent(closeButton)
-                    .addComponent(payButton))
+                    .addComponent(closeButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -311,8 +301,8 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         int quantity = 0;
         int days = 0;
         try{
-            if(productCode==0){
-                JOptionPane.showMessageDialog (null, "Please enter a product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            if(productCode<=0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if (quantity==0){
                 JOptionPane.showMessageDialog (null, "Please enter a quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }else if (days==0){
@@ -327,44 +317,6 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         quantityInput.setText("");
         console.setText(rentalReturn.display());
     }//GEN-LAST:event_voidButtonActionPerformed
-
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-
-        productCodeInput.setEnabled(false);
-        quantityInput.setEnabled(false);
-        daysInput.setEnabled(false);
-                
-        addButton.setEnabled(false);
-        voidButton.setEnabled(false);
-        closeButton.setEnabled(false);
-                
-        cashButton.setEnabled(true);
-        cashButton.setVisible(true);
-        
-        creditButton.setEnabled(true);
-        creditButton.setVisible(true);
-        
-        debitButton.setEnabled(true);
-        debitButton.setVisible(true);
-        
-        paymentLabel1.setEnabled(true);
-        paymentLabel1.setVisible(true);
-        paymentInput1.setEnabled(true);
-        paymentInput1.setVisible(true);
-        
-        paymentLabel2.setVisible(true);
-        paymentInput2.setVisible(true);
-        
-        paymentLabel3.setVisible(true);
-        paymentInput3.setVisible(true);
-        
-        enterPaymentButton.setEnabled(true);
-        enterPaymentButton.setVisible(true);
-        
-        // Give total price (subtotal, tax, and total)
-        console.setText(rentalReturn.getTotals());
-            
-    }//GEN-LAST:event_closeButtonActionPerformed
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
         paymentLabel2.setEnabled(false);
@@ -417,9 +369,43 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         paymentInput3.setEnabled(true);
     }//GEN-LAST:event_debitButtonActionPerformed
 
-    private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_payButtonActionPerformed
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+
+        productCodeInput.setEnabled(false);
+        quantityInput.setEnabled(false);
+        daysInput.setEnabled(false);
+
+        addButton.setEnabled(false);
+        voidButton.setEnabled(false);
+        closeButton.setEnabled(false);
+
+        cashButton.setEnabled(true);
+        cashButton.setVisible(true);
+
+        creditButton.setEnabled(true);
+        creditButton.setVisible(true);
+
+        debitButton.setEnabled(true);
+        debitButton.setVisible(true);
+
+        paymentLabel1.setEnabled(true);
+        paymentLabel1.setVisible(true);
+        paymentInput1.setEnabled(true);
+        paymentInput1.setVisible(true);
+
+        paymentLabel2.setVisible(true);
+        paymentInput2.setVisible(true);
+
+        paymentLabel3.setVisible(true);
+        paymentInput3.setVisible(true);
+
+        enterPaymentButton.setEnabled(true);
+        enterPaymentButton.setVisible(true);
+
+        // Give total price (subtotal, tax, and total)
+        console.setText(rentalReturn.getTotals());
+
+    }//GEN-LAST:event_closeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,7 +460,6 @@ public class RentalReturnGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JButton payButton;
     private javax.swing.JTextField paymentInput1;
     private javax.swing.JTextField paymentInput2;
     private javax.swing.JTextField paymentInput3;
