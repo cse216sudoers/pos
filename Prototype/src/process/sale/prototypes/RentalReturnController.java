@@ -76,6 +76,7 @@ public class RentalReturnController extends TransactionController{
      */
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
         if(payment > leftToPay)
+            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Payment is more than total.");
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
@@ -103,6 +104,7 @@ public class RentalReturnController extends TransactionController{
      */
     public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
        if(payment > leftToPay)
+           JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
            System.out.println("Payment is more than total.");
                
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
@@ -132,6 +134,7 @@ public class RentalReturnController extends TransactionController{
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: "+ code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
             return;
         }
@@ -158,42 +161,6 @@ public class RentalReturnController extends TransactionController{
         }
     }
     
-    private void processCoupon(){
-        String next = "";
-        int code;
-        int productCode;
-        float amount;
-        try{
-            System.out.print("Please enter coupon code: ");
-            next = scanner.next();
-            code = Integer.parseInt(next);
-        }catch(Exception e){
-            System.out.println("Invalid code: " + next);
-            return;
-        }
-        
-        try{
-            System.out.print("Please enter product code: ");
-            next = scanner.next();
-            productCode = Integer.parseInt(next);
-        }catch(Exception e){
-            System.out.println("Invalid code: " + next);
-            return;
-        }
-
-        try{
-            System.out.print("Please enter coupon amount: ");
-            next = scanner.next();
-            DecimalFormat myFormatter = new DecimalFormat("0.00");
-            amount = Float.parseFloat(next);
-            amount = Float.parseFloat(myFormatter.format(amount));
-        }catch(Exception e){
-            System.out.println("Invalid amount: " + next);
-            return;
-        }
-        
-        rentalReturn.addCoupon(new Coupon(code, productCode, amount));
-    }
     
     /**
      *

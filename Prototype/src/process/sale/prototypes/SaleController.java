@@ -67,6 +67,7 @@ public class SaleController extends TransactionController{
      */
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
         if(payment > leftToPay)
+            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Payment is more than total.");
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
@@ -94,6 +95,7 @@ public class SaleController extends TransactionController{
      */
     public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
        if(payment > leftToPay)
+           JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
            System.out.println("Payment is more than total.");
                
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
@@ -123,6 +125,7 @@ public class SaleController extends TransactionController{
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         
         if(product == null){ //product does not exist
+            JOptionPane.showMessageDialog (null, "Invalid product code: "+code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid product code: " + code);
             return;
         }

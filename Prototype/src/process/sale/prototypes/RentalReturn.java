@@ -6,6 +6,7 @@ package process.sale.prototypes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *Return for a SINGLE rental
@@ -82,6 +83,7 @@ public class RentalReturn extends Transaction{
             }
             subTotal -= ((RentalReturnLineItem)lineItem).getLateFee();
         }else{//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
             return false;
         }

@@ -1,5 +1,6 @@
 package process.sale.prototypes;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,6 +61,7 @@ public class Sale extends Transaction{
             }
         }
         if(!found){
+            JOptionPane.showMessageDialog (null, "Invalid coupon: "+ coupon.getCode(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
         }
     }
@@ -86,6 +88,7 @@ public class Sale extends Transaction{
             }
         }
         if(!found){//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
             return false;
         }

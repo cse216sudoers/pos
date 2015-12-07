@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Return
@@ -97,6 +98,7 @@ public class Return extends Transaction{
             }
         }
         if(!found){//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
             return false;
         }
