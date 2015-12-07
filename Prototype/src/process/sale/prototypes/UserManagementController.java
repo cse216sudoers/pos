@@ -19,30 +19,7 @@ public class UserManagementController {
     public UserManagementController(){
          cashierManager = CashierManager.getInstance();
     }
-    
-    /**
-     * Start asking for input
-     */
-    public void start(){
-        Scanner scan = new Scanner(System.in);
-        String input;
-        do{
-            System.out.println("Enter 'add', 'remove', 'display' or 'q' to quit: ");
-            input = scan.next();
-            if(input.equalsIgnoreCase("q"))
-                break;
-            else if(input.equalsIgnoreCase("add")){
-                processAdd();
-            }else if(input.equalsIgnoreCase("remove")){
-                processRemove();
-            }else if(input.equalsIgnoreCase("display")){
-                processDisplay();
-            }else{
-                System.out.println("Invalid Input.");
-            }
-        }while(!input.equalsIgnoreCase("q"));
-    }
-    
+   
     private void processAdd(){
         Scanner scan = new Scanner(System.in);
         String input;

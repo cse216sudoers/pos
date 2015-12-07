@@ -53,78 +53,6 @@ public class RegisterController{
     }
     
     /**
-     * Start/Turn on the register
-     */
-    public void start(){
-        Scanner scan = new Scanner(System.in);
-        String input;
-        do{
-            String otherOptions = "";
-            if(register.getCashier().getAccess() == Cashier.Access.Admin)
-                    otherOptions += "user management, ";
-            System.out.printf("Enter 'sale', 'return', 'rental', %sor 'q' to log off: \n", otherOptions);
-            input = scan.nextLine();
-            if(input.equalsIgnoreCase("q")){
-                register.logOffRegister();
-                break;
-            }else if (input.equalsIgnoreCase("User Management")){
-                processUserManagement();
-            }else if (input.equalsIgnoreCase("sale") || input.equalsIgnoreCase("return") || input.equalsIgnoreCase("rental")){
-                System.out.println("Enter 'new' or 'suspended': ");
-                String type = scan.nextLine();
-
-                if(input.equalsIgnoreCase("sale") && type.equalsIgnoreCase("new")){
-                    processSale();
-                }else if(input.equalsIgnoreCase("return") && type.equalsIgnoreCase("new")){
-                    //processReturn();
-                }else if(input.equalsIgnoreCase("rental") && type.equalsIgnoreCase("new")){
-                    processRental();
-                }else if(type.equalsIgnoreCase("suspended")){
-                    processSuspended(input);
-                }else{
-                    System.out.println("Invalid Input");
-                }
-            }else{
-                System.out.println("Invalid Input");
-            }
-            ProductCatalog.getCatalog().updateFile();
-        }while(!input.equalsIgnoreCase("q"));
-    }
-     
-    private void processSuspended(String type){
-        System.out.printf("Enter suspended %s id: \n", type);
-        int id;
-        Scanner scan = new Scanner(System.in);
-        do{
-            try{
-                id = scan.nextInt();
-                break;
-            }catch(Exception e){
-                System.out.println("Invalid id. Please enter an integer.");
-            }
-        }while(true);
-
-        if(type.equalsIgnoreCase("sale")){
-            Sale sale = SaleManager.getInstance().getSuspendedSaleById(id);
-            if(sale != null)
-                processSuspendedSale(sale);
-            else
-                System.out.printf("Suspended sale with id %d does not exist.\n", id);
-        }else if(type.equalsIgnoreCase("return")){
-            Return ret = ReturnManager.getInstance().getSuspendedReturnById(id);
-            if(ret != null)
-                processSuspendedReturn(ret);
-            else
-                System.out.printf("Suspended return with id %d does not exist.\n", id);
-        }else if(type.equalsIgnoreCase("rental")){
-            Rental rental = RentalManager.getInstance().getSuspendedRentalById(id);
-            if(rental != null)
-                processSuspendedRental(rental);
-            else
-                System.out.printf("Suspended rental with id %d does not exist.\n", id);
-        }
-    }
-    /**
      * Check if username is valid
      * @param username
      * @return
@@ -180,12 +108,6 @@ public class RegisterController{
     //start a rental
     public void processRental(){
         currentTransaction = new RentalController();
-    }
-    
-    //start user management (for Admin access level only)
-    public void processUserManagement(){
-        UserManagementController userManagementController = new UserManagementController();
-        userManagementController.start();
     }
     
     //log on register
