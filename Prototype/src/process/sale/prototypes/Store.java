@@ -52,6 +52,5 @@ public class Store {
             RegisterController currentRegisterController = new RegisterController(register);
         currentRegisterController.logOn();
         
-        currentRegisterController.start();
     }
 }

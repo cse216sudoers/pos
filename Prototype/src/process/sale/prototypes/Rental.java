@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Rental Domain object 
@@ -80,6 +81,7 @@ public class Rental extends Transaction{
             }
         }
         if(!found){
+            JOptionPane.showMessageDialog (null, "Invalid coupon "+ coupon.getCode(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
         }
     }
@@ -108,6 +110,7 @@ public class Rental extends Transaction{
             }
             total-=product.getRentalPrice();
         }else{//item not in Sale
+            JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("item not found");
             return false;
         }

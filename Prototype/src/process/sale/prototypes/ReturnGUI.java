@@ -25,6 +25,7 @@ public class ReturnGUI extends javax.swing.JFrame {
         ret = (ReturnController)previous.getRegisterController().getCurrentTransaction();
         initComponents();
         console.setText(ret.display());
+        MainGui.centreWindow(this);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,11 +162,18 @@ public class ReturnGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void voidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voidButtonActionPerformed
+        int productCode= 0;
+        int quantity = 0;
         try{
-            int productCode = Integer.parseInt(productCodeInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
-            ret.processVoid(productCode, quantity);
+            productCode = Integer.parseInt(productCodeInput.getText());
+            quantity = Integer.parseInt(quantityInput.getText());
+            ret.processProduct(productCode, quantity);
         }catch(Exception e){
+            if(productCode==0){
+                JOptionPane.showMessageDialog (null, "Please enter a product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0){
+                JOptionPane.showMessageDialog (null, "Please enter a quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
         }
         productCodeInput.setText("");
         quantityInput.setText("");
@@ -173,11 +181,18 @@ public class ReturnGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_voidButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        int productCode=0;
+        int quantity=0;
         try{
-            int productCode = Integer.parseInt(productCodeInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
+            productCode = Integer.parseInt(productCodeInput.getText());
+            quantity = Integer.parseInt(quantityInput.getText());
             ret.processProduct(productCode, quantity);
         }catch(Exception e){
+            if(productCode==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
         }
         productCodeInput.setText("");
         quantityInput.setText("");

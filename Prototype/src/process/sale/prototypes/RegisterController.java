@@ -5,6 +5,7 @@
 package process.sale.prototypes;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Does operations for a register domain object
@@ -52,11 +53,7 @@ public class RegisterController{
         register = registerManager.getRegisterById(registerId);
     }
     
-    /**
-     * Check if username is valid
-     * @param username
-     * @return
-     */
+    
     public boolean verifyUsername(String username){
         if(cashierManager.getCashierByUsername(username) != null)
                 return true;
@@ -126,6 +123,7 @@ public class RegisterController{
                     break;
                 }
             }
+            JOptionPane.showMessageDialog (null, "Username and Password combination incorrect", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             System.out.println("Username and Password conbination incorrect.");
         }
     }
