@@ -52,6 +52,7 @@ public class ReturnGUI extends javax.swing.JFrame {
         console = new javax.swing.JTextArea();
         overrideButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -94,6 +95,13 @@ public class ReturnGUI extends javax.swing.JFrame {
             }
         });
 
+        closeButton.setText("close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -102,7 +110,7 @@ public class ReturnGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -113,7 +121,10 @@ public class ReturnGUI extends javax.swing.JFrame {
                             .addComponent(productCodeInput)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                             .addComponent(quantityInput, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(suspendButton)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(closeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(suspendButton))
                     .addComponent(overrideButton))
                 .addContainerGap())
         );
@@ -137,7 +148,9 @@ public class ReturnGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(overrideButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(suspendButton))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(suspendButton)
+                            .addComponent(closeButton)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1)))
@@ -206,12 +219,22 @@ public class ReturnGUI extends javax.swing.JFrame {
         new LoginGui(true, this).setVisible(true);
     }//GEN-LAST:event_overrideButtonActionPerformed
 
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        ret.close();
+        String receipt = ret.close();
+        Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(image));
+        previous.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JButton closeButton;
     private javax.swing.JTextArea console;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
