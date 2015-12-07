@@ -51,6 +51,7 @@ public class SaleGui extends javax.swing.JFrame {
         
         enterPaymentButton.setEnabled(false);
         enterPaymentButton.setVisible(false);
+        MainGui.centreWindow(this);
     }
 
     /**
@@ -330,11 +331,18 @@ public class SaleGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        int productCode= 0;
+        int quantity = 0;
         try{
-            int productCode = Integer.parseInt(productCodeInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
+            productCode = Integer.parseInt(productCodeInput.getText());
+            quantity = Integer.parseInt(quantityInput.getText());
             sale.processProduct(productCode, quantity);
         }catch(Exception e){
+            if(productCode==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
         }
         productCodeInput.setText("");
         quantityInput.setText("");

@@ -18,7 +18,6 @@ public class RentalGUI extends javax.swing.JFrame {
     MainGui previous;
     private RentalController rental;
     public RentalGUI(MainGui prev) {
-        MainGui.centreWindow(this);
         previous=prev;
         rental = (RentalController)previous.getRegisterController().getCurrentTransaction();
         initComponents();
@@ -50,6 +49,7 @@ public class RentalGUI extends javax.swing.JFrame {
         
         enterPaymentButton.setEnabled(false);
         enterPaymentButton.setVisible(false);
+        MainGui.centreWindow(this);
     }
 
     /**
@@ -324,12 +324,19 @@ public class RentalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void voidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voidButtonActionPerformed
+        int productCode= 0;
+        int quantity = 0;
+        int days = 0;
         try{
-            int productCode = Integer.parseInt(productCodeInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
-            int days = Integer.parseInt(daysInput.getText());
-            rental.processVoid(productCode, quantity, days);
+            rental.processProduct(productCode, quantity, days);
         }catch(Exception e){
+            if(productCode==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (days==0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid amount of days", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
         }
         productCodeInput.setText("");
         quantityInput.setText("");
