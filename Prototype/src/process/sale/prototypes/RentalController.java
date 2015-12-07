@@ -6,6 +6,7 @@ package process.sale.prototypes;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -105,6 +106,7 @@ public class RentalController extends TransactionController{
     public String getTotals(){
         String output = rental.printTotals();
         leftToPay = rental.getTotal();
+        rental.startDate = new GregorianCalendar();
         return output;
     }
     

@@ -194,6 +194,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="productCodeInput">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="productCodeInputActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="quantityInput">
         </Component>

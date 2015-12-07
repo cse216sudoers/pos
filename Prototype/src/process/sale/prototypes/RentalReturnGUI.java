@@ -103,6 +103,12 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Code");
 
+        productCodeInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productCodeInputActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Quantity");
 
         voidButton.setText("Void");
@@ -417,6 +423,10 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         console.setText(rentalReturn.getTotals());
 
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void productCodeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productCodeInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productCodeInputActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

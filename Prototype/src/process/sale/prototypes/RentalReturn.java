@@ -59,9 +59,6 @@ public class RentalReturn extends Transaction{
      * @param affectQuantity
      */
     public void addItem(ProductDescription product, int daysRented, boolean affectQuantity){
-        if(rental.getLineItemByCodeAndDaysRented(id, daysRented) == null){
-            JOptionPane.showMessageDialog (null, "Item not found.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        }
         LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
         GregorianCalendar now= new GregorianCalendar();
         GregorianCalendar then = rental.getRentalDate();
@@ -77,7 +74,8 @@ public class RentalReturn extends Transaction{
             product.decreaseQuantity();
         } 
         else{
-            lines.add(new RentalLineItem(product, daysRented));
+            lineItem = new RentalLineItem(product, daysRented);
+            lines.add(lineItem);
             ((RentalReturnLineItem)lineItem).setDaysLate(dayslate);
             subTotal += ((RentalReturnLineItem)lineItem).getLateFee();
         }
@@ -108,7 +106,7 @@ public class RentalReturn extends Transaction{
     public String toString(){
         String output = "******RentalReturn******* \nReturn ID: " + id + "\n";
         for(int i = 0; i < lines.size(); i++){
-            output += lines.get(i).toString();
+            output += ((RentalLineItem)lines.get(i)).toString();
         }
         return output;
     }

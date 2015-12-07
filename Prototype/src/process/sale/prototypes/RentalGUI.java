@@ -79,9 +79,9 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentInput1 = new javax.swing.JTextField();
         paymentLabel1 = new javax.swing.JLabel();
         paymentLabel2 = new javax.swing.JLabel();
-        closeButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
         creditLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -125,13 +125,6 @@ public class RentalGUI extends javax.swing.JFrame {
 
         paymentLabel2.setText("CardNum");
 
-        closeButton.setText("Pay");
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeButtonActionPerformed(evt);
-            }
-        });
-
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +133,13 @@ public class RentalGUI extends javax.swing.JFrame {
         });
 
         creditLabel.setText("Credit");
+
+        jButton1.setText("Pay");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -184,7 +184,7 @@ public class RentalGUI extends javax.swing.JFrame {
                         .addComponent(suspendButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(closeButton)))
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -229,9 +229,9 @@ public class RentalGUI extends javax.swing.JFrame {
                                     .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(creditLabel)))
                             .addComponent(enterPaymentButton))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(closeButton)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -333,7 +333,7 @@ public class RentalGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_suspendButtonActionPerformed
 
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         paymentLabel1.setVisible(true);
         paymentLabel2.setVisible(true);
         paymentLabel3.setVisible(true);
@@ -351,7 +351,7 @@ public class RentalGUI extends javax.swing.JFrame {
         creditLabel.setEnabled(true);
         enterPaymentButton.setEnabled(true);
         console.setText(rental.getTotals());
-    }//GEN-LAST:event_closeButtonActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,12 +393,12 @@ public class RentalGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JButton closeButton;
     private javax.swing.JTextArea console;
     private javax.swing.JLabel creditLabel;
     private javax.swing.JTextField daysInput;
     private javax.swing.JLabel dayslabel;
     private javax.swing.JButton enterPaymentButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
