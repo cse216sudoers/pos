@@ -80,15 +80,6 @@ public class SaleController extends TransactionController{
         }
     }
     
-    //check if payment is valid
-    private boolean processCreditPayment(CreditPayment payment){
-        String cardNum = payment.getCardNum();
-        String secNum = payment.getSecurityCode();
-        if(cardNum.length() == 16 && secNum.length() == 3)
-            return true;
-        return false;
-    }
-    
     /**
      * Make a debit payment
      */
@@ -105,15 +96,6 @@ public class SaleController extends TransactionController{
         else{
             return null;
         }
-    }
-    
-    //Check if debit payment is valid
-    private boolean processDebitPayment(DebitPayment payment){
-        String cardNum = "" + payment.getCardNum();
-        String pin = "" + payment.getPin();
-        if(cardNum.length() == 16 && pin.length() == 4)
-            return true;
-        return false;
     }
     
     /**

@@ -4,6 +4,8 @@
  */
 package process.sale.prototypes;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Pikachu
@@ -37,5 +39,24 @@ public abstract class TransactionController {
     
     public void setLeftToPay(float l){
         leftToPay = l;
+    }
+    //Check if debit payment is valid
+    protected boolean processDebitPayment(DebitPayment payment){
+        String cardNum = "" + payment.getCardNum();
+        String pin = "" + payment.getPin();
+        if(cardNum.length() == 16 && pin.length() == 4)
+            return true;
+        JOptionPane.showMessageDialog (null, "Card declined.Enter 16 digit card number and 4 digit pin.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    //check if payment is valid
+    protected boolean processCreditPayment(CreditPayment payment){
+        String cardNum = payment.getCardNum();
+        String secNum = payment.getSecurityCode();
+        if(cardNum.length() == 16 && secNum.length() == 3)
+            return true;
+        JOptionPane.showMessageDialog (null, "Card declined. Enter 16 digit card number and 3 digit security code.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        return false;
     }
 }

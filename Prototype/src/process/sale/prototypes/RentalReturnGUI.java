@@ -294,6 +294,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         }
         productCodeInput.setText("");
         quantityInput.setText("");
+        daysInput.setText("");
         console.setText(rentalReturn.display());
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -316,6 +317,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         }
         productCodeInput.setText("");
         quantityInput.setText("");
+        daysInput.setText("");
         console.setText(rentalReturn.display());
     }//GEN-LAST:event_voidButtonActionPerformed
 

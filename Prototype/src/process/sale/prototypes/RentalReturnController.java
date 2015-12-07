@@ -88,16 +88,7 @@ public class RentalReturnController extends TransactionController{
             return null;
         }
     }
-    
-    //check if payment is valid
-    private boolean processCreditPayment(CreditPayment payment){
-        String cardNum = payment.getCardNum();
-        String secNum = payment.getSecurityCode();
-        if(cardNum.length() == 16 && secNum.length() == 3)
-            return true;
-        return false;
-    }
-    
+   
     /**
      * Make a debit payment
      */
@@ -114,15 +105,6 @@ public class RentalReturnController extends TransactionController{
         else{
             return null;
         }
-    }
-    
-    //Check if debit payment is valid
-    private boolean processDebitPayment(DebitPayment payment){
-        String cardNum = "" + payment.getCardNum();
-        String pin = "" + payment.getPin();
-        if(cardNum.length() == 16 && pin.length() == 4)
-            return true;
-        return false;
     }
     
     /**
@@ -151,6 +133,10 @@ public class RentalReturnController extends TransactionController{
             JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else if(!product.getIsRentable()){
             JOptionPane.showMessageDialog (null, "Item " + code + " is not rentable.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }else if(rentalReturn.getLineItemByCodeAndDaysRented(code, days) == null){
+            JOptionPane.showMessageDialog (null, "Item " + code + " is not in this rental.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }else if(rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days).getQuantity() == rentalReturn.getLineItemByCodeAndDaysRented(code, days).quantity){
+            JOptionPane.showMessageDialog (null, "Item " + code + " has already been returned.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else{
             for(int i = 0; i < amount; i++)
                 rentalReturn.addItem(product, days, true);
