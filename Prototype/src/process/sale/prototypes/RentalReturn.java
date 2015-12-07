@@ -23,7 +23,7 @@ public class RentalReturn extends Transaction{
         this.rental = rental;
         total = 0;
         subTotal = 0;
-        id = rental.getId();
+        id=rental.getId();
         payments = new ArrayList<>();
         lines = new ArrayList<>();
     }

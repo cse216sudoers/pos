@@ -282,6 +282,9 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         int quantity=0;
         int days=0;
         try{
+            productCode=Integer.parseInt(productCodeInput.getText());
+            quantity=Integer.parseInt(quantityInput.getText());
+            days=Integer.parseInt(daysInput.getText());
             rentalReturn.processProduct(productCode, quantity, days);
         }catch(Exception e){
             if(productCode==0){
