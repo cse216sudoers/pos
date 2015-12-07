@@ -1,6 +1,7 @@
 .*\#
 *~
 *\#
+*.class
 .DS_Store
 private.*
 Prototype/nbproject/private
