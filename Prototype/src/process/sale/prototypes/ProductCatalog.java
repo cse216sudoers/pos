@@ -86,7 +86,6 @@ public class ProductCatalog {
                 int rent=0;
                 if(item.getIsRentable())
                     rent=1;
-                // System.out.println(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+item.getIsRentable()+"|"+item.getRentalPrice()+"|\n");
                 bw.write(item.getCode()+"|"+item.getDescription()+"|"+item.getPrice()+"|"+item.getQuantity()+"|"+rent+"|"+item.getRentalPrice()+"|");
                 bw.newLine();
             }

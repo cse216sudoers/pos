@@ -4,6 +4,7 @@
  */
 package process.sale.prototypes;
 
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -301,8 +302,11 @@ public class RentalGUI extends javax.swing.JFrame {
         }catch(Exception e){
 
         }
-        if(payment != null)
-        console.setText(console.getText() + payment.toString() + "Total: " + rental.getLeftToPay());
+        if(payment != null){
+            DecimalFormat myFormatter = new DecimalFormat("0.00");
+            float amount = Float.parseFloat(myFormatter.format(rental.getLeftToPay()));
+            console.setText(console.getText() + payment.toString() + "Total: $" + amount);
+        }
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");

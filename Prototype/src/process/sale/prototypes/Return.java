@@ -99,7 +99,6 @@ public class Return extends Transaction{
         }
         if(!found){//item not in Sale
             JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("item not found");
             return false;
         }
         return true;

@@ -106,7 +106,6 @@ public class ReturnController extends TransactionController{
         
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
             return;
         }
         for(int i = 0; i < quantity; i++)
@@ -123,12 +122,10 @@ public class ReturnController extends TransactionController{
         
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: "+ code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
             return;
         }
         if(!ret.addItem(product)){
             JOptionPane.showMessageDialog (null, "Item does not exist on this receipt", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Item does not exist on this receipt.");
         }
         
     }

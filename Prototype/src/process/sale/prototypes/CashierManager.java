@@ -7,7 +7,6 @@ package process.sale.prototypes;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import DB.User;
 import javax.swing.JOptionPane;
 
 /**
@@ -190,6 +189,7 @@ public class CashierManager {
         }
         return false;
     }
+    
     /**
      *
      * @param id unique id for cashier

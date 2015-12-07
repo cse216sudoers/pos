@@ -68,7 +68,6 @@ public class SaleController extends TransactionController{
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
         if(payment > leftToPay)
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Payment is more than total.");
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
@@ -96,7 +95,6 @@ public class SaleController extends TransactionController{
     public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
        if(payment > leftToPay)
            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-           System.out.println("Payment is more than total.");
                
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
         if(processDebitPayment(debit)){
@@ -126,7 +124,6 @@ public class SaleController extends TransactionController{
         
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: "+code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
             return;
         }else if(quantity>sale.getLineItemByCode(product.getCode()).getQuantity()){
             JOptionPane.showMessageDialog (null, "There are only "+ sale.getLineItemByCode(product.getCode()).getQuantity()+" of "+ code+" in this sale", "Invalid Input", JOptionPane.ERROR_MESSAGE);
@@ -145,19 +142,16 @@ public class SaleController extends TransactionController{
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
             return;
         }
         
         if(product.getQuantity()>=1&&amount>product.getQuantity()){
             JOptionPane.showMessageDialog (null, "Only "+ product.getQuantity() +" left in stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Not enough of item "+code+" in stock");
         }else if(product.productLeft()) {
             for(int i=0; i<amount; i++)
                 sale.addItem(product, true);
         }else{
             JOptionPane.showMessageDialog (null, "Item out of stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Item out of stock: " + code);
         }
     }
     

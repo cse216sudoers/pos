@@ -4,6 +4,7 @@
  */
 package process.sale.prototypes;
 
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -172,7 +173,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,6 +329,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
+        
         try{    
             if(cashButton.isSelected()){
                 payment = rentalReturn.processCashPayment(Integer.parseInt(paymentInput1.getText()));
@@ -339,8 +341,11 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         }catch(Exception e){
             
         }
-        if(payment != null)
-            console.setText(console.getText() + payment.toString() + "Total: " + rentalReturn.getLeftToPay());
+        if(payment != null){
+            DecimalFormat myFormatter = new DecimalFormat("0.00");
+            float amount = Float.parseFloat(myFormatter.format(rentalReturn.getLeftToPay()));
+            console.setText(console.getText() + payment.toString() + "Total: $" + amount);
+        }
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");

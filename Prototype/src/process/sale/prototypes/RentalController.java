@@ -55,7 +55,6 @@ public class RentalController extends TransactionController{
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
         if(payment > leftToPay)
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Payment is more than total.");
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
@@ -85,7 +84,6 @@ public class RentalController extends TransactionController{
         
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: "+ code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
             return;
         }
         for(int i = 0; i < quantity; i++)
@@ -102,13 +100,10 @@ public class RentalController extends TransactionController{
   
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
         }else if(!product.getIsRentable()){
             JOptionPane.showMessageDialog (null, "Item can not be rented: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Item cannot be rented: " + code);
         }else if(!product.productLeft()){
             JOptionPane.showMessageDialog (null, "Item out of stock: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Item out of stock: " + code);
         }else{
             for(int i = 0; i < quantity; i++)
                 rental.addItem(product, days, true);

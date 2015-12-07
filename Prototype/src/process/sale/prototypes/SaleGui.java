@@ -6,6 +6,7 @@ package process.sale.prototypes;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -434,8 +435,11 @@ public class SaleGui extends javax.swing.JFrame {
         }catch(Exception e){
             
         }
-        if(payment != null)
-            console.setText(console.getText() + payment.toString() + "Total: " + sale.getLeftToPay());
+        if(payment != null){
+            DecimalFormat myFormatter = new DecimalFormat("0.00");
+            float amount = Float.parseFloat(myFormatter.format(sale.getLeftToPay()));
+            console.setText(console.getText() + payment.toString() + "Total: $" + amount);
+        }
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");

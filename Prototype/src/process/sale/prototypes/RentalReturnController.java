@@ -77,7 +77,6 @@ public class RentalReturnController extends TransactionController{
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
         if(payment > leftToPay)
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Payment is more than total.");
         
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
@@ -105,7 +104,6 @@ public class RentalReturnController extends TransactionController{
     public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
        if(payment > leftToPay)
            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-           System.out.println("Payment is more than total.");
                
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
         if(processDebitPayment(debit)){
@@ -135,7 +133,6 @@ public class RentalReturnController extends TransactionController{
         
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: "+ code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
             return;
         }
         for(int i = 0; i < quantity; i++)
@@ -152,9 +149,8 @@ public class RentalReturnController extends TransactionController{
   
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid product code: " + code);
         }else if(!product.getIsRentable()){
-            System.out.println("Item cannot be rented: " + code);
+            JOptionPane.showMessageDialog (null, "Item " + code + " is not rentable.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else{
             for(int i = 0; i < amount; i++)
                 rentalReturn.addItem(product, days, true);

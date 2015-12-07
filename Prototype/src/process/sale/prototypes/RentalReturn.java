@@ -84,29 +84,9 @@ public class RentalReturn extends Transaction{
             subTotal -= ((RentalReturnLineItem)lineItem).getLateFee();
         }else{//item not in Sale
             JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("item not found");
             return false;
         }
         return true;
-    }
-    
-    /**
-     *
-     * @param coupon
-     */
-    public void addCoupon(Coupon coupon){
-        boolean found = false;
-        for(int i = 0; i < lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == coupon.getProductCode()){
-                lines.get(i).setCoupon(coupon);
-                subTotal-=coupon.getAmount();
-                found = true;
-                break;
-            }
-        }
-        if(!found){
-            System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
-        }
     }
     
     @Override
