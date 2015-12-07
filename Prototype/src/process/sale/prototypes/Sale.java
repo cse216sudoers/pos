@@ -42,8 +42,6 @@ public class Sale extends Transaction{
             item.increaseQuantity();
             subTotal += product.getPrice();
         }
-        else
-            ;//System.out.println("Out of Stock");
     }
     
     /**
@@ -61,8 +59,7 @@ public class Sale extends Transaction{
             }
         }
         if(!found){
-            JOptionPane.showMessageDialog (null, "Invalid coupon: "+ coupon.getCode(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Invalid coupon. Item not scanned: " + coupon.getCode());
+            JOptionPane.showMessageDialog (null, "Item not scanned: "+ coupon.getProductCode(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -89,7 +86,6 @@ public class Sale extends Transaction{
         }
         if(!found){//item not in Sale
             JOptionPane.showMessageDialog (null, "Item not found", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            System.out.println("item not found");
             return false;
         }
         return true;

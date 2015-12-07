@@ -337,11 +337,23 @@ public class SaleGui extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void voidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voidButtonActionPerformed
+        int productCode = 0;
+        int quantity = 0;
         try{
-            int productCode = Integer.parseInt(productCodeInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
+            productCode = Integer.parseInt(productCodeInput.getText());
+            quantity = Integer.parseInt(quantityInput.getText());
+            if(productCode<=0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0)
+                JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+
             sale.processVoid(productCode, quantity);
         }catch(Exception e){
+            if(productCode<=0){
+                JOptionPane.showMessageDialog (null, "Please enter a valid product code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }else if (quantity==0)
+                JOptionPane.showMessageDialog (null, "Please enter a valid quantity", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+
         }
         productCodeInput.setText("");
         quantityInput.setText("");
@@ -355,6 +367,7 @@ public class SaleGui extends javax.swing.JFrame {
             int code = Integer.parseInt(couponCodeInput.getText());
             sale.processCoupon(code);
         }catch(Exception e){
+            JOptionPane.showMessageDialog (null, "Please enter a valid coupon code", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
         couponCodeInput.setText(""); console.setText(sale.display());
        
@@ -437,7 +450,10 @@ public class SaleGui extends javax.swing.JFrame {
     }//GEN-LAST:event_enterPaymentButtonActionPerformed
 
     private void overrideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideButtonActionPerformed
-        new LoginGui(true, this).setVisible(true);
+        if(previous.getRegisterController().getRegister().getCashier().getAccess() == Cashier.Access.Cashier)
+            new LoginGui(true, this).setVisible(true);
+        else
+            new OverrideGUI(this).setVisible(true);
     }//GEN-LAST:event_overrideButtonActionPerformed
 
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditButtonActionPerformed
@@ -462,40 +478,6 @@ public class SaleGui extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_suspendButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SaleGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new SaleGui().setVisible(true);
-//            }
-//        });
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.ButtonGroup buttonGroup1;
