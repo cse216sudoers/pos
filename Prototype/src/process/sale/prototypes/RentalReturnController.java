@@ -135,7 +135,7 @@ public class RentalReturnController extends TransactionController{
             JOptionPane.showMessageDialog (null, "Item " + code + " is not rentable.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else if(rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days) == null){
             JOptionPane.showMessageDialog (null, "Item " + code + " is not in this rental.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        }else if(rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days) !=null && 
+        }else if(rentalReturn.getLineItemByCodeAndDaysRented(code, days) !=null && 
                 rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days).getQuantity() == rentalReturn.getLineItemByCodeAndDaysRented(code, days).getQuantity()){
             JOptionPane.showMessageDialog (null, "Item " + code + " has already been returned.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else{
