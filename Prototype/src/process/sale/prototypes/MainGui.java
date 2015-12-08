@@ -223,13 +223,13 @@ public class MainGui extends javax.swing.JFrame {
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         Object[] options = {"New Sale Return",
-                    "Suspended Sale Return", "New Rental Return",
+                     "New Rental Return",
                     "Cancel"};
         int choice = JOptionPane.showOptionDialog(this,
             "New or Suspended?", "",
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.INFORMATION_MESSAGE,
-            null, options, options[3]);
+            null, options, options[2]);
         String inputValue;
         int id;
         Sale sale = null;
@@ -259,30 +259,8 @@ public class MainGui extends javax.swing.JFrame {
                 new ReturnGUI(this).setVisible(true);
                 this.setVisible(false);
                 break;
+            
             case 1:
-                do{
-                    try{
-                        inputValue = JOptionPane.showInputDialog("Return ID: ");
-                        if(inputValue==null){
-                            break;
-                        }
-                        id = Integer.parseInt(inputValue);
-                        ret = ReturnManager.getInstance().getSuspendedReturnById(id);
-                        if (ret==null){
-                            JOptionPane.showMessageDialog (null, "Return ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }catch(Exception e){
-                        JOptionPane.showMessageDialog (null, "Invalid Return ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                    }
-                }while(ret == null);
-                if(ret==null){
-                    break;
-                }
-                registerController.processSuspendedReturn(ret);
-                new ReturnGUI(this).setVisible(true);
-                this.setVisible(false);
-                break;
-            case 2:
                 do{
                    try{
                         inputValue = JOptionPane.showInputDialog("Rental ID: ");

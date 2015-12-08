@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/RentalReturnGUI.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/LineItem.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/DB/DBClass.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/Rental.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/RentalReturnController.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/RentalReturn.java</file>
-            <file>file:/Users/noahreifsnyder/Desktop/pos/Prototype/src/process/sale/prototypes/MainGui.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

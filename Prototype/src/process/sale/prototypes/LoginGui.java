@@ -177,7 +177,7 @@ public class LoginGui extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        //Resources.Instantiate();
+        Resources.Instantiate();
         //******************************
         //UNCOMMENT WHEN PACKAGEING
         //ALSO GO TO RESOURCES LN:42 and UNCOMMENT
