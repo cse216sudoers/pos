@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -86,6 +87,13 @@ public class RentalManager {
                         break;
                     rentalI.addPayment(pay);
                 }
+                String parsedate = read.next();
+                String[] pair = parsedate.split(":");
+                int year= Integer.parseInt(pair[0]);
+                int month=Integer.parseInt(pair[1]);
+                int day=Integer.parseInt(pair[2]);
+                GregorianCalendar date = new GregorianCalendar(year,month,day);
+                rentalI.startDate=date;
                 read.nextLine();
                 //Rental rental = new Rental();
                 rentals.put(rentalI.getId(),rentalI);
@@ -220,6 +228,8 @@ public class RentalManager {
                     }
                 }
                 bw.write("|");
+                SimpleDateFormat ft =  new SimpleDateFormat ("yyyy:MM:dd");
+                bw.write(ft.format(rental.startDate.getTime())+"|");
                 bw.newLine();
             }
             bw.write("suspended|");

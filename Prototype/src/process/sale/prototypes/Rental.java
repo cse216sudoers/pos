@@ -33,6 +33,8 @@ public class Rental extends Transaction{
         payments = new ArrayList<>();
         lines = new ArrayList<>();
         returns = new ArrayList<>();
+
+    
     }
     
     /**
