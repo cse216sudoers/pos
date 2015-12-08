@@ -51,6 +51,7 @@ public class Rental extends Transaction{
                 quantity--;
             }
         }
+        RentalManager.getInstance().updateFile();
         ProductCatalog.getCatalog().updateFile();
     }
     public GregorianCalendar getRentalDate(){
