@@ -56,7 +56,6 @@ public class RentalReturnController extends TransactionController{
     public CashPayment processCashPayment(float payment){
         CashPayment cash;
         if(payment > leftToPay){
-            //System.out.printf("Your change is $%.2f\n", payment - leftToPay);
             rentalReturn.addPayment(cash = new CashPayment(payment, leftToPay));
             leftToPay = 0;
         }

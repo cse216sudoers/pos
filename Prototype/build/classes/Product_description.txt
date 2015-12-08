@@ -1,4 +1,4 @@
-287|Canon Printer|99.99|959|1|2.0|
+287|Canon Printer|99.99|952|1|2.0|
 853|Target Gift Card|25.0|0|0|0.0|
 975|Shots|4.99|3|0|0.0|
 983|24pc pencil ticonderoga|6.99|1|0|0.0|
@@ -14,7 +14,7 @@
 5644|Mahogany Door|127.95|61|0|0.0|
 6278|4 function calculator|2.49|0|0|0.0|
 6843|A NEW CAR|14499.99|3|1|3.99|
-7774|Monkey|429.99|52|1|3.99|
+7774|Monkey|429.99|48|1|3.99|
 9605|Migraine Medication|29.97|1|0|0.0|
 9642|Nike Dancing Shoes|69.99|3|0|0.0|
 9685|iPhone 6S Plus|299.99|0|0|0.0|
