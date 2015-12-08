@@ -50,7 +50,6 @@ public class ReturnGUI extends javax.swing.JFrame {
         voidButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
-        suspendButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
@@ -80,13 +79,6 @@ public class ReturnGUI extends javax.swing.JFrame {
         console.setRows(5);
         jScrollPane1.setViewportView(console);
 
-        suspendButton.setText("Suspend");
-        suspendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                suspendButtonActionPerformed(evt);
-            }
-        });
-
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,10 +105,9 @@ public class ReturnGUI extends javax.swing.JFrame {
                             .addComponent(productCodeInput)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                             .addComponent(quantityInput, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(closeButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(suspendButton)))
+                        .addGap(0, 107, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,9 +128,7 @@ public class ReturnGUI extends javax.swing.JFrame {
                             .addComponent(addButton)
                             .addComponent(voidButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(suspendButton)
-                            .addComponent(closeButton)))
+                        .addComponent(closeButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1)))
@@ -198,12 +187,6 @@ public class ReturnGUI extends javax.swing.JFrame {
         console.setText(ret.display());
     }//GEN-LAST:event_addButtonActionPerformed
 
-    private void suspendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suspendButtonActionPerformed
-        ret.processSuspend();
-        previous.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_suspendButtonActionPerformed
-
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         String receipt = ret.close();
         Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -227,7 +210,6 @@ public class ReturnGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField productCodeInput;
     private javax.swing.JTextField quantityInput;
-    private javax.swing.JButton suspendButton;
     private javax.swing.JButton voidButton;
     // End of variables declaration//GEN-END:variables
 }
