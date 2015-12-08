@@ -396,6 +396,10 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
 
+        if(rentalReturn.leftToPay==0){
+            rentalReturn.close();
+            return;
+        }
         productCodeInput.setEnabled(false);
         quantityInput.setEnabled(false);
         daysInput.setEnabled(false);
