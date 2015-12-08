@@ -88,11 +88,12 @@ public class RentalManager {
                     rentalI.addPayment(pay);
                 }
                 String parsedate = read.next();
+                System.out.println(parsedate);
                 String[] pair = parsedate.split(":");
                 int year= Integer.parseInt(pair[0]);
                 int month=Integer.parseInt(pair[1]);
                 int day=Integer.parseInt(pair[2]);
-                GregorianCalendar date = new GregorianCalendar(year,month,day);
+                GregorianCalendar date = new GregorianCalendar(year,month-1,day);
                 rentalI.startDate=date;
                 read.nextLine();
                 //Rental rental = new Rental();
@@ -231,6 +232,7 @@ public class RentalManager {
                 }
                 bw.write("|");
                 SimpleDateFormat ft =  new SimpleDateFormat ("yyyy:MM:dd");
+                System.out.println(ft.format(rental.startDate.getTime()));
                 bw.write(ft.format(rental.startDate.getTime())+"|");
                 bw.newLine();
             }
