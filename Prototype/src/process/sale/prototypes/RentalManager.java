@@ -88,7 +88,7 @@ public class RentalManager {
                     rentalI.addPayment(pay);
                 }
                 String parsedate = read.next();
-                System.out.println(parsedate);
+                //System.out.println(parsedate);
                 String[] pair = parsedate.split(":");
                 int year= Integer.parseInt(pair[0]);
                 int month=Integer.parseInt(pair[1]);
@@ -127,7 +127,7 @@ public class RentalManager {
             }
         }
         catch(FileNotFoundException | NumberFormatException e){
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
         }
     }
     
@@ -232,7 +232,7 @@ public class RentalManager {
                 }
                 bw.write("|");
                 SimpleDateFormat ft =  new SimpleDateFormat ("yyyy:MM:dd");
-                System.out.println(ft.format(rental.startDate.getTime()));
+                //System.out.println(ft.format(rental.startDate.getTime()));
                 bw.write(ft.format(rental.startDate.getTime())+"|");
                 bw.newLine();
             }
@@ -253,7 +253,7 @@ public class RentalManager {
             }
             bw.close();
         } catch(Exception e){
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
         }
     }
 }
