@@ -46,7 +46,7 @@ public class RentalReturn extends Transaction{
      */
     public LineItem getLineItemByCodeAndDaysRented(int code, int daysRented){
         for(int i = 0; i< lines.size(); i++){
-            if(lines.get(i).getProduct().getCode() == code && ((RentalLineItem)lines.get(i)).getDaysRented() == daysRented)
+            if(lines.get(i).getProduct().getCode() == code && ((RentalReturnLineItem)lines.get(i)).getDaysRented() == daysRented)
                 return lines.get(i);
         }
         return null;
@@ -74,9 +74,8 @@ public class RentalReturn extends Transaction{
             product.decreaseQuantity();
         } 
         else{
-            lineItem = new RentalLineItem(product, daysRented);
+            lineItem = new RentalReturnLineItem(product, dayslate, daysRented);
             lines.add(lineItem);
-            ((RentalReturnLineItem)lineItem).setDaysLate(dayslate);
             subTotal += ((RentalReturnLineItem)lineItem).getLateFee();
         }
     }
@@ -106,7 +105,7 @@ public class RentalReturn extends Transaction{
     public String toString(){
         String output = "******RentalReturn******* \nReturn ID: " + id + "\n";
         for(int i = 0; i < lines.size(); i++){
-            output += ((RentalLineItem)lines.get(i)).toString();
+            output += lines.get(i).toString();
         }
         return output;
     }
