@@ -48,7 +48,8 @@ public class Rental extends Transaction{
                 removeItem(retItem.getProduct(), retItem.getDaysRented(), false);
                 quantity--;
             }
-        }   
+        }
+        ProductCatalog.getCatalog().updateFile();
     }
     public GregorianCalendar getRentalDate(){
         return startDate;
@@ -67,6 +68,7 @@ public class Rental extends Transaction{
         } 
         else{
             lines.add(new RentalLineItem(product, daysRented));
+            product.decreaseQuantity();
             subTotal += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
         }
     }
