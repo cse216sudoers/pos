@@ -173,6 +173,7 @@ public class SaleManager {
     public void addSale(Sale sale){
         sales.put(sale.getId(), sale);
         updateFile();
+        ProductCatalog.getCatalog().updateFile();
     } 
     
     /**
@@ -182,6 +183,7 @@ public class SaleManager {
     public void addSuspendedSale(Sale sale){
         suspendedSales.put(sale.getId(), sale);
         updateFile();
+        ProductCatalog.getCatalog().updateFile();
     }
     /**
      *

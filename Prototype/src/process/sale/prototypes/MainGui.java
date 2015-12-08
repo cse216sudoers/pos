@@ -170,6 +170,7 @@ public class MainGui extends javax.swing.JFrame {
                         id = Integer.parseInt(inputValue);
                         sale = SaleManager.getInstance().getSuspendedSaleById(id);
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Sale ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                     if(inputValue.equals(JOptionPane.CANCEL_OPTION)){
                         break;
@@ -205,10 +206,11 @@ public class MainGui extends javax.swing.JFrame {
                 int id;
                 do{
                     try{
-                        inputValue = JOptionPane.showInputDialog("Return ID: ");
+                        inputValue = JOptionPane.showInputDialog("Rental ID: ");
                         id = Integer.parseInt(inputValue);
                         rental = RentalManager.getInstance().getSuspendedRentalById(id);
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Rental ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(rental == null);
                 registerController.processSuspendedRental(rental);
