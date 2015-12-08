@@ -48,7 +48,7 @@ public class CashierManager {
             }
         }
         catch(Exception e){
-            //System.out.println(e.toString());
+            System.out.println("Y'all fucked up! " + e.toString());
         }
     }
 
