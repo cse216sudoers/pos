@@ -89,9 +89,10 @@ public class SaleController extends TransactionController{
      * Make a debit payment
      */
     public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
-       if(payment > leftToPay)
-           JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-               
+       if(payment > leftToPay){
+            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }    
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
         if(processDebitPayment(debit)){
             sale.addPayment(debit);

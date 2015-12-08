@@ -74,9 +74,10 @@ public class RentalReturnController extends TransactionController{
      * Create a Credit payment
      */
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
-        if(payment > leftToPay)
+        if(payment > leftToPay){
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        
+            return null;
+        }
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
             rentalReturn.addPayment(credit);
@@ -94,9 +95,10 @@ public class RentalReturnController extends TransactionController{
      * Make a debit payment
      */
     public DebitPayment processDebitPayment(String cardNum, int pin, float payment){
-       if(payment > leftToPay)
-           JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-               
+       if(payment > leftToPay){
+            JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }       
         DebitPayment debit = new DebitPayment(cardNum, pin, payment);
         if(processDebitPayment(debit)){
             rentalReturn.addPayment(debit);

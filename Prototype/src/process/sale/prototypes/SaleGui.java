@@ -425,7 +425,7 @@ public class SaleGui extends javax.swing.JFrame {
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
         Float pay=Float.parseFloat(paymentInput1.getText());
-        float payCheck=(float) ((int)(pay*100)/100.0);
+        float payCheck=Float.parseFloat(String.format("%.2f", pay));
         if(!(payCheck==pay)){
            JOptionPane.showMessageDialog (null, "Invalid payment amount", "Invalid Input", JOptionPane.ERROR_MESSAGE);
            return;
