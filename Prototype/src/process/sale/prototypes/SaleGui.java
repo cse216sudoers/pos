@@ -424,13 +424,18 @@ public class SaleGui extends javax.swing.JFrame {
 
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
+        Float pay=Float.parseFloat(paymentInput1.getText());
+        if(!((int)(pay*100)/100.0==pay)){
+           JOptionPane.showMessageDialog (null, "Invalid payment amount", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+           return;
+        }
         try{    
             if(cashButton.isSelected()){
-                payment = sale.processCashPayment(Integer.parseInt(paymentInput1.getText()));
+                payment = sale.processCashPayment(pay);
             }else if(creditButton.isSelected()){
-                payment = sale.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
+                payment = sale.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),pay);
             }else if(debitButton.isSelected()){
-                payment = sale.processDebitPayment(paymentInput2.getText(), Integer.parseInt(paymentInput3.getText()),Float.parseFloat(paymentInput1.getText()));
+                payment = sale.processDebitPayment(paymentInput2.getText(), Integer.parseInt(paymentInput3.getText()),pay);
             }else return;
         }catch(Exception e){
             
