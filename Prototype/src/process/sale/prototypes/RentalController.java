@@ -54,9 +54,10 @@ public class RentalController extends TransactionController{
      * Create a Credit payment
      */
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
-        if(payment > leftToPay)
+        if(payment > leftToPay){
+            float amount=leftToPay;
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        
+        }
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
             rental.addPayment(credit);
@@ -107,8 +108,10 @@ public class RentalController extends TransactionController{
         String output = rental.printTotals();
         leftToPay = rental.getTotal();
         rental.startDate = new GregorianCalendar();
-        int amount=(int)(leftToPay*100);
-        leftToPay=(float)(amount/100.0);
+        //String pay=Float.toString(leftToPay);
+        String pay=String.format("%.2f",leftToPay);
+        leftToPay=Float.parseFloat(pay);
+        float amount=leftToPay;
         return output;
     }
     

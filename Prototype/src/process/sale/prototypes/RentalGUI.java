@@ -81,7 +81,7 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentLabel2 = new javax.swing.JLabel();
         suspendButton = new javax.swing.JButton();
         creditLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -134,10 +134,10 @@ public class RentalGUI extends javax.swing.JFrame {
 
         creditLabel.setText("Credit");
 
-        jButton1.setText("Pay");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        closeButton.setText("Pay");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                closeButtonActionPerformed(evt);
             }
         });
 
@@ -184,7 +184,7 @@ public class RentalGUI extends javax.swing.JFrame {
                         .addComponent(suspendButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(closeButton)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -230,7 +230,7 @@ public class RentalGUI extends javax.swing.JFrame {
                                     .addComponent(creditLabel)))
                             .addComponent(enterPaymentButton))))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(closeButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -333,7 +333,7 @@ public class RentalGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_suspendButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         paymentLabel1.setVisible(true);
         paymentLabel2.setVisible(true);
         paymentLabel3.setVisible(true);
@@ -351,7 +351,7 @@ public class RentalGUI extends javax.swing.JFrame {
         creditLabel.setEnabled(true);
         enterPaymentButton.setEnabled(true);
         console.setText(rental.getTotals());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_closeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,12 +393,12 @@ public class RentalGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JButton closeButton;
     private javax.swing.JTextArea console;
     private javax.swing.JLabel creditLabel;
     private javax.swing.JTextField daysInput;
     private javax.swing.JLabel dayslabel;
     private javax.swing.JButton enterPaymentButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
