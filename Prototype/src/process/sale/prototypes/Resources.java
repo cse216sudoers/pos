@@ -24,6 +24,7 @@ public class Resources {
     public static void Instantiate(){
         String files[]=new String[]{"Users.txt","Product_description.txt","Coupons.txt","Sales.txt","Rentals.txt"};
         for (String path:files){
+            System.out.println(getPath(path));
             File file=new File(getPath(path));
             try {
                 if (file.createNewFile()){
@@ -38,6 +39,7 @@ public class Resources {
     }
     public static String getPath(String file){
         String path=Store.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        //path=path.substring(0, path.length()-7);
         path+=file;
         path = path.replaceAll("%20", " ");
         return path;
