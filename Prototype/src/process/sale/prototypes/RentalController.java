@@ -55,8 +55,8 @@ public class RentalController extends TransactionController{
      */
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
         if(payment > leftToPay){
-            float amount=leftToPay;
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
