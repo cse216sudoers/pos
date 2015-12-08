@@ -12,27 +12,22 @@ public class RentalReturnLineItem extends LineItem{
     private boolean onTime;
     private int daysLate;
     private float lateFee;
-
-    /**
-     *
-     * @param product
-     */
-    public RentalReturnLineItem(ProductDescription product){
-        super(product);
-        onTime = true;
-        lateFee = 0;
-    }
+    private int daysRented;
     
     /**
      *
      * @param product
      * @param lateFee
      */
-    public RentalReturnLineItem(ProductDescription product, int daysLate){
+    public RentalReturnLineItem(ProductDescription product, int daysLate, int daysRented){
         super(product);
-        onTime = false;
+        if(daysLate == 0)
+            onTime = true;
+        else
+            onTime = false;
         this.daysLate = daysLate;
         lateFee = getOneDayLateFee()*daysLate;
+        this.daysRented = daysRented;
     }
     
     /**
@@ -41,6 +36,10 @@ public class RentalReturnLineItem extends LineItem{
      */
     public boolean isOnTime() {
         return onTime;
+    }
+    
+    public int getDaysRented(){
+        return daysRented;
     }
 
     /**
@@ -79,13 +78,13 @@ public class RentalReturnLineItem extends LineItem{
     
     @Override
     public String toString(){
-       String output =  String.format("%2s %-15.15s", product.getCode(), product.getDescription());
+        String output =  String.format("%2s %-15.15s", product.getCode(), product.getDescription());
         if(quantity >1)
             output += String.format("%3s", "", "X" + quantity);
         if(onTime)
             output += "\tOn time\n";
         else
-            output += String.format("\t%5d Late \t Laenalty: $%4.2f\n", daysLate,lateFee);
+            output += String.format("\t%5d Late \t Late Penalty: $%4.2f\n", daysLate,lateFee);
         return output;
     }
 }
