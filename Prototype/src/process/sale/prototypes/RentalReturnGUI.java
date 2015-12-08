@@ -398,6 +398,8 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
         if(rentalReturn.leftToPay==0){
             rentalReturn.close();
+            previous.setVisible(true);
+            this.dispose();
             return;
         }
         productCodeInput.setEnabled(false);
