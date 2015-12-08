@@ -327,7 +327,7 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");
-        if(rental.getLeftToPay() < .01){
+        if(rental.getLeftToPay() < .009){
             String receipt = rental.close();
             JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE);
             previous.setVisible(true);

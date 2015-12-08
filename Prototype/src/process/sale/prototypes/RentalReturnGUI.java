@@ -369,7 +369,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");
-        if(rentalReturn.getLeftToPay() < .01){
+        if(rentalReturn.getLeftToPay() < .009){
             String receipt = rentalReturn.close();
             JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE);
             previous.setVisible(true);
@@ -398,6 +398,8 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
         if(rentalReturn.leftToPay==0){
             rentalReturn.close();
+            previous.setVisible(true);
+            this.dispose();
             return;
         }
         productCodeInput.setEnabled(false);
