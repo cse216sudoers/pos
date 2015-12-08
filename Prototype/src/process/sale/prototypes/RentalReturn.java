@@ -4,6 +4,7 @@
  */
 package process.sale.prototypes;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -61,7 +62,14 @@ public class RentalReturn extends Transaction{
     public void addItem(ProductDescription product, int daysRented, boolean affectQuantity){
         LineItem lineItem = getLineItemByCodeAndDaysRented(product.getCode(), daysRented);
         GregorianCalendar now= new GregorianCalendar();
-        GregorianCalendar then = rental.getRentalDate();
+        SimpleDateFormat ft =  new SimpleDateFormat ("yyyy:MM:dd");
+        String parsedate = ft.format(rental.getRentalDate().getTime());
+        String[] pair = parsedate.split(":");
+        int year= Integer.parseInt(pair[0]);
+        int month=Integer.parseInt(pair[1]);
+        int day=Integer.parseInt(pair[2]);
+        GregorianCalendar then = new GregorianCalendar(year,month,day);
+        
         then.add(Calendar.DAY_OF_MONTH, daysRented);
         int dayslate=0;
         while(then.before(now)){
