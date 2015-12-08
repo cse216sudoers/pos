@@ -80,11 +80,11 @@ public class RentalReturnLineItem extends LineItem{
     public String toString(){
         String output =  String.format("%2s %-15.15s", product.getCode(), product.getDescription());
         if(quantity >1)
-            output += String.format("%3s", "", "X" + quantity);
+            output += String.format("%3s\t%5s", "", "X" + quantity);
         if(onTime)
             output += "\tOn time\n";
         else
-            output += String.format("\t%5d Late \t Late Penalty: $%4.2f\n", daysLate,lateFee);
+            output += String.format("\t%5d Late \t Late Penalty: $%4.2f\n", daysLate,lateFee*quantity);
         return output;
     }
 }

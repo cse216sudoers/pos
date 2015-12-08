@@ -70,13 +70,14 @@ public class RentalReturn extends Transaction{
         }
         if(lineItem!=null){
             lineItem.increaseQuantity();
-            subTotal += ((RentalLineItem)lineItem).getRentalPrice();
+            subTotal += ((RentalReturnLineItem)lineItem).getLateFee();
             product.decreaseQuantity();
         } 
         else{
             lineItem = new RentalReturnLineItem(product, dayslate, daysRented);
             lines.add(lineItem);
             subTotal += ((RentalReturnLineItem)lineItem).getLateFee();
+            product.decreaseQuantity();
         }
     }
     
