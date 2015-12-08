@@ -39,7 +39,7 @@ public class Resources {
     }
     public static String getPath(String file){
         String path=Store.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        path=path.substring(0, path.length()-7);
+        //path=path.substring(0, path.length()-7);
         path+=file;
         path = path.replaceAll("%20", " ");
         return path;
