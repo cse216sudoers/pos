@@ -6,6 +6,7 @@ package process.sale.prototypes;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -53,13 +54,16 @@ public class RentalController extends TransactionController{
      * Create a Credit payment
      */
     public CreditPayment processCreditPayment(String cardNum, String secNum, float payment){
-        if(payment > leftToPay)
+        if(payment > leftToPay){
+            float amount=leftToPay;
             JOptionPane.showMessageDialog (null, "Payment is more than total.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        
+        }
         CreditPayment credit = new CreditPayment(cardNum, secNum, payment);
         if(processCreditPayment(credit)){
             rental.addPayment(credit);
             leftToPay -= payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
             return credit;
         }
         else{
@@ -105,6 +109,9 @@ public class RentalController extends TransactionController{
     public String getTotals(){
         String output = rental.printTotals();
         leftToPay = rental.getTotal();
+        rental.startDate = new GregorianCalendar();
+        String pay=String.format("%.2f",leftToPay);
+        leftToPay=Float.parseFloat(pay);
         return output;
     }
     

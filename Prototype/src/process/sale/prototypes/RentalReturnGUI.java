@@ -103,6 +103,12 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Code");
 
+        productCodeInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productCodeInputActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Quantity");
 
         voidButton.setText("Void");
@@ -334,10 +340,18 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
-        
+        Float pay=Float.parseFloat(paymentInput1.getText());
+        float payCheck=(float) ((int)(pay*100)/100.0);
+        if(!(payCheck==pay)){
+           JOptionPane.showMessageDialog (null, "Invalid payment amount", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+           paymentInput1.setText("");
+           paymentInput2.setText("");
+           paymentInput3.setText("");
+           return;
+        }
         try{    
             if(cashButton.isSelected()){
-                payment = rentalReturn.processCashPayment(Integer.parseInt(paymentInput1.getText()));
+                payment = rentalReturn.processCashPayment(pay);
             }else if(creditButton.isSelected()){
                 payment = rentalReturn.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
             }else if(debitButton.isSelected()){
@@ -382,6 +396,12 @@ public class RentalReturnGUI extends javax.swing.JFrame {
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
 
+        if(rentalReturn.leftToPay==0){
+            rentalReturn.close();
+            previous.setVisible(true);
+            this.dispose();
+            return;
+        }
         productCodeInput.setEnabled(false);
         quantityInput.setEnabled(false);
         daysInput.setEnabled(false);
@@ -417,6 +437,10 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         console.setText(rentalReturn.getTotals());
 
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void productCodeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productCodeInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productCodeInputActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

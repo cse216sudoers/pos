@@ -182,6 +182,7 @@ public class RentalManager {
     public void addRental(Rental rental){
         rentals.put(rental.getId(), rental);
         updateFile();
+        ProductCatalog.getCatalog().updateFile();
     } 
     
     /**
@@ -191,6 +192,7 @@ public class RentalManager {
     public void addSuspendedRental(Rental rental){
         suspendedRentals.put(rental.getId(), rental);
         updateFile();
+        ProductCatalog.getCatalog().updateFile();
     }
     /**
      * get next unique id

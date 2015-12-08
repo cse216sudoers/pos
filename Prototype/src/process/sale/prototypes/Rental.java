@@ -44,13 +44,14 @@ public class Rental extends Transaction{
     public void addRentalreturn(RentalReturn ret){
         returns.add(ret);
         for(int i = 0; i < lines.size(); i++){
-            RentalLineItem retItem = (RentalLineItem)ret.getLines().get(i);
+            RentalReturnLineItem retItem = (RentalReturnLineItem)ret.getLines().get(i);
             int quantity = retItem.getQuantity();
             while(quantity > 0){
                 removeItem(retItem.getProduct(), retItem.getDaysRented(), false);
                 quantity--;
             }
-        }   
+        }
+        ProductCatalog.getCatalog().updateFile();
     }
     public GregorianCalendar getRentalDate(){
         return startDate;
@@ -69,6 +70,7 @@ public class Rental extends Transaction{
         } 
         else{
             lines.add(new RentalLineItem(product, daysRented));
+            product.decreaseQuantity();
             subTotal += ((RentalLineItem)lines.get(lines.size()-1)).getRentalPrice();
         }
     }

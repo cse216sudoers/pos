@@ -44,7 +44,7 @@ public class SaleController extends TransactionController{
     /**
      * Create a cash payment
      */
-    public CashPayment processCashPayment(int payment){
+    public CashPayment processCashPayment(float payment){
         CashPayment cash;
         if(payment > leftToPay){
             //System.out.printf("Your change is $%.2f\n", payment - leftToPay);
@@ -73,6 +73,9 @@ public class SaleController extends TransactionController{
         if(processCreditPayment(credit)){
             sale.addPayment(credit);
             leftToPay -= payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
+            System.out.println(leftToPay);
             return credit;
         }
         else{
@@ -91,6 +94,8 @@ public class SaleController extends TransactionController{
         if(processDebitPayment(debit)){
             sale.addPayment(debit);
             leftToPay-=payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
             return debit;
         }
         else{
@@ -172,6 +177,8 @@ public class SaleController extends TransactionController{
     public String getTotals(){
         String output = sale.printTotals();
         leftToPay = sale.getTotal();
+        String pay=String.format("%.2f",leftToPay);
+        leftToPay=Float.parseFloat(pay);
         return output;
     }
     /**

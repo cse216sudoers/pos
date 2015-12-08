@@ -53,7 +53,7 @@ public class RentalReturnController extends TransactionController{
         /**
      * Create a cash payment
      */
-    public CashPayment processCashPayment(int payment){
+    public CashPayment processCashPayment(float payment){
         CashPayment cash;
         if(payment > leftToPay){
             //System.out.printf("Your change is $%.2f\n", payment - leftToPay);
@@ -82,6 +82,8 @@ public class RentalReturnController extends TransactionController{
         if(processCreditPayment(credit)){
             rentalReturn.addPayment(credit);
             leftToPay -= payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
             return credit;
         }
         else{
@@ -100,6 +102,8 @@ public class RentalReturnController extends TransactionController{
         if(processDebitPayment(debit)){
             rentalReturn.addPayment(debit);
             leftToPay-=payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
             return debit;
         }
         else{
@@ -128,15 +132,15 @@ public class RentalReturnController extends TransactionController{
      */
     public void processProduct(int code, int amount, int days){
         ProductDescription product = ProductCatalog.getCatalog().findProductByCode(code);
-  
+        LineItem retLineItem=rentalReturn.getLineItemByCodeAndDaysRented(code, days);
         if(product == null){ //product does not exist
             JOptionPane.showMessageDialog (null, "Invalid product code: " + code, "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else if(!product.getIsRentable()){
             JOptionPane.showMessageDialog (null, "Item " + code + " is not rentable.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else if(rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days) == null){
             JOptionPane.showMessageDialog (null, "Item " + code + " is not in this rental.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-        }else if(rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days) !=null && 
-                rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days).getQuantity() == rentalReturn.getLineItemByCodeAndDaysRented(code, days).getQuantity()){
+        }else if(retLineItem !=null && 
+                 retLineItem.getQuantity()== rentalReturn.getRental().getLineItemByCodeAndDaysRented(code, days).getQuantity()){
             JOptionPane.showMessageDialog (null, "Item " + code + " has already been returned.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }else{
             for(int i = 0; i < amount; i++)
@@ -156,6 +160,8 @@ public class RentalReturnController extends TransactionController{
     public String getTotals(){
         String output = rentalReturn.printTotals();
         leftToPay = rentalReturn.getTotal();
+        String pay=String.format("%.2f",leftToPay);
+        leftToPay=Float.parseFloat(pay);
         return output;
     }
     

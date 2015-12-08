@@ -166,10 +166,11 @@ public class MainGui extends javax.swing.JFrame {
                 int id;
                 do{
                     try{
-                        inputValue = JOptionPane.showInputDialog("Sale ID: "); 
+                        inputValue = JOptionPane.showInputDialog("Sale ID: ");
                         id = Integer.parseInt(inputValue);
                         sale = SaleManager.getInstance().getSuspendedSaleById(id);
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Sale ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                     if(inputValue.equals(JOptionPane.CANCEL_OPTION)){
                         break;
@@ -205,10 +206,11 @@ public class MainGui extends javax.swing.JFrame {
                 int id;
                 do{
                     try{
-                        inputValue = JOptionPane.showInputDialog("Return ID: "); 
+                        inputValue = JOptionPane.showInputDialog("Rental ID: ");
                         id = Integer.parseInt(inputValue);
                         rental = RentalManager.getInstance().getSuspendedRentalById(id);
                     }catch(Exception e){
+                        JOptionPane.showMessageDialog (null, "Rental ID does not exist", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(rental == null);
                 registerController.processSuspendedRental(rental);
@@ -238,6 +240,9 @@ public class MainGui extends javax.swing.JFrame {
                 do{
                     try{
                         inputValue = JOptionPane.showInputDialog("Sale ID: "); 
+                        if(inputValue==null){
+                            break;
+                        }
                         id = Integer.parseInt(inputValue);
                         sale = SaleManager.getInstance().getSaleById(id);
                         if (sale==null){
@@ -247,6 +252,9 @@ public class MainGui extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog (null, "Invalid Sale ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(sale == null);
+                if(sale==null){
+                    break;
+                }
                 registerController.processSaleReturn(sale);
                 new ReturnGUI(this).setVisible(true);
                 this.setVisible(false);
@@ -254,7 +262,10 @@ public class MainGui extends javax.swing.JFrame {
             case 1:
                 do{
                     try{
-                        inputValue = JOptionPane.showInputDialog("Return ID: "); 
+                        inputValue = JOptionPane.showInputDialog("Return ID: ");
+                        if(inputValue==null){
+                            break;
+                        }
                         id = Integer.parseInt(inputValue);
                         ret = ReturnManager.getInstance().getSuspendedReturnById(id);
                         if (ret==null){
@@ -264,6 +275,9 @@ public class MainGui extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog (null, "Invalid Return ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(ret == null);
+                if(ret==null){
+                    break;
+                }
                 registerController.processSuspendedReturn(ret);
                 new ReturnGUI(this).setVisible(true);
                 this.setVisible(false);
@@ -272,8 +286,9 @@ public class MainGui extends javax.swing.JFrame {
                 do{
                    try{
                         inputValue = JOptionPane.showInputDialog("Rental ID: ");
-                        //if(inputValue == JOptionPane.CANCEL_OPTION)
-                          //  break; 
+                        if(inputValue==null){
+                            break;
+                        }
                         id = Integer.parseInt(inputValue);
                         rental = RentalManager.getInstance().getRentalById(id);
                         if(rental==null){
@@ -283,6 +298,9 @@ public class MainGui extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog (null, "Invalid Rental ID", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                     }
                 }while(rental == null);
+                if(rental==null){
+                    break;
+                }
                 registerController.processRentalReturn(rental);
                 new RentalReturnGUI(this).setVisible(true);
                 this.setVisible(false);

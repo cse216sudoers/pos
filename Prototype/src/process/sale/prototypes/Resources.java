@@ -39,6 +39,7 @@ public class Resources {
     public static String getPath(String file){
         String path=Store.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         path+=file;
+        path = path.replaceAll("%20", " ");
         return path;
     }
     private static void fill(String path,String Path) throws IOException{

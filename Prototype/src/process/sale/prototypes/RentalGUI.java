@@ -79,9 +79,9 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentInput1 = new javax.swing.JTextField();
         paymentLabel1 = new javax.swing.JLabel();
         paymentLabel2 = new javax.swing.JLabel();
-        closeButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
         creditLabel = new javax.swing.JLabel();
+        closeButton = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -125,13 +125,6 @@ public class RentalGUI extends javax.swing.JFrame {
 
         paymentLabel2.setText("CardNum");
 
-        closeButton.setText("Pay");
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeButtonActionPerformed(evt);
-            }
-        });
-
         suspendButton.setText("Suspend");
         suspendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +133,13 @@ public class RentalGUI extends javax.swing.JFrame {
         });
 
         creditLabel.setText("Credit");
+
+        closeButton.setText("Pay");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -229,9 +229,9 @@ public class RentalGUI extends javax.swing.JFrame {
                                     .addComponent(paymentInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(creditLabel)))
                             .addComponent(enterPaymentButton))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(closeButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -304,6 +304,15 @@ public class RentalGUI extends javax.swing.JFrame {
     }
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
+        Float pay=Float.parseFloat(paymentInput1.getText());
+        float payCheck=(float) ((int)(pay*100)/100.0);
+        if(!(payCheck==pay)){
+           JOptionPane.showMessageDialog (null, "Invalid payment amount", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+           paymentInput1.setText("");
+           paymentInput2.setText("");
+           paymentInput3.setText("");
+           return;
+        }
         try{
             payment = rental.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
         }catch(Exception e){
@@ -318,7 +327,7 @@ public class RentalGUI extends javax.swing.JFrame {
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");
-        if(rental.getLeftToPay() < .01){
+        if(rental.getLeftToPay() < .009){
             String receipt = rental.close();
             JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE);
             previous.setVisible(true);
