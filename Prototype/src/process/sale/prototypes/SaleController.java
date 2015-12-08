@@ -73,6 +73,9 @@ public class SaleController extends TransactionController{
         if(processCreditPayment(credit)){
             sale.addPayment(credit);
             leftToPay -= payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
+            System.out.println(leftToPay);
             return credit;
         }
         else{
@@ -91,6 +94,8 @@ public class SaleController extends TransactionController{
         if(processDebitPayment(debit)){
             sale.addPayment(debit);
             leftToPay-=payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
             return debit;
         }
         else{

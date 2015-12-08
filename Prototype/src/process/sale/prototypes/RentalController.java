@@ -62,6 +62,8 @@ public class RentalController extends TransactionController{
         if(processCreditPayment(credit)){
             rental.addPayment(credit);
             leftToPay -= payment;
+            String pay=String.format("%.2f",leftToPay);
+            leftToPay=Float.parseFloat(pay);
             return credit;
         }
         else{

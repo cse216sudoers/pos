@@ -450,7 +450,7 @@ public class SaleGui extends javax.swing.JFrame {
         paymentInput1.setText("");
         paymentInput2.setText("");
         paymentInput3.setText("");
-        if(sale.getLeftToPay() < .01){
+        if(sale.getLeftToPay() < .009){
             String receipt = sale.close();
             Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
             JOptionPane.showMessageDialog(this, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(image));
