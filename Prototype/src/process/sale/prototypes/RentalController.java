@@ -108,10 +108,8 @@ public class RentalController extends TransactionController{
         String output = rental.printTotals();
         leftToPay = rental.getTotal();
         rental.startDate = new GregorianCalendar();
-        //String pay=Float.toString(leftToPay);
         String pay=String.format("%.2f",leftToPay);
         leftToPay=Float.parseFloat(pay);
-        float amount=leftToPay;
         return output;
     }
     

@@ -304,6 +304,15 @@ public class RentalGUI extends javax.swing.JFrame {
     }
     private void enterPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPaymentButtonActionPerformed
         Payment payment = null;
+        Float pay=Float.parseFloat(paymentInput1.getText());
+        float payCheck=(float) ((int)(pay*100)/100.0);
+        if(!(payCheck==pay)){
+           JOptionPane.showMessageDialog (null, "Invalid payment amount", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+           paymentInput1.setText("");
+           paymentInput2.setText("");
+           paymentInput3.setText("");
+           return;
+        }
         try{
             payment = rental.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
         }catch(Exception e){
