@@ -350,7 +350,7 @@ public class RentalReturnGUI extends javax.swing.JFrame {
         }
         try{    
             if(cashButton.isSelected()){
-                payment = rentalReturn.processCashPayment(Integer.parseInt(paymentInput1.getText()));
+                payment = rentalReturn.processCashPayment(pay);
             }else if(creditButton.isSelected()){
                 payment = rentalReturn.processCreditPayment(paymentInput2.getText(), paymentInput3.getText(),Float.parseFloat(paymentInput1.getText()));
             }else if(debitButton.isSelected()){
