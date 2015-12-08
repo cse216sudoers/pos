@@ -152,6 +152,7 @@ public class LoginGui extends javax.swing.JFrame {
                     new OverrideGUI((SaleGui)(prev)).setVisible(true);
                     this.dispose();
                 }else{
+                    CashierManager.getInstance().addCurrentCashier(cashier);
                     new MainGui(cashier).setVisible(true);
                     this.dispose();
                 }
